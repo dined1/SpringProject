@@ -1,0 +1,80 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/webresources/common/header.jspf"%>
+
+<div id="wrapper">
+    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Item info</b></h5> 
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="list-group">
+
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Item Id :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.itemId)}</div>
+                                        </div>
+                                    </a>             
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Name :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.name)}</div>
+                                        </div>
+                                    </a>             
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Type :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.type)}</div>
+                                        </div>
+                                    </a>             
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Description :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.description)}</div>
+                                        </div>
+                                    </a>             
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Def MP :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.defMP)}</div>
+                                        </div>
+                                    </a>             
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Def OTP :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.defOTP)}</div>
+                                        </div>
+                                    </a>             
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span class="small">Modified Date :</span></div>
+                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.modifiedDate)}</div>
+                                        </div>
+                                    </a>             
+
+                                </div>
+                                <a href="${appPath}/item/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+
+<%--end content--%>
+<%@ include file="/webresources/common/footer.jspf"%>
