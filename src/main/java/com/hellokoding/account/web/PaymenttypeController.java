@@ -57,7 +57,7 @@ public class PaymenttypeController {
     }
 
 
-    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.POST)
     public String removePaymenttype(@PathVariable("id") Long id) {
         paymentTypeRepository.delete(paymentTypeRepository.findOne(id));
         return "redirect:list";

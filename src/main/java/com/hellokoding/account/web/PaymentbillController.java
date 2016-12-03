@@ -57,7 +57,7 @@ public class PaymentbillController {
         return "redirect:list";
     }
 
-    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.POST)
     public String removePaymentbill(@PathVariable("id") Long id) {
         paymentBillRepository.delete(paymentBillRepository.findOne(id));
         return "redirect:list";
