@@ -49,6 +49,10 @@ public class Item implements Serializable {
     @Basic
     private String modifiedDate;
 
+    @Column(name = "locationDistribute", table = "item")
+    @Basic
+    private String locationDistribute;
+
     @OneToMany(targetEntity = ProductItems.class, mappedBy = "item1")
     private List<ProductItems> productItemses1;
 
@@ -138,4 +142,11 @@ public class Item implements Serializable {
         this.itemdiscounts1 = itemdiscounts1;
     }
 
+    public String getLocationDistribute() {
+        return locationDistribute;
+    }
+
+    public void setLocationDistribute(String locationDistribute) {
+        this.locationDistribute = locationDistribute;
+    }
 }

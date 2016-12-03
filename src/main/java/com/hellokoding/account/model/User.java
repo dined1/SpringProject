@@ -1,7 +1,10 @@
 package com.hellokoding.account.model;
 
 
+import com.hellokoding.account.Models.So;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,6 +15,7 @@ public class User {
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,4 +61,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
 }

@@ -24,7 +24,7 @@ public class So implements Serializable {
 
     @Column(name = "SOId", table = "so", nullable = false)
     @Id
-    private Integer sOId;
+    private Long sOId;
 
     @Column(name = "DateCreated", table = "so")
     @Basic
@@ -54,7 +54,7 @@ public class So implements Serializable {
     private Customer customer1;
 
     @ManyToOne(targetEntity = User.class)
-    private User uuser11;
+    private User user;
 
     @OneToMany(targetEntity = Payment.class, mappedBy = "so1")
     private List<Payment> payments1;
@@ -62,11 +62,11 @@ public class So implements Serializable {
     @OneToMany(targetEntity = Soproduct.class, mappedBy = "so1")
     private List<Soproduct> soproducts1;
 
-    public Integer getSOId() {
+    public Long getSOId() {
         return this.sOId;
     }
 
-    public void setSOId(Integer sOId) {
+    public void setSOId(Long sOId) {
         this.sOId = sOId;
     }
 
@@ -126,12 +126,12 @@ public class So implements Serializable {
         this.customer1 = customer1;
     }
 
-    public User getUuser11() {
-        return this.uuser11;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUuser11(User uuser11) {
-        this.uuser11 = uuser11;
+    public void setUser(User uuser11) {
+        this.user = uuser11;
     }
 
     public List<Payment> getPayments1() {

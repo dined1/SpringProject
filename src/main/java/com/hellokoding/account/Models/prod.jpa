@@ -185,7 +185,7 @@
                 <jpa:column name="DateModified" unique="false" nullable="true" insertable="true" updatable="true" table="so" length="255"/>
             </jpa:basic>
             <jpa:many-to-one primaryKey="false" connected-entity-id="_1476345695511217" visibile="true" name="customer1" id="_147634928072837"/>
-            <jpa:many-to-one primaryKey="false" connected-entity-id="_1476345695511215" visibile="true" name="uuser11" id="_147634948358238"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1476345695511215" visibile="true" name="user1" id="_147634948358238"/>
             <jpa:id attribute-type="Integer" visibile="true" name="sOId" id="_1476345695511264">
                 <jpa:column name="SOId" unique="false" nullable="false" insertable="true" updatable="true" table="so"/>
             </jpa:id>
@@ -281,7 +281,7 @@
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
         <jpa:attributes>
-            <jpa:many-to-one primaryKey="false" connected-entity-id="_1476345695511215" visibile="true" name="uuser11" id="_147634916341833"/>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1476345695511215" visibile="true" name="user" id="_147634916341833"/>
             <jpa:many-to-one primaryKey="false" connected-entity-id="_1476345695511207" visibile="true" name="rrole11" id="_147634916947534"/>
             <jpa:id attribute-type="Long" visibile="true" name="id" id="_147634914679431">
                 <jpa:generated-value strategy="AUTO"/>

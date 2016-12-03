@@ -3,13 +3,9 @@
  */
 package com.hellokoding.account.Models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author dzni0816
@@ -44,6 +40,12 @@ public class Customer implements Serializable {
 
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
+
+    @OneToMany(targetEntity = Statisticscollector.class, mappedBy = "customer1")
+    private List<Statisticscollector> statisticscollectors1;
+
+    @OneToMany(targetEntity = So.class, mappedBy = "customer1")
+    private List<So> soes;
 
     public Long getCustomerId() {
         return this.customerId;
@@ -101,4 +103,19 @@ public class Customer implements Serializable {
         this.address1 = address1;
     }
 
+    public List<Statisticscollector> getStatisticscollectors1() {
+        return statisticscollectors1;
+    }
+
+    public void setStatisticscollectors1(List<Statisticscollector> statisticscollectors1) {
+        this.statisticscollectors1 = statisticscollectors1;
+    }
+
+    public List<So> getSoes() {
+        return soes;
+    }
+
+    public void setSoes(List<So> soes) {
+        this.soes = soes;
+    }
 }

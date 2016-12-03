@@ -22,7 +22,7 @@ public class Soproduct implements Serializable {
 
     @Column(name = "SOPId", table = "soproduct", nullable = false)
     @Id
-    private Integer sOPId;
+    private Long sOPId;
 
     @Column(name = "MP", table = "soproduct", precision = 12)
     @Basic
@@ -38,11 +38,11 @@ public class Soproduct implements Serializable {
     @OneToMany(targetEntity = ProductItems.class, mappedBy = "soproduct1")
     private List<ProductItems> productItemses1;
 
-    public Integer getSOPId() {
+    public Long getSOPId() {
         return this.sOPId;
     }
 
-    public void setSOPId(Integer sOPId) {
+    public void setSOPId(Long sOPId) {
         this.sOPId = sOPId;
     }
 

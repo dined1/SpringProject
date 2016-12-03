@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 
 /**
@@ -21,7 +20,7 @@ public class Statisticscollector implements Serializable {
 
     @Column(name = "SCId", table = "statisticscollector", nullable = false)
     @Id
-    private Integer SCId;
+    private Long SCId;
 
     @Column(name = "StatisticType", table = "statisticscollector")
     @Basic
@@ -34,11 +33,11 @@ public class Statisticscollector implements Serializable {
     @ManyToOne(targetEntity = Customer.class)
     private Customer customer1;
 
-    public Integer getSCId() {
+    public Long getSCId() {
         return this.SCId;
     }
 
-    public void setSCId(Integer SCId) {
+    public void setSCId(Long SCId) {
         this.SCId = SCId;
     }
 
