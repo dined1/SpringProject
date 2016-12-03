@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -41,19 +43,19 @@
                                 <tbody>
                                     <c:forEach items="${ITEM_LIST}" var="ITEM">
                                         <tr>
-                                            <td>${mvc.encoders.html(ITEM.itemId)}</td>
+                                            <td>${(ITEM.itemId)}</td>
 
-                                            <td>${mvc.encoders.html(ITEM.name)}</td>
+                                            <td>${(ITEM.name)}</td>
 
-                                            <td>${mvc.encoders.html(ITEM.type)}</td>
+                                            <td>${(ITEM.type)}</td>
 
-                                            <td>${mvc.encoders.html(ITEM.description)}</td>
+                                            <td>${(ITEM.description)}</td>
 
-                                            <td>${mvc.encoders.html(ITEM.defMP)}</td>
+                                            <td>${(ITEM.defMP)}</td>
 
-                                            <td>${mvc.encoders.html(ITEM.defOTP)}</td>
+                                            <td>${(ITEM.defOTP)}</td>
 
-                                            <td>${mvc.encoders.html(ITEM.modifiedDate)}</td>
+                                            <td>${(ITEM.modifiedDate)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -63,7 +65,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/item/update/${ITEM.itemId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/item/update/${ITEM.itemId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${ITEM.itemId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -82,7 +84,7 @@
                                                                 <p>Are you sure to delete Item ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/item/remove/${ITEM.itemId}" method="DELETE">
+                                                                <form action="${contextPath}/item/remove/${ITEM.itemId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

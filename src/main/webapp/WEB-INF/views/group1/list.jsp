@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -36,9 +38,9 @@
                                 <tbody>
                                     <c:forEach items="${GROUP_1_LIST}" var="GROUP_1">
                                         <tr>
-                                            <td>${mvc.encoders.html(GROUP_1.groupId)}</td>
+                                            <td>${(GROUP_1.groupId)}</td>
 
-                                            <td>${mvc.encoders.html(GROUP_1.name)}</td>
+                                            <td>${(GROUP_1.name)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -48,7 +50,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${GROUP_1.groupId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/group1/update/${GROUP_1.groupId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/group1/update/${GROUP_1.groupId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${GROUP_1.groupId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -67,7 +69,7 @@
                                                                 <p>Are you sure to delete Group 1 ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/group1/remove/${GROUP_1.groupId}" method="DELETE">
+                                                                <form action="${contextPath}/group1/remove/${GROUP_1.groupId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

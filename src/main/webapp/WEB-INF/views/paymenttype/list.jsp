@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -36,9 +38,9 @@
                                 <tbody>
                                     <c:forEach items="${PAYMENTTYPE_LIST}" var="PAYMENTTYPE">
                                         <tr>
-                                            <td>${mvc.encoders.html(PAYMENTTYPE.PTId)}</td>
+                                            <td>${(PAYMENTTYPE.PTId)}</td>
 
-                                            <td>${mvc.encoders.html(PAYMENTTYPE.typeName)}</td>
+                                            <td>${(PAYMENTTYPE.typeName)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -48,7 +50,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${PAYMENTTYPE.PTId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/paymenttype/update/${PAYMENTTYPE.PTId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/paymenttype/update/${PAYMENTTYPE.PTId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${PAYMENTTYPE.PTId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -67,7 +69,7 @@
                                                                 <p>Are you sure to delete Paymenttype ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/paymenttype/remove/${PAYMENTTYPE.PTId}" method="DELETE">
+                                                                <form action="${contextPath}/paymenttype/remove/${PAYMENTTYPE.PTId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

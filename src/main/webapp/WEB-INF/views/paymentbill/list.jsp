@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -39,15 +41,15 @@
                                 <tbody>
                                     <c:forEach items="${PAYMENTBILL_LIST}" var="PAYMENTBILL">
                                         <tr>
-                                            <td>${mvc.encoders.html(PAYMENTBILL.PBId)}</td>
+                                            <td>${(PAYMENTBILL.PBId)}</td>
 
-                                            <td>${mvc.encoders.html(PAYMENTBILL.cmp)}</td>
+                                            <td>${(PAYMENTBILL.cmp)}</td>
 
-                                            <td>${mvc.encoders.html(PAYMENTBILL.cotp)}</td>
+                                            <td>${(PAYMENTBILL.cotp)}</td>
 
-                                            <td>${mvc.encoders.html(PAYMENTBILL.CMPDisc)}</td>
+                                            <td>${(PAYMENTBILL.CMPDisc)}</td>
 
-                                            <td>${mvc.encoders.html(PAYMENTBILL.COTPDisc)}</td>
+                                            <td>${(PAYMENTBILL.COTPDisc)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -57,7 +59,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${PAYMENTBILL.PBId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/paymentbill/update/${PAYMENTBILL.PBId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/paymentbill/update/${PAYMENTBILL.PBId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${PAYMENTBILL.PBId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -76,7 +78,7 @@
                                                                 <p>Are you sure to delete Paymentbill ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/paymentbill/remove/${PAYMENTBILL.PBId}" method="DELETE">
+                                                                <form action="${contextPath}/paymentbill/remove/${PAYMENTBILL.PBId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

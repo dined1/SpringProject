@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -37,11 +39,11 @@
                                 <tbody>
                                     <c:forEach items="${USER_LIST}" var="USER">
                                         <tr>
-                                            <td>${mvc.encoders.html(USER.userId)}</td>
+                                            <td>${(USER.userId)}</td>
 
-                                            <td>${mvc.encoders.html(USER.login)}</td>
+                                            <td>${(USER.login)}</td>
 
-                                            <td>${mvc.encoders.html(USER.password)}</td>
+                                            <td>${(USER.password)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -51,7 +53,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${USER.userId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/user/update/${USER.userId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/user/update/${USER.userId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${USER.userId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -70,7 +72,7 @@
                                                                 <p>Are you sure to delete User ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/user/remove/${USER.userId}" method="DELETE">
+                                                                <form action="${contextPath}/user/remove/${USER.userId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

@@ -23,6 +23,22 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String main(Model model) {
+        model.addAttribute("userForm", new User());
+
+        return "welcome";
+    }
+
+
+
+
+
+
+
+
+
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());

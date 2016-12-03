@@ -1,6 +1,9 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div id="page-wrapper">
@@ -18,12 +21,12 @@
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">IDid :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEMDISCOUNT.IDid)}</div>
+                                            <div class="col-lg-8">${(ITEMDISCOUNT.IDid)}</div>
                                         </div>
                                     </a>             
 
                                 </div>
-                                <a href="${appPath}/itemdiscount/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/itemdiscount/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

@@ -1,6 +1,9 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div id="page-wrapper">
@@ -18,48 +21,48 @@
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Item Id :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.itemId)}</div>
+                                            <div class="col-lg-8">${(ITEM.itemId)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Name :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.name)}</div>
+                                            <div class="col-lg-8">${(ITEM.name)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Type :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.type)}</div>
+                                            <div class="col-lg-8">${(ITEM.type)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Description :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.description)}</div>
+                                            <div class="col-lg-8">${(ITEM.description)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Def MP :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.defMP)}</div>
+                                            <div class="col-lg-8">${(ITEM.defMP)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Def OTP :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.defOTP)}</div>
+                                            <div class="col-lg-8">${(ITEM.defOTP)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Modified Date :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ITEM.modifiedDate)}</div>
+                                            <div class="col-lg-8">${(ITEM.modifiedDate)}</div>
                                         </div>
                                     </a>             
 
                                 </div>
-                                <a href="${appPath}/item/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/item/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

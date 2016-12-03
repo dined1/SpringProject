@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -57,7 +59,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
                                                         <li><a href="${PAYMENT.paymentId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${appPath}/payment/update/${PAYMENT.paymentId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                        <li><a href="${contextPath}/payment/update/${PAYMENT.paymentId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
                                                         <li><a data-toggle="modal" data-target="#confirm_delete_${PAYMENT.paymentId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                         </li>
@@ -76,7 +78,7 @@
                                                             <p>Are you sure to delete Payment ?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="${appPath}/payment/remove/${PAYMENT.paymentId}" method="DELETE">
+                                                            <form action="${contextPath}/payment/remove/${PAYMENT.paymentId}" method="DELETE">
                                                                 <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                             </form>
                                                         </div>

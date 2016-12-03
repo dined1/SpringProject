@@ -1,6 +1,9 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div id="page-wrapper">
@@ -13,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${appPath}/paymentbill/new" method="POST">
+                                <form role="form" action="${contextPath}/paymentbill/new" method="POST">
                                     <div class="form-group">
                                         <label for="PBId">PBId</label>
                                         <input class="form-control" type="number" name="PBId" path="PBId"  required="required" autofocus="autofocus"  />
@@ -34,8 +37,9 @@
                                         <label for="COTPDisc">COTPDisc</label>
                                         <input class="form-control" type="number" name="COTPDisc" path="COTPDisc"  />
                                     </div>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${appPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

@@ -41,21 +41,21 @@
 
                                         <tr>
 
-                                            <td>${mvc.encoders.html(ITEMGROUP.item1.itemId)}</td>
+                                            <td>${(ITEMGROUP.item1.itemId)}</td>
 
-                                            <td>${mvc.encoders.html(ITEMGROUP.item1.name)}</td>
+                                            <td>${(ITEMGROUP.item1.name)}</td>
 
-                                            <td>${mvc.encoders.html(ITEMGROUP.item1.type)}</td>
+                                            <td>${(ITEMGROUP.item1.type)}</td>
 
-                                            <td>${mvc.encoders.html(ITEMGROUP.item1.description)}</td>
+                                            <td>${(ITEMGROUP.item1.description)}</td>
 
                                             <td>
                                                 <select>
                                                     <c:forEach items="${ITEMDISCOUNT_LIST}" var="ITEMDISCOUNT">
                                                         <c:if test="${ITEMDISCOUNT.item1.itemId == ITEMGROUP.item1.itemId}">
                                                             <option>
-                                                                    ${mvc.encoders.html(ITEMDISCOUNT.discountrule1.discountValue)}ք
-                                                                    ${mvc.encoders.html(ITEMDISCOUNT.discountrule1.discountProcent)}%
+                                                                    ${(ITEMDISCOUNT.discountrule1.discountValue)}ք
+                                                                    ${(ITEMDISCOUNT.discountrule1.discountProcent)}%
                                                             </option>
                                                         </c:if>
                                                     </c:forEach>
@@ -89,10 +89,10 @@
 
                                                 <tr>
 
-                                                    <td>${mvc.encoders.html(PRODUCTITEMS.id)}</td>
-                                                    <td>${mvc.encoders.html(PRODUCTITEMS.soproduct1.so1.SONumber)}</td>
-                                                    <td>${mvc.encoders.html(ITEMGROUP.item1.name)}</td>
-                                                    <td>${mvc.encoders.html(PRODUCTITEMS.soproduct1.so1.customer1.firstName)}</td>
+                                                    <td>${(PRODUCTITEMS.id)}</td>
+                                                    <td>${(PRODUCTITEMS.soproduct1.so1.SONumber)}</td>
+                                                    <td>${(ITEMGROUP.item1.name)}</td>
+                                                    <td>${(PRODUCTITEMS.soproduct1.so1.customer1.firstName)}</td>
 
 
                                                     <td>
@@ -100,7 +100,7 @@
                                                             <c:forEach items="${PAYMENT_LIST}" var="PAYMENT">
                                                                 <c:if test="${PAYMENT.so1.SOId == PRODUCTITEMS.soproduct1.so1.SOId}">
                                                                     <option>
-                                                                            ${mvc.encoders.html(PAYMENT.paymentInfo)}
+                                                                            ${(PAYMENT.paymentInfo)}
                                                                     </option>
                                                                 </c:if>
                                                             </c:forEach>
@@ -111,7 +111,7 @@
                                                             <c:forEach items="${PAYMENT_LIST}" var="PAYMENT">
                                                                 <c:if test="${PAYMENT.so1.SOId == PRODUCTITEMS.soproduct1.so1.SOId}">
                                                                     <option>
-                                                                            ${mvc.encoders.html(PAYMENT.paymentbill1.cmp)}
+                                                                            ${(PAYMENT.paymentbill1.cmp)}
                                                                     </option>
                                                                 </c:if>
                                                             </c:forEach>
@@ -122,7 +122,7 @@
                                                             <c:forEach items="${PAYMENT_LIST}" var="PAYMENT">
                                                                 <c:if test="${PAYMENT.so1.SOId == PRODUCTITEMS.soproduct1.so1.SOId}">
                                                                     <option>
-                                                                            ${mvc.encoders.html(PAYMENT.paymenttype1.typeName)}
+                                                                            ${(PAYMENT.paymenttype1.typeName)}
                                                                     </option>
                                                                 </c:if>
                                                             </c:forEach>

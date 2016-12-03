@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -37,11 +39,11 @@
                                 <tbody>
                                 <c:forEach items="${PRODUCT_ITEMS_LIST}" var="PRODUCT_ITEMS">
                                     <tr>
-                                        <td>${mvc.encoders.html(PRODUCT_ITEMS.id)}</td>
+                                        <td>${(PRODUCT_ITEMS.id)}</td>
 
-                                        <td>${mvc.encoders.html(PRODUCT_ITEMS.item1.name)}</td>
+                                        <td>${(PRODUCT_ITEMS.item1.name)}</td>
 
-                                        <td>${mvc.encoders.html(PRODUCT_ITEMS.soproduct1.mp)}</td>
+                                        <td>${(PRODUCT_ITEMS.soproduct1.mp)}</td>
 
                                         <td>
                                             <div class="pull-right">
@@ -51,7 +53,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
                                                         <li><a href="${PRODUCT_ITEMS.id}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${appPath}/productItems/update/${PRODUCT_ITEMS.id}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                        <li><a href="${contextPath}/productItems/update/${PRODUCT_ITEMS.id}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
                                                         <li><a data-toggle="modal" data-target="#confirm_delete_${PRODUCT_ITEMS.id}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                         </li>
@@ -70,7 +72,7 @@
                                                             <p>Are you sure to delete Product Items ?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="${appPath}/productItems/remove/${PRODUCT_ITEMS.id}" method="DELETE">
+                                                            <form action="${contextPath}/productItems/remove/${PRODUCT_ITEMS.id}" method="DELETE">
                                                                 <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                             </form>
                                                         </div>

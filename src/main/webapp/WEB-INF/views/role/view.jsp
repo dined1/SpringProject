@@ -18,13 +18,13 @@
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Role Id :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ROLE.roleId)}</div>
+                                            <div class="col-lg-8">${(ROLE.roleId)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Name :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(ROLE.name)}</div>
+                                            <div class="col-lg-8">${(ROLE.name)}</div>
                                         </div>
                                     </a>             
 

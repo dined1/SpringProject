@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -41,19 +43,19 @@
                                 <tbody>
                                 <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
                                     <tr>
-                                        <td>${mvc.encoders.html(CUSTOMER.customerId)}</td>
+                                        <td>${(CUSTOMER.customerId)}</td>
 
-                                        <td>${mvc.encoders.html(CUSTOMER.firstName)}</td>
+                                        <td>${(CUSTOMER.firstName)}</td>
 
-                                        <td>${mvc.encoders.html(CUSTOMER.lastName)}</td>
+                                        <td>${(CUSTOMER.lastName)}</td>
 
-                                        <td>${mvc.encoders.html(CUSTOMER.contact)}</td>
+                                        <td>${(CUSTOMER.contact)}</td>
 
-                                        <td>${mvc.encoders.html(CUSTOMER.email)}</td>
+                                        <td>${(CUSTOMER.email)}</td>
 
-                                        <td>${mvc.encoders.html(CUSTOMER.phone)}</td>
+                                        <td>${(CUSTOMER.phone)}</td>
 
-                                        <td>${mvc.encoders.html(CUSTOMER.address1.addressLine)}</td>
+                                        <td>${(CUSTOMER.address1.addressLine)}</td>
 
                                         <td>
                                             <div class="pull-right">
@@ -63,7 +65,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
                                                         <li><a href="${CUSTOMER.customerId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${appPath}/customer/update/${CUSTOMER.customerId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                        <li><a href="${contextPath}/customer/update/${CUSTOMER.customerId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
                                                         <li><a data-toggle="modal" data-target="#confirm_delete_${CUSTOMER.customerId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                         </li>
@@ -82,7 +84,7 @@
                                                             <p>Are you sure to delete Customer ?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="${appPath}/customer/remove/${CUSTOMER.customerId}" method="DELETE">
+                                                            <form action="${contextPath}/customer/remove/${CUSTOMER.customerId}" method="DELETE">
                                                                 <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                             </form>
                                                         </div>

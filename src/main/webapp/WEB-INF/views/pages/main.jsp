@@ -57,9 +57,9 @@
         <tbody>
         <c:forEach items="${GROUP_LIST}" var="GROUP">
             <tr>
-                <td>${mvc.encoders.html(GROUP.groupId)}</td>
+                <td>${(GROUP.groupId)}</td>
 
-                <td>${mvc.encoders.html(GROUP.name)}</td>
+                <td>${(GROUP.name)}</td>
 
                 <td><li><a href="${contextPath}/application/group/${GROUP.groupId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li></td>
 

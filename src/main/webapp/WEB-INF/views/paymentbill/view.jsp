@@ -1,6 +1,9 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div id="page-wrapper">
@@ -18,36 +21,36 @@
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">PBId :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(PAYMENTBILL.PBId)}</div>
+                                            <div class="col-lg-8">${(PAYMENTBILL.PBId)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Cmp :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(PAYMENTBILL.cmp)}</div>
+                                            <div class="col-lg-8">${(PAYMENTBILL.cmp)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">Cotp :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(PAYMENTBILL.cotp)}</div>
+                                            <div class="col-lg-8">${(PAYMENTBILL.cotp)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">CMPDisc :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(PAYMENTBILL.CMPDisc)}</div>
+                                            <div class="col-lg-8">${(PAYMENTBILL.CMPDisc)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">COTPDisc :</span></div>
-                                            <div class="col-lg-8">${mvc.encoders.html(PAYMENTBILL.COTPDisc)}</div>
+                                            <div class="col-lg-8">${(PAYMENTBILL.COTPDisc)}</div>
                                         </div>
                                     </a>             
 
                                 </div>
-                                <a href="${appPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

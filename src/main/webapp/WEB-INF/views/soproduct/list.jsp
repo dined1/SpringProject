@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -38,13 +40,13 @@
                                 <tbody>
                                     <c:forEach items="${SOPRODUCT_LIST}" var="SOPRODUCT">
                                         <tr>
-                                            <td>${mvc.encoders.html(SOPRODUCT.SOPId)}</td>
+                                            <td>${(SOPRODUCT.SOPId)}</td>
 
-                                            <td>${mvc.encoders.html(SOPRODUCT.mp)}</td>
+                                            <td>${(SOPRODUCT.mp)}</td>
 
-                                            <td>${mvc.encoders.html(SOPRODUCT.otp)}</td>
+                                            <td>${(SOPRODUCT.otp)}</td>
 
-                                            <td>${mvc.encoders.html(SOPRODUCT.so1.purchaseOrderNumber)}</td>
+                                            <td>${(SOPRODUCT.so1.purchaseOrderNumber)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -54,7 +56,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${SOPRODUCT.SOPId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/soproduct/update/${SOPRODUCT.SOPId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/soproduct/update/${SOPRODUCT.SOPId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${SOPRODUCT.SOPId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -73,7 +75,7 @@
                                                                 <p>Are you sure to delete Soproduct ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/soproduct/remove/${SOPRODUCT.SOPId}" method="DELETE">
+                                                                <form action="${contextPath}/soproduct/remove/${SOPRODUCT.SOPId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

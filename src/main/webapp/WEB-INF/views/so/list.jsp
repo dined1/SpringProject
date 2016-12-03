@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
@@ -43,23 +45,23 @@
                                 <tbody>
                                     <c:forEach items="${SO_LIST}" var="SO">
                                         <tr>
-                                            <td>${mvc.encoders.html(SO.SOId)}</td>
+                                            <td>${(SO.SOId)}</td>
 
-                                            <td>${mvc.encoders.html(SO.dateCreated)}</td>
+                                            <td>${(SO.dateCreated)}</td>
 
-                                            <td>${mvc.encoders.html(SO.orderDate)}</td>
+                                            <td>${(SO.orderDate)}</td>
 
-                                            <td>${mvc.encoders.html(SO.status)}</td>
+                                            <td>${(SO.status)}</td>
 
-                                            <td>${mvc.encoders.html(SO.SONumber)}</td>
+                                            <td>${(SO.SONumber)}</td>
 
-                                            <td>${mvc.encoders.html(SO.purchaseOrderNumber)}</td>
+                                            <td>${(SO.purchaseOrderNumber)}</td>
 
-                                            <td>${mvc.encoders.html(SO.dateModified)}</td>
+                                            <td>${(SO.dateModified)}</td>
 
-                                            <td>${mvc.encoders.html(SO.customer1.lastName)}</td>
+                                            <td>${(SO.customer1.lastName)}</td>
 
-                                            <td>${mvc.encoders.html(SO.user1.login)}</td>
+                                            <td>${(SO.user1.login)}</td>
 
                                             <td>
                                                 <div class="pull-right">
@@ -69,7 +71,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${appPath}/so/update/${SO.SOId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/so/update/${SO.SOId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${SO.SOId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -88,7 +90,7 @@
                                                                 <p>Are you sure to delete So ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${appPath}/so/remove/${SO.SOId}" method="DELETE">
+                                                                <form action="${contextPath}/so/remove/${SO.SOId}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>
