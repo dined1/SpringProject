@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -37,6 +41,11 @@ public class PaymentController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createPayment(@Valid
             @BeanParam Payment payment) {
+        Calendar cal = Calendar.getInstance();
+        Date date=cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String formattedDate=dateFormat.format(date);
+        payment.setPaymentDate(date);
         paymentRepository.save(payment);
         return "redirect:list";
     }

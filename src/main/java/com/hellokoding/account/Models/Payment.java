@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author dzni0816
@@ -25,6 +26,10 @@ public class Payment implements Serializable {
     @Column(name = "PaymentInfo", table = "payment")
     @Basic
     private String paymentInfo;
+
+    @Column(name = "paymentDate", table = "payment")
+    @Basic
+    private Date paymentDate;
 
     @ManyToOne(targetEntity = Paymenttype.class)
     private Paymenttype paymenttype1;
@@ -75,4 +80,11 @@ public class Payment implements Serializable {
         this.paymentbill1 = paymentbill1;
     }
 
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 }

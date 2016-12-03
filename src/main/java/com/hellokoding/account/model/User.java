@@ -1,7 +1,10 @@
 package com.hellokoding.account.model;
 
 
+import com.hellokoding.account.Models.So;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,6 +15,9 @@ public class User {
     private String password;
     private String passwordConfirm;
     private Set<Role> roles;
+
+    @OneToMany(targetEntity = So.class, mappedBy = "user")
+    private List<So> soes;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,5 +62,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<So> getSoes() {
+        return soes;
+    }
+
+    public void setSoes(List<So> soes) {
+        this.soes = soes;
     }
 }
