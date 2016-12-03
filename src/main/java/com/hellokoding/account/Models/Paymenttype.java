@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class Paymenttype implements Serializable {
 
     @Column(name = "PTId", table = "paymenttype", nullable = false)
     @Id
-    private Integer pTId;
+    private Long pTId;
 
     @Column(name = "TypeName", table = "paymenttype")
     @Basic
@@ -31,11 +30,11 @@ public class Paymenttype implements Serializable {
     @OneToMany(targetEntity = Payment.class, mappedBy = "paymenttype1")
     private List<Payment> payments1;
 
-    public Integer getPTId() {
+    public Long getPTId() {
         return this.pTId;
     }
 
-    public void setPTId(Integer pTId) {
+    public void setPTId(Long pTId) {
         this.pTId = pTId;
     }
 

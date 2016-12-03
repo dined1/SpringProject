@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class Paymentbill implements Serializable {
 
     @Column(name = "PBId", table = "paymentbill", nullable = false)
     @Id
-    private Integer pBId;
+    private Long pBId;
 
     @Column(name = "CMP", table = "paymentbill", precision = 12)
     @Basic
@@ -43,11 +42,11 @@ public class Paymentbill implements Serializable {
     @OneToMany(targetEntity = Payment.class, mappedBy = "paymentbill1")
     private List<Payment> payments1;
 
-    public Integer getPBId() {
+    public Long getPBId() {
         return this.pBId;
     }
 
-    public void setPBId(Integer pBId) {
+    public void setPBId(Long pBId) {
         this.pBId = pBId;
     }
 

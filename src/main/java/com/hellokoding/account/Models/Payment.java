@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 
 /**
@@ -21,7 +20,7 @@ public class Payment implements Serializable {
 
     @Column(name = "PaymentId", table = "payment", nullable = false)
     @Id
-    private Integer paymentId;
+    private Long paymentId;
 
     @Column(name = "PaymentInfo", table = "payment")
     @Basic
@@ -36,11 +35,11 @@ public class Payment implements Serializable {
     @ManyToOne(targetEntity = Paymentbill.class)
     private Paymentbill paymentbill1;
 
-    public Integer getPaymentId() {
+    public Long getPaymentId() {
         return this.paymentId;
     }
 
-    public void setPaymentId(Integer paymentId) {
+    public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
     }
 

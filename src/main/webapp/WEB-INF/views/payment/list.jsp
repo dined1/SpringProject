@@ -39,15 +39,15 @@
                                 <tbody>
                                 <c:forEach items="${PAYMENT_LIST}" var="PAYMENT">
                                     <tr>
-                                        <td>${mvc.encoders.html(PAYMENT.paymentId)}</td>
+                                        <td>${PAYMENT.paymentId}</td>
 
-                                        <td>${mvc.encoders.html(PAYMENT.paymentInfo)}</td>
+                                        <td>${PAYMENT.paymentInfo}</td>
 
-                                        <td>${mvc.encoders.html(PAYMENT.paymentbill1.cmp)}</td>
+                                        <td>${PAYMENT.paymentbill1.cmp}</td>
 
-                                        <td>${mvc.encoders.html(PAYMENT.paymenttype1.typeName)}</td>
+                                        <td>${PAYMENT.paymenttype1.typeName}</td>
 
-                                        <td>${mvc.encoders.html(PAYMENT.so1.SONumber)}</td>
+                                        <td>${PAYMENT.so1.SONumber}</td>
 
                                         <td>
                                             <div class="pull-right">
