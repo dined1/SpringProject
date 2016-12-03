@@ -67,7 +67,7 @@ public class AddressController {
     }
 
 
-    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String updateAddress(@Valid
             @BeanParam Address address, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

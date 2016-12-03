@@ -8,81 +8,72 @@ package com.hellokoding.account.web;
 import com.hellokoding.account.Models.Paymentbill;
 import com.hellokoding.account.repository.PaymentBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
 
 /**
  *
  * @author dzni0816
  */
-@Path("paymentbill")
+@RequestMapping(value = {"/paymentbill"})
+@Controller
 public class PaymentbillController {
 
     @Autowired
     private PaymentBillRepository paymentBillRepository;
 
-    @GET
-    @Path("new")
-    @javax.mvc.annotation.Controller
+
+    @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyPaymentbill() {
-        return "paymentbill/create.jsp";
+        return "paymentbill/create";
     }
 
-    @POST
-    @Path("new")
-    @javax.mvc.annotation.Controller
-    @ValidateOnExecution(type = ExecutableType.NONE)
+
+    @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createPaymentbill(@Valid
             @BeanParam Paymentbill paymentbill) {
-
         paymentBillRepository.save(paymentbill);
-        return "redirect:paymentbill/list";
+        return "redirect:list";
     }
 
-    @GET
-    @Path("update/{id}")
-    @javax.mvc.annotation.Controller
-    public String editPaymentbill(Model model, @PathParam("id") Long id) {
+
+    @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
+    public String editPaymentbill(Model model, @PathVariable("id") Long id) {
         model.addAttribute("PAYMENTBILL", paymentBillRepository.findOne(id));
-        return "paymentbill/update.jsp";
+        return "paymentbill/update";
     }
 
-    @POST
-    @Path("update")
-    @javax.mvc.annotation.Controller
-    @ValidateOnExecution(type = ExecutableType.NONE)
+
+    @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updatePaymentbill(@Valid
             @BeanParam Paymentbill paymentbill) {
         paymentBillRepository.save(paymentbill);
-        return "redirect:paymentbill/list";
+        return "redirect:list";
     }
 
-    @GET
-    @Path("remove/{id}")
-    @javax.mvc.annotation.Controller
-    public String removePaymentbill(@PathParam("id") Long id) {
+    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
+    public String removePaymentbill(@PathVariable("id") Long id) {
         paymentBillRepository.delete(paymentBillRepository.findOne(id));
-        return "redirect:paymentbill/list";
+        return "redirect:list";
     }
 
-    @GET
-    @Path("{id}")
-    @javax.mvc.annotation.Controller
-    public String findPaymentbill(Model model, @PathParam("id") Long id) {
+
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    public String findPaymentbill(Model model, @PathVariable("id") Long id) {
         model.addAttribute("PAYMENTBILL", paymentBillRepository.findOne(id));
-        return "paymentbill/view.jsp";
+        return "paymentbill/view";
     }
 
-    @GET
-    @Path("list")
-    @javax.mvc.annotation.Controller
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllPaymentbill(Model model) {
         model.addAttribute("PAYMENTBILL_LIST", paymentBillRepository.findAll());
-        return "paymentbill/list.jsp";
+        return "paymentbill/list";
     }
     
 }

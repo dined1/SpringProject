@@ -8,80 +8,72 @@ package com.hellokoding.account.web;
 import com.hellokoding.account.Models.Paymenttype;
 import com.hellokoding.account.repository.PaymentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
 
 /**
  *
  * @author dzni0816
  */
-@Path("paymenttype")
+@RequestMapping(value = {"/paymenttype"})
+@Controller
 public class PaymenttypeController {
 
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
 
-    @GET
-    @Path("new")
-    @javax.mvc.annotation.Controller
+    @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyPaymenttype() {
-        return "paymenttype/create.jsp";
+        return "paymenttype/create";
     }
 
-    @POST
-    @Path("new")
-    @javax.mvc.annotation.Controller
-    @ValidateOnExecution(type = ExecutableType.NONE)
+
+    @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createPaymenttype(@Valid
             @BeanParam Paymenttype paymenttype) {
         paymentTypeRepository.save(paymenttype);
-        return "redirect:paymenttype/list";
+        return "redirect:list";
     }
 
-    @GET
-    @Path("update/{id}")
-    @javax.mvc.annotation.Controller
-    public String editPaymenttype(Model model, @PathParam("id") Long id) {
+
+    @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
+    public String editPaymenttype(Model model, @PathVariable("id") Long id) {
         model.addAttribute("PAYMENTTYPE", paymentTypeRepository.findOne(id));
-        return "paymenttype/update.jsp";
+        return "paymenttype/update";
     }
 
-    @POST
-    @Path("update")
-    @javax.mvc.annotation.Controller
-    @ValidateOnExecution(type = ExecutableType.NONE)
+
+    @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updatePaymenttype(@Valid
             @BeanParam Paymenttype paymenttype) {
         paymentTypeRepository.save(paymenttype);
-        return "redirect:paymenttype/list";
+        return "redirect:list";
     }
 
-    @GET
-    @Path("remove/{id}")
-    @javax.mvc.annotation.Controller
-    public String removePaymenttype(@PathParam("id") Long id) {
+
+    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
+    public String removePaymenttype(@PathVariable("id") Long id) {
         paymentTypeRepository.delete(paymentTypeRepository.findOne(id));
-        return "redirect:paymenttype/list";
+        return "redirect:list";
     }
 
-    @GET
-    @Path("{id}")
-    @javax.mvc.annotation.Controller
-    public String findPaymenttype(Model model, @PathParam("id") Long id) {
+
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    public String findPaymenttype(Model model, @PathVariable("id") Long id) {
         model.addAttribute("PAYMENTTYPE", paymentTypeRepository.findOne(id));
-        return "paymenttype/view.jsp";
+        return "paymenttype/view";
     }
 
-    @GET
-    @Path("list")
-    @javax.mvc.annotation.Controller
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllPaymenttype(Model model) {
         model.addAttribute("PAYMENTTYPE_LIST", paymentTypeRepository.findAll());
-        return "paymenttype/list.jsp";
+        return "paymenttype/list";
     }
     
 }
