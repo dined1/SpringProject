@@ -1,10 +1,6 @@
 package com.hellokoding.account.model;
 
-
-import com.hellokoding.account.Models.So;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
