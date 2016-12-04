@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html lang="en">
 
     <head>
@@ -12,8 +13,6 @@
 
         <title></title>
 
-        <c:set var="appPath" value="${contextPath}"/>
-        <c:set var="webPath" value="${contextPath}/webresources"/>
 
         <!-- Bootstrap Core CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -26,8 +25,10 @@
         <!-- Custom Fonts -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <!-- Custom CSS -->
-        <link href="${webPath}/static/style/theme.css" rel="stylesheet">
-        <link href="${webPath}/common/css/style.css" rel="stylesheet">
+        <spring:url value="/webresources/static/style/style.css" var="style"/>
+        <link href="${style}" rel="stylesheet" />
+        <spring:url value="/webresources/static/style/theme.css" var="theme"/>
+        <link href="${theme}" rel="stylesheet" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

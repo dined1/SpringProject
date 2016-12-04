@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/webresources/common/header.jspf"%>
 
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
