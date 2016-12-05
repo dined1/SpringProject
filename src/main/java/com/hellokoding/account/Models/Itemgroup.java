@@ -20,7 +20,7 @@ public class Itemgroup implements Serializable {
 
     @Column(name = "IGId", table = "itemgroup", nullable = false)
     @Id
-    private Integer iGId;
+    private Long iGId;
 
     @ManyToOne(targetEntity = Group1.class)
     private Group1 groups1;
@@ -28,11 +28,11 @@ public class Itemgroup implements Serializable {
     @ManyToOne(targetEntity = Item.class)
     private Item item1;
 
-    public Integer getiGId() {
+    public Long getiGId() {
         return this.iGId;
     }
 
-    public void setiGId(Integer iGId) {
+    public void setiGId(Long iGId) {
         this.iGId = iGId;
     }
 

@@ -24,7 +24,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
                             <table class="table table-striped table-bordered table-hover" id="PAYMENT_TABLE">
@@ -66,7 +65,6 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <!-- Modal -->
                                             <div class="modal fade" id="confirm_delete_${PAYMENT.paymentId}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -83,11 +81,8 @@
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <!-- /.modal-content -->
                                                 </div>
-                                                <!-- /.modal-dialog -->
                                             </div>
-                                            <!-- /.modal -->
                                         </td>
 
                                     </tr>
@@ -106,13 +101,9 @@
 
 
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
     </div>
 </div>
 <script>

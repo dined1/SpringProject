@@ -38,7 +38,7 @@
                                 <tbody>
                                     <c:forEach items="${ROLE_LIST}" var="ROLE">
                                         <tr>
-                                            <td>${(ROLE.roleId)}</td>
+                                            <td>${(ROLE.id)}</td>
 
                                             <td>${(ROLE.name)}</td>
 
@@ -49,16 +49,16 @@
                                                             <i class="fa fa-gear"></i>  <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
-                                                            <li><a href="${ROLE.roleId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${contextPath}/role/update/${ROLE.roleId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${ROLE.id}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
+                                                            <li><a href="${contextPath}/role/update/${ROLE.id}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
-                                                            <li><a data-toggle="modal" data-target="#confirm_delete_${ROLE.roleId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
+                                                            <li><a data-toggle="modal" data-target="#confirm_delete_${ROLE.id}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="confirm_delete_${ROLE.roleId}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal fade" id="confirm_delete_${ROLE.id}" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -69,7 +69,7 @@
                                                                 <p>Are you sure to delete Role ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${contextPath}/role/remove/${ROLE.roleId}" method="DELETE">
+                                                                <form action="${contextPath}/role/remove/${ROLE.id}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

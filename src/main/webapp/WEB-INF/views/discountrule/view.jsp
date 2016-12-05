@@ -21,7 +21,7 @@
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span class="small">DRId :</span></div>
-                                            <div class="col-lg-8">${(DISCOUNTRULE.DRId)}</div>
+                                            <div class="col-lg-8">${(DISCOUNTRULE.dRId)}</div>
                                         </div>
                                     </a>             
                                     <a href="#" class="list-group-item">

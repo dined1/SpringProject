@@ -21,7 +21,7 @@ public class Itemdiscount implements Serializable {
     @Column(name = "IDid", table = "itemdiscount", nullable = false)
     @Id
     @FormParam("IDid")
-    private Integer IDid;
+    private Long IDid;
 
     @ManyToOne(targetEntity = Item.class)
     private Item item1;
@@ -29,11 +29,11 @@ public class Itemdiscount implements Serializable {
     @ManyToOne(targetEntity = Discountrule.class)
     private Discountrule discountrule1;
 
-    public Integer getIDid() {
+    public Long getIDid() {
         return this.IDid;
     }
 
-    public void setIDid(Integer IDid) {
+    public void setIDid(Long IDid) {
         this.IDid = IDid;
     }
 

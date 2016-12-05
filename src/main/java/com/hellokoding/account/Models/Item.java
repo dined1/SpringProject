@@ -23,7 +23,7 @@ public class Item implements Serializable {
 
     @Column(name = "ItemId", table = "item", nullable = false)
     @Id
-    private Integer itemId;
+    private Long itemId;
 
     @Column(name = "Name", table = "item")
     @Basic
@@ -62,11 +62,11 @@ public class Item implements Serializable {
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "item1")
     private List<Itemdiscount> itemdiscounts1;
 
-    public Integer getItemId() {
+    public Long getItemId() {
         return this.itemId;
     }
 
-    public void setItemId(Integer itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 

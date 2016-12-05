@@ -22,7 +22,7 @@ public class Group1 implements Serializable {
 
     @Column(name = "GroupId", table = "groups", nullable = false)
     @Id
-    private Integer groupId;
+    private Long groupId;
 
     @Column(name = "Name", table = "groups", nullable = false)
     @Basic(optional = false)
@@ -31,11 +31,11 @@ public class Group1 implements Serializable {
     @OneToMany(targetEntity = Itemgroup.class, mappedBy = "groups1")
     private List<Itemgroup> itemgroups1;
 
-    public Integer getGroupId() {
+    public Long getGroupId() {
         return this.groupId;
     }
 
-    public void setGroupId(Integer groupId) {
+    public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
 

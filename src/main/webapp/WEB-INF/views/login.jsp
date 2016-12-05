@@ -1,6 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/webresources/common/header.jspf"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -44,6 +46,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
             <h4 class="text-center"><a href="${contextPath}/main">В обход регистрации</a></h4>
+            <h4 class="text-center"><a href="${contextPath}/payment/list">qwe</a></h4>
         </div>
 
     </form>

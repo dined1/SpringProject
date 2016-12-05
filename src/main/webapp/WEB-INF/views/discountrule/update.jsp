@@ -18,8 +18,8 @@
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/discountrule/update" method="POST">
                                     <div class="form-group">
-                                        <label for="DRId">DRId</label>
-                                        <input class="form-control" type="number" name="DRId" readonly value="${DISCOUNTRULE.DRId}" />
+                                        <label for="dRId">DRId</label>
+                                        <input class="form-control" type="number" name="dRId" readonly value="${DISCOUNTRULE.dRId}" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="discountValue">Discount Value</label>

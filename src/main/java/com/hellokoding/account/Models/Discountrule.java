@@ -22,7 +22,7 @@ public class Discountrule implements Serializable {
 
     @Column(name = "DRId", table = "discountrule", nullable = false)
     @Id
-    private Integer dRId;
+    private Long dRId;
 
     @Column(name = "DiscountValue", table = "discountrule", precision = 12)
     @Basic
@@ -35,11 +35,11 @@ public class Discountrule implements Serializable {
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "discountrule1")
     private List<Itemdiscount> itemdiscounts1;
 
-    public Integer getdRId() {
+    public Long getdRId() {
         return this.dRId;
     }
 
-    public void setdRId(Integer dRId) {
+    public void setdRId(Long dRId) {
         this.dRId = dRId;
     }
 
