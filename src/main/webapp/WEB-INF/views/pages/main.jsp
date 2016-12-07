@@ -2,24 +2,7 @@
 <%@ include file="/webresources/common/header.jspf"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>АСУЗП</title>
 
-    <!-- Bootstrap -->
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
 
 <img src="head" alt="Логотип Компании" class="img-responsive">
 <img src="http://imgur.com/RL0JDTq">
@@ -32,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-2 logotype">
-                    <img src="img/logo.png" alt="Логотип Компании" class="img-responsive">
+                    <img src="${contextPath}/webresources/static/need/img/logo.png" alt="Логотип Компании" class="img-responsive">
                 </div>
                 <div class="col-sm-7 text-center descript">
                     <h4>Автоматизированная система по управлению заказом пользователя</h4>
@@ -120,7 +103,7 @@
             <div class="row text-center">
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="img/types-1.jpg" alt="Страдание" class="img-responsive center-block">
+                        <img src="${contextPath}/webresources/static/need/img/types-1.jpg" alt="Страдание" class="img-responsive center-block">
                         <h4>Страдание</h4>
                         <br>
                         <a class="btn btn-primary btn-sm" href="cat"><i class="fa fa-plus"></i>Подробнее</a>
@@ -129,7 +112,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="img/types-2.jpg" alt="Боль" class="img-responsive center-block">
+                        <img src="${contextPath}/webresources/static/need/img/types-2.jpg" alt="Боль" class="img-responsive center-block">
                         <h4>Боль</h4>
                         <br>
                         <button class="more_btn" data-toggle="modal" href="#">Подробнее</button>
@@ -138,7 +121,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="img/types-3.jpg" alt="Олишевко" class="img-responsive center-block">
+                        <img src="${contextPath}/webresources/static/need/img/types-3.jpg" alt="Олишевко" class="img-responsive center-block">
                         <h4>Олишевко</h4>
                         <br>
                         <button class="more_btn" data-toggle="modal" href="#">Подробнее</button>
@@ -147,7 +130,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="img/types-4.jpg" alt="Терроризм" class="img-responsive center-block">
+                        <img src="${contextPath}/webresources/static/need/img/types-4.jpg" alt="Терроризм" class="img-responsive center-block">
                         <h4>Терроризм</h4>
                         <br>
                         <button class="more_btn" data-toggle="modal" href="#">Подробнее</button>
@@ -169,7 +152,7 @@
                     <button id="free_consult" data-toggle="modal" href="#">Бесплатная консультация</button>
                 </div>
                 <div class="col-md-2">
-                    <img src="img/help_img.jpg" alt="Бесплатная консультация" class="img-responsive help_img center-block">
+                    <img src="${contextPath}/webresources/static/need/img/help_img.jpg" alt="Бесплатная консультация" class="img-responsive help_img center-block">
                 </div>
             </div>
         </div>
@@ -186,11 +169,11 @@
                 <div class="slider">
                     <div class="fotorama"
                          data-nav="thumbs">
-                        <img src="img/portfolio/1.jpg" alt="">
-                        <img src="img/portfolio/2.jpg" alt="">
-                        <img src="img/portfolio/3.jpg" alt="">
-                        <img src="img/portfolio/4.jpg" alt="">
-                        <img src="img/portfolio/5.jpg" alt="">
+                        <img src="${contextPath}/webresources/static/need/img/portfolio/1.jpg" alt="">
+                        <img src="${contextPath}/webresources/static/need/img/portfolio/2.jpg" alt="">
+                        <img src="${contextPath}/webresources/static/need/img/portfolio/3.jpg" alt="">
+                        <img src="${contextPath}/webresources/static/need/img/portfolio/4.jpg" alt="">
+                        <img src="${contextPath}/webresources/static/need/img/portfolio/5.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -201,7 +184,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="img/gift.jpg" alt="Подарок" class="img-responsive center-block gift">
+                    <img src="${contextPath}/webresources/static/need/img/gift.jpg" alt="Подарок" class="img-responsive center-block gift">
                 </div>
                 <div class="col-md-9">
                     <h4>Акция</h4>
@@ -253,15 +236,13 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="fotorama">
-                                            <img src="img/feedback/1/1.jpg" alt="">
-                                            <img src="img/feedback/1/2.jpg" alt="">
-                                            <img src="img/feedback/1/3.jpg" alt="">
+                                            <img src="${contextPath}/webresources/static/need/img/feedback/1/1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <img src="img/avatar-1.jpg" alt="" class="img-circle center-block">
+                                                <img src="${contextPath}/webresources/static/need/img/avatar-1.jpg" alt="" class="img-circle center-block">
                                             </div>
                                             <div class="col-md-10">
                                                 <h5>Rick Astley</h5>
@@ -271,7 +252,7 @@
                                         <div class="row">
                                             <div class="audio">
                                                 <audio controls>
-                                                    <source src="audio/1.mp3" type="audio/mpeg">
+                                                    <source src="${contextPath}/webresources/static/need/audio/1.mp3" type="audio/mpeg">
                                                 </audio>
                                             </div>
                                         </div>
@@ -286,15 +267,13 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="fotorama">
-                                            <img src="img/feedback/1/1.jpg" alt="">
-                                            <img src="img/feedback/1/2.jpg" alt="">
-                                            <img src="img/feedback/1/3.jpg" alt="">
+                                            <img src="${contextPath}/webresources/static/need/img/feedback/1/1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <img src="img/avatar-1.jpg" alt="" class="img-circle center-block">
+                                                <img src="${contextPath}/webresources/static/need/img/avatar-1.jpg" alt="" class="img-circle center-block">
                                             </div>
                                             <div class="col-md-10">
                                                 <h5>Rick Astley</h5>
@@ -304,7 +283,7 @@
                                         <div class="row">
                                             <div class="audio">
                                                 <audio controls>
-                                                    <source src="audio/1.mp3" type="audio/mpeg">
+                                                    <source src="${contextPath}/webresources/static/need/audio/1.mp3" type="audio/mpeg">
                                                 </audio>
                                             </div>
                                         </div>
@@ -319,15 +298,15 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="fotorama">
-                                            <img src="img/feedback/1/1.jpg" alt="">
-                                            <img src="img/feedback/1/2.jpg" alt="">
-                                            <img src="img/feedback/1/3.jpg" alt="">
+                                            <img src="${contextPath}/webresources/static/need/img/feedback/1/1.jpg" alt="">
+                                            <img src="${contextPath}/webresources/static/need/img/feedback/1/2.jpg" alt="">
+                                            <img src="${contextPath}/webresources/static/need/img/feedback/1/3.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <img src="img/avatar-1.jpg" alt="" class="img-circle center-block">
+                                                <img src="${contextPath}/webresources/static/need/img/avatar-1.jpg" alt="" class="img-circle center-block">
                                             </div>
                                             <div class="col-md-10">
                                                 <h5>Rick Astley</h5>
@@ -337,7 +316,7 @@
                                         <div class="row">
                                             <div class="audio">
                                                 <audio controls>
-                                                    <source src="audio/1.mp3" type="audio/mpeg">
+                                                    <source src="${contextPath}/webresources/static/need/audio/1.mp3" type="audio/mpeg">
                                                 </audio>
                                             </div>
                                         </div>
@@ -387,8 +366,8 @@
                         </div>
                     </div>
                     <div class="row social">
-                        <a class="social_icon" href=""><img src="img/vk.png" alt="Вконтакте"></a>
-                        <a class="social_icon" href=""><img src="img/insta.png" alt="Инстаграм"></a>
+                        <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/vk.png" alt="Вконтакте"></a>
+                        <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/insta.png" alt="Инстаграм"></a>
                         <button id="get_answer" data-toggle="modal" href="#">Задать вопрос</button>
                     </div>
                 </div>
@@ -434,9 +413,9 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nicescroll.min.js"></script>
-    <script src="js/wow.min.js"></script>
+    <script src="${contextPath}/webresources/static/need/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/webresources/static/need/js/jquery.nicescroll.min.js"></script>
+    <script src="${contextPath}/webresources/static/need/js/wow.min.js"></script>
     <script>
         new WOW().init();
     </script>
@@ -451,8 +430,7 @@
     <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 </div>
-</body>
-</html>
+
 
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>
