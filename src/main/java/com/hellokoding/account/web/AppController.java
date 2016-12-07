@@ -49,6 +49,7 @@ public class AppController {
         model.addAttribute("GROUP_LIST", groupFacade.findAll());
         model.addAttribute("PRODUCTITEMS_LIST", productItemsFacade.findAll());
         model.addAttribute("PAYMENT_LIST", paymentFacade.findAll());
+        model.addAttribute("SO_LIST", soFacade.findAll());
         return "pages/group";
     }
 }
