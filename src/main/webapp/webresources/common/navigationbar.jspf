@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://jpamodeler.github.io" target="_blank"><img src="${webPath}/static/images/logo.png" /></a>
+        <a class="navbar-brand" href="http://jpamodeler.github.io" target="_blank"><img src="${contextPath}/webresources/static/images/logo.png" /></a>
     </div>
     <!-- /.navbar-header -->
 

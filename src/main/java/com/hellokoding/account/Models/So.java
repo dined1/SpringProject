@@ -53,9 +53,6 @@ public class So implements Serializable {
     @ManyToOne(targetEntity = Customer.class)
     private Customer customer1;
 
-    @ManyToOne(targetEntity = User.class)
-    private User user;
-
     @OneToMany(targetEntity = Payment.class, mappedBy = "so1")
     private List<Payment> payments1;
 
@@ -124,14 +121,6 @@ public class So implements Serializable {
 
     public void setCustomer1(Customer customer1) {
         this.customer1 = customer1;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User uuser11) {
-        this.user = uuser11;
     }
 
     public List<Payment> getPayments1() {
