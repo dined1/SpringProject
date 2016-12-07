@@ -30,6 +30,8 @@ public class AppController {
     @Autowired
     private PaymentRepository paymentFacade;
     @Autowired
+    private PaymentTypeRepository paymentTypeRepository;
+    @Autowired
     private SORepository soFacade;
 
 
@@ -51,5 +53,11 @@ public class AppController {
         model.addAttribute("PAYMENT_LIST", paymentFacade.findAll());
         model.addAttribute("SO_LIST", soFacade.findAll());
         return "pages/group";
+    }
+
+    @RequestMapping(value = {"/finalpay"}, method = RequestMethod.GET)
+    public String emptyPay(Model model) {
+        model.addAttribute("PAYTYPE_LIST", paymentTypeRepository.findAll());
+        return "pages/payment"; //Используется для просмотра главной страницы
     }
 }

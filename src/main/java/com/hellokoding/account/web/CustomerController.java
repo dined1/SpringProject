@@ -43,6 +43,7 @@ public class CustomerController {
     private ErrorBean error;
 
 
+
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyCustomer(Model model) {
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
@@ -99,5 +100,14 @@ public class CustomerController {
         model.addAttribute("CUSTOMER_LIST", customerRepository.findAll());
         return "customer/list";
     }
-    
+
+
+
+
+    @RequestMapping(value = {"/cabinet"}, method = RequestMethod.GET)
+    public String editCabinet(Model model) {
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        return "customer/cabinet";
+    }
+
 }

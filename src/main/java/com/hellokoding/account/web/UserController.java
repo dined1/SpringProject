@@ -30,15 +30,6 @@ public class UserController {
         return "welcome";
     }
 
-
-
-
-
-
-
-
-
-
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());

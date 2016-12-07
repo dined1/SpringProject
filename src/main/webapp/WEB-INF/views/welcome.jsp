@@ -33,6 +33,9 @@
         </form>
 
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <a href="${contextPath}/customer/cabinet" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+        <a href="${contextPath}/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+        <a href="${contextPath}/application/finalpay" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Pay</a>
 
     </c:if>
 

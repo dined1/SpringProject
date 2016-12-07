@@ -38,6 +38,18 @@ public class Customer implements Serializable {
     @Basic
     private String phone;
 
+
+
+    @Column(name = "PassNumber", table = "customer")
+    @Basic
+    private String passNumber;
+
+    @Column(name = "CountNumber", table = "customer")
+    @Basic
+    private String countNumber;
+
+
+
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
 
