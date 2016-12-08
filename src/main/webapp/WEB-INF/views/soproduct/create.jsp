@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/soproduct/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/soproduct/new" method="POST">
                                     <div class="form-group">
                                         <label for="SOPId">SOPId</label>
                                         <input class="form-control" type="number" name="SOPId" path="SOPId"  required="required" autofocus="autofocus"  />
@@ -31,7 +31,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/soproduct/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

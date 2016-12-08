@@ -32,7 +32,7 @@
                                     </a>             
 
                                 </div>
-                                <a href="${contextPath}/group1/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/admin/group1/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

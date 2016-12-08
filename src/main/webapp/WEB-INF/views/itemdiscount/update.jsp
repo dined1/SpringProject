@@ -16,13 +16,13 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/itemdiscount/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/itemdiscount/update" method="POST">
                                     <div class="form-group">
                                         <label for="IDid">IDid</label>
                                         <input class="form-control" type="number" name="IDid" readonly value="${ITEMDISCOUNT.IDid}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/itemdiscount/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/itemdiscount/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

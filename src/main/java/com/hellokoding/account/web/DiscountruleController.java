@@ -15,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -25,7 +24,7 @@ import javax.ws.rs.BeanParam;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/discountrule"})
+@RequestMapping(value = {"/admin/discountrule"})
 @Controller
 public class DiscountruleController {
 

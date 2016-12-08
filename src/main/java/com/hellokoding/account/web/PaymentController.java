@@ -25,7 +25,7 @@ import java.util.Date;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/payment"})
+@RequestMapping(value = {"/admin/payment"})
 @Controller
 public class PaymentController {
 

@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/productItems/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/productItems/new" method="POST">
 
                                     <div class="form-group">
                                         <label for="id">Id</label>
@@ -24,7 +24,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/productItems/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/productItems/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

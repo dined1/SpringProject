@@ -53,7 +53,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${ITEMDISCOUNT.IDid}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${contextPath}/itemdiscount/update/${ITEMDISCOUNT.IDid}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/admin/itemdiscount/update/${ITEMDISCOUNT.IDid}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${ITEMDISCOUNT.IDid}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -72,7 +72,7 @@
                                                                 <p>Are you sure to delete Itemdiscount ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${contextPath}/itemdiscount/remove/${ITEMDISCOUNT.IDid}" method="DELETE">
+                                                                <form action="${contextPath}/admin/itemdiscount/remove/${ITEMDISCOUNT.IDid}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

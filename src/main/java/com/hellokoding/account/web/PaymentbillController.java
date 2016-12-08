@@ -21,7 +21,7 @@ import javax.ws.rs.BeanParam;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/paymentbill"})
+@RequestMapping(value = {"/admin/paymentbill"})
 @Controller
 public class PaymentbillController {
 

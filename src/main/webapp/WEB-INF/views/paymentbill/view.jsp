@@ -50,7 +50,7 @@
                                     </a>             
 
                                 </div>
-                                <a href="${contextPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/admin/paymentbill/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

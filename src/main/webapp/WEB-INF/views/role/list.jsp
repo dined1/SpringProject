@@ -50,7 +50,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${ROLE.id}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${contextPath}/role/update/${ROLE.id}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                            <li><a href="${contextPath}/admin/role/update/${ROLE.id}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${ROLE.id}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                             </li>
@@ -69,7 +69,7 @@
                                                                 <p>Are you sure to delete Role ?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="${contextPath}/role/remove/${ROLE.id}" method="DELETE">
+                                                                <form action="${contextPath}/admin/role/remove/${ROLE.id}" method="DELETE">
                                                                     <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                                 </form>
                                                             </div>

@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/role"})
+@RequestMapping(value = {"/admin/role"})
 @Controller
 public class RoleController {
 

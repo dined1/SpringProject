@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/customer/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/customer/update" method="POST">
                                     <div class="form-group">
                                         <label for="customerId">Customer Id</label>
                                         <input class="form-control" type="number" name="customerId" readonly value="${CUSTOMER.customerId}" />
@@ -51,7 +51,7 @@
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

@@ -26,7 +26,7 @@ import javax.ws.rs.BeanParam;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/address"})
+@RequestMapping(value = {"/admin/address"})
 @Controller
 public class AddressController {
 

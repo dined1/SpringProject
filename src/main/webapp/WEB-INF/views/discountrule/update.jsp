@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/discountrule/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/discountrule/update" method="POST">
                                     <div class="form-group">
                                         <label for="dRId">DRId</label>
                                         <input class="form-control" type="number" name="dRId" readonly value="${DISCOUNTRULE.dRId}" />
@@ -30,7 +30,7 @@
                                         <input class="form-control" type="number" name="discountProcent"  value="${DISCOUNTRULE.discountProcent}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/discountrule/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ import javax.ws.rs.BeanParam;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/paymenttype"})
+@RequestMapping(value = {"/admin/paymenttype"})
 @Controller
 public class PaymenttypeController {
 
