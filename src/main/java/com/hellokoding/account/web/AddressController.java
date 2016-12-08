@@ -57,8 +57,6 @@ public class AddressController {
         return "address/update";
     }
 
-
-
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateAddress(@Valid
                                 @BeanParam Address address) {
@@ -74,7 +72,7 @@ public class AddressController {
             return "welcome";
         }
         addressService.save(address);
-        return "redirect:address/list";
+        return "address/list";
     }
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)

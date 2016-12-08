@@ -27,7 +27,7 @@ public class UserController {
     public String main(Model model) {
         model.addAttribute("userForm", new User());
 
-        return "welcome";
+        return "main";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class UserController {
 
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/main";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -65,6 +65,6 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-        return "welcome";
+        return "main";
     }
 }

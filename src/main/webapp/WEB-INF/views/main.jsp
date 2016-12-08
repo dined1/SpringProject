@@ -21,12 +21,24 @@
 </head>
 <body>
 
-<img src="head" alt="Логотип Компании" class="img-responsive">
-<img src="http://imgur.com/RL0JDTq">
+<img src="http://webdevkin.ru/media/img/cart.jpg"/>
 
-<div>
-    <a class="btn btn-primary btn-sm" href="author"><i class="fa fa-plus"></i> Authorization</a>
-    <div/>
+
+<a href="${contextPath}/address/list" class="btn btn-default"><i class="fa fa-plus"></i>Address</a>
+<a href="${contextPath}/customer/list" class="btn btn-default"><i class="fa fa-plus"></i>Customer</a>
+<a href="${contextPath}/discountrule/list" class="btn btn-default"><i class="fa fa-plus"></i>Discountrule</a>
+<a href="${contextPath}/group/list" class="btn btn-default"><i class="fa fa-plus"></i>Group</a>
+<a href="${contextPath}/item/list" class="btn btn-default"><i class="fa fa-plus"></i>Item</a>
+<a href="${contextPath}/itemdiscount/list" class="btn btn-default"><i class="fa fa-plus"></i>Itemdiscount</a>
+<a href="${contextPath}/itemgroup/list" class="btn btn-default"><i class="fa fa-plus"></i>Itemgroup</a>
+<a href="${contextPath}/payment/list" class="btn btn-default"><i class="fa fa-plus"></i>Payment</a>
+<a href="${contextPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-plus"></i>Paymentbill</a>
+<a href="${contextPath}/paymenttype/list" class="btn btn-default"><i class="fa fa-plus"></i>Paymenttype</a>
+<a href="${contextPath}/productitems/list" class="btn btn-default"><i class="fa fa-plus"></i>ProductItems</a>
+<a href="${contextPath}/role/list" class="btn btn-default"><i class="fa fa-plus"></i>Role</a>
+<a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-plus"></i>SO</a>
+<a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-plus"></i>SOProduct</a>
+<a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a>
 
     <header>
         <div class="container">

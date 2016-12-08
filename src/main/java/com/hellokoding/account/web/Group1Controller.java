@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/group1"})
+@RequestMapping(value = {"/group"})
 @Controller
 public class Group1Controller {
 
@@ -36,7 +36,7 @@ public class Group1Controller {
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyGroup1() {
-        return "group1/create";
+        return "group/create";
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class Group1Controller {
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editGroup1(Model model, @PathVariable("id") Long id) {
         model.addAttribute("GROUP1", groupRepository.findOne(id));
-        return "group1/update";
+        return "group/update";
     }
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
@@ -72,19 +72,19 @@ public class Group1Controller {
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String removeGroup1(@PathVariable("id") Long id) {
         groupRepository.delete(groupRepository.findOne(id));
-        return "group1/view";
+        return "group/view";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String findAddress(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("GROUP1", groupRepository.findOne(Long.valueOf(id)));
-        return "group1/view";
+        model.addAttribute("GROUP", groupRepository.findOne(Long.valueOf(id)));
+        return "group/view";
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllGroup1(Model model) {
         model.addAttribute("GROUP_1_LIST", groupRepository.findAll());
-        return "group1/list";
+        return "group/list";
     }
 
 }

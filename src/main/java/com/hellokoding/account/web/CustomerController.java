@@ -57,7 +57,7 @@ public class CustomerController {
         Address address = addressRepository.findOne(Long.valueOf(addre));
         customer.setAddress1(address);
         customerRepository.save(customer);
-        return "redirect:/list";
+        return "redirect:list";
     }
 
 

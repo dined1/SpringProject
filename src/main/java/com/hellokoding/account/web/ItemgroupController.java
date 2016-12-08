@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/itemGroup"})
+@RequestMapping(value = {"/itemgroup"})
 @Controller
 public class ItemgroupController {
 
@@ -37,7 +37,7 @@ public class ItemgroupController {
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyItemGroup() {
-        return "/itemGroup/create";
+        return "/itemgroup/create";
     }
 
 
@@ -51,7 +51,7 @@ public class ItemgroupController {
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editItemGroup(Model model, @PathVariable("id") Long id) {
         model.addAttribute("ITEMGROUP", itemGroupRepository.findOne(id));
-        return "itemGroup/update";
+        return "itemgroup/update";
     }
 
 
@@ -71,25 +71,25 @@ public class ItemgroupController {
             return "welcome";
         }
         itemGroupRepository.save(itemGroup);
-        return "redirect:itemGroup/list";
+        return "redirect:itemgroup/list";
     }
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public RedirectView removeItemGroup(@PathVariable("id") Long id) {
         itemGroupRepository.delete(itemGroupRepository.findOne(id));
-        return new RedirectView("/itemGroup/list");
+        return new RedirectView("/itemgroup/list");
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String findItemGroup(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("ITEMGROUP", itemGroupRepository.findOne(Long.valueOf(id)));
-        return "itemGroup/view";
+        return "itemgroup/view";
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllItemGroup(Model model) {
         model.addAttribute("ITEMGROUP_LIST", itemGroupRepository.findAll());
-        return "itemGroup/list";
+        return "itemgroup/list";
     }
     
 }

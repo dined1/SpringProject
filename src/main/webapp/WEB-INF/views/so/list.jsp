@@ -38,7 +38,6 @@
                                         <th>Purchase Order Number</th>
                                         <th>Date Modified</th>
                                         <th>Customer</th>
-                                        <th>User</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -60,8 +59,6 @@
                                             <td>${(SO.dateModified)}</td>
 
                                             <td>${(SO.customer1.lastName)}</td>
-
-                                            <td>${(SO.user1.login)}</td>
 
                                             <td>
                                                 <div class="pull-right">

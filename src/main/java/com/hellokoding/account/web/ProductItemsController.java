@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/productItems"})
+@RequestMapping(value = {"/productitems"})
 @Controller
 public class ProductItemsController {
 
@@ -36,7 +36,7 @@ public class ProductItemsController {
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyProductItems() {
-        return "/productItems/create";
+        return "/productitems/create";
     }
 
 
@@ -50,7 +50,7 @@ public class ProductItemsController {
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editProductItems(Model model, @PathVariable("id") Long id) {
         model.addAttribute("PRODUCTITEMS", productItemsRepository.findOne(id));
-        return "productItems/update";
+        return "productitems/update";
     }
 
 
@@ -70,25 +70,25 @@ public class ProductItemsController {
             return "welcome";
         }
         productItemsRepository.save(productItems);
-        return "redirect:productItems/list";
+        return "redirect:productitems/list";
     }
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public RedirectView removeProductItems(@PathVariable("id") Long id) {
         productItemsRepository.delete(productItemsRepository.findOne(id));
-        return new RedirectView("/productItems/list");
+        return new RedirectView("/productitems/list");
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String findProductItems(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("PRODUCTITEMS", productItemsRepository.findOne(Long.valueOf(id)));
-        return "productItems/view";
+        return "productitems/view";
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllProductItems(Model model) {
         model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        return "productItems/list";
+        return "productitems/list";
     }
     
 }
