@@ -61,7 +61,6 @@
 
                                             <td>${(SO.customer1.lastName)}</td>
 
-                                            <td>${(SO.user1.login)}</td>
 
                                             <td>
                                                 <div class="pull-right">

@@ -5,9 +5,13 @@
  */
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.Models.So;
+import com.hellokoding.account.Models.Statisticscollector;
 import com.hellokoding.account.controller.util.ErrorBean;
+import com.hellokoding.account.repository.CustomerRepository;
 import com.hellokoding.account.repository.SORepository;
+import com.hellokoding.account.repository.StatisticsCollectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +35,10 @@ public class SoController {
 
     @Autowired
     SORepository soRepository;
+    @Autowired
+    StatisticsCollectorRepository statisticsCollectorRepository;
+    @Autowired
+    CustomerRepository customerRepository;
     @Inject
     private ErrorBean error;
 
@@ -44,7 +52,15 @@ public class SoController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createSo(@Valid
                                 @BeanParam So so) {
+        Customer customer = customerRepository.findOne(1L);
+        so.setCustomer1(customer);
         soRepository.save(so);
+        Statisticscollector statisticscollector = new Statisticscollector();
+        statisticscollector.setSCId(1L);
+        statisticscollector.setCustomer1(so.getCustomer1());
+        statisticscollector.setStatisticType("SavingSO");
+        statisticscollector.setStatisticsInfo("SO '" + so.getSOId() + "' have been succesfully saved and processed by customer '" + so.getCustomer1().getCustomerId() +  "'");
+        statisticsCollectorRepository.save(statisticscollector);
         return "redirect:list";
     }
 

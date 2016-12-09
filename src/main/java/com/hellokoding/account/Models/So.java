@@ -3,7 +3,6 @@
  */
 package com.hellokoding.account.Models;
 
-import com.hellokoding.account.model.User;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

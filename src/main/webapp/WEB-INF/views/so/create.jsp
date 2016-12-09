@@ -54,15 +54,6 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>User</label>
-                                        <select path="user1" name="user1" onchange=" ">
-                                            <option value="ord_null">Нет</option>
-                                            <c:forEach items="${USER_LIST}" var="USER">
-                                                <option value="${USER.userId}">${USER.login}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                     <a href="${contextPath}/admin/so/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
