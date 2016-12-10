@@ -166,29 +166,29 @@ insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich'
 insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', '3');
 insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', '4');
 insert into so values ('1', '05.11.2016', '07.11.2016', '08.11.2016', '011111', '1001', 'Ordered', '1', '1');
-insert into so values ('2', '05.11.2016', '07.11.2016', '08.11.2016', '022222', '1002', 'Ordered', '1', '1');
+insert into so values ('2', '05.11.2016', '07.11.2016', '08.11.2016', '022222', '1002', 'Wait', '1', '1');
 insert into so values ('3', '05.11.2016', '07.11.2016', '08.11.2016', '033333', '1003', 'Ordered', '1', '1');
 insert into so values ('4', '05.11.2016', '07.11.2016', '08.11.2016', '044444', '1004', 'Ordered', '2', '2');
-insert into so values ('5', '05.11.2016', '07.11.2016', '08.11.2016', '055555', '1005', 'Ordered', '2', '2');
+insert into so values ('5', '05.11.2016', '07.11.2016', '08.11.2016', '055555', '1005', 'Wait', '2', '2');
 insert into so values ('6', '05.11.2016', '07.11.2016', '08.11.2016', '066666', '1006', 'Ordered', '2', '2');
-insert into so values ('7', '05.11.2016', '07.11.2016', '08.11.2016', '077777', '1007', 'Ordered', '3', '3');
+insert into so values ('7', '05.11.2016', '07.11.2016', '08.11.2016', '077777', '1007', 'Wait', '3', '3');
 insert into so values ('8', '05.11.2016', '07.11.2016', '08.11.2016', '088888', '1008', 'Ordered', '3', '3');
-insert into so values ('9', '05.11.2016', '07.11.2016', '08.11.2016', '099999', '1009', 'Ordered', '3', '3');
+insert into so values ('9', '05.11.2016', '07.11.2016', '08.11.2016', '099999', '1009', 'Wait', '3', '3');
 insert into so values ('10', '05.11.2016', '07.11.2016', '08.11.2016', '100000', '1010', 'Ordered', '4', '4');
-insert into so values ('11', '05.11.2016', '07.11.2016', '08.11.2016', '111111', '1011', 'Ordered', '4', '4');
+insert into so values ('11', '05.11.2016', '07.11.2016', '08.11.2016', '111111', '1011', 'Wait', '4', '4');
 insert into so values ('12', '05.11.2016', '07.11.2016', '08.11.2016', '122222', '1012', 'Ordered', '4', '4');
-insert into soproduct values ('1', '1000', '2000', '1');
-insert into soproduct values ('2', '1000', '2000', '2');
-insert into soproduct values ('3', '1000', '2000', '3');
-insert into soproduct values ('4', '1000', '2000', '4');
-insert into soproduct values ('5', '1000', '2000', '5');
-insert into soproduct values ('6', '1000', '2000', '6');
-insert into soproduct values ('7', '1000', '2000', '7');
-insert into soproduct values ('8', '1000', '2000', '8');
-insert into soproduct values ('9', '1000', '2000', '9');
-insert into soproduct values ('10', '1000', '2000', '10');
-insert into soproduct values ('11', '1000', '2000', '11');
-insert into soproduct values ('12', '1000', '2000', '12');
+insert into soproduct values ('1', '1000', '1000', '1');
+insert into soproduct values ('2', '2000', '2000', '2');
+insert into soproduct values ('3', '3000', '3000', '3');
+insert into soproduct values ('4', '4000', '4000', '4');
+insert into soproduct values ('5', '5000', '5000', '5');
+insert into soproduct values ('6', '6000', '6000', '6');
+insert into soproduct values ('7', '7000', '7000', '7');
+insert into soproduct values ('8', '8000', '8000', '8');
+insert into soproduct values ('9', '9000', '9000', '9');
+insert into soproduct values ('10', '10000', '10000', '10');
+insert into soproduct values ('11', '11000', '11000', '11');
+insert into soproduct values ('12', '12000', '12000', '12');
 insert into payment values ('1', 'Info1', '1', '1', '1', '04.12.2016');
 insert into payment values ('2', 'Info2', '2', '2', '2', '04.12.2016');
 insert into payment values ('3', 'Info3', '3', '3', '2', '04.12.2016');
@@ -209,7 +209,7 @@ insert into PRODUCTITEMS values ('3', '3', '3');
 insert into PRODUCTITEMS values ('4', '4', '4');
 insert into PRODUCTITEMS values ('5', '5', '5');
 insert into PRODUCTITEMS values ('6', '6', '6');
-/*insert into PRODUCTITEMS values ('7', '7', '7');
+insert into PRODUCTITEMS values ('7', '7', '7');
 insert into PRODUCTITEMS values ('8', '8', '8');
 insert into PRODUCTITEMS values ('9', '9', '9');
 insert into PRODUCTITEMS values ('10', '10', '10');
@@ -232,7 +232,7 @@ insert into PRODUCTITEMS values ('26', '6', '8');
 insert into PRODUCTITEMS values ('27', '7', '9');
 insert into PRODUCTITEMS values ('28', '8', '10');
 insert into PRODUCTITEMS values ('29', '9', '11');
-insert into PRODUCTITEMS values ('30', '10', '12')*/
+insert into PRODUCTITEMS values ('30', '10', '12')
 
 
 
