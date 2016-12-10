@@ -19,11 +19,11 @@
                                 <form role="form" action="${contextPath}/group1/update" method="POST">
                                     <div class="form-group">
                                         <label for="groupId">Group Id</label>
-                                        <input class="form-control" type="number" name="groupId" readonly value="${GROUP_1.groupId}" />
+                                        <input class="form-control" type="number" name="groupId" readonly value="${GROUP.groupId}" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name"  value="${GROUP_1.name}" />
+                                        <input class="form-control" type="text" name="name"  value="${GROUP.name}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
                                     <a href="${contextPath}/group1/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>

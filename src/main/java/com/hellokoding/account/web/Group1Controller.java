@@ -48,7 +48,7 @@ public class Group1Controller {
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editGroup1(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("GROUP1", groupRepository.findOne(id));
+        model.addAttribute("GROUP", groupRepository.findOne(id));
         return "group/update";
     }
 

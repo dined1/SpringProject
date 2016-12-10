@@ -14,76 +14,49 @@
                         <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Itemdiscount </b></h5>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/application/new" method="POST">
-                                    <!--div class="form-group">
-                                        <label for="IDid">iDid</label>
-                                        <input class="form-control" type="number" name="iDid" path="iDid"  required="required" autofocus="autofocus"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Item</label>
-                                        <select path="item1" name="item1" onchange=" ">
-                                            <option value="ord_null">Нет</option>
-                                            <c:forEach items="${ITEM_LIST}" var="ITEM">
-                                                <option value="${ITEM.itemId}">${ITEM.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Discountrule</label>
-                                        <select path="discountrule1" name="discountrule1" onchange=" ">
-                                            <option value="ord_null">Нет</option>
-                                            <c:forEach items="${DISCOUNTRULE_LIST}" var="DISCOUNTRULE">
-                                                <option value="${DISCOUNTRULE.dRId}">${DISCOUNTRULE.discountValue}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div-->
-                                    <!--input type="text" name="qw"/>
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <button-- type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button-->
-                                    <!--a href="${contextPath}/itemdiscount/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a-->
 
-                                    <div class="dataTable_wrapper">
-                                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
-                                            <thead>
+                        <div class="container">
+
+                            <br />
+                            <br />
+                            <br />
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="../basket/${ID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
+                                <li><a href="../catalog/${ID}">Каталог</a></li>
+                                <li><a href="../order/${ID}">Оформление заказа</a></li>
+                            </ul>
+                            <br />
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="PRODUCTITEMS_TABLE">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Item</th>
+                                        <th>SOProduct</th>
+                                        <th>Удаление</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
+                                        <c:if test="${PRODUCTITEMS.soproduct1.so1.SOId == ID}">
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                                <th>Def MP</th>
-                                                <th>Def OTP</th>
-                                                <th>Modified Date</th>
-                                                <th></th>
+                                                <td>${(PRODUCTITEMS.id)}</td>
+
+                                                <td>${(PRODUCTITEMS.item1.name)}</td>
+
+                                                <td>${(PRODUCTITEMS.soproduct1.mp)}</td>
+
+                                                <td><a href="../remove/${PRODUCTITEMS.id}">Убрать товар</a></td>
+
                                             </tr>
-                                            </thead>
-                                            <tbody>
-                                            <c:forEach items="${ITEM_LIST}" var="ITEM">
-                                                <tr>
-                                                    <td>${(ITEM.name)}</td>
-
-                                                    <td>${(ITEM.type)}</td>
-
-                                                    <td>${(ITEM.description)}</td>
-
-                                                    <td>${(ITEM.defMP)}</td>
-
-                                                    <td>${(ITEM.defOTP)}</td>
-
-                                                    <td>${(ITEM.modifiedDate)}</td>
-
-                                                    <td>
-                                                        <a href="${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  View</a>
-                                                    </td>
-
-                                                </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </form>
+                                        </c:if>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
+                            <div>Итого: <span id="total-cart-summa">65000</span> руб.</div>
+                            <br />
+                            <a class="btn btn-info" href="order.html">Оформить заказ</a>
                         </div>
                     </div>
                 </div>

@@ -24,9 +24,13 @@ import javax.ws.rs.BeanParam;
 @Controller
 public class AppController {
 
-    Long c = 100l;
+    Integer c;
+    @Autowired
+    private CustomerRepository customerRepository;
     @Autowired
     private DiscountruleRepository discountruleRepository;
+    @Autowired
+    private AddressRepository addressRepository;
     @Autowired
     private ItemRepository itemRepository;
     @Autowired
@@ -45,6 +49,8 @@ public class AppController {
     private SORepository soFacade;
     @Autowired
     private SOProductRepository soProductRepository;
+    @Autowired
+    private SORepository soRepository;
 
 
     @RequestMapping(value = {"/main"}, method = RequestMethod.GET)
@@ -72,7 +78,7 @@ public class AppController {
         return "/pages/payment"; //Используется для просмотра главной страницы
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    /*@RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String findPaymentbill(Model model, @PathVariable("id") Long id) {
         c++;
         Item i = itemRepository.findOne(id);
@@ -83,7 +89,7 @@ public class AppController {
         p.setSoproduct1(s);
         productItemsRepository.save(p);
         return "/pages/productCreate";
-    }
+    }*/
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyItemdiscount(Model model) {
@@ -96,4 +102,55 @@ public class AppController {
         m.addAttribute("q", q);
         return "/pages/other";
     }
+
+    @RequestMapping(value = {"/basket/{id}"}, method = RequestMethod.GET)
+    public String emptyBasket(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
+        model.addAttribute("ID", id);
+        c = id;
+        return "/pages/basket";
+    }
+
+    @RequestMapping(value = {"/catalog/{id}"}, method = RequestMethod.GET)
+    public String emptyCatalog(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("ID", id);
+        c = id;
+        return "/pages/catalog";
+    }
+
+    @RequestMapping(value = {"/order/{id}"}, method = RequestMethod.GET)
+    public String emptyOrder(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("ID", id);
+        c = id;
+        return "/pages/order";
+    }
+
+    @RequestMapping(value = {"/orderinfo"}, method = RequestMethod.GET)
+    public String emptyOrderInfo(Model model) {
+        model.addAttribute("SO_LIST", soRepository.findAll());
+        return "/pages/orderinfo";
+    }
+
+    @RequestMapping(value = {"/add/{id1}"}, method = RequestMethod.GET)
+    public String addBasket(Model model, ProductItems productItems, @PathVariable("id1") Integer id1) {
+        Soproduct soproduct = soProductRepository.findOne(Long.valueOf(c));
+        productItems.setSoproduct1(soproduct);
+        Item item = itemRepository.findOne(Long.valueOf(id1));
+        productItems.setItem1(item);
+        productItemsRepository.save(productItems);
+        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
+        model.addAttribute("ID", c);
+        return "/pages/basket";
+    }
+
+    @RequestMapping(value = {"/remove/{id1}"}, method = RequestMethod.GET)
+    public String removeBasket(Model model, @PathVariable("id1") Long id1) {
+        productItemsRepository.delete(productItemsRepository.findOne(id1));
+        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
+        model.addAttribute("ID", c);
+        return "/pages/basket";
+    }
+
 }

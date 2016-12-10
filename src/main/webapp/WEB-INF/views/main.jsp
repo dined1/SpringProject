@@ -24,7 +24,7 @@
 <img src="http://webdevkin.ru/media/img/cart.jpg"/>
 
 
-<a href="${contextPath}/address/list" class="btn btn-default"><i class="fa fa-plus"></i>Address</a>
+<!--a href="${contextPath}/address/list" class="btn btn-default"><i class="fa fa-plus"></i>Address</a>
 <a href="${contextPath}/customer/list" class="btn btn-default"><i class="fa fa-plus"></i>Customer</a>
 <a href="${contextPath}/discountrule/list" class="btn btn-default"><i class="fa fa-plus"></i>Discountrule</a>
 <a href="${contextPath}/group/list" class="btn btn-default"><i class="fa fa-plus"></i>Group</a>
@@ -38,7 +38,8 @@
 <a href="${contextPath}/role/list" class="btn btn-default"><i class="fa fa-plus"></i>Role</a>
 <a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-plus"></i>SO</a>
 <a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-plus"></i>SOProduct</a>
-<a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a>
+<a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a-->
+<a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-plus"></i>Список заказов</a>
 
     <header>
         <div class="container">

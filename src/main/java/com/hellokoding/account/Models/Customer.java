@@ -16,6 +16,7 @@ public class Customer implements Serializable {
 
     @Column(name = "CustomerId", table = "customer", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
 
     @Column(name = "FirstName", table = "customer")
@@ -77,6 +78,22 @@ public class Customer implements Serializable {
 
     public String getLastName() {
         return this.lastName;
+    }
+
+    public void setPassNumber(String passNumber) {
+        this.passNumber = passNumber;
+    }
+
+    public String getPassNumber() {
+        return this.passNumber;
+    }
+
+    public void setCountNumber(String countNumber) {
+        this.countNumber = countNumber;
+    }
+
+    public String getCountNumber() {
+        return this.countNumber;
     }
 
     public void setLastName(String lastName) {

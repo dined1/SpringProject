@@ -5,16 +5,22 @@
  */
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Item;
 import com.hellokoding.account.Models.ProductItems;
+import com.hellokoding.account.Models.Soproduct;
 import com.hellokoding.account.controller.util.ErrorBean;
+import com.hellokoding.account.repository.ItemRepository;
 import com.hellokoding.account.repository.ProductItemsRepository;
+import com.hellokoding.account.repository.SOProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
@@ -30,19 +36,29 @@ import javax.ws.rs.*;
 public class ProductItemsController {
 
     @Autowired
-    ProductItemsRepository productItemsRepository;
+    private ItemRepository itemRepository;
+    @Autowired
+    private SOProductRepository soProductRepository;
+    @Autowired
+    private ProductItemsRepository productItemsRepository;
     @Inject
     private ErrorBean error;
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
-    public String emptyProductItems() {
+    public String emptyProductItems(Model model) {
+        model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("SOPRODUCT_LIST", soProductRepository.findAll());
         return "/productitems/create";
     }
 
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createProductItems(@Valid
-                                @BeanParam ProductItems productItems) {
+        @BeanParam ProductItems productItems, @RequestParam(value = "Soproduct", required = false) String soproduct1, @RequestParam(value = "Item", required = false) String item1) {
+        Soproduct soproduct = soProductRepository.findOne(Long.valueOf(soproduct1));
+        productItems.setSoproduct1(soproduct);
+        Item item = itemRepository.findOne(Long.valueOf(item1));
+        productItems.setItem1(item);
         productItemsRepository.save(productItems);
         return "redirect:list";
     }
