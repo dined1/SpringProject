@@ -5,13 +5,7 @@ package com.hellokoding.account.Models;
 
 import com.hellokoding.account.model.User;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -24,6 +18,7 @@ public class So implements Serializable {
 
     @Column(name = "SOId", table = "so", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long sOId;
 
     @Column(name = "DateCreated", table = "so")

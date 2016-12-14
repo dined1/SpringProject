@@ -5,8 +5,10 @@
  */
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.Models.So;
 import com.hellokoding.account.controller.util.ErrorBean;
+import com.hellokoding.account.repository.CustomerRepository;
 import com.hellokoding.account.repository.SORepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
@@ -31,19 +34,24 @@ public class SoController {
 
     @Autowired
     SORepository soRepository;
+    @Autowired
+    CustomerRepository customerRepository;
     @Inject
     private ErrorBean error;
 
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
-    public String emptySo() {
+    public String emptySo(Model model) {
+        model.addAttribute("CUSTOMER_LIST", customerRepository.findAll());
         return "/so/create";
     }
 
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createSo(@Valid
-                                @BeanParam So so) {
+                               @BeanParam So so, @RequestParam(value = "customer1", required = false) String cust) {
+        Customer customer = customerRepository.findOne(Long.valueOf(cust));
+        so.setCustomer1(customer);
         soRepository.save(so);
         return "redirect:list";
     }

@@ -59,46 +59,6 @@
                                             <td>${(SO.dateModified)}</td>
 
                                             <td>${(SO.customer1.lastName)}</td>
-
-                                            <td>
-                                                <div class="pull-right">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="fa fa-gear"></i>  <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu pull-right" role="menu">
-                                                            <li><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${contextPath}/so/update/${SO.SOId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a data-toggle="modal" data-target="#confirm_delete_${SO.SOId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="confirm_delete_${SO.SOId}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title">Confirmation</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Are you sure to delete So ?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <form action="${contextPath}/so/remove/${SO.SOId}" method="DELETE">
-                                                                    <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                        <!-- /.modal-content -->
-                                                    </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-                                            </td>
-
                                         </tr>
                                     </c:forEach>
                                 </tbody>

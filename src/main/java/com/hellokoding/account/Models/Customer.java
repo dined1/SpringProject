@@ -39,7 +39,17 @@ public class Customer implements Serializable {
     @Basic
     private String phone;
 
+    public String getUserId() {
+        return userId;
+    }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Column(name = "UserId", table = "customer")
+    @Basic
+    private String userId;
 
     @Column(name = "PassNumber", table = "customer")
     @Basic

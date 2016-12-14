@@ -57,47 +57,46 @@
 
                                         <td>${(CUSTOMER.address1.addressLine)}</td>
 
-                                        <td>${(CUSTOMER.userId)}</td>
+                                        <td><a href="${contextPath}/cabinet/update/${CUSTOMER.customerId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
 
-                                        <td>
-                                            <div class="pull-right">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="fa fa-gear"></i>  <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li><a href="${CUSTOMER.customerId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${contextPath}/customer/update/${CUSTOMER.customerId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a data-toggle="modal" data-target="#confirm_delete_${CUSTOMER.customerId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="confirm_delete_${CUSTOMER.customerId}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h4 class="modal-title">Confirmation</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Are you sure to delete Customer ?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form action="${contextPath}/customer/remove/${CUSTOMER.customerId}" method="DELETE">
-                                                                <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                            <!-- /.modal -->
-                                        </td>
+                        <div class="dataTable_wrapper">
+                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
+                                <thead>
+                                <tr>
+                                    <th>SOId</th>
+                                    <th>Date Created</th>
+                                    <th>Order Date</th>
+                                    <th>Status</th>
+                                    <th>SONumber</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Date Modified</th>
+                                    <th>Customer</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${SO_LIST}" var="SO">
+                                    <tr>
+                                        <td>${(SO.SOId)}</td>
 
+                                        <td>${(SO.dateCreated)}</td>
+
+                                        <td>${(SO.orderDate)}</td>
+
+                                        <td>${(SO.status)}</td>
+
+                                        <td>${(SO.SONumber)}</td>
+
+                                        <td>${(SO.purchaseOrderNumber)}</td>
+
+                                        <td>${(SO.dateModified)}</td>
+
+                                        <td>${(SO.customer1.lastName)}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

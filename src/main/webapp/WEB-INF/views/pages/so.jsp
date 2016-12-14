@@ -16,20 +16,24 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/so/new" method="POST">
+                                <form role="form" action="${contextPath}/application/new" method="POST">
                                     <!--div class="form-group">
                                         <label for="SOId">SOId</label>
                                         <input class="form-control" type="number" name="SOId" path="SOId"  required="required" autofocus="autofocus"  />
                                     </div-->
                                     <div class="form-group">
                                         <label for="dateCreated">Date Created</label>
-                                        <input class="form-control" type="text" name="dateCreated" path="dateCreated"  />
+                                        <input class="form-control" type="text" name="dateCreated1" path="dateCreated"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateModified">Date Modified</label>
+                                        <input class="form-control" type="text" name="dateModified1" path="dateModified"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="orderDate">Order Date</label>
-                                        <input class="form-control" type="text" name="orderDate" path="orderDate"  />
+                                        <input class="form-control" type="text" name="orderDate1" path="orderDate"  />
                                     </div>
-                                    <div class="form-group">
+                                    <!--div class="form-group">
                                         <label for="status">Status</label>
                                         <input class="form-control" type="text" name="status" path="status"  />
                                     </div>
@@ -37,16 +41,12 @@
                                         <label for="SONumber">SONumber</label>
                                         <input class="form-control" type="text" name="SONumber" path="SONumber"  />
                                     </div>
-                                    <div class="form-group">
+                                    <div-- class="form-group">
                                         <label for="purchaseOrderNumber">Purchase Order Number</label>
                                         <input class="form-control" type="text" name="purchaseOrderNumber" path="purchaseOrderNumber"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="dateModified">Date Modified</label>
-                                        <input class="form-control" type="text" name="dateModified" path="dateModified"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Costumer</label>
+                                    </div-->
+                                    <!--div class="form-group">
+                                        <label>Customer</label>
                                         <select path="customer1" name="customer1" onchange=" ">
                                             <option value="ord_null">Нет</option>
                                             <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
@@ -54,9 +54,18 @@
                                             </c:forEach>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>User</label>
+                                        <select path="user1" name="user1" onchange=" ">
+                                            <option value="ord_null">Нет</option>
+                                            <c:forEach items="${USER_LIST}" var="USER">
+                                                <option value="${USER.userId}">${USER.login}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div-->
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <!--a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a-->
                                 </form>
                             </div>
                         </div>

@@ -3,13 +3,7 @@
  */
 package com.hellokoding.account.Models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,6 +16,7 @@ public class Soproduct implements Serializable {
 
     @Column(name = "SOPId", table = "soproduct", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long sOPId;
 
     @Column(name = "MP", table = "soproduct", precision = 12)

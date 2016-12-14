@@ -40,6 +40,7 @@
 <a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-plus"></i>SOProduct</a>
 <a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a-->
 <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-plus"></i>Список заказов</a>
+<a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-plus"></i>Кабинет</a>
 
     <header>
         <div class="container">
