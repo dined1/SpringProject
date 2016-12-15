@@ -54,7 +54,7 @@
                             </div>
                             <div>Итого оплатить: <span id="total-cart-summa">${(OTP.toString())}</span> руб.    Итого за месяц: ${(CMP.toString())}</div>
                             <br />
-                            <a class="btn btn-info" href="order.html">Оформить заказ</a>
+                            <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
                         </div>
                     </div>
                 </div>

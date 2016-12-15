@@ -28,7 +28,6 @@ import java.util.List;
 @Controller
 public class AppController {
 
-    Integer c;
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
@@ -91,7 +90,7 @@ public class AppController {
         Float OTP = 0f;
 
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getSOId().equals(userid)){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(userid.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
                 finalproducts.add(productItem);
@@ -113,7 +112,7 @@ public class AppController {
         Float OTP = 0f;
 
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getSOId().equals(id)){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(id.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
                 finalproducts.add(productItem);
@@ -134,11 +133,10 @@ public class AppController {
         return "/pages/catalog";
     }
 
-    @RequestMapping(value = {"/order/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
     public String emptyOrder(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
         model.addAttribute("ID", id);
-        c = id;
         return "/pages/order";
     }
 
@@ -157,6 +155,8 @@ public class AppController {
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(Long.valueOf(id1));
         productItems.setItem1(item);
+        productItems.setOtp(item.getDefOTP());
+        productItems.setMp(item.getDefMP());
         productItemsRepository.save(productItems);
         model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
         return "redirect:/application/basket/" + id;
