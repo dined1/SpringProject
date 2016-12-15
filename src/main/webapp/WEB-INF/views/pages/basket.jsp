@@ -30,31 +30,29 @@
                                 <table class="table table-striped table-bordered table-hover" id="PRODUCTITEMS_TABLE">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Item</th>
-                                        <th>SOProduct</th>
+                                        <th>Наименование</th>
+                                        <th>Единоразовая оплата</th>
+                                        <th>Ежемесячная оплата</th>
                                         <th>Удаление</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
-                                        <c:if test="${PRODUCTITEMS.soproduct1.so1.SOId == ID}">
-                                            <tr>
-                                                <td>${(PRODUCTITEMS.id)}</td>
+                                        <tr>
+                                            <td>${(PRODUCTITEMS.item1.name)}</td>
 
-                                                <td>${(PRODUCTITEMS.item1.name)}</td>
+                                            <td>${(PRODUCTITEMS.soproduct1.mp)}</td>
 
-                                                <td>${(PRODUCTITEMS.soproduct1.mp)}</td>
+                                            <td>${(PRODUCTITEMS.soproduct1.otp)}</td>
 
-                                                <td><a href="../remove/${PRODUCTITEMS.id}">Убрать товар</a></td>
+                                            <td><a href="../remove/${PRODUCTITEMS.id}">Убрать товар</a></td>
 
-                                            </tr>
-                                        </c:if>
+                                        </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
-                            <div>Итого: <span id="total-cart-summa">65000</span> руб.</div>
+                            <div>Итого оплатить: <span id="total-cart-summa">${(OTP.toString())}</span> руб.    Итого за месяц: ${(CMP.toString())}</div>
                             <br />
                             <a class="btn btn-info" href="order.html">Оформить заказ</a>
                         </div>

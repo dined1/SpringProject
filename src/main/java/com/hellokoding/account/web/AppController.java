@@ -16,6 +16,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 27.11.2016.
@@ -81,10 +83,23 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/basket/{id}"}, method = RequestMethod.GET)
-    public String emptyBasket(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
+    public String emptyBasket(Model model, @PathVariable("id") Long id) {
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        List<ProductItems> finalproducts = new ArrayList<>();
+        Float CMP = 0f;
+        Float OTP = 0f;
+        for (ProductItems productItem : productItems){
+            if (productItem.getSoproduct1().getSo1().getSOId().equals(id)){
+                CMP+=productItem.getSoproduct1().getMp();
+                OTP+=productItem.getSoproduct1().getOtp();
+                finalproducts.add(productItem);
+            }
+        }
+        model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
         model.addAttribute("ID", id);
-        c = id;
+
+        model.addAttribute("CMP", CMP);
+        model.addAttribute("OTP", OTP);
         return "/pages/basket";
     }
 
