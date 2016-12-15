@@ -3,6 +3,8 @@
  */
 package com.hellokoding.account.Models;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "itemgroup")
+@Transactional
 public class Itemgroup implements Serializable {
 
     @Column(name = "IGId", table = "itemgroup", nullable = false)

@@ -3,6 +3,8 @@
  */
 package com.hellokoding.account.Models;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "customer")
+@Transactional
 public class Customer implements Serializable {
 
     @Column(name = "CustomerId", table = "customer", nullable = false)

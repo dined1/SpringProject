@@ -1,20 +1,17 @@
 package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
-import com.hellokoding.account.model.*;
+import com.hellokoding.account.model.User;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
-import javax.ws.rs.BeanParam;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +23,7 @@ import java.util.List;
 
 @RequestMapping(value = {"/application"})
 @Controller
+@Transactional
 public class AppController {
 
     @Autowired
@@ -88,15 +86,20 @@ public class AppController {
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
-
-        for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(userid.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
-                CMP+=productItem.getMp();
-                OTP+=productItem.getOtp();
-                finalproducts.add(productItem);
-            }
+        So so = soRepository.findByStatusAndCustomer1_UserId("Wait", userid.toString()).get(0);
+//        for (ProductItems productItem : productItems){
+//            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(userid.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
+//                CMP+=productItem.getMp();
+//                OTP+=productItem.getOtp();
+//                finalproducts.add(productItem);
+//            }
+//        }
+        List<ProductItems> pm = so.getSoproducts1().get(0).getProductItemses1();
+        for (ProductItems productItems1 : pm){
+                CMP+=productItems1.getMp();
+                OTP+=productItems1.getOtp();
         }
-        model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
+        model.addAttribute("PRODUCTITEMS_LIST", pm);
         model.addAttribute("ID", userid);
 
         model.addAttribute("CMP", CMP);
@@ -104,30 +107,59 @@ public class AppController {
         return "/pages/basket";
     }
 
-    @RequestMapping(value = {"/basket/{id}"}, method = RequestMethod.GET)
-    public String emptyBasket(Model model, @PathVariable("id") Long id) {
+    @RequestMapping(value = {"/basket/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String emptyBasket(Model model,
+                              @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                              Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
+            return "";
+        }
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
-
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(id.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
                 finalproducts.add(productItem);
             }
         }
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
-        model.addAttribute("ID", id);
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("SOID", soid);
+        model.addAttribute("USERID", userid);
 
         model.addAttribute("CMP", CMP);
         model.addAttribute("OTP", OTP);
+//        List<ProductItems> productItems = productItemsRepository.findAll();
+//        List<ProductItems> finalproducts = new ArrayList<>();
+//        Float CMP = 0f;
+//        Float OTP = 0f;
+//
+//        for (ProductItems productItem : productItems){
+//            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(id.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
+//                CMP+=productItem.getMp();
+//                OTP+=productItem.getOtp();
+//                finalproducts.add(productItem);
+//            }
+//        }
+//        model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
+//        model.addAttribute("ID", id);
+//
+//        model.addAttribute("CMP", CMP);
+//        model.addAttribute("OTP", OTP);
         return "/pages/basket";
     }
 
-    @RequestMapping(value = {"/catalog"}, method = RequestMethod.GET)
-    public String emptyCatalog(Model model) {
+    @RequestMapping(value = {"/catalog/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String emptyCatalog(Model model,
+                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                               Principal principal) {
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("SOID", soid);
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
         return "/pages/catalog";
@@ -148,18 +180,28 @@ public class AppController {
         return "/pages/orderinfo";
     }
 
-    @RequestMapping(value = {"/add/{id1}"}, method = RequestMethod.GET)
-    public String addBasket(Model model, ProductItems productItems, @PathVariable("id1") Integer id1, Principal principal) {
-        Long id = userRepository.findByUsername(principal.getName()).getId();
-        Soproduct soproduct = soProductRepository.findOne(id);
+    @RequestMapping(value = {"/add/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String addBasket(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
+                            @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                            Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
+            return "";
+        }
+        So so = soRepository.findOne(soid);
+
+        Soproduct soproduct = so.getSoproducts1().get(0);
         productItems.setSoproduct1(soproduct);
-        Item item = itemRepository.findOne(Long.valueOf(id1));
+        Item item = itemRepository.findOne(itemid);
         productItems.setItem1(item);
         productItems.setOtp(item.getDefOTP());
         productItems.setMp(item.getDefMP());
         productItemsRepository.save(productItems);
         model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        return "redirect:/application/basket/" + id;
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("SOID", soid);
+        model.addAttribute("USERID", userid);
+        return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
@@ -174,10 +216,16 @@ public class AppController {
         return "/pages/basket";
     }
 
-    @RequestMapping(value = {"/remove/{id1}"}, method = RequestMethod.GET)
-    public String removeBasket(Model model, @PathVariable("id1") Long id1) {
-        productItemsRepository.delete(productItemsRepository.findOne(id1));
-        return "redirect:/application/basket";
+    @RequestMapping(value = {"/remove/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String removeBasket(Model model, @PathVariable("itemid") Long itemid,
+                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                               Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
+            return "";
+        }
+        productItemsRepository.delete(productItemsRepository.findOne(itemid));
+        return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)

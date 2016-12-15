@@ -3,6 +3,8 @@
  */
 package com.hellokoding.account.Models;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +18,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "statisticscollector")
+@Transactional
 public class Statisticscollector implements Serializable {
 
     @Column(name = "SCId", table = "statisticscollector", nullable = false)

@@ -3,6 +3,8 @@
  */
 package com.hellokoding.account.Models;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "paymenttype")
+@Transactional
 public class Paymenttype implements Serializable {
 
     @Column(name = "PTId", table = "paymenttype", nullable = false)
