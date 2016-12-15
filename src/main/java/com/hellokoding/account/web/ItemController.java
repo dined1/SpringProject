@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/item"})
+@RequestMapping(value = {"/admin/item"})
 @Controller
 public class ItemController {
 

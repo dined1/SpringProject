@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/address/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/address/update" method="POST">
                                     <div class="form-group">
                                         <label for="addressId">Address Id</label>
                                         <input class="form-control" type="number" name="addressId" readonly value="${ADDRESS.addressId}" />
@@ -42,7 +42,7 @@
                                         <input class="form-control" type="text" name="modifiedDate"  value="${ADDRESS.modifiedDate}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/address/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/address/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

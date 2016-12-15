@@ -16,13 +16,13 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/itemgroup/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/itemgroup/update" method="POST">
                                     <div class="form-group">
                                         <label for="IGId">IGId</label>
                                         <input class="form-control" type="number" name="IGId" readonly value="${ITEMGROUP.IGId}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/itemgroup/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/itemgroup/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

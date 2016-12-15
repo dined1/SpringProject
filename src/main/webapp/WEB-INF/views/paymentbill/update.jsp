@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/paymentbill/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/paymentbill/update" method="POST">
                                     <div class="form-group">
                                         <label for="PBId">PBId</label>
                                         <input class="form-control" type="number" name="PBId" readonly value="${PAYMENTBILL.PBId}" />
@@ -38,7 +38,7 @@
                                         <input class="form-control" type="number" name="COTPDisc"  value="${PAYMENTBILL.COTPDisc}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/paymentbill/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

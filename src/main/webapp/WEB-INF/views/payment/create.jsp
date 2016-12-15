@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/payment/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/payment/new" method="POST">
                                     <div class="form-group">
                                         <label for="paymentId">Payment Id</label>
                                         <input class="form-control" type="number" name="paymentId" path="paymentId"  required="required" autofocus="autofocus"  />
@@ -27,7 +27,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/payment/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/admin/payment/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

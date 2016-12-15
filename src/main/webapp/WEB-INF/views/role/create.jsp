@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/role/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/role/new" method="POST">
                                     <div class="form-group">
                                         <label for="roleId">Role Id</label>
                                         <input class="form-control" type="number" name="roleId" path="roleId"  required="required" autofocus="autofocus"  />
@@ -27,7 +27,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/role/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/role/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

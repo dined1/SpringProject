@@ -28,7 +28,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/customer"})
+@RequestMapping(value = {"/admin/customer"})
 @Controller
 public class CustomerController {
 

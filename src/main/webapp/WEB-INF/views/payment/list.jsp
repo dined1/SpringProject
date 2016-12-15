@@ -58,7 +58,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
                                                         <li><a href="${PAYMENT.paymentId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${contextPath}/payment/update/${PAYMENT.paymentId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                        <li><a href="${contextPath}/admin/payment/update/${PAYMENT.paymentId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
                                                         <li><a data-toggle="modal" data-target="#confirm_delete_${PAYMENT.paymentId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                         </li>
@@ -76,7 +76,7 @@
                                                             <p>Are you sure to delete Payment ?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="${contextPath}/payment/remove/${PAYMENT.paymentId}" method="DELETE">
+                                                            <form action="${contextPath}/admin/payment/remove/${PAYMENT.paymentId}" method="DELETE">
                                                                 <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                             </form>
                                                         </div>

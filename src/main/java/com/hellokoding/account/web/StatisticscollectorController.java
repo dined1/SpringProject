@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/statisticscollector"})
+@RequestMapping(value = {"/admin/statisticscollector"})
 @Controller
 public class StatisticscollectorController {
 

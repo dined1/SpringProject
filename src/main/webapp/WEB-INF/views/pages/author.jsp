@@ -26,7 +26,7 @@
 
 ${log}
 
-<form role="form" action="${contextPath}/item/author" method="POST">
+<form role="form" action="${contextPath}/admin/admin/item/author" method="POST">
     <p>
         <label for="login">Login</label>
         <input class="form-control" type="text" name="login" path="login" required="required" autofocus="autofocus"/>

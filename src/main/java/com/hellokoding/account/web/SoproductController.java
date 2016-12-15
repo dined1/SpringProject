@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/soproduct"})
+@RequestMapping(value = {"/admin/soproduct"})
 @Controller
 public class SoproductController {
 
