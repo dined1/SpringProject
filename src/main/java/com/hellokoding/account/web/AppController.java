@@ -82,16 +82,40 @@ public class AppController {
         return "/pages/payment"; //Используется для просмотра главной страницы
     }
 
+    @RequestMapping(value = {"/basket"}, method = RequestMethod.GET)
+    public String basket(Model model, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        List<ProductItems> finalproducts = new ArrayList<>();
+        Float CMP = 0f;
+        Float OTP = 0f;
+
+        for (ProductItems productItem : productItems){
+            if (productItem.getSoproduct1().getSo1().getSOId().equals(userid)){
+                CMP+=productItem.getMp();
+                OTP+=productItem.getOtp();
+                finalproducts.add(productItem);
+            }
+        }
+        model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
+        model.addAttribute("ID", userid);
+
+        model.addAttribute("CMP", CMP);
+        model.addAttribute("OTP", OTP);
+        return "/pages/basket";
+    }
+
     @RequestMapping(value = {"/basket/{id}"}, method = RequestMethod.GET)
     public String emptyBasket(Model model, @PathVariable("id") Long id) {
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
+
         for (ProductItems productItem : productItems){
             if (productItem.getSoproduct1().getSo1().getSOId().equals(id)){
-                CMP+=productItem.getSoproduct1().getMp();
-                OTP+=productItem.getSoproduct1().getOtp();
+                CMP+=productItem.getMp();
+                OTP+=productItem.getOtp();
                 finalproducts.add(productItem);
             }
         }
@@ -103,12 +127,10 @@ public class AppController {
         return "/pages/basket";
     }
 
-    @RequestMapping(value = {"/catalog/{id}"}, method = RequestMethod.GET)
-    public String emptyCatalog(Model model, @PathVariable("id") Integer id) {
+    @RequestMapping(value = {"/catalog"}, method = RequestMethod.GET)
+    public String emptyCatalog(Model model) {
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
-        model.addAttribute("ID", id);
-        c = id;
         return "/pages/catalog";
     }
 
@@ -129,15 +151,15 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/add/{id1}"}, method = RequestMethod.GET)
-    public String addBasket(Model model, ProductItems productItems, @PathVariable("id1") Integer id1) {
-        Soproduct soproduct = soProductRepository.findOne(Long.valueOf(c));
+    public String addBasket(Model model, ProductItems productItems, @PathVariable("id1") Integer id1, Principal principal) {
+        Long id = userRepository.findByUsername(principal.getName()).getId();
+        Soproduct soproduct = soProductRepository.findOne(id);
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(Long.valueOf(id1));
         productItems.setItem1(item);
         productItemsRepository.save(productItems);
         model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        model.addAttribute("ID", c);
-        return "/pages/basket";
+        return "redirect:/application/basket/" + id;
     }
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
@@ -155,9 +177,7 @@ public class AppController {
     @RequestMapping(value = {"/remove/{id1}"}, method = RequestMethod.GET)
     public String removeBasket(Model model, @PathVariable("id1") Long id1) {
         productItemsRepository.delete(productItemsRepository.findOne(id1));
-        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        model.addAttribute("ID", c);
-        return "/pages/basket";
+        return "redirect:/application/basket";
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
@@ -178,8 +198,6 @@ public class AppController {
         so.setCustomer1(customer);
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());
-        soproduct.setMp(3247f);
-        soproduct.setOtp(3247f);
         soproduct.setSo1(so);
         soProductRepository.save(soproduct);
         model.addAttribute("SO_LIST", soRepository.findAll());

@@ -21,9 +21,9 @@
                             <br />
                             <br />
                             <ul class="nav nav-pills">
-                                <li class="active"><a href="../basket/${ID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                <li><a href="../catalog/${ID}">Каталог</a></li>
-                                <li><a href="../order/${ID}">Оформление заказа</a></li>
+                                <li class="active"><a href="${contextPath}/application/basket/${ID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
+                                <li><a href="${contextPath}/application/catalog">Каталог</a></li>
+                                <li><a href="${contextPath}/application/order/${ID}">Оформление заказа</a></li>
                             </ul>
                             <br />
                             <div class="table-responsive">
@@ -41,11 +41,11 @@
                                         <tr>
                                             <td>${(PRODUCTITEMS.item1.name)}</td>
 
-                                            <td>${(PRODUCTITEMS.soproduct1.mp)}</td>
+                                            <td>${(PRODUCTITEMS.mp)}</td>
 
-                                            <td>${(PRODUCTITEMS.soproduct1.otp)}</td>
+                                            <td>${(PRODUCTITEMS.otp)}</td>
 
-                                            <td><a href="../remove/${PRODUCTITEMS.id}">Убрать товар</a></td>
+                                            <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.id}">Убрать товар</a></td>
 
                                         </tr>
                                     </c:forEach>

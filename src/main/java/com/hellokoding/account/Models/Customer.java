@@ -59,8 +59,6 @@ public class Customer implements Serializable {
     @Basic
     private String countNumber;
 
-
-
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
 

@@ -22,9 +22,9 @@
                             <br />
                             <br />
                             <ul class="nav nav-pills">
-                                <li><a href="../basket/${ID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                <li class="active"><a href="../catalog/${ID}">Каталог</a></li>
-                                <li><a href="../order/${ID}">Оформление заказа</a></li>
+                                <li><a href="${contextPath}/application/basket/${ID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
+                                <li class="active"><a href="${contextPath}/application/catalog">Каталог</a></li>
+                                <li><a href="${contextPath}/application/order/${ID}">Оформление заказа</a></li>
                             </ul>
                             <br />
                         </div>
@@ -57,7 +57,7 @@
                                     <td>${(ITEM.modifiedDate)}</td>
 
                                     <td>
-                                        <a href="../add/${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
+                                        <a href="${contextPath}/application/add/${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
                                     </td>
 
                                 </tr>

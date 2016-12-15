@@ -12,10 +12,10 @@ CREATE TABLE itemgroup (IGId INTEGER NOT NULL AUTO_INCREMENT, GROUPS1_GroupId IN
 CREATE TABLE paymentbill (PBId INTEGER NOT NULL AUTO_INCREMENT, CMPDisc FLOAT, COTPDisc FLOAT, CMP FLOAT, COTP FLOAT, PRIMARY KEY (PBId));
 CREATE TABLE payment (PaymentId INTEGER NOT NULL AUTO_INCREMENT, PaymentInfo VARCHAR(255), PAYMENTBILL1_PBId INTEGER, PAYMENTTYPE1_PTId INTEGER, SO1_SOId BIGINT, paymentDate DATE, PRIMARY KEY (PaymentId));
 CREATE TABLE paymenttype (PTId INTEGER NOT NULL, TypeName VARCHAR(255), PRIMARY KEY (PTId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-CREATE TABLE PRODUCTITEMS (ID BIGINT NOT NULL AUTO_INCREMENT, ITEM1_ItemId INTEGER, SOPRODUCT1_SOPId INTEGER, PRIMARY KEY (ID));
+CREATE TABLE PRODUCTITEMS (ID BIGINT NOT NULL AUTO_INCREMENT, ITEM1_ItemId INTEGER, SOPRODUCT1_SOPId INTEGER, MP FLOAT, OTP FLOAT, PRIMARY KEY (ID));
 CREATE TABLE role (id int(11) NOT NULL AUTO_INCREMENT,  name varchar(45) DEFAULT NULL,  primary key (id)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 CREATE TABLE so (SOId BIGINT NOT NULL AUTO_INCREMENT, DateCreated VARCHAR(255), DateModified VARCHAR(255), OrderDate VARCHAR(255), PurchaseOrderNumber VARCHAR(255), SONumber VARCHAR(255), Status VARCHAR(255), CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, PRIMARY KEY (SOId));
-CREATE TABLE soproduct (SOPId INTEGER NOT NULL AUTO_INCREMENT, MP FLOAT, OTP FLOAT, SO1_SOId BIGINT, PRIMARY KEY (SOPId));
+CREATE TABLE soproduct (SOPId INTEGER NOT NULL AUTO_INCREMENT, SO1_SOId BIGINT, PRIMARY KEY (SOPId));
 CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, StatisticType VARCHAR(255), StatisticsInfo VARCHAR(255), CUSTOMER1_CustomerId INTEGER, PRIMARY KEY (SCId));
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS user;
@@ -134,18 +134,18 @@ insert into so values ('9', '05.11.2016', '07.11.2016', '08.11.2016', '099999', 
 insert into so values ('10', '05.11.2016', '07.11.2016', '08.11.2016', '100000', '1010', 'Ordered', '4', '4');
 insert into so values ('11', '05.11.2016', '07.11.2016', '08.11.2016', '111111', '1011', 'Wait', '4', '4');
 insert into so values ('12', '05.11.2016', '07.11.2016', '08.11.2016', '122222', '1012', 'Ordered', '4', '4');
-insert into soproduct values ('1', '1000', '1000', '1');
-insert into soproduct values ('2', '2000', '2000', '2');
-insert into soproduct values ('3', '3000', '3000', '3');
-insert into soproduct values ('4', '4000', '4000', '4');
-insert into soproduct values ('5', '5000', '5000', '5');
-insert into soproduct values ('6', '6000', '6000', '6');
-insert into soproduct values ('7', '7000', '7000', '7');
-insert into soproduct values ('8', '8000', '8000', '8');
-insert into soproduct values ('9', '9000', '9000', '9');
-insert into soproduct values ('10', '10000', '10000', '10');
-insert into soproduct values ('11', '11000', '11000', '11');
-insert into soproduct values ('12', '12000', '12000', '12');
+insert into soproduct values ('1', '1');
+insert into soproduct values ('2', '2');
+insert into soproduct values ('3', '3');
+insert into soproduct values ('4', '4');
+insert into soproduct values ('5', '5');
+insert into soproduct values ('6', '6');
+insert into soproduct values ('7', '7');
+insert into soproduct values ('8', '8');
+insert into soproduct values ('9', '9');
+insert into soproduct values ('10', '10');
+insert into soproduct values ('11', '11');
+insert into soproduct values ('12', '12');
 insert into payment values ('1', 'Info1', '1', '1', '1', '04.12.2016');
 insert into payment values ('2', 'Info2', '2', '2', '2', '04.12.2016');
 insert into payment values ('3', 'Info3', '3', '3', '2', '04.12.2016');
@@ -160,48 +160,33 @@ insert into payment values ('11', 'Info11', '3', '1', '4', '04.12.2016');
 insert into payment values ('12', 'Info12', '4', '2', '3', '04.12.2016');
 insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
 insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
-insert into PRODUCTITEMS values ('1', '1', '1');
-insert into PRODUCTITEMS values ('2', '2', '2');
-insert into PRODUCTITEMS values ('3', '3', '3');
-insert into PRODUCTITEMS values ('4', '4', '4');
-insert into PRODUCTITEMS values ('5', '5', '5');
-insert into PRODUCTITEMS values ('6', '6', '6');
-insert into PRODUCTITEMS values ('7', '7', '7');
-insert into PRODUCTITEMS values ('8', '8', '8');
-insert into PRODUCTITEMS values ('9', '9', '9');
-insert into PRODUCTITEMS values ('10', '10', '10');
-insert into PRODUCTITEMS values ('11', '1', '2');
-insert into PRODUCTITEMS values ('12', '2', '3');
-insert into PRODUCTITEMS values ('13', '3', '4');
-insert into PRODUCTITEMS values ('14', '4', '5');
-insert into PRODUCTITEMS values ('15', '5', '6');
-insert into PRODUCTITEMS values ('16', '6', '7');
-insert into PRODUCTITEMS values ('17', '7', '8');
-insert into PRODUCTITEMS values ('18', '8', '9');
-insert into PRODUCTITEMS values ('19', '9', '10');
-insert into PRODUCTITEMS values ('20', '10', '1');
-insert into PRODUCTITEMS values ('21', '1', '3');
-insert into PRODUCTITEMS values ('22', '2', '4');
-insert into PRODUCTITEMS values ('23', '3', '5');
-insert into PRODUCTITEMS values ('24', '4', '6');
-insert into PRODUCTITEMS values ('25', '5', '7');
-insert into PRODUCTITEMS values ('26', '6', '8');
-insert into PRODUCTITEMS values ('27', '7', '9');
-insert into PRODUCTITEMS values ('28', '8', '10');
-insert into PRODUCTITEMS values ('29', '9', '11');
-insert into PRODUCTITEMS values ('30', '10', '12')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+insert into PRODUCTITEMS values ('1', '1', '1', '1000', '1000');
+insert into PRODUCTITEMS values ('2', '2', '2', '1000', '1000');
+insert into PRODUCTITEMS values ('3', '3', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('4', '4', '4', '1000', '1000');
+insert into PRODUCTITEMS values ('5', '5', '5', '1000', '1000');
+insert into PRODUCTITEMS values ('6', '6', '6', '1000', '1000');
+insert into PRODUCTITEMS values ('7', '7', '7', '1000', '1000');
+insert into PRODUCTITEMS values ('8', '8', '8', '1000', '1000');
+insert into PRODUCTITEMS values ('9', '9', '9', '1000', '1000');
+insert into PRODUCTITEMS values ('10', '10', '10', '1000', '1000');
+insert into PRODUCTITEMS values ('11', '1', '2', '1000', '1000');
+insert into PRODUCTITEMS values ('12', '2', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('13', '3', '4', '1000', '1000');
+insert into PRODUCTITEMS values ('14', '4', '5', '1000', '1000');
+insert into PRODUCTITEMS values ('15', '5', '6', '1000', '1000');
+insert into PRODUCTITEMS values ('16', '6', '7', '1000', '1000');
+insert into PRODUCTITEMS values ('17', '7', '8', '1000', '1000');
+insert into PRODUCTITEMS values ('18', '8', '9', '1000', '1000');
+insert into PRODUCTITEMS values ('19', '9', '10', '1000', '1000');
+insert into PRODUCTITEMS values ('20', '10', '1', '1000', '1000');
+insert into PRODUCTITEMS values ('21', '1', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('22', '2', '4', '1000', '1000');
+insert into PRODUCTITEMS values ('23', '3', '5', '1000', '1000');
+insert into PRODUCTITEMS values ('24', '4', '6', '1000', '1000');
+insert into PRODUCTITEMS values ('25', '5', '7', '1000', '1000');
+insert into PRODUCTITEMS values ('26', '6', '8', '1000', '1000');
+insert into PRODUCTITEMS values ('27', '7', '9', '1000', '1000');
+insert into PRODUCTITEMS values ('28', '8', '10', '1000', '1000');
+insert into PRODUCTITEMS values ('29', '9', '11', '1000', '1000');
+insert into PRODUCTITEMS values ('30', '10', '12', '1000', '1000')

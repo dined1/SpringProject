@@ -3,11 +3,14 @@
  */
 package com.hellokoding.account.Models;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.ws.rs.FormParam;
 import java.io.Serializable;
 
@@ -15,11 +18,20 @@ import java.io.Serializable;
  * @author dzni0816
  */
 @Entity
+@Table(name = "productitems")
 public class ProductItems implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "MP", table = "productitems", precision = 12)
+    @Basic
+    private Float mp;
+
+    @Column(name = "OTP", table = "productitems", precision = 12)
+    @Basic
+    private Float otp;
 
     @ManyToOne(targetEntity = Soproduct.class)
     private Soproduct soproduct1;
@@ -51,4 +63,19 @@ public class ProductItems implements Serializable {
         this.item1 = item1;
     }
 
+    public Float getMp() {
+        return mp;
+    }
+
+    public void setMp(Float mp) {
+        this.mp = mp;
+    }
+
+    public Float getOtp() {
+        return otp;
+    }
+
+    public void setOtp(Float otp) {
+        this.otp = otp;
+    }
 }

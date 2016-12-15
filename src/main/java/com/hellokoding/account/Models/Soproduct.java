@@ -19,14 +19,6 @@ public class Soproduct implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long sOPId;
 
-    @Column(name = "MP", table = "soproduct", precision = 12)
-    @Basic
-    private Float mp;
-
-    @Column(name = "OTP", table = "soproduct", precision = 12)
-    @Basic
-    private Float otp;
-
     @ManyToOne(targetEntity = So.class)
     private So so1;
 
@@ -39,22 +31,6 @@ public class Soproduct implements Serializable {
 
     public void setSOPId(Long sOPId) {
         this.sOPId = sOPId;
-    }
-
-    public Float getMp() {
-        return this.mp;
-    }
-
-    public void setMp(Float mp) {
-        this.mp = mp;
-    }
-
-    public Float getOtp() {
-        return this.otp;
-    }
-
-    public void setOtp(Float otp) {
-        this.otp = otp;
     }
 
     public So getSo1() {
