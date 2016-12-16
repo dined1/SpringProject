@@ -12,4 +12,6 @@ public interface SORepository extends JpaRepository<So, Long> {
     List<So> findByStatusAndCustomer1_UserId(String status, String UserId);
 
     So findByCustomer1_CustomerId(Long customerid);
+
+    List<So> findByCustomer1_UserId(String customerid);
 }

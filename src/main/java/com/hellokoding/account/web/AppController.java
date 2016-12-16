@@ -174,9 +174,10 @@ public class AppController {
 
     @RequestMapping(value = {"/orderinfo"}, method = RequestMethod.GET)
     public String emptyOrderInfo(Model model, Principal principal) {
-        User u = userRepository.findByUsername(principal.getName());
-        model.addAttribute("SO_LIST", soRepository.findAll());
-        model.addAttribute("USER_ID", u.getId());
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+
+        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
+        model.addAttribute("USER_ID", userid);
         return "/pages/orderinfo";
     }
 
@@ -198,9 +199,6 @@ public class AppController {
         productItems.setMp(item.getDefMP());
         productItemsRepository.save(productItems);
         model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        model.addAttribute("CUSTOMERID", customerid);
-        model.addAttribute("SOID", soid);
-        model.addAttribute("USERID", userid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
@@ -229,20 +227,19 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
-    public String emptySO(Model model) {
-        model.addAttribute("CUSTOMER_LIST", customerRepository.findAll());
+    public String emptySO(Model model, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         return "/pages/so";
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String createItemdiscount(Model model, So so, Soproduct soproduct, @RequestParam("dateCreated1") String dateCreated1, @RequestParam("dateModified1") String dateModified1, @RequestParam("orderDate1") String orderDate1) {
-        so.setDateCreated(dateCreated1);
-        so.setDateModified(dateModified1);
-        so.setOrderDate(orderDate1);
+    public String createItemdiscount(Model model, So so, Soproduct soproduct,
+                                     @RequestParam("socustomer") String customer1) {
         so.setStatus("Wait");
         so.setSONumber("132342");
         so.setPurchaseOrderNumber("13232342");
-        Customer customer = customerRepository.findOne(1l);
+        Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setCustomer1(customer);
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());

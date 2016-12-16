@@ -17,6 +17,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/admin/customer/new" method="POST">
+                                    <h2>Customer creation</h2>
                                     <div class="form-group">
                                         <label for="customerId">Customer Id</label>
                                         <input class="form-control" type="number" name="customerId" path="customerId"  required="required" autofocus="autofocus"  />
@@ -41,6 +42,7 @@
                                         <label for="phone">Phone</label>
                                         <input class="form-control" type="text" name="phone" path="phone"  />
                                     </div>
+                                    <h2>Customer address</h2>
                                     <div class="form-group">
                                         <label>Address</label>
                                         <select path="Address" name="Address" onchange=" ">

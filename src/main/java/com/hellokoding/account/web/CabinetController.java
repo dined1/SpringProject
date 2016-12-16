@@ -70,6 +70,14 @@ public class CabinetController {
     }
 
 
+    @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
+    public String newCustomer(Model model, Customer customer, Address address, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        return "customer/create";
+    }
+
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateCustomer(@Valid
                                  @BeanParam Customer customer, BindingResult bindingResult) {
