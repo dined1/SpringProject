@@ -5,11 +5,7 @@ package com.hellokoding.account.Models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import java.io.Serializable;
 
@@ -23,6 +19,7 @@ public class Itemgroup implements Serializable {
 
     @Column(name = "IGId", table = "itemgroup", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long iGId;
 
     @ManyToOne(targetEntity = Group1.class)

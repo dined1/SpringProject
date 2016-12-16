@@ -1,7 +1,6 @@
 package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
-import com.hellokoding.account.model.User;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -190,11 +192,22 @@ public class AppController {
             return "";
         }
         So so = soRepository.findOne(soid);
-
         Soproduct soproduct = so.getSoproducts1().get(0);
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(itemid);
+        Float mp = 0f;
+        Float otp = 0f;
+        List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);
+        for (Itemdiscount discount : itemdiscounts) {
+            if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountValue() != null){
+                otp += discount.getDiscountrule1().getDiscountValue();
+            } else if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountValue() != null){
+                mp -= discount.getDiscountrule1().getDiscountValue();
+            }
+        }
         productItems.setItem1(item);
+        productItems.setOTPWithTaxandDiscont(item.getDefOTP() + otp);
+        productItems.setMPWithTaxandDiscont(item.getDefMP() + mp);
         productItems.setOtp(item.getDefOTP());
         productItems.setMp(item.getDefMP());
         productItemsRepository.save(productItems);
@@ -236,9 +249,12 @@ public class AppController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createItemdiscount(Model model, So so, Soproduct soproduct,
                                      @RequestParam("socustomer") String customer1) {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
         so.setStatus("Wait");
         so.setSONumber("132342");
         so.setPurchaseOrderNumber("13232342");
+        so.setDateCreated(dateFormat.format(date));
         Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setCustomer1(customer);
         soRepository.save(so);

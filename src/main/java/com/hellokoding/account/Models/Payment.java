@@ -5,12 +5,7 @@ package com.hellokoding.account.Models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,6 +19,7 @@ public class Payment implements Serializable {
 
     @Column(name = "PaymentId", table = "payment", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long paymentId;
 
     @Column(name = "PaymentInfo", table = "payment")

@@ -5,12 +5,7 @@ package com.hellokoding.account.Models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +20,7 @@ public class Group1 implements Serializable {
 
     @Column(name = "GroupId", table = "groups", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long groupId;
 
     @Column(name = "Name", table = "groups", nullable = false)

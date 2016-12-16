@@ -5,12 +5,7 @@ package com.hellokoding.account.Models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -24,6 +19,7 @@ public class Address implements Serializable {
 
     @Column(name = "AddressId", table = "address", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long addressId;
 
     @Column(name = "AddressLine", table = "address")

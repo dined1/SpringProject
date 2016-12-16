@@ -5,12 +5,7 @@ package com.hellokoding.account.Models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +20,7 @@ public class Discountrule implements Serializable {
 
     @Column(name = "DRId", table = "discountrule", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long dRId;
 
     @Column(name = "DiscountValue", table = "discountrule", precision = 12)
@@ -34,6 +30,14 @@ public class Discountrule implements Serializable {
     @Column(name = "DiscountProcent", table = "discountrule", precision = 12)
     @Basic
     private Float discountProcent;
+
+    @Column(name = "Type", table = "discountrule", precision = 12)
+    @Basic
+    private String type;
+
+    @Column(name = "Description", table = "discountrule", precision = 12)
+    @Basic
+    private Float description;
 
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "discountrule1")
     private List<Itemdiscount> itemdiscounts1;
@@ -70,4 +74,19 @@ public class Discountrule implements Serializable {
         this.itemdiscounts1 = itemdiscounts1;
     }
 
+    public Float getDescription() {
+        return description;
+    }
+
+    public void setDescription(Float description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

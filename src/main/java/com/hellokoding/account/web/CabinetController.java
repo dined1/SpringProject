@@ -1,7 +1,7 @@
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.*;
-import com.hellokoding.account.model.*;
+import com.hellokoding.account.Models.Address;
+import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
@@ -70,12 +68,40 @@ public class CabinetController {
     }
 
 
+    @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
+    public String createCustomer(Model model, Customer customer, Address address, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        addressRepository.save(address);
+        customer.setAddress1(address);
+        customer.setUserId(userid.toString());
+        customerRepository.save(customer);
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        return "redirect:/cabinet/cabinet";
+    }
+
+    @RequestMapping(value = {"/myorders"}, method = RequestMethod.GET)
+    public String getOrders(Model model, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
+        return "cabinet/orders";
+    }
+
+
+    @RequestMapping(value = {"/mypayments"}, method = RequestMethod.GET)
+    public String getPayments(Model model, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("PAYMENTS_LIST", paymentFacade.findBySo1_Customer1_UserId(userid.toString()));
+        return "cabinet/payments";
+    }
+
+
+
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
-    public String newCustomer(Model model, Customer customer, Address address, Principal principal) {
+    public String newCustomer(Model model, Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
 
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
-        return "customer/create";
+        return "cabinet/create";
     }
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)

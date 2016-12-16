@@ -36,6 +36,14 @@ public class ProductItems implements Serializable {
     @Basic
     private Float otp;
 
+    @Column(name = "MPWithTaxandDiscont", table = "productitems", precision = 12)
+    @Basic
+    private Float MPWithTaxandDiscont;
+
+    @Column(name = "OTPWithTaxandDiscont", table = "productitems", precision = 12)
+    @Basic
+    private Float OTPWithTaxandDiscont;
+
     @ManyToOne(targetEntity = Soproduct.class)
     private Soproduct soproduct1;
 
@@ -80,5 +88,21 @@ public class ProductItems implements Serializable {
 
     public void setOtp(Float otp) {
         this.otp = otp;
+    }
+
+    public Float getMPWithTaxandDiscont() {
+        return MPWithTaxandDiscont;
+    }
+
+    public void setMPWithTaxandDiscont(Float MPWithTaxandDiscont) {
+        this.MPWithTaxandDiscont = MPWithTaxandDiscont;
+    }
+
+    public Float getOTPWithTaxandDiscont() {
+        return OTPWithTaxandDiscont;
+    }
+
+    public void setOTPWithTaxandDiscont(Float OTPWithTaxandDiscont) {
+        this.OTPWithTaxandDiscont = OTPWithTaxandDiscont;
     }
 }
