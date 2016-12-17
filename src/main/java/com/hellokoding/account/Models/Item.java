@@ -52,8 +52,8 @@ public class Item implements Serializable {
     @Basic
     private String locationDistribute;
 
-    @OneToMany(targetEntity = ProductItems.class, mappedBy = "item1")
-    private List<ProductItems> productItemses1;
+//    @OneToMany(targetEntity = ProductItems.class, mappedBy = "item1")
+//    private List<ProductItems> productItemses1;
 
     @OneToMany(targetEntity = Itemgroup.class, mappedBy = "item1")
     private List<Itemgroup> itemgroups1;
@@ -118,14 +118,6 @@ public class Item implements Serializable {
 
     public void setModifiedDate(String modifiedDate) {
         this.modifiedDate = modifiedDate;
-    }
-
-    public List<ProductItems> getProductItemses1() {
-        return this.productItemses1;
-    }
-
-    public void setProductItemses1(List<ProductItems> productItemses1) {
-        this.productItemses1 = productItemses1;
     }
 
     public List<Itemgroup> getItemgroups1() {

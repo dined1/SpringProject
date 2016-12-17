@@ -47,8 +47,8 @@ public class ProductItems implements Serializable {
     @ManyToOne(targetEntity = Soproduct.class)
     private Soproduct soproduct1;
 
-    @ManyToOne(targetEntity = Item.class)
-    private Item item1;
+    @ManyToOne(targetEntity = OrdItem.class)
+    private OrdItem OrdItem;
 
     public Long getId() {
         return this.id;
@@ -66,13 +66,6 @@ public class ProductItems implements Serializable {
         this.soproduct1 = soproduct1;
     }
 
-    public Item getItem1() {
-        return this.item1;
-    }
-
-    public void setItem1(Item item1) {
-        this.item1 = item1;
-    }
 
     public Float getMp() {
         return mp;
@@ -104,5 +97,13 @@ public class ProductItems implements Serializable {
 
     public void setOTPWithTaxandDiscont(Float OTPWithTaxandDiscont) {
         this.OTPWithTaxandDiscont = OTPWithTaxandDiscont;
+    }
+
+    public com.hellokoding.account.Models.OrdItem getOrdItem() {
+        return OrdItem;
+    }
+
+    public void setOrdItem(com.hellokoding.account.Models.OrdItem ordItem) {
+        OrdItem = ordItem;
     }
 }

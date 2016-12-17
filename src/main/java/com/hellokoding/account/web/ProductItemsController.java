@@ -5,15 +5,14 @@
  */
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.Item;
+import com.hellokoding.account.Models.OrdItem;
 import com.hellokoding.account.Models.ProductItems;
 import com.hellokoding.account.Models.Soproduct;
 import com.hellokoding.account.controller.util.ErrorBean;
-import com.hellokoding.account.repository.ItemRepository;
+import com.hellokoding.account.repository.OrdItemRepository;
 import com.hellokoding.account.repository.ProductItemsRepository;
 import com.hellokoding.account.repository.SOProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
 
 /**
  *
@@ -36,7 +35,7 @@ import javax.ws.rs.*;
 public class ProductItemsController {
 
     @Autowired
-    private ItemRepository itemRepository;
+    private OrdItemRepository itemRepository;
     @Autowired
     private SOProductRepository soProductRepository;
     @Autowired
@@ -57,8 +56,8 @@ public class ProductItemsController {
         @BeanParam ProductItems productItems, @RequestParam(value = "Soproduct", required = false) String soproduct1, @RequestParam(value = "Item", required = false) String item1) {
         Soproduct soproduct = soProductRepository.findOne(Long.valueOf(soproduct1));
         productItems.setSoproduct1(soproduct);
-        Item item = itemRepository.findOne(Long.valueOf(item1));
-        productItems.setItem1(item);
+        OrdItem item = itemRepository.findOne(Long.valueOf(item1));
+        productItems.setOrdItem(item);
         productItemsRepository.save(productItems);
         return "redirect:list";
     }

@@ -47,8 +47,8 @@ public class OrdItem implements Serializable {
     @Basic
     private String locationDistribute;
 
-//    @OneToMany(targetEntity = ProductItems.class, mappedBy = "item1")
-//    private List<ProductItems> productItemses1;
+    @OneToMany(targetEntity = ProductItems.class, mappedBy = "OrdItem")
+    private List<ProductItems> productItemses1;
 //
 //    @OneToMany(targetEntity = Itemgroup.class, mappedBy = "item1")
 //    private List<Itemgroup> itemgroups1;
@@ -121,5 +121,29 @@ public class OrdItem implements Serializable {
 
     public void setLocationDistribute(String locationDistribute) {
         this.locationDistribute = locationDistribute;
+    }
+
+    public List<OrdItemDiscount> getItemdiscounts1() {
+        return itemdiscounts1;
+    }
+
+    public void setItemdiscounts1(List<OrdItemDiscount> itemdiscounts1) {
+        this.itemdiscounts1 = itemdiscounts1;
+    }
+
+    public List<OrdItemCharacteristic> getItemCharacteristic() {
+        return itemCharacteristic;
+    }
+
+    public void setItemCharacteristic(List<OrdItemCharacteristic> itemCharacteristic) {
+        this.itemCharacteristic = itemCharacteristic;
+    }
+
+    public List<ProductItems> getProductItemses1() {
+        return productItemses1;
+    }
+
+    public void setProductItemses1(List<ProductItems> productItemses1) {
+        this.productItemses1 = productItemses1;
     }
 }

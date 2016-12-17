@@ -43,6 +43,12 @@ public class AppController {
     @Autowired
     private GroupRepository groupRepository;
     @Autowired
+    private OrdItemRepository ordItemRepository;
+    @Autowired
+    private OrdItemCharacteristicsRepository ordItemCharacteristicsRepository;
+    @Autowired
+    private OrdItemdiscountRepository ordItemdiscountRepository;
+    @Autowired
     private ProductItemsRepository productItemsRepository;
     @Autowired
     private PaymentRepository paymentFacade;
@@ -195,6 +201,21 @@ public class AppController {
         Soproduct soproduct = so.getSoproducts1().get(0);
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(itemid);
+        OrdItem ordItem = new OrdItem();
+        List<OrdItemCharacteristic> ordItemCharacteristic = new ArrayList<>();
+        List<OrdItemDiscount> ordItemDiscount = new ArrayList<>();
+
+        ordItem.setOrditemId(item.getItemId());
+        ordItem.setDefMP(item.getDefMP());
+        ordItem.setDefOTP(item.getDefOTP());
+        ordItem.setDescription(item.getDescription());
+        ordItem.setLocationDistribute(item.getLocationDistribute());
+        ordItem.setModifiedDate(item.getModifiedDate());
+        ordItem.setName(item.getName());
+        ordItem.setType(item.getType());
+        ordItem.setItemCharacteristic(ordItemCharacteristic);
+        ordItem.setItemdiscounts1(ordItemDiscount);
+
         Float mp = 0f;
         Float otp = 0f;
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);
@@ -205,7 +226,7 @@ public class AppController {
                 mp -= discount.getDiscountrule1().getDiscountValue();
             }
         }
-        productItems.setItem1(item);
+        productItems.setOrdItem(ordItem);
         productItems.setOTPWithTaxandDiscont(item.getDefOTP() + otp);
         productItems.setMPWithTaxandDiscont(item.getDefMP() + mp);
         productItems.setOtp(item.getDefOTP());
