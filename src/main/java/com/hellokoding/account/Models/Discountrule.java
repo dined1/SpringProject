@@ -42,6 +42,9 @@ public class Discountrule implements Serializable {
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "discountrule1")
     private List<Itemdiscount> itemdiscounts1;
 
+    @OneToMany(targetEntity = OrdItemDiscount.class, mappedBy = "discountrule1")
+    private List<OrdItemDiscount> orditemdiscounts;
+
     public Long getdRId() {
         return this.dRId;
     }
@@ -88,5 +91,13 @@ public class Discountrule implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<OrdItemDiscount> getOrditemdiscounts() {
+        return orditemdiscounts;
+    }
+
+    public void setOrditemdiscounts(List<OrdItemDiscount> orditemdiscounts) {
+        this.orditemdiscounts = orditemdiscounts;
     }
 }

@@ -61,6 +61,9 @@ public class Item implements Serializable {
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "item1")
     private List<Itemdiscount> itemdiscounts1;
 
+    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "Item")
+    private List<ItemCharacteristic> itemCharacteristic;
+
     public Long getItemId() {
         return this.itemId;
     }
@@ -147,5 +150,13 @@ public class Item implements Serializable {
 
     public void setLocationDistribute(String locationDistribute) {
         this.locationDistribute = locationDistribute;
+    }
+
+    public List<ItemCharacteristic> getItemCharacteristic() {
+        return itemCharacteristic;
+    }
+
+    public void setItemCharacteristic(List<ItemCharacteristic> itemCharacteristic) {
+        this.itemCharacteristic = itemCharacteristic;
     }
 }
