@@ -39,7 +39,7 @@
                                     <tbody>
                                     <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
                                         <tr>
-                                            <td>${(PRODUCTITEMS.item1.name)}</td>
+                                            <td>${(PRODUCTITEMS.ordItem.name)}</td>
 
                                             <td>${(PRODUCTITEMS.otp)}</td>
 

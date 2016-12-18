@@ -205,7 +205,6 @@ public class AppController {
         List<OrdItemCharacteristic> ordItemCharacteristic = new ArrayList<>();
         List<OrdItemDiscount> ordItemDiscount = new ArrayList<>();
 
-        ordItem.setOrditemId(item.getItemId());
         ordItem.setDefMP(item.getDefMP());
         ordItem.setDefOTP(item.getDefOTP());
         ordItem.setDescription(item.getDescription());
@@ -215,7 +214,7 @@ public class AppController {
         ordItem.setType(item.getType());
         ordItem.setItemCharacteristic(ordItemCharacteristic);
         ordItem.setItemdiscounts1(ordItemDiscount);
-
+        ordItemRepository.save(ordItem);
         Float mp = 0f;
         Float otp = 0f;
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);
