@@ -21,14 +21,14 @@ CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PR
 CREATE TABLE characteristics (CharacteristicId INTEGER NOT NULL AUTO_INCREMENT, Characteristic VARCHAR(255), CharacteristicValue VARCHAR(255), PRIMARY KEY (CharacteristicId));
 CREATE TABLE itemcharacteristic (ItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, Item_itemId INTEGER, PRIMARY KEY (ItemCharacteristicId));
 CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), PRIMARY KEY (OrdItemId));
-CREATE TABLE orditemcharacteristic (OrdItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic INTEGER, OrdItem INTEGER, PRIMARY KEY (OrdItemCharacteristicId));
-CREATE TABLE orditemdiscount (OrdIDid INTEGER NOT NULL AUTO_INCREMENT, discountrule1 INTEGER, OrdItem INTEGER, PRIMARY KEY (OrdIDid));
+CREATE TABLE orditemcharacteristic (OrdItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdItemCharacteristicId));
+CREATE TABLE orditemdiscount (OrdIDid INTEGER NOT NULL AUTO_INCREMENT, discountrule1_dRId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdIDid));
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (id int(11) NOT NULL AUTO_INCREMENT,username varchar(255) DEFAULT NULL,password varchar(255) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 ALTER TABLE statisticscollector ADD CONSTRAINT FK_statisticscollector_CUSTOMER1_CustomerId FOREIGN KEY (CUSTOMER1_CustomerId) REFERENCES customer (CustomerId);
-ALTER TABLE PRODUCTITEMS ADD CONSTRAINT FK_PRODUCTITEMS_ORDITEM_OrdItemId FOREIGN KEY (ORDITEM_OrdItemIdorditem) REFERENCES orditem (OrdItemId);
+ALTER TABLE PRODUCTITEMS ADD CONSTRAINT FK_PRODUCTITEMS_ORDITEM_OrdItemId FOREIGN KEY (ORDITEM_OrdItemId) REFERENCES orditem (OrdItemId);
 ALTER TABLE PRODUCTITEMS ADD CONSTRAINT FK_PRODUCTITEMS_SOPRODUCT1_SOPId FOREIGN KEY (SOPRODUCT1_SOPId) REFERENCES soproduct (SOPId);
 ALTER TABLE itemdiscount ADD CONSTRAINT FK_itemdiscount_ITEM1_ItemId FOREIGN KEY (ITEM1_ItemId) REFERENCES item (ItemId);
 ALTER TABLE itemdiscount ADD CONSTRAINT FK_itemdiscount_DISCOUNTRULE1_DRId FOREIGN KEY (DISCOUNTRULE1_DRId) REFERENCES discountrule (DRId);
@@ -45,10 +45,10 @@ ALTER TABLE user_role ADD CONSTRAINT fk_user_role_roleid FOREIGN KEY (role_id) R
 ALTER TABLE user_role ADD CONSTRAINT fk_user_role_userid FOREIGN KEY (user_id) REFERENCES user (id);
 ALTER TABLE itemcharacteristic ADD CONSTRAINT FK_itemcharacteristic_ITEM1_characteristic FOREIGN KEY (ItemCharacteristic_CharacteristicId) REFERENCES characteristics (CharacteristicId);
 ALTER TABLE itemcharacteristic ADD CONSTRAINT FK_itemcharacteristic_ITEM1 FOREIGN KEY (Item_itemId) REFERENCES item (ItemId);
-ALTER TABLE orditemcharacteristic ADD CONSTRAINT FK_orditemcharacteristic_ITEM1 FOREIGN KEY (OrdItem) REFERENCES OrdItem (OrdItemId);
-ALTER TABLE orditemcharacteristic ADD CONSTRAINT FK_orditemcharacteristic_ITEM1_characteristic FOREIGN KEY (ItemCharacteristic) REFERENCES characteristics (CharacteristicId);
-ALTER TABLE orditemdiscount ADD CONSTRAINT FK_orditemdiscount_ITEM1_ItemId FOREIGN KEY (OrdItem) REFERENCES orditem (OrdItemId);
-ALTER TABLE orditemdiscount ADD CONSTRAINT FK_orditemdiscount_DISCOUNTRULE1_DRId FOREIGN KEY (discountrule1) REFERENCES discountrule (DRId);
+ALTER TABLE orditemcharacteristic ADD CONSTRAINT FK_orditemcharacteristic_ITEM1 FOREIGN KEY (OrdItem_orditemId) REFERENCES OrdItem (OrdItemId);
+ALTER TABLE orditemcharacteristic ADD CONSTRAINT FK_orditemcharacteristic_ITEM1_characteristic FOREIGN KEY (ItemCharacteristic_CharacteristicId) REFERENCES characteristics (CharacteristicId);
+ALTER TABLE orditemdiscount ADD CONSTRAINT FK_orditemdiscount_ITEM1_ItemId FOREIGN KEY (OrdItem_orditemId) REFERENCES orditem (OrdItemId);
+ALTER TABLE orditemdiscount ADD CONSTRAINT FK_orditemdiscount_DISCOUNTRULE1_DRId FOREIGN KEY (discountrule1_dRId) REFERENCES discountrule (DRId);
 
 
 insert into role values ('1', 'ROLE_USER');
