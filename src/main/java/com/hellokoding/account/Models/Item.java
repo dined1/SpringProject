@@ -61,7 +61,7 @@ public class Item implements Serializable {
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "item1")
     private List<Itemdiscount> itemdiscounts1;
 
-    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "Item")
+    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "item")
     private List<ItemCharacteristic> itemCharacteristic;
 
     public Long getItemId() {

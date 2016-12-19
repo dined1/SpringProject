@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -60,6 +61,10 @@ public class AppController {
     private SORepository soRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CharacteristicsRepository characteristicsRepository;
+    @Autowired
+    private ItemCharacteristicRepository itemCharacteristicRepository;
 
 
     @RequestMapping(value = {"/main"}, method = RequestMethod.GET)
@@ -104,8 +109,8 @@ public class AppController {
 //        }
         List<ProductItems> pm = so.getSoproducts1().get(0).getProductItemses1();
         for (ProductItems productItems1 : pm){
-                CMP+=productItems1.getMp();
-                OTP+=productItems1.getOtp();
+            CMP+=productItems1.getMp();
+            OTP+=productItems1.getOtp();
         }
         model.addAttribute("PRODUCTITEMS_LIST", pm);
         model.addAttribute("ID", userid);
@@ -162,15 +167,33 @@ public class AppController {
         return "/pages/basket";
     }
 
+    @Transactional
     @RequestMapping(value = {"/catalog/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyCatalog(Model model,
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                Principal principal) {
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
+        model.addAttribute("CHARACTERISTICS", itemCharacteristicRepository.findAll());
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
         return "/pages/catalog";
+    }
+
+    @RequestMapping(value = {"/itemdescription/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String itemDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
+                                  @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                                  Principal principal) {
+        Item item = itemRepository.findOne(itemid);
+        model.addAttribute("ITEM", item);
+
+            model.addAttribute("ITEMCHARACTERISTICS", itemCharacteristicRepository.findByItem_ItemId(itemid));
+            model.addAttribute("ITEMDISCOUNTS", itemdiscountRepository.findByItem1_ItemId(itemid));
+
+        model.addAttribute("ITEMID", itemid);
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("SOID", soid);
+        return "/pages/itemDesc";
     }
 
     @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
@@ -190,13 +213,15 @@ public class AppController {
     }
 
     @RequestMapping(value = {"/add/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
-    public String addBasket(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
+    public String addBasket(Model model, HttpServletRequest request, ItemCharacteristic itemCharacteristic, Itemdiscount itemdiscount,
+                            ProductItems productItems, @PathVariable("itemid") Long itemid,
                             @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                             Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
             return "";
         }
+
         So so = soRepository.findOne(soid);
         Soproduct soproduct = so.getSoproducts1().get(0);
         productItems.setSoproduct1(soproduct);
@@ -215,6 +240,20 @@ public class AppController {
         ordItem.setItemCharacteristic(ordItemCharacteristic);
         ordItem.setItemdiscounts1(ordItemDiscount);
         ordItemRepository.save(ordItem);
+        String[] characs = request.getParameterValues("characteristics");
+        OrdItemCharacteristic ordItemChar = new OrdItemCharacteristic();
+        for (String charac : characs){
+            ordItemChar.setOrdItem(ordItem);
+            ordItemChar.setItemCharacteristic(characteristicsRepository.findOne(Long.valueOf(charac)));
+            ordItemCharacteristicsRepository.save(ordItemChar);
+        }
+        String[] discounts = request.getParameterValues("discounts");
+        OrdItemDiscount ordDisc = new OrdItemDiscount();
+        for (String disc : discounts){
+            ordDisc.setOrdItem(ordItem);
+            ordDisc.setDiscountrule1(discountruleRepository.findOne(Long.valueOf(disc)));
+            ordItemdiscountRepository.save(ordDisc);
+        }
         Float mp = 0f;
         Float otp = 0f;
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);

@@ -19,10 +19,10 @@ public class ItemCharacteristic implements Serializable{
     private Long ItemCharacteristicId;
 
     @ManyToOne(targetEntity = Characteristics.class)
-    private Characteristics ItemCharacteristic;
+    private Characteristics itemCharacteristic;
 
     @ManyToOne(targetEntity = Item.class)
-    private Item Item;
+    private Item item;
 
     public Long getItemCharacteristicId() {
         return ItemCharacteristicId;
@@ -33,18 +33,18 @@ public class ItemCharacteristic implements Serializable{
     }
 
     public Characteristics getItemCharacteristic() {
-        return ItemCharacteristic;
+        return itemCharacteristic;
     }
 
     public void setItemCharacteristic(Characteristics itemCharacteristic) {
-        ItemCharacteristic = itemCharacteristic;
+        this.itemCharacteristic = itemCharacteristic;
     }
 
     public com.hellokoding.account.Models.Item getItem() {
-        return Item;
+        return item;
     }
 
     public void setItem(com.hellokoding.account.Models.Item item) {
-        Item = item;
+        this.item = item;
     }
 }

@@ -26,7 +26,7 @@ public class Characteristics implements Serializable {
     @Basic
     private String CharacteristicValue;
 
-    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "ItemCharacteristic")
+    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "itemCharacteristic")
     private List<ItemCharacteristic> itemCharacteristic;
 
     @OneToMany(targetEntity = OrdItemCharacteristic.class, mappedBy = "ItemCharacteristic")

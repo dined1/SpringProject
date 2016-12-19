@@ -44,21 +44,21 @@
                             <tbody>
                             <c:forEach items="${ITEM_LIST}" var="ITEM">
                                 <tr>
-                                    <td>${(ITEM.name)}</td>
+                                <td><a href="${contextPath}/application/itemdescription/${ITEM.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.name)}</a></td>
 
-                                    <td>${(ITEM.type)}</td>
+                                <td>${(ITEM.type)}</td>
 
-                                    <td>${(ITEM.description)}</td>
+                                <td>${(ITEM.description)}</td>
 
-                                    <td>${(ITEM.defMP)}</td>
+                                <td>${(ITEM.defMP)}</td>
 
-                                    <td>${(ITEM.defOTP)}</td>
+                                <td>${(ITEM.defOTP)}</td>
 
-                                    <td>${(ITEM.modifiedDate)}</td>
+                                <td>${(ITEM.modifiedDate)}</td>
 
-                                    <td>
-                                        <a href="${contextPath}/application/add/${ITEM.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
-                                    </td>
+                                <td>
+                                    <a href="${contextPath}/application/add/${ITEM.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
+                                </td>
 
                                 </tr>
                             </c:forEach>
