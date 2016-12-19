@@ -47,16 +47,16 @@ public class OrdItem implements Serializable {
     @Basic
     private String locationDistribute;
 
-    @OneToMany(targetEntity = ProductItems.class, mappedBy = "OrdItem")
+    @OneToMany(targetEntity = ProductItems.class, mappedBy = "OrdItem", cascade = CascadeType.REMOVE)
     private List<ProductItems> productItemses1;
 //
 //    @OneToMany(targetEntity = Itemgroup.class, mappedBy = "item1")
 //    private List<Itemgroup> itemgroups1;
 //
-    @OneToMany(targetEntity = OrdItemDiscount.class, mappedBy = "OrdItem")
+    @OneToMany(targetEntity = OrdItemDiscount.class, mappedBy = "OrdItem", cascade = CascadeType.REMOVE)
     private List<OrdItemDiscount> itemdiscounts1;
 
-    @OneToMany(targetEntity = OrdItemCharacteristic.class, mappedBy = "OrdItem")
+    @OneToMany(targetEntity = OrdItemCharacteristic.class, mappedBy = "OrdItem", cascade = CascadeType.REMOVE)
     private List<OrdItemCharacteristic> itemCharacteristic;
 
     public Long getOrditemId() {

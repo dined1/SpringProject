@@ -16,11 +16,6 @@
                     <div class="panel-body">
 
                         <div class="container">
-
-
-                            <br />
-                            <br />
-                            <br />
                             <ul class="nav nav-pills">
                                 <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
                                 <li class="active"><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>

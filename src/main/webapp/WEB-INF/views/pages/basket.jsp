@@ -17,45 +17,42 @@
 
                         <div class="container">
 
-                            <br />
-                            <br />
-                            <br />
                             <ul class="nav nav-pills">
                                 <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
                                 <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
                                 <li><a href="${contextPath}/application/order/${ID}">Оформление заказа</a></li>
                             </ul>
-                            <br />
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="PRODUCTITEMS_TABLE">
-                                    <thead>
-                                    <tr>
-                                        <th>Наименование</th>
-                                        <th>Единоразовая оплата</th>
-                                        <th>Ежемесячная оплата</th>
-                                        <th>Удаление</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
-                                        <tr>
-                                            <td>${(PRODUCTITEMS.ordItem.name)}</td>
-
-                                            <td>${(PRODUCTITEMS.otp)}</td>
-
-                                            <td>${(PRODUCTITEMS.mp)}</td>
-
-                                            <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.id}/${CUSTOMERID}/${SOID}">Убрать товар</a></td>
-
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div>Итого оплатить: <span id="total-cart-summa">${(OTP.toString())}</span> руб.    Итого за месяц: ${(CMP.toString())}</div>
-                            <br />
-                            <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
                         </div>
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="PRODUCTITEMS_TABLE">
+                                <thead>
+                                <tr>
+                                    <th>Наименование</th>
+                                    <th>Единоразовая оплата</th>
+                                    <th>Ежемесячная оплата</th>
+                                    <th>Удаление</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
+                                    <tr>
+                                        <td>${(PRODUCTITEMS.ordItem.name)}</td>
+
+                                        <td>${(PRODUCTITEMS.otp)}</td>
+
+                                        <td>${(PRODUCTITEMS.mp)}</td>
+
+                                        <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Убрать товар</a></td>
+
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>Итого оплатить: <span id="total-cart-summa">${(OTP.toString())}</span> руб.    Итого за месяц: ${(CMP.toString())}</div>
+                        <br />
+                        <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
                     </div>
                 </div>
             </div>

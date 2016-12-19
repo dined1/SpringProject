@@ -187,8 +187,8 @@ public class AppController {
         Item item = itemRepository.findOne(itemid);
         model.addAttribute("ITEM", item);
 
-            model.addAttribute("ITEMCHARACTERISTICS", itemCharacteristicRepository.findByItem_ItemId(itemid));
-            model.addAttribute("ITEMDISCOUNTS", itemdiscountRepository.findByItem1_ItemId(itemid));
+        model.addAttribute("ITEMCHARACTERISTICS", itemCharacteristicRepository.findByItem_ItemId(itemid));
+        model.addAttribute("ITEMDISCOUNTS", itemdiscountRepository.findByItem1_ItemId(itemid));
 
         model.addAttribute("ITEMID", itemid);
         model.addAttribute("CUSTOMERID", customerid);
@@ -241,18 +241,22 @@ public class AppController {
         ordItem.setItemdiscounts1(ordItemDiscount);
         ordItemRepository.save(ordItem);
         String[] characs = request.getParameterValues("characteristics");
-        OrdItemCharacteristic ordItemChar = new OrdItemCharacteristic();
-        for (String charac : characs){
-            ordItemChar.setOrdItem(ordItem);
-            ordItemChar.setItemCharacteristic(characteristicsRepository.findOne(Long.valueOf(charac)));
-            ordItemCharacteristicsRepository.save(ordItemChar);
+        if (characs!=null) {
+            OrdItemCharacteristic ordItemChar = new OrdItemCharacteristic();
+            for (String charac : characs) {
+                ordItemChar.setOrdItem(ordItem);
+                ordItemChar.setItemCharacteristic(characteristicsRepository.findOne(Long.valueOf(charac)));
+                ordItemCharacteristicsRepository.save(ordItemChar);
+            }
         }
         String[] discounts = request.getParameterValues("discounts");
-        OrdItemDiscount ordDisc = new OrdItemDiscount();
-        for (String disc : discounts){
-            ordDisc.setOrdItem(ordItem);
-            ordDisc.setDiscountrule1(discountruleRepository.findOne(Long.valueOf(disc)));
-            ordItemdiscountRepository.save(ordDisc);
+        if (discounts!=null) {
+            OrdItemDiscount ordDisc = new OrdItemDiscount();
+            for (String disc : discounts) {
+                ordDisc.setOrdItem(ordItem);
+                ordDisc.setDiscountrule1(discountruleRepository.findOne(Long.valueOf(disc)));
+                ordItemdiscountRepository.save(ordDisc);
+            }
         }
         Float mp = 0f;
         Float otp = 0f;
@@ -294,7 +298,7 @@ public class AppController {
         if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
             return "";
         }
-        productItemsRepository.delete(productItemsRepository.findOne(itemid));
+        ordItemRepository.delete(itemid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
