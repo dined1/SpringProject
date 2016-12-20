@@ -20,7 +20,7 @@
                             <ul class="nav nav-pills">
                                 <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
                                 <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                <li><a href="${contextPath}/application/order/${ID}">Оформление заказа</a></li>
+                                <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
                             </ul>
                         </div>
                         <br />

@@ -197,10 +197,13 @@ public class AppController {
         return "/pages/itemDesc";
     }
 
-    @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
-    public String emptyOrder(Model model, @PathVariable("id") Integer id) {
+    @RequestMapping(value = {"/order/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String emptyOrder(Model model, @PathVariable("customerid") Long customerid,
+                             @PathVariable("soid") Long soid,
+                             Principal principal) {
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
-        model.addAttribute("ID", id);
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("SOID", soid);
         return "/pages/order";
     }
 

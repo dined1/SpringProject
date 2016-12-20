@@ -30,7 +30,6 @@
                             <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
                                 <thead>
                                 <tr>
-                                    <th>SOId</th>
                                     <th>SONumber</th>
                                     <th>Purchase Order Number</th>
                                     <th>Date Created</th>
@@ -46,7 +45,6 @@
                                     <tr>
                                         <td>${(SO.SOId)}</td>
 
-                                        <td>${(SO.SONumber)}</td>
 
                                         <td>${(SO.purchaseOrderNumber)}</td>
 
