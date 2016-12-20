@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -274,8 +275,27 @@ public class AppController {
         productItems.setOtp(item.getDefOTP());
         productItems.setMp(item.getDefMP());
         productItemsRepository.save(productItems);
-        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
+        priceRecountSO(customerid, soid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
+    }
+
+    private void priceRecountSO(Long customerid, Long soid){
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        Float CMP = 0f, CMPTD = 0f;
+        Float OTP = 0f, OTPTD = 0f;
+        for (ProductItems productItem : productItems){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                CMP+=productItem.getMp();
+                OTP+=productItem.getOtp();
+                CMPTD+=productItem.getMPWithTaxandDiscont();
+                OTPTD+=productItem.getOTPWithTaxandDiscont();
+            }
+        }
+        soRepository.findOne(soid).setFinalMP(BigDecimal.valueOf(CMP));
+        soRepository.findOne(soid).setFinalOTP(BigDecimal.valueOf(OTP));
+        soRepository.findOne(soid).setFinalMPwithTaxAndDiscount(BigDecimal.valueOf(CMPTD));
+        soRepository.findOne(soid).setFinalOTPwithTaxAndDiscount(BigDecimal.valueOf(OTPTD));
     }
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
@@ -315,8 +335,10 @@ public class AppController {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
         so.setStatus("Wait");
-        so.setSONumber("132342");
-        so.setPurchaseOrderNumber("13232342");
+        so.setFinalMP(BigDecimal.ZERO);
+        so.setFinalOTP(BigDecimal.ZERO);
+        so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
+        so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
         Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setCustomer1(customer);

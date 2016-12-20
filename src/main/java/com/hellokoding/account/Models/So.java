@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -46,6 +48,22 @@ public class So implements Serializable {
     @Column(name = "DateModified", table = "so")
     @Basic
     private String dateModified;
+
+    @Column(name = "FinalMP", table = "so")
+    @Basic
+    private BigDecimal finalMP;
+
+    @Column(name = "FinalOTP", table = "so")
+    @Basic
+    private BigDecimal finalOTP;
+
+    @Column(name = "FinalMPwithTaxAndDiscount", table = "so")
+    @Basic
+    private BigDecimal finalMPwithTaxAndDiscount;
+
+    @Column(name = "FinalOTPwithTaxAndDiscount", table = "so")
+    @Basic
+    private BigDecimal finalOTPwithTaxAndDiscount;
 
     @ManyToOne(targetEntity = Customer.class)
     private Customer customer1;
@@ -136,4 +154,35 @@ public class So implements Serializable {
         this.soproducts1 = soproducts1;
     }
 
+    public BigDecimal getFinalMP() {
+        return finalMP;
+    }
+
+    public void setFinalMP(BigDecimal finalMP) {
+        this.finalMP = finalMP;
+    }
+
+    public BigDecimal getFinalOTP() {
+        return finalOTP;
+    }
+
+    public void setFinalOTP(BigDecimal finalOTP) {
+        this.finalOTP = finalOTP;
+    }
+
+    public BigDecimal getFinalMPwithTaxAndDiscount() {
+        return finalMPwithTaxAndDiscount;
+    }
+
+    public void setFinalMPwithTaxAndDiscount(BigDecimal finalMPwithTaxAndDiscount) {
+        this.finalMPwithTaxAndDiscount = finalMPwithTaxAndDiscount;
+    }
+
+    public BigDecimal getFinalOTPwithTaxAndDiscount() {
+        return finalOTPwithTaxAndDiscount;
+    }
+
+    public void setFinalOTPwithTaxAndDiscount(BigDecimal finalOTPwithTaxAndDiscount) {
+        this.finalOTPwithTaxAndDiscount = finalOTPwithTaxAndDiscount;
+    }
 }
