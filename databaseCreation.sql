@@ -14,7 +14,8 @@ CREATE TABLE payment (PaymentId INTEGER NOT NULL AUTO_INCREMENT, PaymentInfo VAR
 CREATE TABLE paymenttype (PTId INTEGER NOT NULL AUTO_INCREMENT, TypeName VARCHAR(255), PRIMARY KEY (PTId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 CREATE TABLE PRODUCTITEMS (ID BIGINT NOT NULL AUTO_INCREMENT, ORDITEM_OrdItemId INTEGER, SOPRODUCT1_SOPId INTEGER, MP FLOAT, OTP FLOAT, MPWithTaxandDiscont float, OTPWithTaxandDiscont float, PRIMARY KEY (ID));
 CREATE TABLE role (id int(11) NOT NULL AUTO_INCREMENT,  name varchar(45) DEFAULT NULL,  primary key (id)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-CREATE TABLE so (SOId BIGINT NOT NULL AUTO_INCREMENT, DateCreated VARCHAR(255), DateModified VARCHAR(255), OrderDate VARCHAR(255), PurchaseOrderNumber VARCHAR(255), SONumber VARCHAR(255), Status VARCHAR(255), CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, PRIMARY KEY (SOId));
+CREATE TABLE so (SOId BIGINT NOT NULL AUTO_INCREMENT, DateCreated VARCHAR(255), DateModified VARCHAR(255), OrderDate VARCHAR(255), PurchaseOrderNumber VARCHAR(255)
+, SONumber VARCHAR(255), Status VARCHAR(255), finalMP FLOAT, finalOTP FLOAT, finalMPwithTaxAndDiscount FLOAT, finalOTPwithTaxAndDiscount FLOAT, CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, PRIMARY KEY (SOId));
 CREATE TABLE soproduct (SOPId INTEGER NOT NULL AUTO_INCREMENT, SO1_SOId BIGINT, PRIMARY KEY (SOPId));
 CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, StatisticType VARCHAR(255), StatisticsInfo VARCHAR(255), CUSTOMER1_CustomerId INTEGER, PRIMARY KEY (SCId));
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -325,7 +326,7 @@ insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
 -- insert into PRODUCTITEMS values ('2', '2', '2', '1000', '1000');
 -- insert into PRODUCTITEMS values ('3', '3', '3', '1000', '1000');
 -- insert into PRODUCTITEMS values ('4', '4', '4', '1000', '1000');
--- insert into PRODUCTITEMS values ('5', '5', '5', '1000', '1000');
+-- insert into PRODUCTITEMS values ('5', '5', '5', '1000', '1000');characteristics
 -- insert into PRODUCTITEMS values ('6', '6', '6', '1000', '1000');
 -- insert into PRODUCTITEMS values ('7', '7', '7', '1000', '1000');
 -- insert into PRODUCTITEMS values ('8', '8', '8', '1000', '1000');
