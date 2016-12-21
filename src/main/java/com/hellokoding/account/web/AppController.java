@@ -66,6 +66,8 @@ public class AppController {
     private CharacteristicsRepository characteristicsRepository;
     @Autowired
     private ItemCharacteristicRepository itemCharacteristicRepository;
+    @Autowired
+    private ItemLocationRepository itemLocationRepository;
 
 
     @RequestMapping(value = {"/main"}, method = RequestMethod.GET)
@@ -148,23 +150,6 @@ public class AppController {
 
         model.addAttribute("CMP", CMP);
         model.addAttribute("OTP", OTP);
-//        List<ProductItems> productItems = productItemsRepository.findAll();
-//        List<ProductItems> finalproducts = new ArrayList<>();
-//        Float CMP = 0f;
-//        Float OTP = 0f;
-//
-//        for (ProductItems productItem : productItems){
-//            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(id.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
-//                CMP+=productItem.getMp();
-//                OTP+=productItem.getOtp();
-//                finalproducts.add(productItem);
-//            }
-//        }
-//        model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
-//        model.addAttribute("ID", id);
-//
-//        model.addAttribute("CMP", CMP);
-//        model.addAttribute("OTP", OTP);
         return "/pages/basket";
     }
 
@@ -175,9 +160,11 @@ public class AppController {
                                Principal principal) {
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
+        So so = soRepository.findOne(soid);
+        List<ItemLocations> items = itemLocationRepository.findByLocation_Locationname(so.getLocation());
         model.addAttribute("CHARACTERISTICS", itemCharacteristicRepository.findAll());
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
-        model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("ITEM_LIST", items);
         return "/pages/catalog";
     }
 
@@ -237,7 +224,6 @@ public class AppController {
         ordItem.setDefMP(item.getDefMP());
         ordItem.setDefOTP(item.getDefOTP());
         ordItem.setDescription(item.getDescription());
-        ordItem.setLocationDistribute(item.getLocationDistribute());
         ordItem.setModifiedDate(item.getModifiedDate());
         ordItem.setName(item.getName());
         ordItem.setType(item.getType());
@@ -337,13 +323,14 @@ public class AppController {
                                      @RequestParam("socustomer") String customer1) {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
+        Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setStatus("Wait");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
+        so.setLocation(customer.getLocation());
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
-        Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setCustomer1(customer);
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());

@@ -48,9 +48,8 @@ public class Item implements Serializable {
     @Basic
     private String modifiedDate;
 
-    @Column(name = "locationDistribute", table = "item")
-    @Basic
-    private String locationDistribute;
+    @OneToMany(targetEntity = ItemLocations.class, mappedBy = "item")
+    private List<ItemLocations> itemlocations;
 
 //    @OneToMany(targetEntity = ProductItems.class, mappedBy = "item1")
 //    private List<ProductItems> productItemses1;
@@ -136,19 +135,19 @@ public class Item implements Serializable {
         this.itemdiscounts1 = itemdiscounts1;
     }
 
-    public String getLocationDistribute() {
-        return locationDistribute;
-    }
-
-    public void setLocationDistribute(String locationDistribute) {
-        this.locationDistribute = locationDistribute;
-    }
-
     public List<ItemCharacteristic> getItemCharacteristic() {
         return itemCharacteristic;
     }
 
     public void setItemCharacteristic(List<ItemCharacteristic> itemCharacteristic) {
         this.itemCharacteristic = itemCharacteristic;
+    }
+
+    public List<ItemLocations> getItemlocations() {
+        return itemlocations;
+    }
+
+    public void setItemlocations(List<ItemLocations> itemlocations) {
+        this.itemlocations = itemlocations;
     }
 }

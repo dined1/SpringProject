@@ -39,20 +39,20 @@
                             <tbody>
                             <c:forEach items="${ITEM_LIST}" var="ITEM">
                                 <tr>
-                                <td><a href="${contextPath}/application/itemdescription/${ITEM.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.name)}</a></td>
+                                <td><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
 
-                                <td>${(ITEM.type)}</td>
+                                <td>${(ITEM.item.type)}</td>
 
-                                <td>${(ITEM.description)}</td>
+                                <td>${(ITEM.item.description)}</td>
 
-                                <td>${(ITEM.defMP)}</td>
+                                <td>${(ITEM.item.defMP)}</td>
 
-                                <td>${(ITEM.defOTP)}</td>
+                                <td>${(ITEM.item.defOTP)}</td>
 
-                                <td>${(ITEM.modifiedDate)}</td>
+                                <td>${(ITEM.item.modifiedDate)}</td>
 
                                 <td>
-                                    <a href="${contextPath}/application/add/${ITEM.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
+                                    <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
                                 </td>
 
                                 </tr>
@@ -60,7 +60,7 @@
                             </tbody>
                         </table>
 
-                        <script src="js/vendor/jquery.min.js" type="text/javascript"></script>
+                        <script src="${contextPath}/webresources/static/style/jquery.min.js" type="text/javascript"></script>
                         <script src="js/vendor/underscore.min.js" type="text/javascript"></script>
                         <script src="js/modules/catalog.js" type="text/javascript"></script>
                         <script src="js/modules/cart.js" type="text/javascript"></script>

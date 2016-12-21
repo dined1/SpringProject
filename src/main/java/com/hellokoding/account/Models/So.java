@@ -65,6 +65,10 @@ public class So implements Serializable {
     @Basic
     private BigDecimal finalOTPwithTaxAndDiscount;
 
+    @Column(name = "Location", table = "so")
+    @Basic
+    private String location;
+
     @ManyToOne(targetEntity = Customer.class)
     private Customer customer1;
 
@@ -184,5 +188,13 @@ public class So implements Serializable {
 
     public void setFinalOTPwithTaxAndDiscount(BigDecimal finalOTPwithTaxAndDiscount) {
         this.finalOTPwithTaxAndDiscount = finalOTPwithTaxAndDiscount;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

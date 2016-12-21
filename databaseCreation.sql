@@ -3,7 +3,7 @@ create schema test;
 use test;
 
 CREATE TABLE address (AddressId INTEGER NOT NULL AUTO_INCREMENT, AddressLine VARCHAR(255), City VARCHAR(255), Country VARCHAR(255), ModifiedDate VARCHAR(255), PostalCode VARCHAR(255), PRIMARY KEY (AddressId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
+CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), Location VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
 CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, DiscountValue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
 CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), PRIMARY KEY (ItemId));
@@ -15,7 +15,7 @@ CREATE TABLE paymenttype (PTId INTEGER NOT NULL AUTO_INCREMENT, TypeName VARCHAR
 CREATE TABLE PRODUCTITEMS (ID BIGINT NOT NULL AUTO_INCREMENT, ORDITEM_OrdItemId INTEGER, SOPRODUCT1_SOPId INTEGER, MP FLOAT, OTP FLOAT, MPWithTaxandDiscont float, OTPWithTaxandDiscont float, PRIMARY KEY (ID));
 CREATE TABLE role (id int(11) NOT NULL AUTO_INCREMENT,  name varchar(45) DEFAULT NULL,  primary key (id)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 CREATE TABLE so (SOId BIGINT NOT NULL AUTO_INCREMENT, DateCreated VARCHAR(255), DateModified VARCHAR(255), OrderDate VARCHAR(255), PurchaseOrderNumber VARCHAR(255)
-, SONumber VARCHAR(255), Status VARCHAR(255), finalMP FLOAT, finalOTP FLOAT, finalMPwithTaxAndDiscount FLOAT, finalOTPwithTaxAndDiscount FLOAT, CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, PRIMARY KEY (SOId));
+, SONumber VARCHAR(255), Status VARCHAR(255), finalMP FLOAT, finalOTP FLOAT, finalMPwithTaxAndDiscount FLOAT, finalOTPwithTaxAndDiscount FLOAT, Location VARCHAR(255), CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, PRIMARY KEY (SOId));
 CREATE TABLE soproduct (SOPId INTEGER NOT NULL AUTO_INCREMENT, SO1_SOId BIGINT, PRIMARY KEY (SOPId));
 CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, StatisticType VARCHAR(255), StatisticsInfo VARCHAR(255), CUSTOMER1_CustomerId INTEGER, PRIMARY KEY (SCId));
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -24,6 +24,9 @@ CREATE TABLE itemcharacteristic (ItemCharacteristicId INTEGER NOT NULL AUTO_INCR
 CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), PRIMARY KEY (OrdItemId));
 CREATE TABLE orditemcharacteristic (OrdItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdItemCharacteristicId));
 CREATE TABLE orditemdiscount (OrdIDid INTEGER NOT NULL AUTO_INCREMENT, discountrule1_dRId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdIDid));
+CREATE TABLE locations (locationId INTEGER NOT NULL AUTO_INCREMENT, locationname varchar(255), PRIMARY KEY (locationId));
+CREATE TABLE itemlocations (iLid INTEGER NOT NULL AUTO_INCREMENT, location_locationId INTEGER, item_ItemId INTEGER, PRIMARY KEY (iLid));
+
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (id int(11) NOT NULL AUTO_INCREMENT,username varchar(255) DEFAULT NULL,password varchar(255) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -50,6 +53,8 @@ ALTER TABLE orditemcharacteristic ADD CONSTRAINT FK_orditemcharacteristic_ITEM1 
 ALTER TABLE orditemcharacteristic ADD CONSTRAINT FK_orditemcharacteristic_ITEM1_characteristic FOREIGN KEY (ItemCharacteristic_CharacteristicId) REFERENCES characteristics (CharacteristicId);
 ALTER TABLE orditemdiscount ADD CONSTRAINT FK_orditemdiscount_ITEM1_ItemId FOREIGN KEY (OrdItem_orditemId) REFERENCES orditem (OrdItemId);
 ALTER TABLE orditemdiscount ADD CONSTRAINT FK_orditemdiscount_DISCOUNTRULE1_DRId FOREIGN KEY (discountrule1_dRId) REFERENCES discountrule (DRId);
+ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_ITEM_ItemId FOREIGN KEY (item_ItemId) REFERENCES item (ItemId);
+ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_location_locationId FOREIGN KEY (location_locationId) REFERENCES locations (locationId);
 
 
 insert into role values ('1', 'ROLE_USER');
@@ -132,12 +137,23 @@ insert into user_role values ('1', '1');
 insert into user_role values ('2', '1');
 insert into user_role values ('3', '1');
 insert into user_role values ('7', '1');
-insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', '1', '1');
-insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', '2', '7');
-insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', '3', '1');
-insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', '4', '7');
+insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', 'Belarus', '1', '1');
+insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', 'Belarus', '2', '7');
+insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', 'Belarus', '3', '1');
+insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', 'Belarus', '4', '7');
 insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
 insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
+INSERT INTO `test`.`locations` (`locationId`, `locationname`) VALUES ('1', 'Belarus');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('1', '1', '1');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('2', '1', '2');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('3', '1', '3');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('4', '1', '4');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('5', '1', '5');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('6', '1', '6');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('7', '1', '7');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('8', '1', '8');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('9', '1', '9');
+INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('10', '1', '10');
 
 
 
