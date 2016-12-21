@@ -128,9 +128,12 @@ public class AppController {
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                               Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
+        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid)==null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
             return "";
         }
+
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
@@ -222,7 +225,7 @@ public class AppController {
     public String emptyOrder(Model model, @PathVariable("customerid") Long customerid,
                              @PathVariable("soid") Long soid,
                              Principal principal) {
-        model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
