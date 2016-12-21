@@ -8,6 +8,7 @@ import java.io.Serializable;
 /**
  * Created by Admin on 17.12.2016.
  */
+
 @Entity
 @Table(name = "orditemcharacteristic")
 @Transactional
@@ -21,7 +22,7 @@ public class OrdItemCharacteristic implements Serializable {
     private Characteristics ItemCharacteristic;
 
     @ManyToOne(targetEntity = OrdItem.class)
-    private OrdItem OrdItem;
+    private OrdItem ordItem;
 
     public Long getOrdItemCharacteristicId() {
         return ordItemCharacteristicId;
@@ -32,11 +33,11 @@ public class OrdItemCharacteristic implements Serializable {
     }
 
     public com.hellokoding.account.Models.OrdItem getOrdItem() {
-        return OrdItem;
+        return ordItem;
     }
 
     public void setOrdItem(com.hellokoding.account.Models.OrdItem ordItem) {
-        OrdItem = ordItem;
+        this.ordItem = ordItem;
     }
 
     public Characteristics getItemCharacteristic() {

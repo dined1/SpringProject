@@ -14,24 +14,23 @@ import java.io.Serializable;
 @Transactional
 public class OrdItemDiscount implements Serializable {
 
-    @Column(name = "OrdIDid", table = "orditemdiscount", nullable = false)
+    @Column(name = "ordIDid", table = "orditemdiscount", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @FormParam("OrdIDid")
-    private Long OrdIDid;
+    private Long ordIDid;
 
     @ManyToOne(targetEntity = OrdItem.class)
-    private OrdItem OrdItem;
+    private OrdItem ordItem;
 
     @ManyToOne(targetEntity = Discountrule.class)
     private Discountrule discountrule1;
 
     public com.hellokoding.account.Models.OrdItem getOrdItem() {
-        return OrdItem;
+        return ordItem;
     }
 
     public void setOrdItem(com.hellokoding.account.Models.OrdItem ordItem) {
-        OrdItem = ordItem;
+        this.ordItem = ordItem;
     }
 
     public Discountrule getDiscountrule1() {
@@ -40,5 +39,13 @@ public class OrdItemDiscount implements Serializable {
 
     public void setDiscountrule1(Discountrule discountrule1) {
         this.discountrule1 = discountrule1;
+    }
+
+    public Long getOrdIDid() {
+        return ordIDid;
+    }
+
+    public void setOrdIDid(Long ordIDid) {
+        this.ordIDid = ordIDid;
     }
 }

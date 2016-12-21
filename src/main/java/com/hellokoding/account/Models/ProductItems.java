@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 
 /**
@@ -48,7 +47,7 @@ public class ProductItems implements Serializable {
     private Soproduct soproduct1;
 
     @ManyToOne(targetEntity = OrdItem.class)
-    private OrdItem OrdItem;
+    private OrdItem ordItem;
 
     public Long getId() {
         return this.id;
@@ -100,10 +99,10 @@ public class ProductItems implements Serializable {
     }
 
     public com.hellokoding.account.Models.OrdItem getOrdItem() {
-        return OrdItem;
+        return ordItem;
     }
 
     public void setOrdItem(com.hellokoding.account.Models.OrdItem ordItem) {
-        OrdItem = ordItem;
+        this.ordItem = ordItem;
     }
 }

@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Itemdiscount </b></h5>
+                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Basket </b></h5>
                     </div>
                     <div class="panel-body">
 
@@ -37,7 +37,7 @@
                                 <tbody>
                                 <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
                                     <tr>
-                                        <td>${(PRODUCTITEMS.ordItem.name)}</td>
+                                        <td><a href="${contextPath}/application/itembasket/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">${(PRODUCTITEMS.ordItem.name)}</a></td>
 
                                         <td>${(PRODUCTITEMS.otp)}</td>
 
@@ -50,7 +50,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div>Итого оплатить: <span id="total-cart-summa">${(OTP.toString())}</span> руб.    Итого за месяц: ${(CMP.toString())}</div>
+                        <div>Result:
+                            <label>One-time: <span id="total-cart-summa">${(OTP.toString())}</span> BYN</label><br>
+                            <label>Mounth price: <span>${(CMP.toString())}</span>  BYN</label>
+                        </div>
                         <br />
                         <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
                     </div>

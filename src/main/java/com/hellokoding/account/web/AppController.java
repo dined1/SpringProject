@@ -153,6 +153,8 @@ public class AppController {
         return "/pages/basket";
     }
 
+
+
     @Transactional
     @RequestMapping(value = {"/catalog/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyCatalog(Model model,
@@ -161,6 +163,9 @@ public class AppController {
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
         So so = soRepository.findOne(soid);
+        if (so == null){
+            return "";
+        }
         List<ItemLocations> items = itemLocationRepository.findByLocation_Locationname(so.getLocation());
         model.addAttribute("CHARACTERISTICS", itemCharacteristicRepository.findAll());
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
@@ -184,11 +189,41 @@ public class AppController {
         return "/pages/itemDesc";
     }
 
+    @RequestMapping(value = {"/itembasket/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String itemBasketDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
+                                  @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                                  Principal principal) {
+        OrdItem item = ordItemRepository.findOne(itemid);
+        model.addAttribute("ITEM", item);
+        List<OrdItemCharacteristic> itemchar = ordItemCharacteristicsRepository.findAll();
+        List<OrdItemCharacteristic> basketItemchar = new ArrayList<>();
+        for (OrdItemCharacteristic ic : itemchar){
+            if (itemid.equals(ic.getOrdItem().getOrditemId())) {
+                basketItemchar.add(ic);
+            }
+        }
+        List<OrdItemDiscount> itemdisc = ordItemdiscountRepository.findAll();
+        List<OrdItemDiscount> basketItemdisc = new ArrayList<>();
+        for (OrdItemDiscount id : itemdisc){
+            if (itemid.equals(id.getOrdItem().getOrditemId())) {
+                basketItemdisc.add(id);
+            }
+        }
+        model.addAttribute("ITEMCHARACTERISTICS", basketItemchar);
+        model.addAttribute("ITEMDISCOUNTS", basketItemdisc);
+
+        model.addAttribute("ITEMID", itemid);
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("SOID", soid);
+        return "/pages/itemBasketDesc";
+    }
+
     @RequestMapping(value = {"/order/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyOrder(Model model, @PathVariable("customerid") Long customerid,
                              @PathVariable("soid") Long soid,
                              Principal principal) {
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
         return "/pages/order";

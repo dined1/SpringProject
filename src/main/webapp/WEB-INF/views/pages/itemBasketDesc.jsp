@@ -58,8 +58,9 @@
                                             <label>Charactiristics </label><br>
                                             <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">
                                                 <tr>
-                                                    <c:if test="${Characteristic.item.itemId==ITEM.itemId}">
-                                                        <td><label><input type="checkbox" name="characteristics" value="${Characteristic.itemCharacteristic.characteristicId}">${Characteristic.itemCharacteristic.characteristic}:  ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
+                                                    <c:if test="${Characteristic.ordItem.orditemId==ITEM.orditemId}">
+                                                        <td><label>${Characteristic.itemCharacteristic.characteristic}:
+                                                          ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
@@ -69,15 +70,14 @@
                                             <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                 <tr>
 
-                                                    <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='disc'}">
-                                                        <td><label><input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}:
+                                                    <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='disc'}">
+                                                        <td><label>${DISCOUNT.discountrule1.description}:
                                                         ${DISCOUNT.discountrule1.discountValue}</label></td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                         <a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                                     </form>
                                 </div>

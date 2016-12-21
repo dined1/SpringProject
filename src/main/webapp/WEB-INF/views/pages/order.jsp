@@ -11,23 +11,22 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Itemdiscount </b></h5>
+                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Payment list</b></h5>
                     </div>
                     <div class="panel-body">
 
                         <div class="container">
-
-                            <br />
-                            <br />
-                            <br />
                             <ul class="nav nav-pills">
-                                <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
+                                <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
                                 <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                <li class="active"><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
                             </ul>
                             <br />
                             <br />
-                            <div id="order-message" class="alert alert-info"></div>
+                            <div id="order-message" class="alert alert-info">
+                                <label>One-time: <span id="total-cart-summa">${(SO_FINAL.finalOTPwithTaxAndDiscount)}</span> BYN</label><br>
+                                <label>Mounth price: <span>${(SO_FINAL.finalMPwithTaxAndDiscount)}</span>  BYN</label>
+                            </div>
                             <br />
                             <form id="order-form" class="form-horizontal" role="form">
                                 <div class="form-group">

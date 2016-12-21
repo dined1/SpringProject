@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Itemdiscount </b></h5>
+                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Item catalog </b></h5>
                     </div>
                     <div class="panel-body">
 
@@ -28,10 +28,10 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Type</th>
+                                <th>Product type</th>
                                 <th>Description</th>
-                                <th>Def MP</th>
-                                <th>Def OTP</th>
+                                <th>Default One-time price, BYN</th>
+                                <th>Default Mounth price, BYN</th>
                                 <th>Modified Date</th>
                                 <th></th>
                             </tr>
@@ -39,32 +39,32 @@
                             <tbody>
                             <c:forEach items="${ITEM_LIST}" var="ITEM">
                                 <tr>
-                                <td><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
+                                    <td><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
 
-                                <td>${(ITEM.item.type)}</td>
+                                    <td class="bg-info">${(ITEM.item.type)}</td>
 
-                                <td>${(ITEM.item.description)}</td>
+                                    <td>${(ITEM.item.description)}</td>
 
-                                <td>${(ITEM.item.defMP)}</td>
+                                    <td>${(ITEM.item.defOTP)}</td>
 
-                                <td>${(ITEM.item.defOTP)}</td>
+                                    <td>${(ITEM.item.defMP)}</td>
 
-                                <td>${(ITEM.item.modifiedDate)}</td>
+                                    <td>${(ITEM.item.modifiedDate)}</td>
 
-                                <td>
-                                    <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
-                                </td>
+                                    <td>
+                                        <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
+                                    </td>
 
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
 
-                        <script src="${contextPath}/webresources/static/style/jquery.min.js" type="text/javascript"></script>
-                        <script src="js/vendor/underscore.min.js" type="text/javascript"></script>
-                        <script src="js/modules/catalog.js" type="text/javascript"></script>
-                        <script src="js/modules/cart.js" type="text/javascript"></script>
-                        <script src="js/modules/main.js" type="text/javascript"></script>
+                        <script src="${contextPath}/webresources/common/js/vendor/jquery.min.js" type="text/javascript"></script>
+                        <script src="${contextPath}/webresources/common/js/vendor/underscore.min.js" type="text/javascript"></script>
+                        <script src="${contextPath}/webresources/common/js/modules/catalog.js" type="text/javascript"></script>
+                        <script src="${contextPath}/webresources/common/js/modules/cart.js" type="text/javascript"></script>
+                        <script src="${contextPath}/webresources/common/js/modules/main.js" type="text/javascript"></script>
                     </div>
                 </div>
             </div>
