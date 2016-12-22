@@ -1,6 +1,6 @@
 package com.hellokoding.account.web;
 
-        import com.hellokoding.account.model.User;
+import com.hellokoding.account.model.User;
 import com.hellokoding.account.repository.GroupRepository;
 import com.hellokoding.account.repository.ItemGroupRepository;
 import com.hellokoding.account.service.SecurityService;
@@ -8,6 +8,7 @@ import com.hellokoding.account.service.UserService;
 import com.hellokoding.account.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.Collection;
 
 @Controller
 public class UserController {
@@ -91,6 +93,7 @@ public class UserController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model, Principal principal) {
         model.addAttribute("us", principal);
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
         return "pages/main";
     }
