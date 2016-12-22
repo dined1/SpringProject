@@ -346,6 +346,13 @@ public class AppController {
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
+    /*@RequestMapping(value = {"/remove/{soid}"}, method = RequestMethod.GET)
+    public String remove(Model model, @PathVariable("soid") Long soid,
+                               Principal principal) {
+        soRepository.delete(soid);
+        return "redirect:/application/orderinfo";
+    }*/
+
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptySO(Model model, Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
@@ -374,5 +381,7 @@ public class AppController {
         model.addAttribute("SO_LIST", soRepository.findAll());
         return "/pages/orderinfo";
     }
+
+
 
 }

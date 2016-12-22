@@ -66,6 +66,8 @@
                         <script src="${contextPath}/webresources/common/js/modules/cart.js" type="text/javascript"></script>
                         <script src="${contextPath}/webresources/common/js/modules/main.js" type="text/javascript"></script>
                     </div>
+
+                    <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                 </div>
             </div>
         </div>

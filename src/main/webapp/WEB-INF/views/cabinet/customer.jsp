@@ -31,7 +31,7 @@
 
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <!--div class="dataTable_wrapper">
+                        <div class="dataTable_wrapper">
                             <table class="table table-striped table-bordered table-hover" id="CUSTOMER_TABLE">
                                 <thead>
                                     <tr>
@@ -68,59 +68,7 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
-                                <thead>
-                                <tr>
-                                    <th>SOId</th>
-                                    <th>Date Created</th>
-                                    <th>Order Date</th>
-                                    <th>Status</th>
-                                    <th>SONumber</th>
-                                    <th>Purchase Order Number</th>
-                                    <th>Date Modified</th>
-                                    <th>Customer</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${SO_LIST}" var="SO">
-                                    <tr>
-                                        <td>${(SO.SOId)}</td>
-
-                                        <td>${(SO.dateCreated)}</td>
-
-                                        <td>${(SO.orderDate)}</td>
-
-                                        <td>${(SO.status)}</td>
-
-                                        <td>${(SO.SONumber)}</td>
-
-                                        <td>${(SO.purchaseOrderNumber)}</td>
-
-                                        <td>${(SO.dateModified)}</td>
-
-                                        <td>${(SO.customer1.lastName)}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div-->
-
-                        <!--p>
-                        <c:if test="${empty requestScope.CUSTOMER_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No Customer found</div>
-                            </div>
-                        </c:if>
-                        <p-->
-
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/application/orderinfo"><i class="fa fa-edit fa-fw"></i>  Просмотр заказов</a></p>
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/customerinfo"><i class="fa fa-edit fa-fw"></i>  Просмотр клиентов</a></p>
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/login"><i class="fa fa-edit fa-fw"></i>  Изменить логин</a></p>
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/password"><i class="fa fa-edit fa-fw"></i>  Изменить пароль</a></p>
-                        <p><a href="${contextPath}/welcome" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
+                        <p><a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
 
                     </div>
                     <!-- /.panel-body -->

@@ -15,7 +15,7 @@
                     </div>
                     <div class="panel-body">
 
-                        <div class="container">
+                        <!--div class="container">
                             <ul class="nav nav-pills">
                                 <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
                                 <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
@@ -93,7 +93,13 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div-->
+
+
+
+
+                        <a href="${contextPath}/cabinet/apply/${SO_FINAL.SOId}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Отправить</a>
+                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     </div>
                 </div>
             </div>

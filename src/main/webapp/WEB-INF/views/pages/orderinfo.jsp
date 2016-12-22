@@ -61,6 +61,7 @@
                                         <td>
                                             <c:if test="${SO.status == 'Wait'}">
                                                 <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Подробнее</a>
+                                                <!--a href="remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Удалить</a-->
                                             </c:if>
                                             <c:if test="${SO.status == 'Ordered'}">
                                                 Ожидайте
@@ -83,6 +84,7 @@
 
 
                     </div>
+                    <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
