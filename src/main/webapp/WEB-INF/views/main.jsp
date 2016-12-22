@@ -23,6 +23,10 @@
 
 <img src="http://webdevkin.ru/media/img/cart.jpg"/>
 
+<iframe src="http://www.nbrb.by/publications/wmastersd.asp?
+lnkcolor=Maroon&bgcolor=e6e6dc&brdcolor=dcdccd"
+        width=237 height=86 frameborder=0 scrolling=no>
+</iframe>
 
 <!--a href="${contextPath}/address/list" class="btn btn-default"><i class="fa fa-plus"></i>Address</a>
 <a href="${contextPath}/customer/list" class="btn btn-default"><i class="fa fa-plus"></i>Customer</a>
@@ -39,8 +43,31 @@
 <a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-plus"></i>SO</a>
 <a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-plus"></i>SOProduct</a>
 <a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a-->
-<a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-plus"></i>Список заказов</a>
-<a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-plus"></i>Кабинет</a>
+<c:if test="${us != null}">
+    <!--a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-plus"></i>Список заказов</a-->
+    <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-plus"></i>Кабинет</a>
+    <a href="${contextPath}/logout" class="btn btn-default"><i class="fa fa-plus"></i>Выйти</a>
+    <!--button type="button" class="btn btn-default" onclick="document.forms['logoutForm'].submit()">Выйти</button-->
+</c:if>
+<c:if test="${us == null}">
+    <a href="${contextPath}/login" class="btn btn-default"><i class="fa fa-plus"></i>Вход</a>
+    <a href="${contextPath}/registration" class="btn btn-default"><i class="fa fa-plus"></i>Регистрация</a>
+</c:if>
+
+<table class="table table-striped table-bordered table-hover" id="GROUP_TABLE">
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${GROUP_LIST}" var="GROUP">
+        <tr>
+            <td><a href="${contextPath}/group">${GROUP.name}</a></td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 
     <header>
         <div class="container">
@@ -60,7 +87,7 @@
         </div>
     </header>
 
-    <table class="table table-striped table-bordered table-hover" id="GROUP_1_TABLE">
+    <!--table class="table table-striped table-bordered table-hover" id="GROUP_1_TABLE">
         <thead>
         <tr>
             <th>Group Id</th>
@@ -80,7 +107,7 @@
             </tr>
         </c:forEach>
         </tbody>
-    </table>
+    </table-->
 
     <nav>
         <div class="container">

@@ -56,6 +56,7 @@
                         </div>
                         <br />
                         <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
+                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     </div>
                 </div>
             </div>

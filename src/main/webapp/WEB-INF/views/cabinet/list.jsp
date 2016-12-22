@@ -24,9 +24,14 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div class="dataTable_wrapper">
+                        <!--div class="dataTable_wrapper">
                             <table class="table table-striped table-bordered table-hover" id="CUSTOMER_TABLE">
                                 <thead>
                                     <tr>
@@ -101,16 +106,21 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
-                        </div>
+                        </div-->
 
-
+                        <!--p>
                         <c:if test="${empty requestScope.CUSTOMER_LIST}">
                             <div class="alert alert-info">
                                 <div align="center">No Customer found</div>
                             </div>
                         </c:if>
+                        <p-->
 
-
+                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/application/orderinfo"><i class="fa fa-edit fa-fw"></i>  Просмотр заказов</a></p>
+                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/customerinfo"><i class="fa fa-edit fa-fw"></i>  Просмотр клиентов</a></p>
+                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/login"><i class="fa fa-edit fa-fw"></i>  Изменить логин</a></p>
+                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/password"><i class="fa fa-edit fa-fw"></i>  Изменить пароль</a></p>
+                        <p><a href="${contextPath}/welcome" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
 
                     </div>
                     <!-- /.panel-body -->

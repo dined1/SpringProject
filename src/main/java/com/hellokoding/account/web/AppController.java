@@ -128,12 +128,9 @@ public class AppController {
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                               Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())
-                || soRepository.findOne(soid)==null
-                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
             return "";
         }
-
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
@@ -225,7 +222,7 @@ public class AppController {
     public String emptyOrder(Model model, @PathVariable("customerid") Long customerid,
                              @PathVariable("soid") Long soid,
                              Principal principal) {
-        model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
+        model.addAttribute("ITEM_LIST", itemRepository.findAll());
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
@@ -349,6 +346,13 @@ public class AppController {
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
+    /*@RequestMapping(value = {"/remove/{soid}"}, method = RequestMethod.GET)
+    public String remove(Model model, @PathVariable("soid") Long soid,
+                               Principal principal) {
+        soRepository.delete(soid);
+        return "redirect:/application/orderinfo";
+    }*/
+
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptySO(Model model, Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
@@ -377,5 +381,7 @@ public class AppController {
         model.addAttribute("SO_LIST", soRepository.findAll());
         return "/pages/orderinfo";
     }
+
+
 
 }
