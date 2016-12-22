@@ -15,7 +15,7 @@
     <meta name="author" content="">
 
     <title>Create an account</title>
-
+    
     <link href="${contextPath}/webresources/common/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/webresources/common/css/common.css" rel="stylesheet">
 
