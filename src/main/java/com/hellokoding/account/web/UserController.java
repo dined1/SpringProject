@@ -44,7 +44,7 @@ public class UserController {
     public String main(Model model) {
         model.addAttribute("userForm", new User());
 
-        return "main";
+        return "pages/main";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)

@@ -112,7 +112,18 @@ public class CabinetController {
     @RequestMapping(value = {"/password"}, method = RequestMethod.GET)
     public String getPassword(Model model, Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        return "cabinet/payments";
+        return "cabinet/password";
+    }
+
+    @RequestMapping(value = {"/password"}, method = RequestMethod.POST)
+    public String updatePassword(Principal principal, @RequestParam("name1") String name1,
+                                 @RequestParam("name2") String name2, @RequestParam("name3") String name3) {
+        String qw = bCryptPasswordEncoder.encode(name1);
+        String n = name1;
+        n = name2;
+        n = name3;
+        //userRepository.save(user);
+        return "redirect:/cabinet/cabinet";
     }
 
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
