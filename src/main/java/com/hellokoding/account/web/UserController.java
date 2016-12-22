@@ -1,26 +1,25 @@
 package com.hellokoding.account.web;
 
         import com.hellokoding.account.model.User;
-        import com.hellokoding.account.repository.GroupRepository;
-        import com.hellokoding.account.repository.ItemGroupRepository;
-        import com.hellokoding.account.service.SecurityService;
-        import com.hellokoding.account.service.UserService;
-        import com.hellokoding.account.validator.UserValidator;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.security.core.Authentication;
-        import org.springframework.security.core.context.SecurityContextHolder;
-        import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.validation.BindingResult;
-        import org.springframework.web.bind.annotation.ModelAttribute;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
+import com.hellokoding.account.repository.GroupRepository;
+import com.hellokoding.account.repository.ItemGroupRepository;
+import com.hellokoding.account.service.SecurityService;
+import com.hellokoding.account.service.UserService;
+import com.hellokoding.account.validator.UserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-        import javax.servlet.http.HttpServletRequest;
-        import javax.servlet.http.HttpServletResponse;
-        import java.security.Principal;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -93,7 +92,7 @@ public class UserController {
     public String welcome(Model model, Principal principal) {
         model.addAttribute("us", principal);
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
-        return "main";
+        return "pages/main";
     }
 
     @RequestMapping(value = {"/group"}, method = RequestMethod.GET)
