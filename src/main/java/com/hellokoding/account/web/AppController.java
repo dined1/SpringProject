@@ -129,8 +129,9 @@ public class AppController {
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                               Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())
-                || soRepository.findOne(soid)==null
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
             return "";
         }
@@ -166,9 +167,14 @@ public class AppController {
                                Principal principal) {
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
+
         So so = soRepository.findOne(soid);
-        if (so == null){
-            return "";
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            return "error";
         }
         List<ItemLocations> items = itemLocationRepository.findByLocation_Locationname(so.getLocation());
         model.addAttribute("CHARACTERISTICS", itemCharacteristicRepository.findAll());

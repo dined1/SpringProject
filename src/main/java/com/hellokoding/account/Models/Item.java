@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -47,6 +48,10 @@ public class Item implements Serializable {
     @Column(name = "ModifiedDate", table = "item")
     @Basic
     private String modifiedDate;
+
+    @Column(name = "Quantity", table = "item")
+    @Basic
+    private BigInteger quantity;
 
     @OneToMany(targetEntity = ItemLocations.class, mappedBy = "item")
     private List<ItemLocations> itemlocations;
@@ -149,5 +154,13 @@ public class Item implements Serializable {
 
     public void setItemlocations(List<ItemLocations> itemlocations) {
         this.itemlocations = itemlocations;
+    }
+
+    public BigInteger getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(BigInteger quantity) {
+        this.quantity = quantity;
     }
 }

@@ -33,6 +33,7 @@
                                 <th>Default One-time price, BYN</th>
                                 <th>Default Mounth price, BYN</th>
                                 <th>Modified Date</th>
+                                <th>Available quantity</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -50,6 +51,8 @@
                                     <td>${(ITEM.item.defMP)}</td>
 
                                     <td>${(ITEM.item.modifiedDate)}</td>
+
+                                    <td>${(ITEM.item.quantity)}</td>
 
                                     <td>
                                         <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
