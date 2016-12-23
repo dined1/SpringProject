@@ -98,7 +98,22 @@
 
 
 
-                        <a href="${contextPath}/cabinet/apply/${SO_FINAL.SOId}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Отправить</a>
+                        <br/>
+                        <br />
+                        <form action="${contextPath}/application/stripe" method="POST">
+                            <script th:inline="javascript"
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+                                    data-currency="BYN"
+                                    data-amount="${SO_FINAL.finalMPwithTaxAndDiscount}"
+                                    data-name="Stripe Checkout Demo"
+                                    data-description="Demo"
+                                    data-locale="auto"
+                                    data-bitcoin="true"
+                                    data-alipay="true">
+
+                            </script>
+                        </form>
                         <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     </div>
                 </div>
