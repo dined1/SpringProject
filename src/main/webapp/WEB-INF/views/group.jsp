@@ -11,66 +11,52 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Item List</b></h5></div>
+                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Customer List</b></h5></div>
                             <div class="col-lg-6">
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
-                                    <c:if test="${not empty requestScope.ITEM_LIST}">
+                                    <c:if test="${not empty requestScope.CUSTOMER_LIST}">
                                         <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Item list
+                                            <i class="fa fa-print fa-fw"></i> Print Customer list
                                         </button>
                                     </c:if>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                            <table class="table table-striped table-bordered table-hover" id="CUSTOMER_TABLE">
                                 <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Description</th>
-                                        <th>Def MP</th>
-                                        <th>Def OTP</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th>Customer Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${ITEM_LIST}" var="ITEM">
-                                        <tr>
-
-                                            <td>${(ITEM.item1.name)}</td>
-
-                                            <td>${(ITEM.item1.type)}</td>
-
-                                            <td>${(ITEM.item1.description)}</td>
-
-                                            <td>${(ITEM.item1.defMP)}</td>
-
-                                            <td>${(ITEM.item1.defOTP)}</td>
-
-
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach items="${ITEMGROUP_LIST}" var="ITEMGROUP">
+                                    <tr>
+                                        <td>${ITEMGROUP.item1.name}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
-
-
-                        <c:if test="${empty requestScope.ITEM_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No Item found</div>
-                            </div>
-                        </c:if>
-
-
+                        <p><a href="${contextPath}/" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
 
                     </div>
-
-                    <a href="${contextPath}/" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
@@ -82,7 +68,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('ITEM_TABLE').DataTable({
+        $('CUSTOMER_TABLE').DataTable({
             responsive: true
         });
     });

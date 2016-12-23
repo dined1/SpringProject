@@ -1,5 +1,6 @@
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Address;
 import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.Models.So;
 import com.hellokoding.account.model.User;
@@ -145,4 +146,21 @@ public class CabinetController {
         return "cabinet/cabinet";
     }
 
+    @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.GET)
+    public String emptyCustomer(Model model) {
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        return "cabinet/customerCreate";
+    }
+
+    @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.POST)
+    public String createCustomer(Principal principal, @Valid
+    @BeanParam Customer customer, @RequestParam(value = "Address", required = false) String addre) {
+        Address address = addressRepository.findOne(Long.valueOf(addre));
+        customer.setAddress1(address);
+        Long u = userRepository.findByUsername(principal.getName()).getId();
+        customer.setUserId(String.valueOf(u));
+        customerRepository.save(customer);
+        return "redirect:/cabinet/cabinet";
+
+    }
 }

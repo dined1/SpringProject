@@ -148,6 +148,7 @@
 
 
                     </div>
+
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

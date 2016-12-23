@@ -78,7 +78,7 @@
                                             </c:forEach>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                        <a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                                     </form>
                                 </div>
                             </div>

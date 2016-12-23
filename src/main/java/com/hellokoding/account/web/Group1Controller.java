@@ -25,7 +25,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/group"})
+@RequestMapping(value = {"admin/group"})
 @Controller
 public class Group1Controller {
 

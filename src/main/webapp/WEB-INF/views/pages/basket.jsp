@@ -16,12 +16,13 @@
                     <div class="panel-body">
 
                         <div class="container">
-
-                            <ul class="nav nav-pills">
-                                <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
-                            </ul>
+                            <c:if test="${STATUS == 'Wait'}">
+                                <ul class="nav nav-pills">
+                                    <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
+                                    <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
+                                    <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                </ul>
+                            </c:if>
                         </div>
                         <br />
                         <div class="table-responsive">
@@ -31,7 +32,9 @@
                                     <th>Наименование</th>
                                     <th>Единоразовая оплата</th>
                                     <th>Ежемесячная оплата</th>
-                                    <th>Удаление</th>
+                                    <c:if test="${STATUS == 'Wait'}">
+                                        <th>Удаление</th>
+                                    </c:if>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -43,8 +46,9 @@
 
                                         <td>${(PRODUCTITEMS.mp)}</td>
 
-                                        <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Убрать товар</a></td>
-
+                                        <c:if test="${STATUS == 'Wait'}">
+                                            <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Убрать товар</a></td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -55,7 +59,9 @@
                             <label>Mounth price: <span>${(CMP.toString())}</span>  BYN</label>
                         </div>
                         <br />
-                        <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
+                        <c:if test="${STATUS == 'Wait'}">
+                            <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
+                        </c:if>
                         <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     </div>
                 </div>

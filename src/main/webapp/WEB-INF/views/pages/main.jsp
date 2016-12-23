@@ -99,6 +99,9 @@
                         <li>Регистрация</li>
                     </a>
                 </c:if>
+                <c:if test="${ADM == true}">
+                    <a href="${contextPath}/adm">Admin</a>
+                </c:if>
             </ul>
         </div>
     </div>

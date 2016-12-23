@@ -150,6 +150,7 @@ public class AppController {
         }
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
         model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
         model.addAttribute("SOID", soid);
         model.addAttribute("USERID", userid);
 

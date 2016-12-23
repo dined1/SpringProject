@@ -94,9 +94,21 @@ public class UserController {
     public String welcome(Model model, Principal principal) {
         model.addAttribute("us", principal);
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Boolean adm = false;
+        for (SimpleGrantedAuthority i: authorities) {
+            if (String.valueOf(i).equals("ROLE_ADMIN")) {
+                adm = true;
+                break;
+            }
+        }
+        model.addAttribute("ADM", adm);
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
         return "pages/main";
     }
 
+    @RequestMapping(value = {"/adm"}, method = RequestMethod.GET)
+    public String admin(Model model, Principal principal) {
+        return "admin";
+    }
 
 }
