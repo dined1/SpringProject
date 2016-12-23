@@ -107,7 +107,7 @@ public class CustomerController {
     @RequestMapping(value = {"/cabinet"}, method = RequestMethod.GET)
     public String editCabinet(Model model) {
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
-        return "customer/cabinet";
+        return "cabinet/cabinet";
     }
 
 }

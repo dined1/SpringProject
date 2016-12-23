@@ -78,7 +78,7 @@ public class AppController {
     }
 
 
-    @RequestMapping(value = {"/group/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/grousadsp/{id}"}, method = RequestMethod.GET)
     public String groupItem(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("ID", id);
         model.addAttribute("ITEM_LIST", itemRepository.findAll());
@@ -355,6 +355,13 @@ public class AppController {
         }
         ordItemRepository.delete(itemid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
+    }
+
+
+    @RequestMapping(value = {"/group/{group}"}, method = RequestMethod.GET)
+    public String group(Model model, @PathVariable("group") Long groupid) {
+        model.addAttribute("ITEM_LIST", itemGroupRepository.findByGroups1_GroupId(groupid));
+        return "pages/list";
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)

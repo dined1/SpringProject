@@ -98,10 +98,5 @@ public class UserController {
         return "pages/main";
     }
 
-    @RequestMapping(value = {"/group"}, method = RequestMethod.GET)
-    public String group(Model model, Principal principal) {
-        model.addAttribute("ITEMGROUP_LIST", itemGroupRepository.findAll());
-        return "group";
-    }
 
 }

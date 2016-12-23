@@ -39,35 +39,12 @@
     <a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-plus"></i>SO</a>
     <a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-plus"></i>SOProduct</a>
     <a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a-->
-<c:if test="${us != null}">
-    <!--a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-plus"></i>Список заказов</a-->
-    <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-plus"></i>Кабинет</a>
-    <a href="${contextPath}/logout" class="btn btn-default"><i class="fa fa-plus"></i>Выйти</a>
-    <!--button type="button" class="btn btn-default" onclick="document.forms['logoutForm'].submit()">Выйти</button-->
-</c:if>
-<c:if test="${us == null}">
-    <a href="${contextPath}/login" class="btn btn-default"><i class="fa fa-plus"></i>Вход</a>
-    <a href="${contextPath}/registration" class="btn btn-default"><i class="fa fa-plus"></i>Регистрация</a>
-</c:if>
+
 
 <div id='gcw_mainFBqkGDCoH' class='gcw_mainFBqkGDCoH'></div>
 <a id='gcw_siteFBqkGDCoH' href='https://freecurrencyrates.com/ru/'>FreeCurrencyRates.com</a>
 <script>function reloadFBqkGDCoH(){ var sc = document.getElementById('scFBqkGDCoH');if (sc) sc.parentNode.removeChild(sc);sc = document.createElement('script');sc.type = 'text/javascript';sc.charset = 'UTF-8';sc.async = true;sc.id='scFBqkGDCoH';sc.src = 'https://freecurrencyrates.com/ru/widget-vertical-editable?iso=BYNRUBUSDEURGBPCNY&df=2&p=FBqkGDCoH&v=fits&source=fcr&width=245&width_title=0&firstrowvalue=1&thm=A6C9E2,FCFDFD,4297D7,5C9CCC,FFFFFF,C5DBEC,FCFDFD,2E6E9E,000000&title=%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B5%D1%80%20%D0%B2%D0%B0%D0%BB%D1%8E%D1%82&tzo=-180';var div = document.getElementById('gcw_mainFBqkGDCoH');div.parentNode.insertBefore(sc, div);} reloadFBqkGDCoH(); </script>
 
-<table class="table table-striped table-bordered table-hover" id="GROUP_TABLE">
-    <thead>
-    <tr>
-        <th>Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${GROUP_LIST}" var="GROUP">
-        <tr>
-            <td><a href="${contextPath}/group">${GROUP.name}</a></td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
 
 <header>
     <div class="container">
@@ -87,28 +64,6 @@
     </div>
 </header>
 
-<table class="table table-striped table-bordered table-hover" id="GROUP_1_TABLE">
-    <thead>
-    <tr>
-        <th>Group Id</th>
-        <th>Name</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${GROUP_LIST}" var="GROUP">
-        <tr>
-            <td>${(GROUP.groupId)}</td>
-
-            <td>${(GROUP.name)}</td>
-
-            <td><li><a href="${contextPath}/application/group/${GROUP.groupId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li></td>
-
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-
 <nav>
     <div class="container">
         <div class="row">
@@ -117,12 +72,9 @@
                     <li>Главная</li>
                 </a>
                 <a href="#">
-                    <li>Предоставляемое услуги</li>
-                </a>
-                <a href="#">
                     <li>Оборудование</li>
                 </a>
-                <a href="#">
+                <a href="${contextPath}/disconts">
                     <li>Акции</li>
                 </a>
                 <a href="#">
@@ -131,6 +83,22 @@
                 <a href="#">
                     <li>Контакты</li>
                 </a>
+                <c:if test="${us != null}">
+                    <a href="${contextPath}/cabinet/cabinet">
+                        <li>Кабинет</li>
+                    </a>
+                    <a href="${contextPath}/logout">
+                        <li>Выйти</li>
+                    </a>
+                </c:if>
+                <c:if test="${us == null}">
+                    <a href="${contextPath}/login">
+                        <li>Вход</li>
+                    </a>
+                    <a href="${contextPath}/registration">
+                        <li>Регистрация</li>
+                    </a>
+                </c:if>
             </ul>
         </div>
     </div>
@@ -155,46 +123,25 @@
     <div class="container">
         <div class="row">
             <div class="section_header text-center">
-                <h2> Услуги</h2>
+                <h2> Offering groups</h2>
             </div>
         </div>
-        <div class="row text-center">
+        <c:forEach items="${GROUP_LIST}" var="GROUP">
             <div class="col-md-3">
-                <div class="card">
-                    <img src="${contextPath}/webresources/static/need/img/types-1.jpg" alt="Страдание" class="img-responsive center-block">
-                    <h4>Страдание</h4>
-                    <br>
-                    <a class="btn btn-primary btn-sm" href="cat"><i class="fa fa-plus"></i>Подробнее</a>
-                    <button class="offer_btn" data-toggle="modal" href="#">Купить</button>
-                </div>
+
+                    <div class="card">
+                        <a class="btn more_btn center-block" href="${contextPath}/application/group/${GROUP.groupId}"><H1>${GROUP.name}</H1></a>
+                    </div>
+
+                <%--<div class="card">--%>
+                    <%--<img src="${contextPath}/webresources/static/need/img/types-1.jpg" alt="Страдание" class="img-responsive center-block">--%>
+                    <%--<h4>Страдание</h4>--%>
+                    <%--<br>--%>
+                    <%--<a class="btn btn-primary btn-sm" href="cat"><i class="fa fa-plus"></i>Подробнее</a>--%>
+                    <%--<button class="offer_btn" data-toggle="modal" href="#">Купить</button>--%>
+                <%--</div>--%>
             </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="${contextPath}/webresources/static/need/img/types-2.jpg" alt="Боль" class="img-responsive center-block">
-                    <h4>Боль</h4>
-                    <br>
-                    <button class="more_btn" data-toggle="modal" href="#">Подробнее</button>
-                    <button class="offer_btn" data-toggle="modal" href="#">Купить</button>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="${contextPath}/webresources/static/need/img/types-3.jpg" alt="Олишевко" class="img-responsive center-block">
-                    <h4>Олишевко</h4>
-                    <br>
-                    <button class="more_btn" data-toggle="modal" href="#">Подробнее</button>
-                    <button class="offer_btn" data-toggle="modal" href="#">Купить</button>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="${contextPath}/webresources/static/need/img/types-4.jpg" alt="Терроризм" class="img-responsive center-block">
-                    <h4>Терроризм</h4>
-                    <br>
-                    <button class="more_btn" data-toggle="modal" href="#">Подробнее</button>
-                    <button class="offer_btn" data-toggle="modal" href="#">Купить</button>
-                </div>
-            </div>
+        </c:forEach>
         </div>
     </div>
 </section>
@@ -247,8 +194,7 @@
             <div class="col-md-9">
                 <h4>Акция</h4>
                 <br>
-                <h3>Подключите услугу "Максим заебал" до 16.12.2016</h3>
-                <p>И получите в подарок Flugegeheimen!</p>
+                <h3>Подключите услугу "Максим" до 16.12.2016</h3>
                 <div class="row">
                     <div class="col-md-4">
                         <form action="#">

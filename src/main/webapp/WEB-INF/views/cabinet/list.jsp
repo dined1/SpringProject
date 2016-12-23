@@ -116,10 +116,10 @@
                         </c:if>
                         <p-->
 
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/application/orderinfo"><i class="fa fa-edit fa-fw"></i>  Просмотр заказов</a></p>
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/customerinfo"><i class="fa fa-edit fa-fw"></i>  Просмотр клиентов</a></p>
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/login"><i class="fa fa-edit fa-fw"></i>  Изменить логин</a></p>
-                        <p><a class="btn btn-primary btn-sm" href="${contextPath}/cabinet/password"><i class="fa fa-edit fa-fw"></i>  Изменить пароль</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/application/orderinfo"><i class=""></i>  Просмотр заказов</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/customerinfo"><i class=""></i>  Просмотр клиентов</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/login"><i class=""></i>  Изменить логин</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/password"><i class=""></i>  Изменить пароль</a></p>
                         <p><a href="${contextPath}/welcome" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
 
                     </div>

@@ -139,9 +139,10 @@ public class CabinetController {
 
     @RequestMapping(value = {"/customerinfo"}, method = RequestMethod.GET)
     public String getCustomer(Model model, Principal principal) {
-        model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(Long.toString(userRepository.findByUsername(principal.getName()).getId())));
+        Long id =  userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(id.toString()));
 
-        return "cabinet/customer";
+        return "cabinet/cabinet";
     }
 
 }
