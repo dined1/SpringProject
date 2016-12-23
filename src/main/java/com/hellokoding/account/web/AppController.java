@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Admin on 27.11.2016.
@@ -229,6 +230,13 @@ public class AppController {
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
+        return "/pages/order";
+    }
+
+    @RequestMapping(value = {"/stripe"}, method = RequestMethod.GET)
+    public String stripe(@RequestParam Map<String, String> request, Model model,
+                         Principal principal) {
+        model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
         return "/pages/order";
     }
 
