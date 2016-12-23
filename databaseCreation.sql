@@ -6,7 +6,7 @@ CREATE TABLE address (AddressId INTEGER NOT NULL AUTO_INCREMENT, AddressLine VAR
 CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), Location VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
 CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, DiscountValue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
-CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), PRIMARY KEY (ItemId));
+CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), quantity INTEGER, PRIMARY KEY (ItemId));
 CREATE TABLE itemdiscount (IDid INTEGER NOT NULL AUTO_INCREMENT, DISCOUNTRULE1_DRId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IDid));
 CREATE TABLE itemgroup (IGId INTEGER NOT NULL AUTO_INCREMENT, GROUPS1_GroupId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IGId));
 CREATE TABLE paymentbill (PBId INTEGER NOT NULL AUTO_INCREMENT, CMPDisc FLOAT, COTPDisc FLOAT, CMP FLOAT, COTP FLOAT, PRIMARY KEY (PBId));
@@ -70,16 +70,16 @@ insert into address values('2', 'Lesnaya 23-68', 'Moskow', 'Russia', '06.11.2016
 insert into address values('3', 'Sadovaya 2-16', 'St.Petersburg', 'Russia', '06.11.2016', '448645');
 insert into address values('4', 'Stepnaya 34-61', 'Minsk', 'Belarus', '06.11.2016', '346734');
 
-insert into item values ('1', '10000', '3000', 'This is computer', '08.11.2016', 'Computer', 'Tech', 'Minsk');
-insert into item values ('2', '1000', '500', 'This is phone', '04.11.2016', 'Phone', 'Tech', 'Minsk');
-insert into item values ('3', '20000', '5000', 'This is car', '05.09.2016', 'Car', 'Auto', 'Minsk');
-insert into item values ('4', '30000', '3000', 'This is motorcycle', '03.11.2016', 'Motorcycle', 'Auto', 'Minsk');
-insert into item values ('5', '40000', '5000', 'This is hat', '12.12.2016', 'Hat', 'Clothes', 'Minsk');
-insert into item values ('6', '10000', '2000', 'This is tshort', '23.11.2016', 'Tshort', 'Clothes', 'Minsk');
-insert into item values ('7', '30000', '1000', 'This is ball', '11.11.2016', 'Ball', 'Sport', 'Minsk');
-insert into item values ('8', '20000', '7000', 'This is stick', '05.01.2016', 'Stick', 'Sport', 'Minsk');
-insert into item values ('9', '70000', '8000', 'This is bed', '05.03.2016', 'Bed', 'House', 'Minsk');
-insert into item values ('10', '60000', '9000', 'This is chair', '05.11.2016', 'Chair', 'House', 'Minsk');
+insert into item values ('1', '10000', '3000', 'This is computer', '08.11.2016', 'Computer', 'Tech', 'Minsk', '10');
+insert into item values ('2', '1000', '500', 'This is phone', '04.11.2016', 'Phone', 'Tech', 'Minsk','39');
+insert into item values ('3', '20000', '5000', 'This is car', '05.09.2016', 'Car', 'Auto', 'Minsk', '28');
+insert into item values ('4', '30000', '3000', 'This is motorcycle', '03.11.2016', 'Motorcycle', 'Auto', 'Minsk', '65');
+insert into item values ('5', '40000', '5000', 'This is hat', '12.12.2016', 'Hat', 'Clothes', 'Minsk', '56');
+insert into item values ('6', '10000', '2000', 'This is tshort', '23.11.2016', 'Tshort', 'Clothes', 'Minsk', '3134');
+insert into item values ('7', '30000', '1000', 'This is ball', '11.11.2016', 'Ball', 'Sport', 'Minsk', '124');
+insert into item values ('8', '20000', '7000', 'This is stick', '05.01.2016', 'Stick', 'Sport', 'Minsk', '234');
+insert into item values ('9', '70000', '8000', 'This is bed', '05.03.2016', 'Bed', 'House', 'Minsk', '12');
+insert into item values ('10', '60000', '9000', 'This is chair', '05.11.2016', 'Chair', 'House', 'Minsk', '575');
 
 insert into discountrule values ('1', null, '10', 'disc', '');
 insert into discountrule values ('2', '20', '5', 'disc', '');
