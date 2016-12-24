@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/group1/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/group/update" method="POST">
                                     <div class="form-group">
                                         <label for="groupId">Group Id</label>
                                         <input class="form-control" type="number" name="groupId" readonly value="${GROUP.groupId}" />
@@ -24,7 +24,8 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input class="form-control" type="text" name="name"  value="${GROUP.name}" />
-                                    </div>     
+                                    </div>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
                                     <a href="${contextPath}/group1/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>

@@ -10,11 +10,89 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
+
                     <div class="panel-heading">
                         <h5><i class="fa fa-info-circle fa-fw"></i> <b> Discountrule info</b></h5> 
                     </div>
                     <div class="panel-body">
-                        <div class="row">
+
+                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                            <thead>
+                            <tr>
+                                <th>Item Id</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Def MP</th>
+                                <th>Def OTP</th>
+                                <th>Modified Date</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${ITEM_LIST}" var="ITEM">
+                                <tr>
+                                    <td>${ITEM.itemId}</td>
+
+                                    <td>${ITEM.name}</td>
+
+                                    <td>${ITEM.type}</td>
+
+                                    <td>${ITEM.description}</td>
+
+                                    <td>${ITEM.defMP}</td>
+
+                                    <td>${ITEM.defOTP}</td>
+
+                                    <td>${ITEM.modifiedDate}</td>
+
+                                    <td><a href="${contextPath}/admin/discountrule/removeitem/${ITEM.itemId}/${DISCOUNTRULE.dRId}">Delete</a></td>
+
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                            <thead>
+                            <tr>
+                                <th>Item Id</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Def MP</th>
+                                <th>Def OTP</th>
+                                <th>Modified Date</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${NITEM_LIST}" var="ITEM">
+                                <tr>
+                                    <td>${ITEM.itemId}</td>
+
+                                    <td>${ITEM.name}</td>
+
+                                    <td>${ITEM.type}</td>
+
+                                    <td>${ITEM.description}</td>
+
+                                    <td>${ITEM.defMP}</td>
+
+                                    <td>${ITEM.defOTP}</td>
+
+                                    <td>${ITEM.modifiedDate}</td>
+
+                                    <td><a href="${contextPath}/admin/discountrule/add/${ITEM.itemId}/${DISCOUNTRULE.dRId}">Add</a></td>
+
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+
+
+
+                        <!--div class="row">
                             <div class="col-lg-12">
                                 <div class="list-group">
 
@@ -40,8 +118,8 @@
                                 </div>
                                 <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
-                            <!-- /.col-lg-6 (nested) -->
-                        </div>
+                        </div-->
+                        <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                         <!-- /.row (nested) -->
                     </div>
                     <!-- /.panel-body -->

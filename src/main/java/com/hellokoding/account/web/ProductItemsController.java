@@ -103,7 +103,7 @@ public class ProductItemsController {
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllProductItems(Model model) {
         model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        return "productitems/list";
+        return "productItems/list";
     }
     
 }

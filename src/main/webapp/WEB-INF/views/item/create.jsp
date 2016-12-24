@@ -21,6 +21,22 @@
                                         <label for="name">Name</label>
                                         <input class="form-control" type="text" name="name" path="name"  />
                                     </div>
+                                    <div class="form-group">
+                                        <label for="type">Type</label>
+                                        <input class="form-control" type="text" name="type" path="type"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input class="form-control" type="text" name="description" path="description"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="defMP">Discount Value</label>
+                                        <input class="form-control" type="number" name="defMP" path="defMP"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="defOTP">Discount Procent</label>
+                                        <input class="form-control" type="number" name="defOTP" path="defOTP"  />
+                                    </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                     <a href="${contextPath}/admin/item/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>

@@ -6,8 +6,13 @@
 package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.Discountrule;
+import com.hellokoding.account.Models.Itemdiscount;
+import com.hellokoding.account.Models.Item;
 import com.hellokoding.account.controller.util.ErrorBean;
 import com.hellokoding.account.repository.DiscountruleRepository;
+import com.hellokoding.account.repository.ItemdiscountRepository;
+import com.hellokoding.account.repository.ItemRepository;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,6 +38,10 @@ public class DiscountruleController {
 
     @Autowired
     DiscountruleRepository discountruleRepository;
+    @Autowired
+    ItemdiscountRepository itemdiscountRepository;
+    @Autowired
+    ItemRepository itemRepository;
     @Inject
     private ErrorBean error;
 
@@ -70,13 +82,54 @@ public class DiscountruleController {
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String removeDiscountrule(@PathVariable("id") Long id) {
+        itemdiscountRepository.delete(itemdiscountRepository.findByDiscountrule1_DRId(id));
         discountruleRepository.delete(discountruleRepository.findOne(id));
-        return "discountrule/view";
+        return "redirect:/admin/discountrule/list";
+    }
+
+    @RequestMapping(value = {"/removeitem/{iid}/{gid}"}, method = RequestMethod.GET)
+    public String removeItemGroup1(@PathVariable("iid") Long iid, @PathVariable("gid") Long gid) {
+        itemdiscountRepository.delete(itemdiscountRepository.findByItem1_ItemId(iid));
+        return "redirect:/admin/discountrule/" + gid + "";
+    }
+
+    @RequestMapping(value = {"/add/{iid}/{gid}"}, method = RequestMethod.GET)
+    public String addItemGroup1(Itemdiscount itemdiscount, @PathVariable("iid") Long iid, @PathVariable("gid") Long gid) {
+        itemdiscount.setItem1(itemRepository.findOne(iid));
+        itemdiscount.setDiscountrule1(discountruleRepository.findOne(gid));
+        itemdiscountRepository.save(itemdiscount);
+        return "redirect:/admin/discountrule/" + gid + "";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String findDiscountrule(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("DISCOUNTRULE", discountruleRepository.findOne(Long.valueOf(id)));
+    public String findDiscountrule(Model model, @PathVariable("id") Long id) {
+        List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByDiscountrule1_DRId(id);
+        List<Item> tempitem = itemRepository.findAll();
+
+        List<Item> item = new ArrayList<Item>();
+        List<Item> nitem = new ArrayList<Item>();
+
+        for (Item i: tempitem) {
+            Boolean b = false;
+            for (Itemdiscount idisc: itemdiscounts) {
+                if (i.getItemId().equals(idisc.getItem1().getItemId())) {
+                    b = true;
+                }
+            }
+            if (b) {
+                item.add(i);
+            }
+            else {
+                nitem.add(i);
+            }
+        }
+        //cascade = CascadeType.REMOVE
+
+        model.addAttribute("ITEM_LIST", item);
+        model.addAttribute("NITEM_LIST", nitem);
+        model.addAttribute("DISCOUNTRULE", discountruleRepository.findOne(id));
+        //model.addAttribute("ITEM_LIST", itemdiscountRepository.findByDiscountrule1_DRId(id));
+
         return "discountrule/view";
     }
 

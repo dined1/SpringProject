@@ -58,6 +58,7 @@ ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_location_locationId FO
 
 
 insert into role values ('1', 'ROLE_USER');
+insert into role values ('2', 'ROLE_ADMIN');
 insert into user values ('1', 'AAAAAdm1', 'AAAAAdm1');
 insert into user values ('2', 'MMMModer1', 'MMMModer1');
 insert into user values ('3', 'MMMMMMax', 'MMMMMMax');
@@ -137,6 +138,7 @@ insert into user_role values ('1', '1');
 insert into user_role values ('2', '1');
 insert into user_role values ('3', '1');
 insert into user_role values ('7', '1');
+insert into user_role values ('7', '2');
 insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', 'Belarus', '1', '1');
 insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', 'Belarus', '2', '7');
 insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', 'Belarus', '3', '1');

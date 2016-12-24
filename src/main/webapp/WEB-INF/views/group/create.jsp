@@ -16,18 +16,14 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/group/new" method="POST">
-                                    <div class="form-group">
-                                        <label for="groupId">Group Id</label>
-                                        <input class="form-control" type="number" name="groupId" path="groupId"  required="required" autofocus="autofocus"  />
-                                    </div>
+                                <form role="form" action="${contextPath}/admin/group/new" method="POST">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input class="form-control" type="text" name="name" path="name"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/group/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/group/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

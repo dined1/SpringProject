@@ -18,10 +18,6 @@
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/admin/discountrule/new" method="POST">
                                     <div class="form-group">
-                                        <label for="DRId">DRId</label>
-                                        <input class="form-control" type="number" name="DRId" path="DRId"  required="required" autofocus="autofocus"  />
-                                    </div>
-                                    <div class="form-group">
                                         <label for="discountValue">Discount Value</label>
                                         <input class="form-control" type="number" name="discountValue" path="discountValue"  />
                                     </div>

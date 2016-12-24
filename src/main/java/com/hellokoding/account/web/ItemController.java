@@ -5,8 +5,12 @@
  */
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Group1;
+import com.hellokoding.account.Models.Itemgroup;
 import com.hellokoding.account.Models.Item;
 import com.hellokoding.account.controller.util.ErrorBean;
+import com.hellokoding.account.repository.GroupRepository;
+import com.hellokoding.account.repository.ItemGroupRepository;
 import com.hellokoding.account.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -29,6 +36,10 @@ import javax.ws.rs.*;
 @Controller
 public class ItemController {
 
+    @Autowired
+    GroupRepository groupRepository;
+    @Autowired
+    ItemGroupRepository itemGroupRepository;
     @Autowired
     ItemRepository itemRepository;
     @Inject
@@ -42,6 +53,9 @@ public class ItemController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createItem(@Valid
             @BeanParam Item item) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        item.setModifiedDate(dateFormat.format(date));
         itemRepository.save(item);
         return "redirect:list";
     }
@@ -83,6 +97,9 @@ public class ItemController {
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateItem(@Valid
                                 @BeanParam Item item) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        item.setModifiedDate(dateFormat.format(date));
         itemRepository.save(item);
         return "redirect:list";
     }
@@ -103,9 +120,24 @@ public class ItemController {
         return new RedirectView("/item/list");
     }
 
+    @RequestMapping(value = {"/removegroup/{id}"}, method = RequestMethod.GET)
+    public String removeItemGroup1(@PathVariable("id") Long id) {
+        itemGroupRepository.delete(itemGroupRepository.findOne(id));
+        return "redirect:/admin/item/list";
+    }
+
+    @RequestMapping(value = {"/add/{iid}/{gid}"}, method = RequestMethod.GET)
+    public String addItemGroup1(Itemgroup itemgroup, @PathVariable("iid") Long iid, @PathVariable("gid") Long gid) {
+        itemgroup.setItem1(itemRepository.findOne(iid));
+        itemgroup.setGroups1(groupRepository.findOne(gid));
+        itemGroupRepository.save(itemgroup);
+        return "redirect:/admin/item/list";
+    }
+
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String findItem(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("ITEM", itemRepository.findOne(Long.valueOf(id)));
+        model.addAttribute("ITEMGROUP_LIST", itemGroupRepository.findAll());
         return "item/view";
     }
 

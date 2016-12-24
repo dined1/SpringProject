@@ -66,10 +66,10 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h4 class="modal-title">Confirmation</h4>
+                                                            <h4 class="modal-title">lol</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Are you sure to delete Discountrule ?</p>
+                                                            <p>lol2</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form action="${contextPath}/admin/discountrule/remove/${DISCOUNTRULE.dRId}" method="DELETE">
@@ -100,6 +100,7 @@
 
 
                     </div>
+                    <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

@@ -14,7 +14,55 @@
                         <h5><i class="fa fa-info-circle fa-fw"></i> <b> Item info</b></h5> 
                     </div>
                     <div class="panel-body">
-                        <div class="row">
+                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                            <thead>
+                            <tr>
+                                <th>Group Id</th>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${ITEMGROUP_LIST}" var="ITEMGROUP">
+                                <c:if test="${ITEMGROUP.item1.itemId == ITEM.itemId}">
+                                    <tr>
+                                        <td>${ITEMGROUP.groups1.groupId}</td>
+
+                                        <td>${ITEMGROUP.groups1.name}</td>
+
+                                        <td><a href="${contextPath}/admin/item/removegroup/${ITEMGROUP.iGId}">Delete</a></td>
+
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                            <thead>
+                            <tr>
+                                <th>Group Id</th>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${ITEMGROUP_LIST}" var="ITEMGROUP">
+                                <c:if test="${ITEMGROUP.item1.itemId != ITEM.itemId}">
+                                    <tr>
+                                        <td>${ITEMGROUP.groups1.groupId}</td>
+
+                                        <td>${ITEMGROUP.groups1.name}</td>
+
+                                        <td><a href="${contextPath}/admin/item/add/${ITEM.itemId}/${ITEMGROUP.groups1.groupId}">Add</a></td>
+
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+
+
+                        <!--div class="row">
                             <div class="col-lg-12">
                                 <div class="list-group">
 
@@ -64,8 +112,7 @@
                                 </div>
                                 <a href="${contextPath}/admin/item/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
-                            <!-- /.col-lg-6 (nested) -->
-                        </div>
+                        </div-->
                         <!-- /.row (nested) -->
                     </div>
                     <!-- /.panel-body -->

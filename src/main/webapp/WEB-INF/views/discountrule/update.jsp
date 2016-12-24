@@ -28,7 +28,8 @@
                                     <div class="form-group">
                                         <label for="discountProcent">Discount Procent</label>
                                         <input class="form-control" type="number" name="discountProcent"  value="${DISCOUNTRULE.discountProcent}" />
-                                    </div>     
+                                    </div>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
                                     <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
