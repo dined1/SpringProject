@@ -1,8 +1,6 @@
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.Address;
-import com.hellokoding.account.Models.Customer;
-import com.hellokoding.account.Models.So;
+import com.hellokoding.account.Models.*;
 import com.hellokoding.account.model.User;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,8 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 27.11.2016.
@@ -50,6 +50,9 @@ public class CabinetController {
     private PaymentTypeRepository paymentTypeRepository;
     @Autowired
     private SOProductRepository soProductRepository;
+    @Autowired
+    private OrdItemRepository ordItemRepository;
+
     @Autowired
     private SORepository soRepository;
     @Autowired
@@ -152,6 +155,16 @@ public class CabinetController {
         So so = soRepository.findOne(qw);
         so.setStatus("Ordered");
         soRepository.save(so);
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        List<ProductItems> productItemsList = new ArrayList<>();
+        for (ProductItems product : productItems){
+            if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())){
+                OrdItem item = product.getOrdItem();
+                item.setStatus("Ordered");
+                ordItemRepository.save(item);
+            }
+        }
+
         return "redirect:/application/orderinfo";
     }
 

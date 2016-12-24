@@ -145,11 +145,15 @@ public class AppController {
         Float FOTP = 0f;
         for (ProductItems productItem : productItems){
             if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+                    && productItem.getOrdItem().getStatus().equals("Wait")){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
                 FCMP+=productItem.getMPWithTaxandDiscont();
                 FOTP+=productItem.getOTPWithTaxandDiscont();
+            }
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
                 finalproducts.add(productItem);
             }
         }
@@ -275,11 +279,17 @@ public class AppController {
                             @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                             Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
-            return "";
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            return "error";
         }
 
         So so = soRepository.findOne(soid);
+        if (so.getStatus().equals("Ordered")){
+            so.setStatus("Wait");
+        }
         Soproduct soproduct = so.getSoproducts1().get(0);
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(itemid);
@@ -296,6 +306,7 @@ public class AppController {
         ordItem.setItemCharacteristic(ordItemCharacteristic);
         ordItem.setItemdiscounts1(ordItemDiscount);
         ordItem.setParentId(item.getItemId());
+        ordItem.setStatus("Wait");
         ordItemRepository.save(ordItem);
         String[] characs = request.getParameterValues("characteristics");
         if (characs!=null) {

@@ -23,7 +23,7 @@ public class So implements Serializable {
     @Column(name = "SOId", table = "so", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long sOId;
+    private Long SOId;
 
     @Column(name = "DateCreated", table = "so")
     @Basic
@@ -77,14 +77,6 @@ public class So implements Serializable {
 
     @OneToMany(targetEntity = Soproduct.class, mappedBy = "so1")
     private List<Soproduct> soproducts1;
-
-    public Long getSOId() {
-        return this.sOId;
-    }
-
-    public void setSOId(Long sOId) {
-        this.sOId = sOId;
-    }
 
     public String getDateCreated() {
         return this.dateCreated;
@@ -196,5 +188,13 @@ public class So implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Long getSOId() {
+        return SOId;
+    }
+
+    public void setSOId(Long SOId) {
+        this.SOId = SOId;
     }
 }
