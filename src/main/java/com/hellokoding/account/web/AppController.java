@@ -157,6 +157,15 @@ public class AppController {
                 finalproducts.add(productItem);
             }
         }
+        int i=0;
+        for (ProductItems p : finalproducts){
+            if (p.getOrdItem().getStatus().equals("Ordered")){
+                i++;
+            }
+        }
+        if (i == finalproducts.size()){
+            soRepository.findOne(soid).setStatus("Ordered");
+        }
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
