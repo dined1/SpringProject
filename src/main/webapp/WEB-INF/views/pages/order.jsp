@@ -105,7 +105,7 @@
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
                                     data-currency="BYN"
-                                    data-amount="${SO_FINAL.finalMPwithTaxAndDiscount}"
+                                    data-amount="${SO_FINAL.finalOTPwithTaxAndDiscount}"
                                     data-name="Stripe Checkout Demo"
                                     data-description="Demo"
                                     data-locale="auto"

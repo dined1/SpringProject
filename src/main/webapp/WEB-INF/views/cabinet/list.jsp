@@ -5,29 +5,10 @@
 
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
+    <div id="center-panel-grid">
+        <div class="center-block">
+            <div class="center-block">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Customer List</b></h5></div>
-                            <div class="col-lg-6">
-                                <div align="right">
-                                    <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
-                                    <c:if test="${not empty requestScope.CUSTOMER_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Customer list
-                                        </button>
-                                    </c:if>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
 
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -116,11 +97,10 @@
                         </c:if>
                         <p-->
 
-                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/application/orderinfo"><i class=""></i>  Просмотр заказов</a></p>
-                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/customerinfo"><i class=""></i>  Просмотр клиентов</a></p>
-                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/login"><i class=""></i>  Изменить логин</a></p>
-                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/password"><i class=""></i>  Изменить пароль</a></p>
-                        <p><a href="${contextPath}/welcome" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/application/orderinfo"><i class=""></i>  Orders</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/customerinfo"><i class=""></i>  Customers</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/password"><i class=""></i>  Change password</a></p>
+                        <p><a href="${contextPath}/welcome" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a></p>
 
                     </div>
                     <!-- /.panel-body -->

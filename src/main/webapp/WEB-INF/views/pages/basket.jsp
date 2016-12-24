@@ -29,9 +29,9 @@
                             <table class="table table-striped table-bordered table-hover" id="PRODUCTITEMS_TABLE">
                                 <thead>
                                 <tr>
-                                    <th>Наименование</th>
-                                    <th>Единоразовая оплата</th>
-                                    <th>Ежемесячная оплата</th>
+                                    <th>Item name</th>
+                                    <th>One-time price</th>
+                                    <th>Recurrent price</th>
                                     <c:if test="${STATUS == 'Wait'}">
                                         <th>Удаление</th>
                                     </c:if>
@@ -55,8 +55,10 @@
                             </table>
                         </div>
                         <div>Result:
-                            <label>One-time: <span id="total-cart-summa">${(OTP.toString())}</span> BYN</label><br>
-                            <label>Mounth price: <span>${(CMP.toString())}</span>  BYN</label>
+                            <label>One-time price: <span id="total-cart-summa">${(OTP.toString())}</span> BYN</label><br>
+                            <label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>
+                            <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
+                            <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
                         </div>
                         <br />
                         <c:if test="${STATUS == 'Wait'}">

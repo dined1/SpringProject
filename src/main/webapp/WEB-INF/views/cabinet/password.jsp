@@ -11,23 +11,23 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-edit fa-fw"></i> <b> Update Customer</b></h5>
+                        <h5><i class="fa fa-edit fa-fw"></i> <b> Change password</b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/cabinet/password" method="POST">
                                     <div class="form-group">
-                                        <label for="userPassword1">First Name</label>
-                                        <input class="form-control" type="text" name="name1" />
+                                        <label for="userPassword1">Old password</label>
+                                        <input class="form-control" type="password" name="name1" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="userPassword2">First Name</label>
-                                        <input class="form-control" type="text" name="name2" />
+                                        <label for="userPassword2">New password</label>
+                                        <input class="form-control" type="password" name="name2" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="userPassword3">First Name</label>
-                                        <input class="form-control" type="text" name="name3" />
+                                        <label for="userPassword3">Repeat new password</label>
+                                        <input class="form-control" type="password" name="name3" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

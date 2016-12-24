@@ -47,6 +47,10 @@ public class OrdItem implements Serializable {
     @Basic
     private String locationDistribute;
 
+    @Column(name = "parentId", table = "orditem")
+    @Basic
+    private Long parentId;
+
     @OneToMany(targetEntity = ProductItems.class, mappedBy = "ordItem", cascade = CascadeType.REMOVE)
     private List<ProductItems> productItemses1;
 
@@ -142,5 +146,13 @@ public class OrdItem implements Serializable {
 
     public void setProductItemses1(List<ProductItems> productItemses1) {
         this.productItemses1 = productItemses1;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 }

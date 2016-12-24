@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -133,18 +134,22 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
-            return "";
+            return "error";
         }
 
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
+        Float FCMP = 0f;
+        Float FOTP = 0f;
         for (ProductItems productItem : productItems){
             if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
+                FCMP+=productItem.getMPWithTaxandDiscont();
+                FOTP+=productItem.getOTPWithTaxandDiscont();
                 finalproducts.add(productItem);
             }
         }
@@ -153,7 +158,8 @@ public class AppController {
         model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
         model.addAttribute("SOID", soid);
         model.addAttribute("USERID", userid);
-
+        model.addAttribute("FCMP", FCMP);
+        model.addAttribute("FOTP", FOTP);
         model.addAttribute("CMP", CMP);
         model.addAttribute("OTP", OTP);
         return "/pages/basket";
@@ -188,6 +194,13 @@ public class AppController {
     public String itemDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                   Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            return "error";
+        }
         Item item = itemRepository.findOne(itemid);
         model.addAttribute("ITEM", item);
 
@@ -282,6 +295,7 @@ public class AppController {
         ordItem.setType(item.getType());
         ordItem.setItemCharacteristic(ordItemCharacteristic);
         ordItem.setItemdiscounts1(ordItemDiscount);
+        ordItem.setParentId(item.getItemId());
         ordItemRepository.save(ordItem);
         String[] characs = request.getParameterValues("characteristics");
         if (characs!=null) {
@@ -307,10 +321,12 @@ public class AppController {
         for (Itemdiscount discount : itemdiscounts) {
             if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountValue() != null){
                 otp += discount.getDiscountrule1().getDiscountValue();
-            } else if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountValue() != null){
-                mp -= discount.getDiscountrule1().getDiscountValue();
             }
+//            else if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountValue() != null){
+//                mp -= discount.getDiscountrule1().getDiscountValue();
+//            }
         }
+        itemRepository.findOne(itemid).setQuantity(item.getQuantity().subtract(BigInteger.ONE));
         productItems.setOrdItem(ordItem);
         productItems.setOTPWithTaxandDiscont(item.getDefOTP() + otp);
         productItems.setMPWithTaxandDiscont(item.getDefMP() + mp);
@@ -357,9 +373,14 @@ public class AppController {
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        if (!customerRepository.findOne(customerid).getUserId().equals(userid.toString())){
-            return "";
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            return "error";
         }
+        Long parent = ordItemRepository.findOne(itemid).getParentId();
+        itemRepository.findOne(parent).setQuantity(itemRepository.findOne(parent).getQuantity().add(BigInteger.ONE));
         ordItemRepository.delete(itemid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
