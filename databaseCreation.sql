@@ -21,7 +21,7 @@ CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, Statisti
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE characteristics (CharacteristicId INTEGER NOT NULL AUTO_INCREMENT, Characteristic VARCHAR(255), CharacteristicValue VARCHAR(255), PRIMARY KEY (CharacteristicId));
 CREATE TABLE itemcharacteristic (ItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, Item_itemId INTEGER, PRIMARY KEY (ItemCharacteristicId));
-CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), PRIMARY KEY (OrdItemId));
+CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), parentId INTEGER, status varchar(255), PRIMARY KEY (OrdItemId));
 CREATE TABLE orditemcharacteristic (OrdItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdItemCharacteristicId));
 CREATE TABLE orditemdiscount (OrdIDid INTEGER NOT NULL AUTO_INCREMENT, discountrule1_dRId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdIDid));
 CREATE TABLE locations (locationId INTEGER NOT NULL AUTO_INCREMENT, locationname varchar(255), PRIMARY KEY (locationId));
