@@ -128,13 +128,13 @@ public class AppController {
     @RequestMapping(value = {"/basket/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyBasket(Model model,
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
-                              Principal principal) {
+                              Principal principal) throws Exception {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
-            return "error";
+            throw new NotFoundException(soid);
         }
 
         List<ProductItems> productItems = productItemsRepository.findAll();
@@ -154,6 +154,8 @@ public class AppController {
             }
             if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                CMP+=productItem.getMp();
+                FCMP+=productItem.getMPWithTaxandDiscont();
                 finalproducts.add(productItem);
             }
         }
@@ -406,6 +408,30 @@ public class AppController {
     }
 
 
+    @RequestMapping(value = {"/cancel/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String cancel(Model model, @PathVariable("customerid") Long customerid,
+                         @PathVariable("soid") Long soid, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            return "error";
+        }
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        List<ProductItems> productItemsList = new ArrayList<>();
+        for (ProductItems product : productItems){
+            if (product.getOrdItem().getStatus().equals("Ordered") && soid.equals(product.getSoproduct1().getSo1().getSOId())){
+                OrdItem item = product.getOrdItem();
+                item.setStatus("Canceled");
+                ordItemRepository.save(item);
+            }
+        }
+        So so = soRepository.findOne(soid);
+        so.setStatus("Canceled");
+        return "redirect:/application/basket/" + customerid + "/" + soid;
+    }
+
     @RequestMapping(value = {"/group/{group}"}, method = RequestMethod.GET)
     public String group(Model model, @PathVariable("group") Long groupid) {
         model.addAttribute("ITEM_LIST", itemGroupRepository.findByGroups1_GroupId(groupid));
@@ -440,5 +466,4 @@ public class AppController {
         model.addAttribute("SO_LIST", soRepository.findAll());
         return "/pages/orderinfo";
     }
-
 }

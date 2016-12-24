@@ -16,7 +16,10 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,6 +49,8 @@ public class CabinetController {
     private ProductItemsRepository productItemsRepository;
     @Autowired
     private PaymentRepository paymentFacade;
+    @Autowired
+    private PaymentBillRepository paymentBillRepository;
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
     @Autowired
@@ -148,12 +153,16 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
-    public String apply(@PathVariable("sq") Long qw) {
+    public String apply(@PathVariable("sq") Long qw, Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
         /*if (bindingResult.hasErrors()) {
             return "welcome";
         }*/
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
         So so = soRepository.findOne(qw);
         so.setStatus("Ordered");
+        so.setOrderDate(dateFormat.format(date));
         soRepository.save(so);
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> productItemsList = new ArrayList<>();
@@ -164,7 +173,17 @@ public class CabinetController {
                 ordItemRepository.save(item);
             }
         }
-
+        Paymentbill paymentbill = new Paymentbill();
+        paymentbill.setCmp(so.getFinalMP().floatValue());
+        paymentbill.setCotp(so.getFinalOTP().floatValue());
+        paymentBillRepository.save(paymentbill);
+        Payment payment = new Payment();
+        payment.setPaymentDate(date);
+        payment.setPaymentInfo("Payment was succesfull");
+        payment.setSo1(so);
+        payment.setPaymentbill1(paymentbill);
+        payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
+        paymentFacade.save(payment);
         return "redirect:/application/orderinfo";
     }
 

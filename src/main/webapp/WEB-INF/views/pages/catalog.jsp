@@ -39,26 +39,28 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${ITEM_LIST}" var="ITEM">
-                                <tr>
-                                    <td><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
+                                <c:if test="${ITEM.item.quantity <= 0}">
+                                    <tr>
+                                        <td><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
 
-                                    <td class="bg-info">${(ITEM.item.type)}</td>
+                                        <td class="bg-info">${(ITEM.item.type)}</td>
 
-                                    <td>${(ITEM.item.description)}</td>
+                                        <td>${(ITEM.item.description)}</td>
 
-                                    <td>${(ITEM.item.defOTP)}</td>
+                                        <td>${(ITEM.item.defOTP)}</td>
 
-                                    <td>${(ITEM.item.defMP)}</td>
+                                        <td>${(ITEM.item.defMP)}</td>
 
-                                    <td>${(ITEM.item.modifiedDate)}</td>
+                                        <td>${(ITEM.item.modifiedDate)}</td>
 
-                                    <td>${(ITEM.item.quantity)}</td>
+                                        <td>${(ITEM.item.quantity)}</td>
 
-                                    <td>
-                                        <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
-                                    </td>
+                                        <td>
+                                            <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                </c:if>
                             </c:forEach>
                             </tbody>
                         </table>

@@ -59,12 +59,7 @@
                                         <td>${(SO.status)}</td>
 
                                         <td>
-                                            <c:if test="${SO.status == 'Wait'}">
-                                                <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Подробнее</a>
-                                            </c:if>
-                                            <c:if test="${SO.status == 'Ordered'}">
-                                                <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Подробнее</a>
-                                            </c:if>
+                                            <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Подробнее</a>
                                         </td>
 
                                     </tr>

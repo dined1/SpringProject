@@ -4,13 +4,19 @@ import com.hellokoding.account.Models.Payment;
 import com.hellokoding.account.Models.Paymentbill;
 import com.hellokoding.account.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Admin on 03.12.2016.
  */
+@Service
+@EnableScheduling
 public class PaymentProcessorService {
 
     @Autowired
@@ -33,7 +39,15 @@ public class PaymentProcessorService {
     public void paymentTimer(){
         List<Payment> payments = paymentRepository.findAll();
         for (Payment payment : payments){
-            payment.getPaymentDate();
+            Date date = new Date();
+            Date paymentDate = payment.getPaymentDate();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(paymentDate);
+            cal.add(Calendar.DATE, 27);
+            paymentDate = cal.getTime();
+            if (paymentDate.after(date)){
+
+            }
         }
     }
 }

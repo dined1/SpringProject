@@ -17,9 +17,11 @@
 
                         <div class="container">
                                 <ul class="nav nav-pills">
-                                    <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                    <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                    <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                    <c:if test="${STATUS != 'Canceled'}">
+                                        <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
+                                        <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
+                                        <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                    </c:if>
                                 </ul>
                         </div>
                         <br />
@@ -54,15 +56,28 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div>Result:
-                            <label>One-time price: <span id="total-cart-summa">${(OTP.toString())}</span> BYN</label><br>
-                            <label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>
-                            <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
-                            <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
-                        </div>
+                        <c:if test="${STATUS != 'Canceled'}">
+                            <div>Result:
+                                <label>One-time price: <span id="total-cart-summa">${(OTP.toString())}</span> BYN</label><br>
+                                <label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>
+                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
+                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
+                            </div>
+                        </c:if>
+                        <%--<c:if test="${STATUS == 'Canceled'}">--%>
+                            <%--<div>Result:--%>
+                                <%--<label>One-time price: <span id="total-cart-summa">${(Pr.toString())}</span> BYN</label><br>--%>
+                                <%--<label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>--%>
+                                <%--<label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>--%>
+                                <%--<label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>--%>
+                            <%--</div>--%>
+                        <%--</c:if>--%>
                         <br />
-                        <c:if test="${STATUS == 'Wait'}">
-                            <a class="btn btn-info" href="${contextPath}/application/order/${ID}">Оформить заказ</a>
+                        <c:if test="${STATUS == 'Wait' and STATUS != 'Canceled'}">
+                            <a class="btn btn-info" href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформить заказ</a>
+                        </c:if>
+                        <c:if test="${CMP != 0 and FCMP !=0 and STATUS == 'Ordered' and STATUS != 'Canceled'}">
+                            <a class="btn btn-info" href="${contextPath}/application/cancel/${CUSTOMERID}/${SOID}/">Cancel order</a>
                         </c:if>
                         <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
                     </div>
