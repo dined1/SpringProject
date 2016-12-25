@@ -44,6 +44,9 @@
                                 <c:forEach items="${SO_LIST}" var="SO">
                                     <c:if test="${fn:contains(SO.attentionFlag, 'Waiting for payment')}">
                                         <td>Please, pay the order ${SO.SONumber}</td>
+                                        <c:if test="${fn:contains(SO.attentionFlag, 'Waiting for payment')}">
+                                            <td><a href="order/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Pay</a></td>
+                                        </c:if>
                                     </c:if>
                                     <tr>
                                         <td>${(SO.SOId)}</td>
@@ -64,10 +67,6 @@
                                         <td>
                                             <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Details</a>
                                         </td>
-                                        
-                                        <c:if test="${fn:contains(SO.attentionFlag, 'Waiting for payment')}">
-                                            <a href="order/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Pay</a>
-                                        </c:if>
 
                                     </tr>
                                 </c:forEach>
@@ -85,7 +84,7 @@
 
 
                     </div>
-                    <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
+                    <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

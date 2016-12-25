@@ -198,6 +198,10 @@ public class AppController {
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
             return "error";
         }
+        if ("Canceled".equals(so.getStatus())){
+            return "error";
+        }
+
         List<ItemLocations> items = itemLocationRepository.findByLocation_Locationname(so.getLocation());
         model.addAttribute("CHARACTERISTICS", itemCharacteristicRepository.findAll());
         model.addAttribute("GROUP_LIST", groupRepository.findAll());

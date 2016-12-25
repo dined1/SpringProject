@@ -17,9 +17,9 @@
 
                         <div class="container">
                             <ul class="nav nav-pills">
-                                <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                <li class="active"><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
+                                <li class="active"><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
+                                <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
                             </ul>
                             <br />
                         </div>
@@ -56,7 +56,7 @@
                                         <td>${(ITEM.item.quantity)}</td>
 
                                         <td>
-                                            <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>  Добавить</a>
+                                            <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>Add</a>
                                         </td>
 
                                     </tr>
@@ -72,7 +72,7 @@
                         <script src="${contextPath}/webresources/common/js/modules/main.js" type="text/javascript"></script>
                     </div>
 
-                    <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
+                    <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                 </div>
             </div>
         </div>

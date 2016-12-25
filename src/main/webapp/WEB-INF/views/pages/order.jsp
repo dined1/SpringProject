@@ -17,9 +17,9 @@
 
                         <!--div class="container">
                             <ul class="nav nav-pills">
-                                <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                <li class="active"><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
+                                <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
+                                <li class="active"><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
                             </ul>
                             <br />
                             <br />
@@ -114,7 +114,7 @@
 
                             </script>
                         </form>
-                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
+                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
                 </div>
             </div>
