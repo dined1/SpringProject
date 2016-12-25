@@ -15,11 +15,6 @@
                             <div class="col-lg-6">
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
-                                    <c:if test="${not empty requestScope.ITEM_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Item list
-                                        </button>
-                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +59,8 @@
                                                             <i class="fa fa-gear"></i>  <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
-                                                            <li><a href="${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
+                                                            <li><a href="${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Groups</a></li>
+                                                            <li><a href="${contextPath}/admin/item/discountrule/${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Discount</a></li>
                                                             <li><a href="${contextPath}/admin/item/update/${ITEM.itemId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${ITEM.itemId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>

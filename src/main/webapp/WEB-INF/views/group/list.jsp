@@ -63,7 +63,7 @@
                                                             <i class="fa fa-gear"></i>  <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu pull-right" role="menu">
-                                                            <li><a href="${GROUP_1.groupId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
+                                                            <li><a href="${contextPath}/admin/group/item/${GROUP_1.groupId}"><i class="fa fa-level-up fa-fw"></i>  Items</a></li>
                                                             <li><a href="${contextPath}/admin/group/update/${GROUP_1.groupId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${GROUP_1.groupId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>

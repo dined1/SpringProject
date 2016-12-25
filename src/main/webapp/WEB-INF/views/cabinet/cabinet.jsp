@@ -14,7 +14,7 @@
                             <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Customer List</b></h5></div>
                             <div class="col-lg-6">
                                 <div align="right">
-                                    <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
+                                    <a class="btn btn-primary btn-sm" href="newcustomer"><i class="fa fa-plus"></i> Add</a>
                                     <c:if test="${not empty requestScope.CUSTOMER_LIST}">
                                         <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
                                             <i class="fa fa-print fa-fw"></i> Print Customer list
@@ -36,6 +36,8 @@
                                     <th>Contact</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Pass Number</th>
+                                    <th>Count Number</th>
                                     <th>Address</th>
                                     <th></th>
                                 </tr>
@@ -54,6 +56,10 @@
                                         <td>${(CUSTOMER.email)}</td>
 
                                         <td>${(CUSTOMER.phone)}</td>
+
+                                        <td>${(CUSTOMER.passNumber)}</td>
+
+                                        <td>${(CUSTOMER.countNumber)}</td>
 
                                         <td>${(CUSTOMER.address1.addressLine)}</td>
 

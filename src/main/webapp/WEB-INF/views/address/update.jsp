@@ -40,7 +40,8 @@
                                     <div class="form-group">
                                         <label for="modifiedDate">Modified Date</label>
                                         <input class="form-control" type="text" name="modifiedDate"  value="${ADDRESS.modifiedDate}" />
-                                    </div>     
+                                    </div>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
                                     <a href="${contextPath}/admin/address/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>

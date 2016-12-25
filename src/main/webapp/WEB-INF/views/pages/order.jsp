@@ -100,7 +100,7 @@
 
                         <br/>
                         <br />
-                        <form action="${contextPath}/application/stripe" method="POST">
+                        <form action="${contextPath}/application/stripe/${SOID}" method="POST">
                             <script th:inline="javascript"
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"

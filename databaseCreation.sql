@@ -4,7 +4,7 @@ use test;
 
 CREATE TABLE address (AddressId INTEGER NOT NULL AUTO_INCREMENT, AddressLine VARCHAR(255), City VARCHAR(255), Country VARCHAR(255), ModifiedDate VARCHAR(255), PostalCode VARCHAR(255), PRIMARY KEY (AddressId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), Location VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
-CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, DiscountValue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
+CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, Discountvalue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
 CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), quantity INTEGER, PRIMARY KEY (ItemId));
 CREATE TABLE itemdiscount (IDid INTEGER NOT NULL AUTO_INCREMENT, DISCOUNTRULE1_DRId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IDid));
@@ -19,7 +19,7 @@ CREATE TABLE so (SOId BIGINT NOT NULL AUTO_INCREMENT, DateCreated VARCHAR(255), 
 CREATE TABLE soproduct (SOPId INTEGER NOT NULL AUTO_INCREMENT, SO1_SOId BIGINT, PRIMARY KEY (SOPId));
 CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, StatisticType VARCHAR(255), StatisticsInfo VARCHAR(255), CUSTOMER1_CustomerId INTEGER, PRIMARY KEY (SCId));
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE characteristics (CharacteristicId INTEGER NOT NULL AUTO_INCREMENT, Characteristic VARCHAR(255), CharacteristicValue VARCHAR(255), PRIMARY KEY (CharacteristicId));
+CREATE TABLE characteristics (CharacteristicId INTEGER NOT NULL AUTO_INCREMENT, Characteristic VARCHAR(255), Characteristicvalue VARCHAR(255), PRIMARY KEY (CharacteristicId));
 CREATE TABLE itemcharacteristic (ItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, Item_itemId INTEGER, PRIMARY KEY (ItemCharacteristicId));
 CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), parentId INTEGER, status varchar(255), PRIMARY KEY (OrdItemId));
 CREATE TABLE orditemcharacteristic (OrdItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdItemCharacteristicId));
@@ -145,17 +145,21 @@ insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '83
 insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', 'Belarus', '4', '7');
 insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
 insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
-INSERT INTO `test`.`locations` (`locationId`, `locationname`) VALUES ('1', 'Belarus');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('1', '1', '1');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('2', '1', '2');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('3', '1', '3');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('4', '1', '4');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('5', '1', '5');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('6', '1', '6');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('7', '1', '7');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('8', '1', '8');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('9', '1', '9');
-INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`) VALUES ('10', '1', '10');
+insert into locations values ('1', 'Belarus');
+insert into locations values ('2', 'Russia');
+insert into locations values ('3', 'Czech');
+insert into locations values ('4', 'Slovakia');
+insert into locations values ('5', 'Serbia');
+insert into itemlocations values ('1', '1', '1');
+insert into itemlocations values ('2', '1', '2');
+insert into itemlocations values ('3', '2', '3');
+insert into itemlocations values ('4', '2', '4');
+insert into itemlocations values ('5', '3', '5');
+insert into itemlocations values ('6', '3', '6');
+insert into itemlocations values ('7', '4', '7');
+insert into itemlocations values ('8', '4', '8');
+insert into itemlocations values ('9', '5', '9');
+insert into itemlocations values ('10', '5', '10');
 
 
 
@@ -184,7 +188,7 @@ INSERT INTO `test`.`itemlocations` (`iLid`, `location_locationId`, `item_ItemId`
 -- 
 -- CREATE TABLE address (AddressId INTEGER NOT NULL, AddressLine VARCHAR(255), City VARCHAR(255), Country VARCHAR(255), ModifiedDate VARCHAR(255), PostalCode VARCHAR(255), PRIMARY KEY (AddressId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 -- CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
--- CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, DiscountValue FLOAT, Type VARCHAR(255), PRIMARY KEY (DRId));
+-- CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, Discountvalue FLOAT, Type VARCHAR(255), PRIMARY KEY (DRId));
 -- CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
 -- CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), PRIMARY KEY (ItemId));
 -- CREATE TABLE itemdiscount (IDid INTEGER NOT NULL AUTO_INCREMENT, DISCOUNTRULE1_DRId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IDid));

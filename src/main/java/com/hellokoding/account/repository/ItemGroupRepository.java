@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface ItemGroupRepository extends JpaRepository<Itemgroup, Long> {
     List<Itemgroup> findByGroups1_GroupId(Long group);
+    List<Itemgroup> findByItem1_ItemId(Long item);
 }

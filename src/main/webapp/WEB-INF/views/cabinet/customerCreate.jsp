@@ -19,10 +19,6 @@
                                 <form role="form" action="${contextPath}/cabinet/newcustomer" method="POST">
                                     <h2>Customer creation</h2>
                                     <div class="form-group">
-                                        <label for="customerId">Customer Id</label>
-                                        <input class="form-control" type="number" name="customerId" path="customerId"  required="required" autofocus="autofocus"  />
-                                    </div>
-                                    <div class="form-group">
                                         <label for="firstName">First Name</label>
                                         <input class="form-control" type="text" name="firstName" path="firstName"  />
                                     </div>
@@ -42,11 +38,18 @@
                                         <label for="phone">Phone</label>
                                         <input class="form-control" type="text" name="phone" path="phone"  />
                                     </div>
+                                    <div class="form-group">
+                                        <label for="passNumber">Pass Number</label>
+                                        <input class="form-control" type="text" name="passNumber" path="passNumber"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="countNumber">Count Number</label>
+                                        <input class="form-control" type="text" name="countNumber" path="countNumber"  />
+                                    </div>
                                     <h2>Customer address</h2>
                                     <div class="form-group">
                                         <label>Address</label>
                                         <select path="Address" name="Address" onchange=" ">
-                                            <option value="ord_null">Нет</option>
                                             <c:forEach items="${ADDRESS_LIST}" var="ADDRESS">
                                                 <option value="${ADDRESS.addressId}">${ADDRESS.addressLine}</option>
                                             </c:forEach>

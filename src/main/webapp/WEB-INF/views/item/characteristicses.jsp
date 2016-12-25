@@ -10,62 +10,62 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
+
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Item info</b></h5> 
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Discountrule info</b></h5>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+
+                        <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
                             <thead>
                             <tr>
-                                <th>Group Id</th>
-                                <th>Name</th>
+                                <th>Characteristics Id</th>
+                                <th>Characteristic</th>
+                                <th>Characteristic Value</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${GROUP_LIST}" var="G">
-                                    <tr>
-                                        <td>${G.groupId}</td>
-                                        <td>${G.name}</td>
-                                        <td><a href="${contextPath}/admin/item/removegroup/${ITEM.itemId}/${G.groupId}">Delete</a></td>
-                                    </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
-                            <thead>
-                            <tr>
-                                <th>Group Id</th>
-                                <th>Name</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${NGROUP_LIST}" var="G">
+                            <c:forEach items="${CHARACTERISTICS_LIST}" var="C">
                                 <tr>
-                                    <td>${G.groupId}</td>
-                                    <td>${G.name}</td>
-                                    <td><a href="${contextPath}/admin/item/add/${ITEM.itemId}/${G.groupId}">Add</a></td>
-                                    </tr>
+                                    <td>${C.characteristicId}</td>
+                                    <td>${C.characteristicId}</td>
+                                    <td>${C.characteristicValue}</td>
+                                    <td><a href="${contextPath}/admin/item/removecharacteristicses/${ITEM.itemId}/${C.characteristicId}">Delete</a></td>
+
+                                </tr>
                             </c:forEach>
                             </tbody>
                         </table>
 
+                        <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
+                            <thead>
+                            <tr>
+                                <th>Characteristics Id</th>
+                                <th>Characteristic</th>
+                                <th>Characteristic Value</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${CHARACTERISTICS_LIST}" var="C">
+                                <tr>
+                                    <td>${C.characteristicId}</td>
+                                    <td>${C.characteristicId}</td>
+                                    <td>${C.characteristicValue}</td>
+                                    <td><a href="${contextPath}/admin/item/addcharacteristicses/${ITEM.itemId}/${C.characteristicId}">Add</a></td>
 
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
 
                         <a href="${contextPath}/admin/item/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
-
-                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
 </div>
 
 <%--end content--%>

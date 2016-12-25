@@ -53,19 +53,19 @@ public class Item implements Serializable {
     @Basic
     private BigInteger quantity;
 
-    @OneToMany(targetEntity = ItemLocations.class, mappedBy = "item")
+    @OneToMany(targetEntity = ItemLocations.class, mappedBy = "item", cascade = CascadeType.REMOVE)
     private List<ItemLocations> itemlocations;
 
 //    @OneToMany(targetEntity = ProductItems.class, mappedBy = "item1")
 //    private List<ProductItems> productItemses1;
 
-    @OneToMany(targetEntity = Itemgroup.class, mappedBy = "item1")
+    @OneToMany(targetEntity = Itemgroup.class, mappedBy = "item1", cascade = CascadeType.REMOVE)
     private List<Itemgroup> itemgroups1;
 
-    @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "item1")
+    @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "item1", cascade = CascadeType.REMOVE)
     private List<Itemdiscount> itemdiscounts1;
 
-    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "item")
+    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "item", cascade = CascadeType.REMOVE)
     private List<ItemCharacteristic> itemCharacteristic;
 
     public Long getItemId() {

@@ -76,9 +76,9 @@ public class AddressController {
     }
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
-    public RedirectView removeAddress(@PathVariable("id") Long id) {
+    public String removeAddress(@PathVariable("id") Long id) {
         addressRepository.delete(addressRepository.findOne(id));
-        return new RedirectView("/address/list");
+        return "redirect:/admin/address/list";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)

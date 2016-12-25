@@ -24,6 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,25 +91,40 @@ public class Group1Controller {
         return "redirect:/admin/group/list";
     }
 
-    @RequestMapping(value = {"/removeitem/{id}"}, method = RequestMethod.GET)
-    public String removeItemGroup1(@PathVariable("id") Long id) {
-        itemGroupRepository.delete(itemGroupRepository.findOne(id));
-        return "redirect:/admin/group/list";
+    @RequestMapping(value = {"/item/{id}"}, method = RequestMethod.GET)
+    public String findAddress(Model model, @PathVariable("id") Long id) {
+        List<Itemgroup> itemgroups = itemGroupRepository.findByGroups1_GroupId(id);
+        List<Item> tempitems = itemRepository.findAll();
+
+        List<Item> items = new ArrayList<Item>();
+        List<Item> nitems = new ArrayList<Item>();
+
+        for (Item i: tempitems) {
+            Boolean b = false;
+            for (Itemgroup idisc: itemgroups) if (i.getItemId().equals(idisc.getItem1().getItemId())) b = true;
+            if (b) items.add(i);
+            else nitems.add(i);
+        }
+
+        model.addAttribute("ITEM_LIST", items);
+        model.addAttribute("NITEM_LIST", nitems);
+        model.addAttribute("GROUP", groupRepository.findOne(id));
+
+        return "group/item";
     }
 
-    @RequestMapping(value = {"/add/{iid}/{gid}"}, method = RequestMethod.GET)
-    public String addItemGroup1(Itemgroup itemgroup, @PathVariable("iid") Long iid, @PathVariable("gid") Long gid) {
-        itemgroup.setItem1(itemRepository.findOne(iid));
-        itemgroup.setGroups1(groupRepository.findOne(gid));
+    @RequestMapping(value = {"/removeitem/{id1}/{id2}"}, method = RequestMethod.GET)
+    public String removeItemGroup1(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
+        itemGroupRepository.delete(itemGroupRepository.findByItem1_ItemId(id2));
+        return "redirect:/admin/group/item/" + id1;
+    }
+
+    @RequestMapping(value = {"/additem/{id1}/{id2}"}, method = RequestMethod.GET)
+    public String addItemGroup1(Itemgroup itemgroup, @PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
+        itemgroup.setItem1(itemRepository.findOne(id2));
+        itemgroup.setGroups1(groupRepository.findOne(id1));
         itemGroupRepository.save(itemgroup);
-        return "redirect:/admin/group/list";
-    }
-
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String findAddress(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("GROUP", groupRepository.findOne(Long.valueOf(id)));
-        model.addAttribute("ITEMGROUP_LIST", itemGroupRepository.findAll());
-        return "group/view";
+        return "redirect:/admin/group/item/" + id1;
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)

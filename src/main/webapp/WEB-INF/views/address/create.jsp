@@ -18,10 +18,6 @@
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/admin/address/new" method="POST">
                                     <div class="form-group">
-                                        <label for="addressId">Address Id</label>
-                                        <input class="form-control" type="number" name="addressId" path="addressId"  required="required" autofocus="autofocus"  />
-                                    </div>
-                                    <div class="form-group">
                                         <label for="addressLine">Address Line</label>
                                         <input class="form-control" type="text" name="addressLine" path="addressLine"  />
                                     </div>
