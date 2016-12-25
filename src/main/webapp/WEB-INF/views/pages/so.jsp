@@ -21,18 +21,6 @@
                                         <label for="SOId">SOId</label>
                                         <input class="form-control" type="number" name="SOId" path="SOId"  required="required" autofocus="autofocus"  />
                                     </div-->
-                                    <div class="form-group">
-                                        <label for="dateCreated">Date Created</label>
-                                        <input class="form-control" type="text" name="dateCreated1" path="dateCreated"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="dateModified">Date Modified</label>
-                                        <input class="form-control" type="text" name="dateModified1" path="dateModified"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="orderDate">Order Date</label>
-                                        <input class="form-control" type="text" name="orderDate1" path="orderDate"  />
-                                    </div>
                                     <!--div class="form-group">
                                         <label for="status">Status</label>
                                         <input class="form-control" type="text" name="status" path="status"  />
@@ -48,7 +36,6 @@
                                     <div class="form-group">
                                         <label>Customer</label>
                                         <select path="socustomer" name="socustomer" onchange=" ">
-                                            <option value="ord_null">Нет</option>
                                             <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
                                                 <option value="${CUSTOMER.customerId}">${CUSTOMER.lastName}</option>
                                             </c:forEach>

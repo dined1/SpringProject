@@ -18,9 +18,9 @@
                         <div class="container">
                                 <ul class="nav nav-pills">
                                     <c:if test="${STATUS != 'Canceled'}">
-                                        <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Корзина<span id="total-cart-count" class="badge"></span></a></li>
-                                        <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Каталог</a></li>
-                                        <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформление заказа</a></li>
+                                        <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
+                                        <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
+                                        <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
                                     </c:if>
                                 </ul>
                         </div>
@@ -48,7 +48,7 @@
 
                                         <c:if test="${STATUS == 'Wait'}">
                                         <c:if test="${PRODUCTITEMS.ordItem.status == 'Wait'}">
-                                            <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Убрать товар</a></td>
+                                            <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
                                         </c:if>
                                         </c:if>
                                     </tr>
@@ -74,12 +74,12 @@
                         <%--</c:if>--%>
                         <br />
                         <c:if test="${STATUS == 'Wait' and STATUS != 'Canceled'}">
-                            <a class="btn btn-info" href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Оформить заказ</a>
+                            <a class="btn btn-info" href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a>
                         </c:if>
                         <c:if test="${CMP != 0 and FCMP !=0 and STATUS == 'Ordered' and STATUS != 'Canceled'}">
                             <a class="btn btn-info" href="${contextPath}/application/cancel/${CUSTOMERID}/${SOID}/">Cancel order</a>
                         </c:if>
-                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
+                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
                 </div>
             </div>

@@ -155,9 +155,11 @@ public class CabinetController {
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
     public String apply(@PathVariable("sq") Long qw, Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
-        /*if (bindingResult.hasErrors()) {
-            return "welcome";
-        }*/
+        if ( soRepository.findOne(qw) == null
+                || !soRepository.findOne(qw).getCustomer1().getUserId().equals(userid.toString())){
+            return "error";
+        }
+
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
         So so = soRepository.findOne(qw);
@@ -185,6 +187,8 @@ public class CabinetController {
             payment.setPaymentbill1(paymentbill);
             payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
             paymentFacade.save(payment);
+            so.setPurchaseOrderNumber(payment.getPaymentId().toString());
+            soRepository.save(so);
         }
         return "redirect:/application/orderinfo";
     }
