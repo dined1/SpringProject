@@ -348,6 +348,10 @@ public class AppController {
 //                mp -= discount.getDiscountrule1().getDiscountValue();
 //            }
         }
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        so.setDateModified(dateFormat.format(date));
+        soRepository.save(so);
         itemRepository.findOne(itemid).setQuantity(item.getQuantity().subtract(BigInteger.ONE));
         productItems.setOrdItem(ordItem);
         productItems.setOTPWithTaxandDiscont(item.getDefOTP() + otp);
@@ -429,6 +433,7 @@ public class AppController {
         }
         So so = soRepository.findOne(soid);
         so.setStatus("Canceled");
+        so.setAttentionFlag("");
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 
@@ -459,6 +464,8 @@ public class AppController {
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
         so.setCustomer1(customer);
+        soRepository.save(so);
+        so.setSONumber(so.getSOId().toString());
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());
         soproduct.setSo1(so);

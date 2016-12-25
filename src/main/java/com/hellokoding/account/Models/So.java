@@ -69,6 +69,10 @@ public class So implements Serializable {
     @Basic
     private String location;
 
+    @Column(name = "AttentionFlag", table = "so")
+    @Basic
+    private String attentionFlag;
+
     @ManyToOne(targetEntity = Customer.class)
     private Customer customer1;
 
@@ -196,5 +200,13 @@ public class So implements Serializable {
 
     public void setSOId(Long SOId) {
         this.SOId = SOId;
+    }
+
+    public String getAttentionFlag() {
+        return attentionFlag;
+    }
+
+    public void setAttentionFlag(String attentionFlag) {
+        this.attentionFlag = attentionFlag;
     }
 }

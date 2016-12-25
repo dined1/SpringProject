@@ -161,29 +161,31 @@ public class CabinetController {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
         So so = soRepository.findOne(qw);
-        so.setStatus("Ordered");
-        so.setOrderDate(dateFormat.format(date));
-        soRepository.save(so);
-        List<ProductItems> productItems = productItemsRepository.findAll();
-        List<ProductItems> productItemsList = new ArrayList<>();
-        for (ProductItems product : productItems){
-            if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())){
-                OrdItem item = product.getOrdItem();
-                item.setStatus("Ordered");
-                ordItemRepository.save(item);
+        if (!so.getStatus().equals("Ordered")) {
+            so.setStatus("Ordered");
+            so.setOrderDate(dateFormat.format(date));
+            soRepository.save(so);
+            List<ProductItems> productItems = productItemsRepository.findAll();
+            List<ProductItems> productItemsList = new ArrayList<>();
+            for (ProductItems product : productItems) {
+                if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
+                    OrdItem item = product.getOrdItem();
+                    item.setStatus("Ordered");
+                    ordItemRepository.save(item);
+                }
             }
+            Paymentbill paymentbill = new Paymentbill();
+            paymentbill.setCmp(so.getFinalMP().floatValue());
+            paymentbill.setCotp(so.getFinalOTP().floatValue());
+            paymentBillRepository.save(paymentbill);
+            Payment payment = new Payment();
+            payment.setPaymentDate(date);
+            payment.setPaymentInfo("Payment was succesfull");
+            payment.setSo1(so);
+            payment.setPaymentbill1(paymentbill);
+            payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
+            paymentFacade.save(payment);
         }
-        Paymentbill paymentbill = new Paymentbill();
-        paymentbill.setCmp(so.getFinalMP().floatValue());
-        paymentbill.setCotp(so.getFinalOTP().floatValue());
-        paymentBillRepository.save(paymentbill);
-        Payment payment = new Payment();
-        payment.setPaymentDate(date);
-        payment.setPaymentInfo("Payment was succesfull");
-        payment.setSo1(so);
-        payment.setPaymentbill1(paymentbill);
-        payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
-        paymentFacade.save(payment);
         return "redirect:/application/orderinfo";
     }
 

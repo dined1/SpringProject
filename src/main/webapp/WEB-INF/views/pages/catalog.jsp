@@ -39,7 +39,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${ITEM_LIST}" var="ITEM">
-                                <c:if test="${ITEM.item.quantity <= 0}">
+                                <c:if test="${ITEM.item.quantity > 0}">
                                     <tr>
                                         <td><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
 
