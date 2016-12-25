@@ -38,7 +38,9 @@
                                     </a>             
 
                                 </div>
-                                <a href="${contextPath}/admin/user/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/admin/role/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/admin/role/setadm/${ID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Make admin</a>
+                                <a href="${contextPath}/admin/role/setmod/${ID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Make moderator</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

@@ -11,15 +11,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Role List</b></h5></div>
+                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> User List</b></h5></div>
                             <div class="col-lg-6">
                                 <div align="right">
-                                    <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
-                                    <c:if test="${not empty requestScope.ROLE_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Role list
-                                        </button>
-                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -27,70 +21,35 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="ROLE_TABLE">
+                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE">
                                 <thead>
-                                    <tr>
-                                        <th>Role Id</th>
-                                        <th>Name</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th>User Id</th>
+                                    <th>Login</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${ROLE_LIST}" var="ROLE">
-                                        <tr>
-                                            <td>${(ROLE.id)}</td>
+                                <c:forEach items="${USER_LIST}" var="USER">
+                                    <tr>
+                                        <td>${(USER.id)}</td>
 
-                                            <td>${(ROLE.name)}</td>
+                                        <td>${(USER.username)}</td>
 
-                                            <td>
-                                                <div class="pull-right">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="fa fa-gear"></i>  <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu pull-right" role="menu">
-                                                            <li><a href="${ROLE.id}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                            <li><a href="${contextPath}/admin/role/update/${ROLE.id}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a data-toggle="modal" data-target="#confirm_delete_${ROLE.id}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="confirm_delete_${ROLE.id}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title">Confirmation</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Are you sure to delete Role ?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <form action="${contextPath}/admin/role/remove/${ROLE.id}" method="DELETE">
-                                                                    <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                        <!-- /.modal-content -->
-                                                    </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-                                            </td>
+                                        <td><a href="${contextPath}/admin/role/setadm/${USER.id}"><i class="fa fa-level-up fa-fw"></i>adm  </a></td>
 
-                                        </tr>
-                                    </c:forEach>
+                                        <td><a href="${contextPath}/admin/role/setmod/${USER.id}"><i class="fa fa-level-up fa-fw"></i>mod  </a></td>
+
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
 
 
-                        <c:if test="${empty requestScope.ROLE_LIST}">
+                        <c:if test="${empty requestScope.USER_LIST}">
                             <div class="alert alert-info">
-                                <div align="center">No Role found</div>
+                                <div align="center">No User found</div>
                             </div>
                         </c:if>
 
@@ -108,7 +67,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('ROLE_TABLE').DataTable({
+        $('USER_TABLE').DataTable({
             responsive: true
         });
     });

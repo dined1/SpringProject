@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/so/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/so/new" method="POST">
                                     <!--div class="form-group">
                                         <label for="SOId">SOId</label>
                                         <input class="form-control" type="number" name="SOId" path="SOId"  required="required" autofocus="autofocus"  />
@@ -48,7 +48,6 @@
                                     <div class="form-group">
                                         <label>Costumer</label>
                                         <select path="customer1" name="customer1" onchange=" ">
-                                            <option value="ord_null">Нет</option>
                                             <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
                                                 <option value="${CUSTOMER.customerId}">${CUSTOMER.lastName}</option>
                                             </c:forEach>

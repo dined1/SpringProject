@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,6 +77,15 @@ public class CabinetController {
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(Long.toString(userRepository.findByUsername(principal.getName()).getId())));
         model.addAttribute("SO_LIST", soRepository.findAll());
         return "/cabinet/list"; //Используется для просмотра главной страницы
+    }
+
+    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
+    public String removeCustomer(@PathVariable("id") Integer id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "welcome";
+        }
+        customerRepository.delete(customerRepository.findOne(Long.valueOf(id)));
+        return "redirect:/cabinet/customerinfo";
     }
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)

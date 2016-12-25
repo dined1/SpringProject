@@ -9,6 +9,6 @@ import java.util.List;
  * Created by Admin on 17.12.2016.
  */
 public interface ItemCharacteristicRepository extends JpaRepository<ItemCharacteristic, Long> {
-    //List<ItemCharacteristic> findByItemCharacteristicId(Long charid);
+    List<ItemCharacteristic> findByItemCharacteristic_CharacteristicId(Long fd);
     List<ItemCharacteristic> findByItem_ItemId(Long itemid);
 }

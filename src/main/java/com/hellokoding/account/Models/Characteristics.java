@@ -13,10 +13,10 @@ import java.util.List;
 @Table(name = "characteristics")
 @Transactional
 public class Characteristics implements Serializable {
-    @Column(name = "CharacteristicId", table = "characteristics", nullable = false)
+    @Column(name = "characteristicId", table = "characteristics", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long CharacteristicId;
+    private Long characteristicId;
 
     @Column(name = "Characteristic", table = "characteristics")
     @Basic
@@ -33,11 +33,11 @@ public class Characteristics implements Serializable {
     private List<OrdItemCharacteristic> orditemCharacteristic;
 
     public Long getCharacteristicId() {
-        return CharacteristicId;
+        return characteristicId;
     }
 
     public void setCharacteristicId(Long characteristicId) {
-        CharacteristicId = characteristicId;
+        this.characteristicId = characteristicId;
     }
 
     public String getCharacteristic() {

@@ -28,7 +28,7 @@ import javax.ws.rs.*;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/so"})
+@RequestMapping(value = {"admin/so"})
 @Controller
 public class SoController {
 
@@ -55,6 +55,7 @@ public class SoController {
         soRepository.save(so);
         return "redirect:list";
     }
+
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editSo(Model model, @PathVariable("id") Long id) {

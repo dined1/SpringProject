@@ -61,6 +61,8 @@
                                                         <ul class="dropdown-menu pull-right" role="menu">
                                                             <li><a href="${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Groups</a></li>
                                                             <li><a href="${contextPath}/admin/item/discountrule/${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Discount</a></li>
+                                                            <li><a href="${contextPath}/admin/item/locations/${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Locations</a></li>
+                                                            <li><a href="${contextPath}/admin/item/characteristicses/${ITEM.itemId}"><i class="fa fa-level-up fa-fw"></i>  Characteristics</a></li>
                                                             <li><a href="${contextPath}/admin/item/update/${ITEM.itemId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                             <li class="divider"></li>
                                                             <li><a data-toggle="modal" data-target="#confirm_delete_${ITEM.itemId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>

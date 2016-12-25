@@ -69,10 +69,10 @@ public class Customer implements Serializable {
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
 
-    @OneToMany(targetEntity = Statisticscollector.class, mappedBy = "customer1")
+    @OneToMany(targetEntity = Statisticscollector.class, mappedBy = "customer1", cascade = CascadeType.REMOVE)
     private List<Statisticscollector> statisticscollectors1;
 
-    @OneToMany(targetEntity = So.class, mappedBy = "customer1")
+    @OneToMany(targetEntity = So.class, mappedBy = "customer1", cascade = CascadeType.REMOVE)
     private List<So> soes;
 
     public Long getCustomerId() {

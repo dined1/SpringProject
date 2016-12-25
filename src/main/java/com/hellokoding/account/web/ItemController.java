@@ -44,6 +44,8 @@ public class ItemController {
     @Autowired
     ItemCharacteristicRepository itemCharacteristicRepository;
     @Autowired
+    LocationRepository locationsRepository;
+    @Autowired
     ItemLocationRepository itemLocationRepository;
     @Autowired
     ItemdiscountRepository itemdiscountRepository;
@@ -170,56 +172,79 @@ public class ItemController {
         return "redirect:/admin/item/discountrule/" + id1;
     }
 
-    /*@RequestMapping(value = {"/location/{id}"}, method = RequestMethod.GET)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @RequestMapping(value = {"/locations/{id}"}, method = RequestMethod.GET)
     public String findLocation(Model model, @PathVariable("id") Long id) {
         List<ItemLocations> itemLocationses = itemLocationRepository.findByItem_ItemId(id);
-        List<Location> templocation = locationRepository.findAll();
+        List<Locations> templocation = locationsRepository.findAll();
 
-        List<Location> locations = new ArrayList<Location>();
-        List<Location> nlocations = new ArrayList<Location>();
+        List<Locations> locations = new ArrayList<Locations>();
+        List<Locations> nlocations = new ArrayList<Locations>();
 
 
 
-        for (Discountrule i: tempdiscountrule) {
+        for (Locations i: templocation) {
             Boolean b = false;
-            for (Itemdiscount idisc: itemdiscounts) if (i.getdRId().equals(idisc.getDiscountrule1().getdRId())) b = true;
-            if (b) discountrule.add(i);\
-            else ndiscountrule.add(i);
-        }
-        Location isfkg;
-        ItemLocations qwe;
-        qwe.
-        isfkg.
-
-        for (Location i: templocation) {
-            Boolean b = false;
-            for (ItemLocations idisc: itemLocationses) if (i.)
-            if (b) discountrule.add(i);
-            else ndiscountrule.add(i);
+            for (ItemLocations idisc: itemLocationses) if (i.getLocationId().equals(idisc.getLocation().getLocationId())) b = true;
+            if (b) locations.add(i);
+            else nlocations.add(i);
         }
 
-        model.addAttribute("DISCOUNTRULE_LIST", discountrule);
-        model.addAttribute("NDISCOUNTRULE_LIST", ndiscountrule);
+        model.addAttribute("LOCATIONS_LIST", locations);
+        model.addAttribute("NLOCATIONS_LIST", nlocations);
         model.addAttribute("ITEM", itemRepository.findOne(id));
 
-        return "item/discountrule";
+        return "item/locations";
     }
 
-    @RequestMapping(value = {"/removediscountrule/{id1}/{id2}"}, method = RequestMethod.GET)
-    public String removeDiscountrule(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
-        itemdiscountRepository.delete(itemdiscountRepository.findByDiscountrule1_DRId(id2));
-        return "redirect:/admin/item/discountrule/" + id1;
+    @RequestMapping(value = {"/removelocations/{id1}/{id2}"}, method = RequestMethod.GET)
+    public String removeLocations(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
+        itemLocationRepository.delete(itemLocationRepository.findByLocation_LocationId(id2));
+        return "redirect:/admin/item/locations/" + id1;
     }
 
-    @RequestMapping(value = {"/adddiscountrule/{id1}/{id2}"}, method = RequestMethod.GET)
-    public String addDiscountrule(Itemdiscount itemdiscount, @PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
-        itemdiscount.setItem1(itemRepository.findOne(id1));
-        itemdiscount.setDiscountrule1(discountruleRepository.findOne(id2));
-        itemdiscountRepository.save(itemdiscount);
-        return "redirect:/admin/item/discountrule/" + id1;
-    }*/
+    @RequestMapping(value = {"/addlocations/{id1}/{id2}"}, method = RequestMethod.GET)
+    public String addLocations(ItemLocations itemLocations, @PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
+        itemLocations.setItem(itemRepository.findOne(id1));
+        itemLocations.setLocation(locationsRepository.findOne(id2));
+        itemLocationRepository.save(itemLocations);
+        return "redirect:/admin/item/locations/" + id1;
+    }
 
-    /*@RequestMapping(value = {"/characteristics/{id}"}, method = RequestMethod.GET)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @RequestMapping(value = {"/characteristicses/{id}"}, method = RequestMethod.GET)
     public String findCharacteristics(Model model, @PathVariable("id") Long id) {
         List<ItemCharacteristic> itemCharacteristics = itemCharacteristicRepository.findByItem_ItemId(id);
         List<Characteristics> tempcharacteristicses = characteristicsRepository.findAll();
@@ -243,7 +268,7 @@ public class ItemController {
 
     @RequestMapping(value = {"/removecharacteristicses/{id1}/{id2}"}, method = RequestMethod.GET)
     public String removeCharacteristicses(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
-        itemCharacteristicRepository.delete(itemCharacteristicRepository.findByItemCharacteristicId(id2));
+        itemCharacteristicRepository.delete(itemCharacteristicRepository.findByItemCharacteristic_CharacteristicId(id2));
         return "redirect:/admin/item/characteristicses/" + id1;
     }
 
@@ -253,6 +278,6 @@ public class ItemController {
         itemCharacteristic.setItemCharacteristic(characteristicsRepository.findOne(id2));
         itemCharacteristicRepository.save(itemCharacteristic);
         return "redirect:/admin/item/characteristicses/" + id1;
-    }*/
+    }
     
 }

@@ -59,6 +59,7 @@ ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_location_locationId FO
 
 insert into role values ('1', 'ROLE_USER');
 insert into role values ('2', 'ROLE_ADMIN');
+insert into role values ('3', 'ROLE_MODER');
 insert into user values ('1', 'AAAAAdm1', 'AAAAAdm1');
 insert into user values ('2', 'MMMModer1', 'MMMModer1');
 insert into user values ('3', 'MMMMMMax', 'MMMMMMax');
@@ -160,6 +161,73 @@ insert into itemlocations values ('7', '4', '7');
 insert into itemlocations values ('8', '4', '8');
 insert into itemlocations values ('9', '5', '9');
 insert into itemlocations values ('10', '5', '10');
+insert into characteristics values ('1', 'Color', 'Red');
+insert into characteristics values ('2', 'Color', 'Blue');
+insert into characteristics values ('3', 'Color', 'Yellow');
+insert into characteristics values ('4', 'Color', 'Green');
+insert into characteristics values ('5', 'Color', 'Black');
+insert into characteristics values ('6', 'Color', 'White');
+insert into characteristics values ('7', 'Size', '40');
+insert into characteristics values ('8', 'Size', '41');
+insert into characteristics values ('9', 'Size', '42');
+insert into characteristics values ('10', 'Size', '43');
+
+/*insert into so values ('1', '05.11.2016', '04.11.2016', '08.11.2016', '011111', '1001', 'Ordered', '5', '5', '5', '5', 'Belarus', '1', '1');
+insert into so values ('2', '05.11.2016', '08.11.2016', '', '022222', '1002', 'Wait', '5', '5', '5', '5', 'Belarus', '1', '1');
+insert into so values ('3', '05.11.2016', '03.11.2016', '09.11.2016', '033333', '1003', 'Ordered', '5', '5', '5', '5', 'Belarus', '1', '1');
+insert into so values ('4', '05.11.2016', '02.11.2016', '', '044444', '1004', 'Wait', '5', '5', '5', '5', 'Belarus', '2', '2');
+insert into so values ('5', '05.11.2016', '08.11.2016', '', '055555', '1005', 'Wait', '5', '5', '5', '5', 'Belarus', '2', '2');
+insert into so values ('6', '05.11.2016', '06.11.2016', '07.11.2016', '066666', '1006', 'Ordered', '5', '5', '5', '5', 'Belarus', '2', '2');
+insert into so values ('7', '05.11.2016', '08.11.2016', '', '077777', '1007', 'Wait', '5', '5', '5', '5', 'Belarus', '3', '3');
+insert into so values ('8', '05.11.2016', '05.11.2016', '07.11.2016', '088888', '1008', 'Ordered', '5', '5', '5', '5', 'Belarus', '3', '3');
+insert into so values ('9', '05.11.2016', '08.11.2016', '', '099999', '1009', 'Wait', '5', '5', '5', '5', 'Belarus', '3', '3');
+insert into so values ('10', '05.11.2016', '03.11.2016', '06.11.2016', '100000', '1010', 'Ordered', '5', '5', '5', '5', 'Belarus', '4', '4');
+insert into so values ('11', '05.11.2016', '08.11.2016', '', '111111', '1011', 'Wait', '5', '5', '5', '5', 'Belarus', '4', '4');
+insert into so values ('12', '05.11.2016', '02.11.2016', '05.11.2016', '122222', '1012', 'Ordered', '5', '5', '5', '5', 'Belarus', '4', '4');
+
+insert into soproduct values ('1', '1');
+insert into soproduct values ('2', '2');
+insert into soproduct values ('3', '3');
+insert into soproduct values ('4', '4');
+insert into soproduct values ('5', '5');
+insert into soproduct values ('6', '6');
+insert into soproduct values ('7', '7');
+insert into soproduct values ('8', '8');
+insert into soproduct values ('9', '9');
+insert into soproduct values ('10', '10');
+insert into soproduct values ('11', '11');
+insert into soproduct values ('12', '12');
+
+insert into PRODUCTITEMS values ('1', '1', '1', '1000', '1000');
+insert into PRODUCTITEMS values ('2', '2', '2', '1000', '1000');
+insert into PRODUCTITEMS values ('3', '3', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('4', '4', '4', '1000', '1000');
+insert into PRODUCTITEMS values ('5', '5', '5', '1000', '1000');
+insert into PRODUCTITEMS values ('6', '6', '6', '1000', '1000');
+insert into PRODUCTITEMS values ('7', '7', '7', '1000', '1000');
+insert into PRODUCTITEMS values ('8', '8', '8', '1000', '1000');
+insert into PRODUCTITEMS values ('9', '9', '9', '1000', '1000');
+insert into PRODUCTITEMS values ('10', '10', '10', '1000', '1000');
+insert into PRODUCTITEMS values ('11', '1', '2', '1000', '1000');
+insert into PRODUCTITEMS values ('12', '2', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('13', '3', '4', '1000', '1000');
+insert into PRODUCTITEMS values ('14', '4', '5', '1000', '1000');
+insert into PRODUCTITEMS values ('15', '5', '6', '1000', '1000');
+insert into PRODUCTITEMS values ('16', '6', '7', '1000', '1000');
+insert into PRODUCTITEMS values ('17', '7', '8', '1000', '1000');
+insert into PRODUCTITEMS values ('18', '8', '9', '1000', '1000');
+insert into PRODUCTITEMS values ('19', '9', '10', '1000', '1000');
+insert into PRODUCTITEMS values ('20', '10', '1', '1000', '1000');
+insert into PRODUCTITEMS values ('21', '1', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('22', '2', '4', '1000', '1000');
+insert into PRODUCTITEMS values ('23', '3', '5', '1000', '1000');
+insert into PRODUCTITEMS values ('24', '4', '6', '1000', '1000');
+insert into PRODUCTITEMS values ('25', '5', '7', '1000', '1000');
+insert into PRODUCTITEMS values ('26', '6', '8', '1000', '1000');
+insert into PRODUCTITEMS values ('27', '7', '9', '1000', '1000');
+insert into PRODUCTITEMS values ('28', '8', '10', '1000', '1000');
+insert into PRODUCTITEMS values ('29', '9', '11', '1000', '1000');
+insert into PRODUCTITEMS values ('30', '10', '12', '1000', '1000')*/
 
 
 

@@ -16,44 +16,40 @@
                     </div>
                     <div class="panel-body">
 
-                        <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
+                        <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                             <thead>
                             <tr>
-                                <th>Characteristics Id</th>
-                                <th>Characteristic</th>
-                                <th>Characteristic Value</th>
+                                <th>Location Id</th>
+                                <th>Country</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${CHARACTERISTICS_LIST}" var="C">
+                            <c:forEach items="${LOCATIONS_LIST}" var="L">
                                 <tr>
-                                    <td>${C.characteristicId}</td>
-                                    <td>${C.characteristicId}</td>
-                                    <td>${C.characteristicValue}</td>
-                                    <td><a href="${contextPath}/admin/item/removecharacteristicses/${ITEM.itemId}/${C.characteristicId}">Delete</a></td>
+                                    <td>${L.locationId}</td>
+                                    <td>${L.locationname}</td>
+                                    <td><a href="${contextPath}/admin/item/removelocations/${ITEM.itemId}/${L.locationId}">Delete</a></td>
 
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
 
-                        <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
+                        <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                             <thead>
                             <tr>
-                                <th>Characteristics Id</th>
-                                <th>Characteristic</th>
-                                <th>Characteristic Value</th>
+                                <th>Location Id</th>
+                                <th>Country</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${NCHARACTERISTICS_LIST}" var="C">
+                            <c:forEach items="${NLOCATIONS_LIST}" var="L">
                                 <tr>
-                                    <td>${C.characteristicId}</td>
-                                    <td>${C.characteristicId}</td>
-                                    <td>${C.characteristicValue}</td>
-                                    <td><a href="${contextPath}/admin/item/addcharacteristicses/${ITEM.itemId}/${C.characteristicId}">Add</a></td>
+                                    <td>${L.locationId}</td>
+                                    <td>${L.locationname}</td>
+                                    <td><a href="${contextPath}/admin/item/addlocations/${ITEM.itemId}/${L.locationId}">Add</a></td>
 
                                 </tr>
                             </c:forEach>

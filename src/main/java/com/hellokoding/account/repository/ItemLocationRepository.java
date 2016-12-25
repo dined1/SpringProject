@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface ItemLocationRepository extends JpaRepository<ItemLocations, Long> {
     List<ItemLocations> findByLocation_Locationname(String location);
+    List<ItemLocations> findByLocation_LocationId(Long loc);
     List<ItemLocations> findByItem_ItemId(Long item);
 }
