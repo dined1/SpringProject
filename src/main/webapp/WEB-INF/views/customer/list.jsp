@@ -15,11 +15,6 @@
                             <div class="col-lg-6">
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
-                                    <c:if test="${not empty requestScope.CUSTOMER_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Customer list
-                                        </button>
-                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -56,8 +51,6 @@
                                         <td>${(CUSTOMER.phone)}</td>
 
                                         <td>${(CUSTOMER.address1.addressLine)}</td>
-
-                                        <td>${(CUSTOMER.userId)}</td>
 
                                         <td>
                                             <div class="pull-right">
