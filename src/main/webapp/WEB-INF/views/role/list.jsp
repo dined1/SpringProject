@@ -88,7 +88,6 @@
                         </div>
                         <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
 
-
                     </div>
                     <!-- /.panel-body -->
                 </div>

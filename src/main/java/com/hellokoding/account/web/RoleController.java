@@ -74,16 +74,6 @@ public class RoleController {
     }
 
 
-    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.POST)
-    public String updateRole(@Valid
-                                @BeanParam Role role, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "welcome";
-        }
-        roleRepository.save(role);
-        return "redirect:role/list";
-    }
-
     @RequestMapping(value = {"/remove/{id1}/{id2}"}, method = RequestMethod.GET)
     public String removeRole(User user, @PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
         user = userRepository.findById(id1);
