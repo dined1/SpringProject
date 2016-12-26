@@ -17,11 +17,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/admin/customer/new" method="POST">
-                                    <h2>Customer creation</h2>
-                                    <div class="form-group">
-                                        <label for="customerId">Customer Id</label>
-                                        <input class="form-control" type="number" name="customerId" path="customerId"  required="required" autofocus="autofocus"  />
-                                    </div>
+                                    <h2>Customer information</h2>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
                                         <input class="form-control" type="text" name="firstName" path="firstName"  />
@@ -42,15 +38,30 @@
                                         <label for="phone">Phone</label>
                                         <input class="form-control" type="text" name="phone" path="phone"  />
                                     </div>
+                                    <div class="form-group">
+                                        <label for="passNumber">Pass Number</label>
+                                        <input class="form-control" type="text" name="passNumber" path="PassNumber"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="countNumber">Count Number</label>
+                                        <input class="form-control" type="text" name="countNumber" path="CountNumber"  />
+                                    </div>
                                     <h2>Customer address</h2>
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <select path="Address" name="Address" onchange=" ">
-                                            <option value="ord_null">Нет</option>
-                                            <c:forEach items="${ADDRESS_LIST}" var="ADDRESS">
-                                                <option value="${ADDRESS.addressId}">${ADDRESS.addressLine}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <label for="addressLine">Address Line</label>
+                                        <input class="form-control" type="text" name="addressLine" path="addressLine"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input class="form-control" type="text" name="city" path="city"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input class="form-control" type="text" name="country" path="country"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="postalCode">Postal Code</label>
+                                        <input class="form-control" type="text" name="postalCode" path="postalCode"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

@@ -99,6 +99,7 @@
 
                         <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/application/orderinfo"><i class=""></i>  Orders</a></p>
                         <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/customerinfo"><i class=""></i>  Customers</a></p>
+                        <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/payments"><i class=""></i>  Payments</a></p>
                         <p><a class="btn btn-primary btn-sm center-block" href="${contextPath}/cabinet/password"><i class=""></i>  Change password</a></p>
                         <p><a href="${contextPath}/welcome" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a></p>
 

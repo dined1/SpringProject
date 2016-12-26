@@ -165,7 +165,7 @@ public class AppController {
                 i++;
             }
         }
-        if (i == finalproducts.size()){
+        if (i == finalproducts.size() && i != 0){
             soRepository.findOne(soid).setStatus("Ordered");
         }
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);

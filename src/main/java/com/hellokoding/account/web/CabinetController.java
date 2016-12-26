@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,21 +79,48 @@ public class CabinetController {
         return "/cabinet/list"; //Используется для просмотра главной страницы
     }
 
-    @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
-    public String editCustomer(Model model, @PathVariable("id") Long id) {
+    @RequestMapping(value = {"/payments"}, method = RequestMethod.GET)
+    public String payments(Model model, Principal principal) {
+        //String qwe = bCryptPasswordEncoder.encode("12345678");
+        if (principal==null){
+            return "error";
+        }
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("PAYMENTS_LIST", paymentFacade.findBySo1_Customer1_UserId(userid.toString()));
+        model.addAttribute("SO_LIST", soRepository.findAll());
+        return "/cabinet/paymentslist";
+    }
+
+    @RequestMapping(value = {"/customer/update/{id}"}, method = RequestMethod.GET)
+    public String editCustomer(Model model, @PathVariable("id") Long id,  Principal principal) {
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if ( customerRepository.findOne(id) == null
+                || !customerRepository.findOne(id).getUserId().equals(userid.toString())){
+            return "error";
+        }
         model.addAttribute("CUSTOMER", customerRepository.findOne(id));
-        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("ADDRESS", customerRepository.findOne(id).getAddress1());
         return "cabinet/update";
     }
 
-    @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/customer/update"}, method = RequestMethod.POST)
     public String updateCustomer(@Valid
-                                 @BeanParam Customer customer/*, BindingResult bindingResult*/) {
-        /*if (bindingResult.hasErrors()) {
-            return "welcome";
-        }*/
-        customerRepository.save(customer);
-        return "redirect:cabinet";
+                                 @BeanParam Customer customer, @Valid @BeanParam Address address) {
+        Customer customer1 = customerRepository.findOne(customer.getCustomerId());
+        customer1.setLocation(customer.getLocation());
+        customer1.setContact(customer.getContact());
+        customer1.setCountNumber(customer.getCountNumber());
+        customer1.setEmail(customer.getEmail());
+        customer1.setFirstName(customer.getFirstName());
+        customer1.setLastName(customer.getLastName());
+        customer1.setPhone(customer.getPhone());
+        customer1.getAddress1().setAddressLine(address.getAddressLine());
+        customer1.getAddress1().setCity(address.getCity());
+        customer1.getAddress1().setCountry(address.getCountry());
+        customer1.getAddress1().setPostalCode(address.getPostalCode());
+        addressRepository.save(customer1.getAddress1());
+        customerRepository.save(customer1);
+        return "redirect:/cabinet/customerinfo";
     }
 
     @RequestMapping(value = {"/myorders"}, method = RequestMethod.GET)
@@ -162,13 +190,24 @@ public class CabinetController {
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
+        Float CMP = 0f;
+        Float OTP = 0f;
         So so = soRepository.findOne(qw);
         if (!so.getStatus().equals("Ordered")) {
             so.setStatus("Ordered");
             so.setOrderDate(dateFormat.format(date));
             soRepository.save(so);
+
+            Paymentbill paymentbill = new Paymentbill();
             List<ProductItems> productItems = productItemsRepository.findAll();
             List<ProductItems> productItemsList = new ArrayList<>();
+            for (ProductItems pi : productItems){
+                if (pi.getOrdItem().getStatus().equals("Wait")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
+                    CMP += pi.getOrdItem().getDefMP();
+                    OTP += pi.getOrdItem().getDefOTP();
+                }
+            }
+
             for (ProductItems product : productItems) {
                 if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
                     OrdItem item = product.getOrdItem();
@@ -176,9 +215,8 @@ public class CabinetController {
                     ordItemRepository.save(item);
                 }
             }
-            Paymentbill paymentbill = new Paymentbill();
-            paymentbill.setCmp(so.getFinalMP().floatValue());
-            paymentbill.setCotp(so.getFinalOTP().floatValue());
+            paymentbill.setCmp(CMP);
+            paymentbill.setCotp(OTP);
             paymentBillRepository.save(paymentbill);
             Payment payment = new Payment();
             payment.setPaymentDate(date);
@@ -193,6 +231,17 @@ public class CabinetController {
         return "redirect:/application/orderinfo";
     }
 
+    @RequestMapping(value = {"/customer/remove/{id}"}, method = RequestMethod.GET)
+    public String deleteCustomer(Model model, Principal principal, @PathVariable("id") Integer id) {
+        Long userid =  userRepository.findByUsername(principal.getName()).getId();
+        if (!soRepository.findByCustomer1_UserId(userid.toString()).isEmpty()){
+            return "error";
+        }
+        customerRepository.delete(customerRepository.findOne(Long.valueOf(id)));
+
+        return "redirect:/cabinet/customerinfo";
+    }
+
     @RequestMapping(value = {"/customerinfo"}, method = RequestMethod.GET)
     public String getCustomer(Model model, Principal principal) {
         Long id =  userRepository.findByUsername(principal.getName()).getId();
@@ -204,18 +253,39 @@ public class CabinetController {
     @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.GET)
     public String emptyCustomer(Model model) {
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
-        return "cabinet/customerCreate";
+        return "cabinet/create";
     }
 
     @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.POST)
-    public String createCustomer(Principal principal, @Valid
-    @BeanParam Customer customer, @RequestParam(value = "Address", required = false) String addre) {
-        Address address = addressRepository.findOne(Long.valueOf(addre));
+    public String createCustomer(Principal principal, Address address, Customer customer, @RequestParam("firstName") String firstName,
+                                 @RequestParam("lastName") String lastName,
+                                 @RequestParam("contact") String contact,
+                                 @RequestParam("email") String email,
+                                 @RequestParam("phone") String phone,
+                                 @RequestParam("passNumber") String passNumber,
+                                 @RequestParam("countNumber") String countNumber,
+                                 @RequestParam("addressLine") String addressLine,
+                                 @RequestParam("city") String city,
+                                 @RequestParam("country") String country,
+                                 @RequestParam("postalCode") String postalCode) {
+        customer.setLastName(lastName);
+        customer.setFirstName(firstName);
+        customer.setContact(contact);
+        customer.setEmail(email);
+        customer.setPhone(phone);
+        customer.setPassNumber(passNumber);
+        customer.setCountNumber(countNumber);
+        customer.setLocation(country);
+        Long i = userRepository.findByUsername(principal.getName()).getId();
+        String s = String.valueOf(i);
+        customer.setUserId(String.valueOf(s));
+        address.setAddressLine(addressLine);
+        address.setCity(city);
+        address.setCountry(country);
+        address.setPostalCode(postalCode);
+        addressRepository.save(address);
         customer.setAddress1(address);
-        Long u = userRepository.findByUsername(principal.getName()).getId();
-        customer.setUserId(String.valueOf(u));
         customerRepository.save(customer);
-        return "redirect:/cabinet/cabinet";
-
+        return "redirect:customerinfo";
     }
 }

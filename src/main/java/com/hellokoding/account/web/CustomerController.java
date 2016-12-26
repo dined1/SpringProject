@@ -5,12 +5,11 @@
  */
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.Address;
-import com.hellokoding.account.Models.Customer;
+import com.hellokoding.account.Models.*;
 import com.hellokoding.account.controller.util.ErrorBean;
-import com.hellokoding.account.repository.AddressRepository;
-import com.hellokoding.account.repository.CustomerRepository;
+import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import java.security.Principal;
 
 /**
  *
@@ -33,6 +33,8 @@ import javax.ws.rs.*;
 public class CustomerController {
 
 
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
@@ -52,9 +54,31 @@ public class CustomerController {
 
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String createCustomer(@Valid
-            @BeanParam Customer customer, @RequestParam(value = "Address", required = false) String addre) {
-        Address address = addressRepository.findOne(Long.valueOf(addre));
+    public String createCustomer(Principal principal, Address address, Customer customer, @RequestParam("firstName") String firstName,
+                                 @RequestParam("lastName") String lastName,
+                                 @RequestParam("contact") String contact,
+                                 @RequestParam("email") String email,
+                                 @RequestParam("phone") String phone,
+                                 @RequestParam("passNumber") String passNumber,
+                                 @RequestParam("countNumber") String countNumber,
+                                 @RequestParam("addressLine") String addressLine,
+                                 @RequestParam("city") String city,
+                                 @RequestParam("country") String country,
+                                 @RequestParam("postalCode") String postalCode) {
+        customer.setFirstName(firstName);
+        customer.setContact(contact);
+        customer.setEmail(email);
+        customer.setPhone(phone);
+        customer.setPassNumber(passNumber);
+        customer.setCountNumber(countNumber);
+        Long i = userRepository.findByUsername(principal.getName()).getId();
+        String s = String.valueOf(i);
+        customer.setUserId(String.valueOf(s));
+        address.setAddressLine(addressLine);
+        address.setCity(city);
+        address.setCountry(country);
+        address.setPostalCode(postalCode);
+        addressRepository.save(address);
         customer.setAddress1(address);
         customerRepository.save(customer);
         return "redirect:list";
@@ -71,7 +95,7 @@ public class CustomerController {
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateCustomer(@Valid
-            @BeanParam Customer customer, BindingResult bindingResult) {
+                                 @BeanParam Customer customer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "welcome";
         }
