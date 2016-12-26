@@ -36,10 +36,14 @@
                                     <div class="form-group">
                                         <label for="defMP">Def MP</label>
                                         <input class="form-control" type="number" name="defMP"  value="${ITEM.defMP}" />
-                                    </div>     
+                                    </div>
                                     <div class="form-group">
                                         <label for="defOTP">Def OTP</label>
                                         <input class="form-control" type="number" name="defOTP"  value="${ITEM.defOTP}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity</label>
+                                        <input class="form-control" type="number" name="quantity"  value="${ITEM.quantity}" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

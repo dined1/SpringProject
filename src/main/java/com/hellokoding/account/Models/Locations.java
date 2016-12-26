@@ -2,14 +2,7 @@ package com.hellokoding.account.Models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,7 +23,7 @@ public class Locations implements Serializable {
     @Basic
     private String locationname;
 
-    @OneToMany(targetEntity = ItemLocations.class, mappedBy = "location")
+    @OneToMany(targetEntity = ItemLocations.class, mappedBy = "location", cascade = CascadeType.REMOVE)
     private List<ItemLocations> itemlocations;
 
     public Long getLocationId() {

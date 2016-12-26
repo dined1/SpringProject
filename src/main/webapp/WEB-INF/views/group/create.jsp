@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Group 1 </b></h5>
+                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Group </b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">

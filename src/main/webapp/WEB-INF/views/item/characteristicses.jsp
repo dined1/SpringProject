@@ -12,10 +12,11 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Discountrule info</b></h5>
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Characteristics</b></h5>
                     </div>
                     <div class="panel-body">
 
+                        <h4>To add the feature</h4>
                         <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
                             <thead>
                             <tr>
@@ -31,13 +32,14 @@
                                     <td>${C.characteristicId}</td>
                                     <td>${C.characteristicId}</td>
                                     <td>${C.characteristicValue}</td>
-                                    <td><a href="${contextPath}/admin/item/removecharacteristicses/${ITEM.itemId}/${C.characteristicId}">Delete</a></td>
+                                    <td><a href="${contextPath}/admin/item/removecharacteristicses/${ITEM.itemId}/${C.characteristicId}">Remove</a></td>
 
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
 
+                        <h4>To remove the feature</h4>
                         <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
                             <thead>
                             <tr>

@@ -11,23 +11,23 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Discountrule </b></h5>
+                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Characteristic </b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/discountrule/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/characteristics/new" method="POST">
                                     <div class="form-group">
-                                        <label for="discountValue">Discount Value</label>
-                                        <input class="form-control" type="number" name="discountValue" path="discountValue"  />
+                                        <label for="Characteristic">Characteristic</label>
+                                        <input class="form-control" type="text" name="Characteristic" path="Characteristic" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="discountProcent">Discount Procent</label>
-                                        <input class="form-control" type="number" name="discountProcent" path="discountProcent"  />
+                                        <label for="CharacteristicValue">Characteristic Value</label>
+                                        <input class="form-control" type="text" name="CharacteristicValue" path="CharacteristicValue" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/characteristics/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

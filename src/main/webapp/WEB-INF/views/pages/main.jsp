@@ -167,7 +167,7 @@
     <div class="container">
         <div class="row">
             <div class="section_header text-center">
-                <h2>Посмотрите как мы вас ненавидим</h2>
+                <h2>Посмотрите как счастливы наши клиенты</h2>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">

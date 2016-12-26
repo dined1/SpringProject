@@ -20,45 +20,73 @@
 
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">Customer Id :</span></div>
+                                            <div class="col-lg-4"><span>Customer Id :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.customerId}</div>
                                         </div>
                                     </a>
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">First Name :</span></div>
+                                            <div class="col-lg-4"><span>First Name :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.firstName}</div>
                                         </div>
                                     </a>
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">Last Name :</span></div>
+                                            <div class="col-lg-4"><span>Last Name :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.firstName}</div>
                                         </div>
                                     </a>
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">Contact :</span></div>
+                                            <div class="col-lg-4"><span>Contact :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.contact}</div>
                                         </div>
                                     </a>
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">Email :</span></div>
+                                            <div class="col-lg-4"><span>Email :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.email}</div>
                                         </div>
                                     </a>
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">Phone :</span></div>
+                                            <div class="col-lg-4"><span>Phone :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.phone}</div>
                                         </div>
                                     </a>
 
                                     <a href="#" class="list-group-item">
                                         <div class="row">
-                                            <div class="col-lg-4"><span class="small">Address :</span></div>
+                                            <div class="col-lg-4"><span>Address Line :</span></div>
                                             <div class="col-lg-8">${CUSTOMER.address1.addressLine}</div>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span>City :</span></div>
+                                            <div class="col-lg-8">${CUSTOMER.address1.city}</div>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span>Country :</span></div>
+                                            <div class="col-lg-8">${CUSTOMER.address1.country}</div>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span>Date :</span></div>
+                                            <div class="col-lg-8">${CUSTOMER.address1.modifiedDate}</div>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span>Code :</span></div>
+                                            <div class="col-lg-8">${CUSTOMER.address1.postalCode}</div>
                                         </div>
                                     </a>
                                 </div>

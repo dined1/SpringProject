@@ -11,7 +11,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Group 1 List</b></h5></div>
+                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Group List</b></h5></div>
                             <div class="col-lg-6">
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
@@ -27,7 +27,6 @@
                                     <tr>
                                         <th>Group Id</th>
                                         <th>Name</th>
-                                        <th>Items</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -38,7 +37,7 @@
 
                                             <td>${(GROUP_1.name)}</td>
 
-                                            <td>
+                                            <!--td>
                                                 <div class="pull-right">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -54,7 +53,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td-->
 
                                             <td>
                                                 <div class="pull-right">
@@ -80,7 +79,7 @@
                                                                 <h4 class="modal-title">Confirmation</h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>Are you sure to delete Group 1 ?</p>
+                                                                <p>Are you sure to delete Group?</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form action="${contextPath}/admin/group/remove/${GROUP_1.groupId}" method="DELETE">

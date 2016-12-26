@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/admin/customer/new" method="POST">
-                                    <h2>Customer information</h2>
+                                    <h4>Customer information</h4>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
                                         <input class="form-control" type="text" name="firstName" path="firstName"  />
@@ -46,7 +46,7 @@
                                         <label for="countNumber">Count Number</label>
                                         <input class="form-control" type="text" name="countNumber" path="CountNumber"  />
                                     </div>
-                                    <h2>Customer address</h2>
+                                    <h4>Customer address</h4>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
                                         <input class="form-control" type="text" name="addressLine" path="addressLine"  />

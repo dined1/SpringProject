@@ -27,7 +27,7 @@ public class Group1 implements Serializable {
     @Basic(optional = false)
     private String name;
 
-    @OneToMany(targetEntity = Itemgroup.class, mappedBy = "groups1")
+    @OneToMany(targetEntity = Itemgroup.class, mappedBy = "groups1", cascade = CascadeType.REMOVE)
     private List<Itemgroup> itemgroups1;
 
     public Long getGroupId() {

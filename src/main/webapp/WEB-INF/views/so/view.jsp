@@ -14,58 +14,34 @@
                         <h5><i class="fa fa-info-circle fa-fw"></i> <b> So info</b></h5> 
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="list-group">
+                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                            <thead>
+                            <tr>
+                                <th>Item Id</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Def MP</th>
+                                <th>Def OTP</th>
+                                <th>Modified Date</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${PROD}" var="P">
+                                    <tr>
+                                        <td>${P.ordItem.orditemId}</td>
+                                        <td>${P.ordItem.name}</td>
+                                        <td>${P.ordItem.type}</td>
+                                        <td>${P.ordItem.description}</td>
+                                        <td>${P.ordItem.defMP}</td>
+                                        <td>${P.ordItem.defOTP}</td>
+                                        <td>${P.ordItem.modifiedDate}</td>
 
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">SOId :</span></div>
-                                            <div class="col-lg-8">${(SO.SOId)}</div>
-                                        </div>
-                                    </a>             
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">Date Created :</span></div>
-                                            <div class="col-lg-8">${(SO.dateCreated)}</div>
-                                        </div>
-                                    </a>             
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">Order Date :</span></div>
-                                            <div class="col-lg-8">${(SO.orderDate)}</div>
-                                        </div>
-                                    </a>             
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">Status :</span></div>
-                                            <div class="col-lg-8">${(SO.status)}</div>
-                                        </div>
-                                    </a>             
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">SONumber :</span></div>
-                                            <div class="col-lg-8">${(SO.SONumber)}</div>
-                                        </div>
-                                    </a>             
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">Purchase Order Number :</span></div>
-                                            <div class="col-lg-8">${(SO.purchaseOrderNumber)}</div>
-                                        </div>
-                                    </a>             
-                                    <a href="#" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-lg-4"><span class="small">Date Modified :</span></div>
-                                            <div class="col-lg-8">${(SO.dateModified)}</div>
-                                        </div>
-                                    </a>             
-
-                                </div>
-                                <a href="${contextPath}/admin/so/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
-                            </div>
-                            <!-- /.col-lg-6 (nested) -->
-                        </div>
+                                    </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
                         <!-- /.row (nested) -->
                     </div>
                     <!-- /.panel-body -->

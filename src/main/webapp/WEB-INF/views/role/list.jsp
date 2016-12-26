@@ -45,13 +45,7 @@
                                 </tbody>
                             </table>
                         </div>
-
-
-                        <c:if test="${empty requestScope.USER_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No User found</div>
-                            </div>
-                        </c:if>
+                        <a href="${contextPath}/admin/role/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
 
 
 

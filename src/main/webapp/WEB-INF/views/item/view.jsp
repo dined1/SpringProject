@@ -11,9 +11,10 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Item info</b></h5> 
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Groups</b></h5>
                     </div>
                     <div class="panel-body">
+                        <h4>To remove the item from the group</h4>
                         <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
                             <thead>
                             <tr>
@@ -27,11 +28,13 @@
                                     <tr>
                                         <td>${G.groupId}</td>
                                         <td>${G.name}</td>
-                                        <td><a href="${contextPath}/admin/item/removegroup/${ITEM.itemId}/${G.groupId}">Delete</a></td>
+                                        <td><a href="${contextPath}/admin/item/removegroup/${ITEM.itemId}/${G.groupId}">Remove</a></td>
                                     </tr>
                             </c:forEach>
                             </tbody>
                         </table>
+
+                        <h4>Add the item to the group</h4>
                         <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
                             <thead>
                             <tr>

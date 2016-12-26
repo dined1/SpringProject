@@ -5,11 +5,9 @@
  */
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.Customer;
-import com.hellokoding.account.Models.So;
+import com.hellokoding.account.Models.*;
 import com.hellokoding.account.controller.util.ErrorBean;
-import com.hellokoding.account.repository.CustomerRepository;
-import com.hellokoding.account.repository.SORepository;
+import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +32,8 @@ public class SoController {
 
     @Autowired
     SORepository soRepository;
+    @Autowired
+    ProductItemsRepository productItemsRepository;
     @Autowired
     CustomerRepository customerRepository;
     @Inject
@@ -90,8 +90,9 @@ public class SoController {
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String findSo(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("SO", soRepository.findOne(Long.valueOf(id)));
+    public String findSo(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("SO", soRepository.findOne(id));
+        model.addAttribute("PROD", productItemsRepository.findBySoproduct1_SOPId(id));
         return "so/view";
     }
 

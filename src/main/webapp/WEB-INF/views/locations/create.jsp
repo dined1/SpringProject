@@ -11,23 +11,20 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Discountrule </b></h5>
+                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new Location </b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/discountrule/new" method="POST">
+                                <form role="form" action="${contextPath}/admin/locations/new" method="POST">
                                     <div class="form-group">
-                                        <label for="discountValue">Discount Value</label>
-                                        <input class="form-control" type="number" name="discountValue" path="discountValue"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="discountProcent">Discount Procent</label>
-                                        <input class="form-control" type="number" name="discountProcent" path="discountProcent"  />
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="locationname">Location</label>
+                                            <input class="form-control" type="text" name="locationname" path="locationname" />
+                                        </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/locations/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

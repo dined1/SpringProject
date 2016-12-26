@@ -11,7 +11,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Discountrule List</b></h5></div>
+                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Characteristic List</b></h5></div>
                             <div class="col-lg-6">
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
@@ -25,9 +25,9 @@
                             <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                                 <thead>
                                 <tr>
-                                    <th>DRId</th>
-                                    <th>Discount Value</th>
-                                    <th>Discount Procent</th>
+                                    <th>Characteristic Id</th>
+                                    <th>Characteristic</th>
+                                    <th>Characteristic Value</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -48,7 +48,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
                                                         <li><a href="${CHARACTERISTICS.characteristicId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${contextPath}/admin/discountrule/update/${CHARACTERISTICS.characteristicId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                        <li><a href="${contextPath}/admin/characteristics/update/${CHARACTERISTICS.characteristicId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
                                                         <li><a data-toggle="modal" data-target="#confirm_delete_${CHARACTERISTICS.characteristicId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                         </li>
@@ -61,13 +61,13 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h4 class="modal-title">lol</h4>
+                                                            <h4 class="modal-title">Confirmation</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>lol2</p>
+                                                            <p>Are you sure to delete Characteristics?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="${contextPath}/admin/discountrule/remove/${CHARACTERISTICS.characteristicId}" method="DELETE">
+                                                            <form action="${contextPath}/admin/characteristics/remove/${CHARACTERISTICS.characteristicId}" method="DELETE">
                                                                 <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                             </form>
                                                         </div>
@@ -85,12 +85,6 @@
                             </table>
                         </div>
 
-
-                        <c:if test="${empty requestScope.DISCOUNTRULE_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No Discountrule found</div>
-                            </div>
-                        </c:if>
 
 
 

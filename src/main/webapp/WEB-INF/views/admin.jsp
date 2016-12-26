@@ -9,7 +9,7 @@
         <div class="row">
 
             <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
@@ -35,29 +35,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right entity">
-                                <div class="title">Group</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="${contextPath}/admin/group/list">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-green">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-laptop fa-5x"></i>
+                                <i class="fa fa-list-alt fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right entity">
                                 <div class="title">Discountrule</div>
@@ -79,58 +57,14 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right entity">
-                                <div class="title">Address</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="${contextPath}/admin/address/list">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-green">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-laptop fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right entity">
-                                <div class="title">Customer</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="${contextPath}/admin/customer/list">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
                                 <i class="fa fa-list-alt fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right entity">
-                                <div class="title">So</div>
+                                <div class="title">Group</div>
                             </div>
                         </div>
                     </div>
-                    <a href="${contextPath}/admin/so/list">
+                    <a href="${contextPath}/admin/group/list">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -141,29 +75,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-list-alt fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right entity">
-                                <div class="title">Characteristics</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="${contextPath}/admin/characteristics/list">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
@@ -189,7 +101,51 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
+                                <i class="fa fa-list-alt fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right entity">
+                                <div class="title">Characteristics</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="${contextPath}/admin/characteristics/list">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-list-alt fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right entity">
+                                <div class="title">Customer</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="${contextPath}/admin/customer/list">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-list-alt fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right entity">
                                 <div class="title">Role</div>
@@ -197,6 +153,28 @@
                         </div>
                     </div>
                     <a href="${contextPath}/admin/role/list">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-list-alt fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right entity">
+                                <div class="title">So</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="${contextPath}/admin/so/list">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

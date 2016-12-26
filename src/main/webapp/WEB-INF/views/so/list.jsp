@@ -45,20 +45,14 @@
                                     <c:forEach items="${SO_LIST}" var="SO">
                                         <tr>
                                             <td>${(SO.SOId)}</td>
-
                                             <td>${(SO.dateCreated)}</td>
-
                                             <td>${(SO.orderDate)}</td>
-
                                             <td>${(SO.status)}</td>
-
                                             <td>${(SO.SONumber)}</td>
-
                                             <td>${(SO.purchaseOrderNumber)}</td>
-
                                             <td>${(SO.dateModified)}</td>
-
                                             <td>${(SO.customer1.lastName)}</td>
+                                            <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

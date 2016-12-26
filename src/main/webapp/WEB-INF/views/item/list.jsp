@@ -32,6 +32,7 @@
                                         <th>Def MP</th>
                                         <th>Def OTP</th>
                                         <th>Modified Date</th>
+                                        <th>Quantity</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -51,6 +52,8 @@
                                             <td>${(ITEM.defOTP)}</td>
 
                                             <td>${(ITEM.modifiedDate)}</td>
+
+                                            <td>${(ITEM.quantity)}</td>
 
                                             <td>
                                                 <div class="pull-right">

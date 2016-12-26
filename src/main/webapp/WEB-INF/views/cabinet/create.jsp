@@ -16,12 +16,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/cabinet/new" method="POST">
+                                <form role="form" action="${contextPath}/cabinet/newcustomer" method="POST">
                                     <h2>Customer information</h2>
-                                    <div class="form-group">
-                                        <label for="customerId">Customer Id</label>
-                                        <input class="form-control" type="number" name="customerId" path="customerId"  required="required" autofocus="autofocus"  />
-                                    </div>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
                                         <input class="form-control" type="text" name="firstName" path="firstName"  />
@@ -43,12 +39,12 @@
                                         <input class="form-control" type="text" name="phone" path="phone"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="phone">Pass Number</label>
-                                        <input class="form-control" type="text" name="PassNumber" path="PassNumber"  />
+                                        <label for="passNumber">Pass Number</label>
+                                        <input class="form-control" type="text" name="passNumber" path="passNumber"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="phone">Count Number</label>
-                                        <input class="form-control" type="text" name="CountNumber" path="CountNumber"  />
+                                        <label for="countNumber">Count Number</label>
+                                        <input class="form-control" type="text" name="countNumber" path="countNumber"  />
                                     </div>
                                     <h2>Customer address</h2>
                                     <div class="form-group">
@@ -75,7 +71,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/admin/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/cabinet/customerinfo" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

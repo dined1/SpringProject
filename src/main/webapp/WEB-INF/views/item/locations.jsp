@@ -12,10 +12,11 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Discountrule info</b></h5>
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Location</b></h5>
                     </div>
                     <div class="panel-body">
 
+                        <h4>Add the location of the sale</h4>
                         <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                             <thead>
                             <tr>
@@ -29,13 +30,14 @@
                                 <tr>
                                     <td>${L.locationId}</td>
                                     <td>${L.locationname}</td>
-                                    <td><a href="${contextPath}/admin/item/removelocations/${ITEM.itemId}/${L.locationId}">Delete</a></td>
+                                    <td><a href="${contextPath}/admin/item/removelocations/${ITEM.itemId}/${L.locationId}">Remove</a></td>
 
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
 
+                        <h4>To remove the location of the sale</h4>
                         <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                             <thead>
                             <tr>

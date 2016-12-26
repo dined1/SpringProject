@@ -95,7 +95,7 @@ public class CustomerController {
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateCustomer(@Valid
-            @BeanParam Customer customer, BindingResult bindingResult) {
+                                 @BeanParam Customer customer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "welcome";
         }

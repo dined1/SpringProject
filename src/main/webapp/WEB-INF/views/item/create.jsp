@@ -37,6 +37,10 @@
                                         <label for="defOTP">Discount Procent</label>
                                         <input class="form-control" type="number" name="defOTP" path="defOTP"  />
                                     </div>
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity</label>
+                                        <input class="form-control" type="number" name="quantity" path="quantity"  />
+                                    </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                     <a href="${contextPath}/admin/item/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>

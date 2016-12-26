@@ -16,22 +16,22 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/discountrule/update" method="POST">
+                                <form role="form" action="${contextPath}/admin/characteristics/update" method="POST">
                                     <div class="form-group">
-                                        <label for="dRId">DRId</label>
-                                        <input class="form-control" type="number" name="dRId" readonly value="${DISCOUNTRULE.dRId}" />
-                                    </div>     
+                                        <label for="characteristicId">DRId</label>
+                                        <input class="form-control" type="number" name="characteristicId" readonly value="${CHARACTERISTICS.characteristicId}" />
+                                    </div>
                                     <div class="form-group">
-                                        <label for="discountValue">Discount Value</label>
-                                        <input class="form-control" type="number" name="discountValue"  value="${DISCOUNTRULE.discountValue}" />
-                                    </div>     
+                                        <label for="Characteristic">Characteristic</label>
+                                        <input class="form-control" type="text" name="Characteristic"  value="${CHARACTERISTICS.characteristic}" />
+                                    </div>
                                     <div class="form-group">
-                                        <label for="discountProcent">Discount Procent</label>
-                                        <input class="form-control" type="number" name="discountProcent"  value="${DISCOUNTRULE.discountProcent}" />
+                                        <label for="CharacteristicValue">Characteristic Value</label>
+                                        <input class="form-control" type="text" name="CharacteristicValue"  value="${CHARACTERISTICS.characteristicValue}" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/admin/discountrule/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/admin/characteristics/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

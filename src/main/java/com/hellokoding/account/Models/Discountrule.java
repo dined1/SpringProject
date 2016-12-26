@@ -39,10 +39,10 @@ public class Discountrule implements Serializable {
     @Basic
     private Float description;
 
-    @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "discountrule1")
+    @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "discountrule1", cascade = CascadeType.REMOVE)
     private List<Itemdiscount> itemdiscounts1;
 
-    @OneToMany(targetEntity = OrdItemDiscount.class, mappedBy = "discountrule1")
+    @OneToMany(targetEntity = OrdItemDiscount.class, mappedBy = "discountrule1", cascade = CascadeType.REMOVE)
     private List<OrdItemDiscount> orditemdiscounts;
 
     public Long getdRId() {

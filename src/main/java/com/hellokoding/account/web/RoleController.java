@@ -12,6 +12,7 @@ import com.hellokoding.account.repository.RoleRepository;
 import com.hellokoding.account.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import java.util.*;
  *
  * @author dzni0816
  */
+@Transactional
 @RequestMapping(value = {"/admin/role"})
 @Controller
 public class RoleController {
@@ -117,7 +119,7 @@ public class RoleController {
         user = userRepository.findById(id);
         user.setRoles(new HashSet<>(roleRepository.findAll()));
         List<Role> rl = roleRepository.findAll();
-
+        user.getRoles();
         Set<Role> i = user.getRoles();
         Boolean adm = false;
         Boolean mod = false;

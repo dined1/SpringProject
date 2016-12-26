@@ -16,6 +16,7 @@
                     </div>
                     <div class="panel-body">
 
+                        <h4>To add the characteristic</h4>
                         <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
                             <thead>
                             <tr>
@@ -53,6 +54,7 @@
                             </tbody>
                         </table>
 
+                        <h4>To remove the characteristic</h4>
                         <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
                             <thead>
                             <tr>

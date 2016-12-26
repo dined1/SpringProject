@@ -26,10 +26,10 @@ public class Characteristics implements Serializable {
     @Basic
     private String CharacteristicValue;
 
-    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "itemCharacteristic")
+    @OneToMany(targetEntity = ItemCharacteristic.class, mappedBy = "itemCharacteristic", cascade = CascadeType.REMOVE)
     private List<ItemCharacteristic> itemCharacteristic;
 
-    @OneToMany(targetEntity = OrdItemCharacteristic.class, mappedBy = "ItemCharacteristic")
+    @OneToMany(targetEntity = OrdItemCharacteristic.class, mappedBy = "ItemCharacteristic", cascade = CascadeType.REMOVE)
     private List<OrdItemCharacteristic> orditemCharacteristic;
 
     public Long getCharacteristicId() {

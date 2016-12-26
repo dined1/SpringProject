@@ -83,7 +83,7 @@
                                                             <h4 class="modal-title">Confirmation</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Are you sure to delete Customer ?</p>
+                                                            <p>Are you sure to delete Customer?</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form action="${contextPath}/admin/customer/remove/${CUSTOMER.customerId}" method="DELETE">
@@ -103,13 +103,6 @@
                                 </tbody>
                             </table>
                         </div>
-
-
-                        <c:if test="${empty requestScope.CUSTOMER_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No Customer found</div>
-                            </div>
-                        </c:if>
 
                         <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
 

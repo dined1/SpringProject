@@ -12,10 +12,11 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Discountrule info</b></h5>
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Discountrule</b></h5>
                     </div>
                     <div class="panel-body">
 
+                        <h4>To check out a discount from the item</h4>
                         <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                             <thead>
                             <tr>
@@ -35,13 +36,13 @@
                                     <td>${D.discountValue}</td>
                                     <td>${D.description}</td>
                                     <td>${D.type}</td>
-                                    <td><a href="${contextPath}/admin/item/removediscountrule/${ITEM.itemId}/${D.dRId}">Delete</a></td>
+                                    <td><a href="${contextPath}/admin/item/removediscountrule/${ITEM.itemId}/${D.dRId}">Remove</a></td>
 
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
-
+                        <h4>To attach a discount to the item</h4>
                         <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                             <thead>
                             <tr>

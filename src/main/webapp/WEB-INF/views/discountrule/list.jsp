@@ -61,10 +61,10 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            <h4 class="modal-title">lol</h4>
+                                                            <h4 class="modal-title">Confirmation</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>lol2</p>
+                                                            <p>Are you sure to delete Discountrule?</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form action="${contextPath}/admin/discountrule/remove/${DISCOUNTRULE.dRId}" method="DELETE">
