@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import java.security.Principal;
+import java.util.List;
 
 /**
  *
@@ -88,19 +89,51 @@ public class CustomerController {
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editCustomer(Model model, @PathVariable("id") Long id) {
         model.addAttribute("CUSTOMER", customerRepository.findOne(id));
-        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        List<Address> adr = addressRepository.findAll();
+        Address adrm = addressRepository.findOne(id);
+        for (Address adr1: adr) if (adr1.getAddressId().equals(customerRepository.findOne(id).getAddress1().getAddressId())) {
+            adrm = adr1;
+            break;
+        }
+        model.addAttribute("ADDRESS", adrm);
         return "customer/update";
     }
 
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
-    public String updateCustomer(@Valid
-                                 @BeanParam Customer customer, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "welcome";
-        }
+    public String updateCustomer(Principal principal, Address address, Customer customer, @RequestParam("firstName") String firstName,
+                                 @RequestParam("customerId") Long customerId,
+                                 @RequestParam("lastName") String lastName,
+                                 @RequestParam("contact") String contact,
+                                 @RequestParam("email") String email,
+                                 @RequestParam("phone") String phone,
+                                 @RequestParam("passNumber") String passNumber,
+                                 @RequestParam("countNumber") String countNumber,
+                                 @RequestParam("addressId") Long addressId,
+                                 @RequestParam("addressLine") String addressLine,
+                                 @RequestParam("city") String city,
+                                 @RequestParam("country") String country,
+                                 @RequestParam("postalCode") String postalCode) {
+
+        customer.setCustomerId(customerId);
+        customer.setFirstName(firstName);
+        customer.setContact(contact);
+        customer.setEmail(email);
+        customer.setPhone(phone);
+        customer.setPassNumber(passNumber);
+        customer.setCountNumber(countNumber);
+        Long i = userRepository.findByUsername(principal.getName()).getId();
+        String s = String.valueOf(i);
+        customer.setUserId(String.valueOf(s));
+        address.setAddressId(addressId);
+        address.setAddressLine(addressLine);
+        address.setCity(city);
+        address.setCountry(country);
+        address.setPostalCode(postalCode);
+        addressRepository.save(address);
+        customer.setAddress1(address);
         customerRepository.save(customer);
-        return "redirect:customer/list";
+        return "redirect:/admin/customer/list";
     }
 
 

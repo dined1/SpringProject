@@ -36,9 +36,11 @@
 
                                         <td>${(USER.username)}</td>
 
-                                        <td><a href="${contextPath}/admin/role/setadm/${USER.id}"><i class="fa fa-level-up fa-fw"></i>adm  </a></td>
+                                        <td>${(USER.roles)}</td>
 
-                                        <td><a href="${contextPath}/admin/role/setmod/${USER.id}"><i class="fa fa-level-up fa-fw"></i>mod  </a></td>
+                                        <td><a href="${contextPath}/admin/role/setadm/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make admin</a></td>
+
+                                        <td><a href="${contextPath}/admin/role/setmod/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make moderator</a></td>
 
                                     </tr>
                                 </c:forEach>

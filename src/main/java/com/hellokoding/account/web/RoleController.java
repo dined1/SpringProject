@@ -132,6 +132,19 @@ public class RoleController {
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllRole(Model model) {
+        List<User> all = userRepository.findAll();
+        List<User> adms = new ArrayList<User>();
+        List<User> mods = new ArrayList<User>();
+
+        Role ra = roleRepository.findOne(2l);
+        Role rm = roleRepository.findOne(3l);
+        for (User u: all) {
+            if (u.getRoles().contains(ra)) adms.add(u);
+            if (u.getRoles().contains(rm)) mods.add(u);
+        }
+
+        model.addAttribute("USER_LIST", userRepository.findAll());
+        model.addAttribute("USER_LIST", userRepository.findAll());
         model.addAttribute("USER_LIST", userRepository.findAll());
         return "role/list";
     }

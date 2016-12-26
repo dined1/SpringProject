@@ -9,4 +9,5 @@ import java.util.List;
  * Created by Admin on 02.12.2016.
  */
 public interface ProductItemsRepository extends JpaRepository<ProductItems, Long> {
+    List<ProductItems> findBySoproduct1_SOPId(Long id);
 }
