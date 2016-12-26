@@ -68,7 +68,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p><a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a></p>
+                        <p><a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a></p>
 
                     </div>
                     <!-- /.panel-body -->

@@ -70,7 +70,7 @@
 
                     </div>
 
-                    <a href="${contextPath}/" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
+                    <a href="${contextPath}/" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

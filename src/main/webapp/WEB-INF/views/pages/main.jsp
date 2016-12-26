@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>АСУЗП</title>
+    <title>ASCOM</title>
 
     <!-- Bootstrap -->
     <link href="${contextPath}/webresources/static/need/css/bootstrap.min.css" rel="stylesheet">
@@ -24,25 +24,6 @@
     <![endif]-->
 </head>
 <body>
-<!--a href="${contextPath}/address/list" class="btn btn-default"><i class="fa fa-plus"></i>Address</a>
-    <a href="${contextPath}/customer/list" class="btn btn-default"><i class="fa fa-plus"></i>Customer</a>
-    <a href="${contextPath}/discountrule/list" class="btn btn-default"><i class="fa fa-plus"></i>Discountrule</a>
-    <a href="${contextPath}/group/list" class="btn btn-default"><i class="fa fa-plus"></i>Group</a>
-    <a href="${contextPath}/item/list" class="btn btn-default"><i class="fa fa-plus"></i>Item</a>
-    <a href="${contextPath}/itemdiscount/list" class="btn btn-default"><i class="fa fa-plus"></i>Itemdiscount</a>
-    <a href="${contextPath}/itemgroup/list" class="btn btn-default"><i class="fa fa-plus"></i>Itemgroup</a>
-    <a href="${contextPath}/payment/list" class="btn btn-default"><i class="fa fa-plus"></i>Payment</a>
-    <a href="${contextPath}/paymentbill/list" class="btn btn-default"><i class="fa fa-plus"></i>Paymentbill</a>
-    <a href="${contextPath}/paymenttype/list" class="btn btn-default"><i class="fa fa-plus"></i>Paymenttype</a>
-    <a href="${contextPath}/productitems/list" class="btn btn-default"><i class="fa fa-plus"></i>ProductItems</a>
-    <a href="${contextPath}/role/list" class="btn btn-default"><i class="fa fa-plus"></i>Role</a>
-    <a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-plus"></i>SO</a>
-    <a href="${contextPath}/soproduct/list" class="btn btn-default"><i class="fa fa-plus"></i>SOProduct</a>
-    <a href="${contextPath}/statisticscollector/list" class="btn btn-default"><i class="fa fa-plus"></i>StatisticsCollector</a-->
-
-
-
-
 <header>
     <div class="container">
         <div class="row">
@@ -50,8 +31,8 @@
                 <img src="${contextPath}/webresources/static/need/img/logo.png" alt="Логотип Компании" class="img-responsive">
             </div>
             <div class="col-sm-7 text-center descript">
-                <h4>Автоматизированная система по управлению заказом пользователя</h4>
-                <h5>АСУЗП</h5>
+                <h4>automated system for customer order management</h4>
+                <h5>ASCOM</h5>
             </div>
             <div class="col-sm-3 phone_number">
                 <h3><a href="+375298715105">(29) 4-8-15-16-23-42</a></h3>
@@ -61,7 +42,7 @@
     </div>
 </header>
 
-<nav>
+<nav id="top_nav" >
     <div class="container">
         <div class="row">
             <ul class="list-inline">
@@ -70,9 +51,6 @@
                 </a>
                 <a href="#">
                     <li>Оборудование</li>
-                </a>
-                <a href="${contextPath}/disconts">
-                    <li>Акции</li>
                 </a>
                 <a href="#">
                     <li>Отзывы</li>
@@ -113,48 +91,91 @@
             <h3>Вы сами на это пошли.<span> Зря-зря!</span></h3>
         </div>
         <div class="row main_buttons">
-            <button data-toggle= "modal" id="get_mes" href=#">Я идиот.</button>
+            <button data-toggle= "modal" id="get_mes" href="#get_mes_modal">Я идиот.</button>
             <a href="#types"><button id="get_types">Меня заставили!</button></a>
         </div>
     </div>
 </section>
 
-<section id="types">
+
+<section id="who">
     <div class="container">
-        <div class="row">
-            <div class="section_header text-center">
-                <h2> Offering groups</h2>
-            </div>
+        <div class="page-header">
+            <h1 class="text-center">Who are we?</h1>
         </div>
-        <c:forEach items="${GROUP_LIST}" var="GROUP">
-            <div class="col-md-3">
-
-                    <div class="card">
-                        <a class="btn more_btn center-block" href="${contextPath}/application/group/${GROUP.groupId}"><H1>${GROUP.name}</H1></a>
+        <p class="lead text-center">Our success depends on our ability to provide optimum service to you and your shareholders. Our staff is efficient, productive, and flexible in addressing the specialized needs of each client.</p>
+        <div class="container">
+            <div class="row stylish-panel">
+                <div class="col-md-4">
+                    <div>
+                        <img src="http://lorempixel.com/200/200/business/1/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                        <h2>Head of Department</h2>
+                        <p>The overman...Who has organized the chaos of his passions, given style to his character, and become creative. Aware of life's terrors, he affirms life without resentment.
+                        </p>
                     </div>
-
-                <%--<div class="card">--%>
-                    <%--<img src="${contextPath}/webresources/static/need/img/types-1.jpg" alt="Страдание" class="img-responsive center-block">--%>
-                    <%--<h4>Страдание</h4>--%>
-                    <%--<br>--%>
-                    <%--<a class="btn btn-primary btn-sm" href="cat"><i class="fa fa-plus"></i>Подробнее</a>--%>
-                    <%--<button class="offer_btn" data-toggle="modal" href="#">Купить</button>--%>
-                <%--</div>--%>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <img src="http://lorempixel.com/200/200/business/2/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                        <h2>Power Engineer</h2>
+                        <p>The overman...Who has organized the chaos of his passions, given style to his character, and become creative. Aware of life's terrors, he affirms life without resentment.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <img src="http://lorempixel.com/200/200/business/3/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                        <h2>Logistic Department</h2>
+                        <p>The overman...Who has organized the chaos of his passions, given style to his character, and become creative. Aware of life's terrors, he affirms life without resentment.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </c:forEach>
+            <div class="row stylish-panel">
+                <div class="col-md-4">
+                    <div>
+                        <img src="http://lorempixel.com/200/200/business/4/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                        <h2>Transport Manager</h2>
+                        <p>The overman...Who has organized the chaos of his passions, given style to his character, and become creative. Aware of life's terrors, he affirms life without resentment.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <img src="http://lorempixel.com/200/200/business/5/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                        <h2>Marketing Director</h2>
+                        <p>The overman...Who has organized the chaos of his passions, given style to his character, and become creative. Aware of life's terrors, he affirms life without resentment.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <img src="http://lorempixel.com/200/200/business/6/" alt="Texto Alternativo" class="img-circle img-thumbnail">
+                        <h2>Software developer</h2>
+                        <p>The overman...Who has organized the chaos of his passions, given style to his character, and become creative. Aware of life's terrors, he affirms life without resentment.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<!-- /container -->
+
+
+
+
 
 <section id="help">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-2">
-                <h3>Нужна помощь в выборе?</h3>
+                <h3>You need help?</h3>
                 <br>
-                <p>Оставте заявку на консультацию и наш специалист подробно ответит <br> на все интересующие Вас вопросы.Это бесплатно.</p>
+                <p>Are you having difficulties with the registration? <br> You saw an unknown status of the goods?.</p>
                 <br>
-                <button id="free_consult" data-toggle="modal" href="#">Бесплатная консультация</button>
+                <button id="free_consult" data-toggle="modal"><a href="${contextPath}/WEB-INF/views/services.jsp">Read F.A.Q.</a></button>
             </div>
             <div class="col-md-2">
                 <img src="${contextPath}/webresources/static/need/img/help_img.jpg" alt="Бесплатная консультация" class="img-responsive help_img center-block">
@@ -167,10 +188,10 @@
     <div class="container">
         <div class="row">
             <div class="section_header text-center">
-                <h2>Посмотрите как счастливы наши клиенты</h2>
+                <h2>Посмотрите как мы вас ненавидим</h2>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="slider">
                 <div class="fotorama"
                      data-nav="thumbs">
@@ -192,19 +213,22 @@
                 <img src="${contextPath}/webresources/static/need/img/gift.jpg" alt="Подарок" class="img-responsive center-block gift">
             </div>
             <div class="col-md-9">
-                <h4>Акция</h4>
+                <h4>Offer</h4>
                 <br>
-                <h3>Подключите услугу "Максим" до 16.12.2016</h3>
+                <h3>Our logistics experts will contact you. And answer all your questions.</h3>
+                <p>It's free!</p>
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="#">
+                        <form action="${contextPath}/webresources/static/need/send.php" method="post">
+                            <input type="hidden" name="what" value="Участвовать в акции">
                             <input name="name" type="text" required placeholder="Имя" class="form-comtrol form_input">
+
                     </div>
                     <div class="col-md-4">
-                        <input name="phone" type="text" required placeholder="Телефон" class="form-comtrol form_input">
+                        <input name="phone" id="phone_1" type="text" required placeholder="Телефон" class="form-comtrol form_input">
                     </div>
                     <div class="col-md-4">
-                        <button type="submit">Подключить</button>
+                        <button type="submit">Send</button>
                         </form>
                     </div>
                 </div>
@@ -303,8 +327,6 @@
                                 <div class="col-md-4">
                                     <div class="fotorama">
                                         <img src="${contextPath}/webresources/static/need/img/feedback/1/1.jpg" alt="">
-                                        <img src="${contextPath}/webresources/static/need/img/feedback/1/2.jpg" alt="">
-                                        <img src="${contextPath}/webresources/static/need/img/feedback/1/3.jpg" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -398,16 +420,37 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="get_mes_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <div class="row">
+                    <div class="header_modal">
+                        <h4>не знаю, что тут будет</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Подробнее (1 услуга) -->
+<div class="modal fade" id="more_one" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body text-center">
+                <div class="row">
+                    <div class="header_modal_info">
+                        <h4>не знаю, что тут будет</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -424,13 +467,30 @@
     new WOW().init();
 </script>
 <script>
-    $(document).ready(
-            function() {
-                $("html").niceScroll({cursorcolor:"#000"});
-            }
-    );
-</script>
+    var h_hght = 165; // высота шапки
+    var h_mrg = 0;    // отступ когда шапка уже не видна
 
+    $(function(){
+
+        var elem = $('#top_nav');
+        var top = $(this).scrollTop();
+
+        if(top > h_hght){
+            elem.css('top', h_mrg);
+        }
+
+        $(window).scroll(function(){
+            top = $(this).scrollTop();
+
+            if (top+h_mrg < h_hght) {
+                elem.css('top', (h_hght-top));
+            } else {
+                elem.css('top', h_mrg);
+            }
+        });
+
+    });
+</script>
 <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 </div>
