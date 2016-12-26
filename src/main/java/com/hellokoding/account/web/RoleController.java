@@ -123,22 +123,6 @@ public class RoleController {
         return "redirect:/admin/role/list";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String findRole(User user, Principal principal, Model model, @PathVariable("id") Long id) {
-        user = userRepository.findById(id);
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
-        List<Role> rl = roleRepository.findAll();
-        user.getRoles();
-        Set<Role> i = user.getRoles();
-        Boolean adm = false;
-        Boolean mod = false;
-        //if (i.contains())
-        model.addAttribute("ID", id);
-
-        //model.addAttribute()
-        return "role/view";
-    }
-
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllRole(Model model, Principal principal) {
         List<User> all = userRepository.findAll();
