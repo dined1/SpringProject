@@ -99,6 +99,9 @@ public class AppController {
 
     @RequestMapping(value = {"/basket"}, method = RequestMethod.GET)
     public String basket(Model model, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
@@ -129,6 +132,9 @@ public class AppController {
     public String emptyBasket(Model model,
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                               Principal principal) throws Exception {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
@@ -187,6 +193,9 @@ public class AppController {
     public String emptyCatalog(Model model,
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
 
@@ -213,6 +222,9 @@ public class AppController {
     public String itemDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                   Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
@@ -236,6 +248,9 @@ public class AppController {
     public String itemBasketDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                   Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         OrdItem item = ordItemRepository.findOne(itemid);
         model.addAttribute("ITEM", item);
         List<OrdItemCharacteristic> itemchar = ordItemCharacteristicsRepository.findAll();
@@ -265,6 +280,9 @@ public class AppController {
     public String emptyOrder(Model model, @PathVariable("customerid") Long customerid,
                              @PathVariable("soid") Long soid,
                              Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("CUSTOMERID", customerid);
@@ -275,12 +293,18 @@ public class AppController {
     @RequestMapping(value = {"/stripe"}, method = RequestMethod.GET)
     public String stripe(@RequestParam Map<String, String> request, Model model,
                          Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
         return "/pages/order";
     }
 
     @RequestMapping(value = {"/orderinfo"}, method = RequestMethod.GET)
     public String emptyOrderInfo(Model model, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
 
         model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
@@ -293,6 +317,9 @@ public class AppController {
                             ProductItems productItems, @PathVariable("itemid") Long itemid,
                             @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                             Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
@@ -402,6 +429,9 @@ public class AppController {
     public String removeBasket(Model model, @PathVariable("itemid") Long itemid,
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
@@ -419,6 +449,9 @@ public class AppController {
     @RequestMapping(value = {"/cancel/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String cancel(Model model, @PathVariable("customerid") Long customerid,
                          @PathVariable("soid") Long soid, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
@@ -449,6 +482,9 @@ public class AppController {
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptySO(Model model, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         return "/pages/so";

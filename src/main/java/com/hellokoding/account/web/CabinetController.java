@@ -72,7 +72,7 @@ public class CabinetController {
     public String cabinet(Model model, Principal principal) {
         //String qwe = bCryptPasswordEncoder.encode("12345678");
         if (principal==null){
-            return "error";
+            return "main";
         }
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(Long.toString(userRepository.findByUsername(principal.getName()).getId())));
         model.addAttribute("SO_LIST", soRepository.findAll());
@@ -83,7 +83,7 @@ public class CabinetController {
     public String payments(Model model, Principal principal) {
         //String qwe = bCryptPasswordEncoder.encode("12345678");
         if (principal==null){
-            return "error";
+            return "main";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("PAYMENTS_LIST", paymentFacade.findBySo1_Customer1_UserId(userid.toString()));
@@ -93,6 +93,9 @@ public class CabinetController {
 
     @RequestMapping(value = {"/customer/update/{id}"}, method = RequestMethod.GET)
     public String editCustomer(Model model, @PathVariable("id") Long id,  Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if ( customerRepository.findOne(id) == null
                 || !customerRepository.findOne(id).getUserId().equals(userid.toString())){
@@ -126,7 +129,7 @@ public class CabinetController {
     @RequestMapping(value = {"/myorders"}, method = RequestMethod.GET)
     public String getOrders(Model model, Principal principal) {
         if (principal==null){
-            return "error";
+            return "main";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
@@ -136,7 +139,7 @@ public class CabinetController {
     @RequestMapping(value = {"/mypayments"}, method = RequestMethod.GET)
     public String getPayments(Model model, Principal principal) {
         if (principal==null){
-            return "error";
+            return "main";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("PAYMENTS_LIST", paymentFacade.findBySo1_Customer1_UserId(userid.toString()));
@@ -147,7 +150,7 @@ public class CabinetController {
     @RequestMapping(value = {"/password"}, method = RequestMethod.GET)
     public String getPassword(Model model, Principal principal) {
         if (principal==null){
-            return "error";
+            return "main";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         return "cabinet/password";
@@ -157,7 +160,7 @@ public class CabinetController {
     public String updatePassword(Principal principal, @RequestParam("name1") String name1,
                                  @RequestParam("name2") String name2, @RequestParam("name3") String name3) {
         if (principal==null){
-            return "error";
+            return "main";
         }
         if (name2.length() < 8 || name2.length() > 32
                 || name3.length() < 8 || name3.length() > 32) {
@@ -182,6 +185,9 @@ public class CabinetController {
 
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
     public String apply(@PathVariable("sq") Long qw, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if ( soRepository.findOne(qw) == null
                 || !soRepository.findOne(qw).getCustomer1().getUserId().equals(userid.toString())){
@@ -233,6 +239,9 @@ public class CabinetController {
 
     @RequestMapping(value = {"/customer/remove/{id}"}, method = RequestMethod.GET)
     public String deleteCustomer(Model model, Principal principal, @PathVariable("id") Integer id) {
+        if (principal==null){
+            return "main";
+        }
         Long userid =  userRepository.findByUsername(principal.getName()).getId();
         if (!soRepository.findByCustomer1_UserId(userid.toString()).isEmpty()){
             return "error";
@@ -244,6 +253,9 @@ public class CabinetController {
 
     @RequestMapping(value = {"/customerinfo"}, method = RequestMethod.GET)
     public String getCustomer(Model model, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         Long id =  userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(id.toString()));
 
@@ -251,7 +263,10 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.GET)
-    public String emptyCustomer(Model model) {
+    public String emptyCustomer(Model model, Principal principal) {
+        if (principal==null){
+            return "main";
+        }
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
         return "cabinet/create";
     }
@@ -268,6 +283,9 @@ public class CabinetController {
                                  @RequestParam("city") String city,
                                  @RequestParam("country") String country,
                                  @RequestParam("postalCode") String postalCode) {
+        if (principal==null){
+            return "main";
+        }
         customer.setLastName(lastName);
         customer.setFirstName(firstName);
         customer.setContact(contact);
