@@ -11,6 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,8 +51,10 @@ public class PaymentProcessorService {
             if (payment.getSo1().getFinalMP() != null && BigDecimal.ZERO.equals(payment.getSo1().getFinalMP())
                     && payment.getSo1().getFinalMPwithTaxAndDiscount() != null
                     && BigDecimal.ZERO.equals(payment.getSo1().getFinalMPwithTaxAndDiscount())) {
+                try {
                 Date date = new Date();
-                Date paymentDate = payment.getPaymentDate();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date paymentDate = formatter.parse(payment.getSo1().getOrderDate());
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(paymentDate);
                 cal.add(Calendar.DATE, 27);
@@ -66,7 +70,9 @@ public class PaymentProcessorService {
                     so.setAttentionFlag("Services stopped");
                     soRepository.save(so);
                 }
-
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

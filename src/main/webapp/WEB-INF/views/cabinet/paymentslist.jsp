@@ -30,6 +30,7 @@
                                 <tr>
                                     <th>Payment number</th>
                                     <th>Order number</th>
+                                    <th>Payment date</th>
                                     <th>Info</th>
                                     <th>One-time price</th>
                                     <th>Mounth price</th>
@@ -43,6 +44,8 @@
                                         <td>${PAYMENT.paymentId}</td>
 
                                         <td>${PAYMENT.so1.SONumber}</td>
+
+                                        <td>${PAYMENT.paymentDate}</td>
 
                                         <td>${PAYMENT.paymentInfo}</td>
 

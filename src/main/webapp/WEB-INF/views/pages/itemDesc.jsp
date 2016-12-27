@@ -65,16 +65,17 @@
                                             </c:forEach>
                                         </div>
                                         <div class="row">
+                                            <% if (request.isUserInRole("ROLE_ADMIN")) {%>
                                             <label>Discounts </label><br>
                                             <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                 <tr>
-
                                                     <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='disc'}">
                                                         <td><label><input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}:
                                                         ${DISCOUNT.discountrule1.discountValue}</label></td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
+                                            <%}%>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

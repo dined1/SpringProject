@@ -199,10 +199,6 @@ public class CabinetController {
         Float OTP = 0f;
         So so = soRepository.findOne(qw);
         if (!so.getStatus().equals("Ordered")) {
-            so.setStatus("Ordered");
-            so.setOrderDate(dateFormat.format(date));
-            soRepository.save(so);
-
             Paymentbill paymentbill = new Paymentbill();
             List<ProductItems> productItems = productItemsRepository.findAll();
             List<ProductItems> productItemsList = new ArrayList<>();
@@ -213,6 +209,19 @@ public class CabinetController {
                 }
             }
 
+            Integer signal = 0;
+            for (ProductItems product : productItems) {
+                if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
+                    if (product.getOrdItem().getDefOTP() != 0 || product.getOrdItem().getDefOTP() != null){
+                        signal+=1;
+                    }
+                }
+            }
+            if (signal != 0){
+                paymentbill.setCotp(OTP);
+            } else {
+                paymentbill.setCmp(CMP);
+            }
             for (ProductItems product : productItems) {
                 if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
                     OrdItem item = product.getOrdItem();
@@ -220,8 +229,33 @@ public class CabinetController {
                     ordItemRepository.save(item);
                 }
             }
+            so.setStatus("Ordered");
+            so.setOrderDate(dateFormat.format(date));
+            soRepository.save(so);
+            paymentBillRepository.save(paymentbill);
+            Payment payment = new Payment();
+            payment.setPaymentDate(date);
+            payment.setPaymentInfo("Payment was succesfull");
+            payment.setSo1(so);
+            payment.setPaymentbill1(paymentbill);
+            payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
+            paymentFacade.save(payment);
+            so.setPurchaseOrderNumber(payment.getPaymentId().toString());
+            soRepository.save(so);
+        } else if (so.getAttentionFlag().contains("Waiting for payment") && so.getStatus().equals("Ordered")){
+            Paymentbill paymentbill = new Paymentbill();
+            List<ProductItems> productItems = productItemsRepository.findAll();
+            List<ProductItems> productItemsList = new ArrayList<>();
+            for (ProductItems pi : productItems){
+                if (pi.getOrdItem().getStatus().equals("Ordered")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
+                    CMP += pi.getOrdItem().getDefMP();
+                }
+            }
             paymentbill.setCmp(CMP);
-            paymentbill.setCotp(OTP);
+            so.setStatus("Ordered");
+            so.setOrderDate(dateFormat.format(date));
+            so.setAttentionFlag("");
+            soRepository.save(so);
             paymentBillRepository.save(paymentbill);
             Payment payment = new Payment();
             payment.setPaymentDate(date);
