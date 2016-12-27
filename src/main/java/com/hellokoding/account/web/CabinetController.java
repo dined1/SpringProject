@@ -109,7 +109,6 @@ public class CabinetController {
     public String updateCustomer(@Valid
                                  @BeanParam Customer customer, @Valid @BeanParam Address address) {
         Customer customer1 = customerRepository.findOne(customer.getCustomerId());
-        customer1.setLocation(customer.getLocation());
         customer1.setContact(customer.getContact());
         customer1.setCountNumber(customer.getCountNumber());
         customer1.setEmail(customer.getEmail());
@@ -292,7 +291,6 @@ public class CabinetController {
         customer.setPhone(phone);
         customer.setPassNumber(passNumber);
         customer.setCountNumber(countNumber);
-        customer.setLocation(country);
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));

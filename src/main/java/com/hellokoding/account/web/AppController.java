@@ -499,13 +499,21 @@ public class AppController {
         so.setStatus("Wait");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
-        so.setLocation(customer.getLocation());
+        so.setLocation(customer.getAddress1().getCountry());
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
+        so.setDateModified(dateFormat.format(date));
         so.setCustomer1(customer);
         soRepository.save(so);
-        so.setSONumber(so.getSOId().toString());
+        String s = "";
+        for (int i = 0; i < 4-so.getSOId().toString().length(); i++)
+            s += '0';
+        so.setSONumber(s + so.getSOId().toString());
+        s = "";
+        for (int i = 0; i < 8-so.getSOId().toString().length(); i++)
+            s += '0';
+        so.setPurchaseOrderNumber(s + so.getSOId().toString());
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());
         soproduct.setSo1(so);

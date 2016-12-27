@@ -27,7 +27,14 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="discountProcent">Discount Procent</label>
-                                        <input class="form-control" type="number" name="discountProcent"  value="${DISCOUNTRULE.discountProcent}" />
+                                        <input class="form-control" type="number" min="0" max="100" step="0.01" name="discountProcent"  value="${DISCOUNTRULE.discountProcent}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tax/Discount</label>
+                                        <select path="type" name="type" onchange=" ">
+                                            <option value="tax">Tax</option>
+                                            <option value="discount">Discount</option>
+                                        </select>
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

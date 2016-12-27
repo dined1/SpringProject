@@ -68,10 +68,19 @@
                                             <label>Discounts </label><br>
                                             <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                 <tr>
-
-                                                    <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='disc'}">
+                                                    <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='discount'}">
                                                         <td><label><input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}:
-                                                        ${DISCOUNT.discountrule1.discountValue}</label></td>
+                                                                ${DISCOUNT.discountrule1.discountValue}</label></td>
+                                                    </c:if>
+                                                </tr>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="row">
+                                            <label>Tax </label><br>
+                                            <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
+                                                <tr>
+                                                    <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='tax'}">
+                                                        <td><label>${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}: ${DISCOUNT.discountrule1.discountValue}</label></td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
