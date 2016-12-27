@@ -70,7 +70,6 @@
                                                         <i class="fa fa-gear"></i>  <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li><a href="${CUSTOMER.customerId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
                                                         <li><a href="${contextPath}/cabinet/customer/update/${CUSTOMER.customerId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
                                                         <li><a data-toggle="modal" data-target="#confirm_delete_${CUSTOMER.customerId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>

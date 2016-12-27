@@ -100,7 +100,7 @@ public class AppController {
     @RequestMapping(value = {"/basket"}, method = RequestMethod.GET)
     public String basket(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         List<ProductItems> productItems = productItemsRepository.findAll();
@@ -133,7 +133,7 @@ public class AppController {
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                               Principal principal) throws Exception {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
@@ -157,8 +157,8 @@ public class AppController {
                 OTP+=productItem.getOtp();
                 FCMP+=productItem.getMPWithTaxandDiscont();
                 FOTP+=productItem.getOTPWithTaxandDiscont();
-            }
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                finalproducts.add(productItem);
+            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
                 CMP+=productItem.getMp();
                 FCMP+=productItem.getMPWithTaxandDiscont();
@@ -194,7 +194,7 @@ public class AppController {
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
@@ -223,7 +223,7 @@ public class AppController {
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                   Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
@@ -249,7 +249,7 @@ public class AppController {
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                   Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         OrdItem item = ordItemRepository.findOne(itemid);
         model.addAttribute("ITEM", item);
@@ -281,7 +281,7 @@ public class AppController {
                              @PathVariable("soid") Long soid,
                              Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
@@ -294,7 +294,7 @@ public class AppController {
     public String stripe(@RequestParam Map<String, String> request, Model model,
                          Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
         return "/pages/order";
@@ -303,7 +303,7 @@ public class AppController {
     @RequestMapping(value = {"/orderinfo"}, method = RequestMethod.GET)
     public String emptyOrderInfo(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
 
@@ -318,7 +318,7 @@ public class AppController {
                             @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                             Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
@@ -368,16 +368,33 @@ public class AppController {
                 ordItemdiscountRepository.save(ordDisc);
             }
         }
-        Float mp = 0f;
-        Float otp = 0f;
+        Float mp = ordItem.getDefMP();
+        Float otp = ordItem.getDefOTP();
+        List<OrdItemDiscount> itemdisc = ordItemdiscountRepository.findAll();
+        List<OrdItemDiscount> basketItemdisc = new ArrayList<>();
+        for (OrdItemDiscount id : itemdisc){
+            if (ordItem.getOrditemId().equals(id.getOrdItem().getOrditemId())) {
+                basketItemdisc.add(id);
+            }
+        }
+        for (OrdItemDiscount discount : basketItemdisc) {
+            if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountValue() != null){
+                otp -= discount.getDiscountrule1().getDiscountValue();
+                mp -= discount.getDiscountrule1().getDiscountValue();
+            }
+            if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountProcent() != null){
+                otp = otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+                mp = mp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+            }
+        }
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);
         for (Itemdiscount discount : itemdiscounts) {
+            if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountProcent() != null){
+                otp = otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+            }
             if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountValue() != null){
                 otp += discount.getDiscountrule1().getDiscountValue();
             }
-//            else if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountValue() != null){
-//                mp -= discount.getDiscountrule1().getDiscountValue();
-//            }
         }
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date date = new Date();
@@ -385,8 +402,8 @@ public class AppController {
         soRepository.save(so);
         itemRepository.findOne(itemid).setQuantity(item.getQuantity().subtract(BigInteger.ONE));
         productItems.setOrdItem(ordItem);
-        productItems.setOTPWithTaxandDiscont(item.getDefOTP() + otp);
-        productItems.setMPWithTaxandDiscont(item.getDefMP() + mp);
+        productItems.setOTPWithTaxandDiscont(otp);
+        productItems.setMPWithTaxandDiscont(mp);
         productItems.setOtp(item.getDefOTP());
         productItems.setMp(item.getDefMP());
         productItemsRepository.save(productItems);
@@ -430,7 +447,7 @@ public class AppController {
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
                                Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
@@ -450,7 +467,7 @@ public class AppController {
     public String cancel(Model model, @PathVariable("customerid") Long customerid,
                          @PathVariable("soid") Long soid, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
@@ -483,7 +500,7 @@ public class AppController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptySO(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
