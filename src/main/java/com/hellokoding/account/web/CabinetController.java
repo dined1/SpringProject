@@ -17,8 +17,10 @@ import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
 import java.security.Principal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +73,7 @@ public class CabinetController {
     public String cabinet(Model model, Principal principal) {
         //String qwe = bCryptPasswordEncoder.encode("12345678");
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(Long.toString(userRepository.findByUsername(principal.getName()).getId())));
         model.addAttribute("SO_LIST", soRepository.findAll());
@@ -82,7 +84,7 @@ public class CabinetController {
     public String payments(Model model, Principal principal) {
         //String qwe = bCryptPasswordEncoder.encode("12345678");
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("PAYMENTS_LIST", paymentFacade.findBySo1_Customer1_UserId(userid.toString()));
@@ -93,7 +95,7 @@ public class CabinetController {
     @RequestMapping(value = {"/customer/update/{id}"}, method = RequestMethod.GET)
     public String editCustomer(Model model, @PathVariable("id") Long id,  Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if ( customerRepository.findOne(id) == null
@@ -127,7 +129,7 @@ public class CabinetController {
     @RequestMapping(value = {"/myorders"}, method = RequestMethod.GET)
     public String getOrders(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
@@ -137,7 +139,7 @@ public class CabinetController {
     @RequestMapping(value = {"/mypayments"}, method = RequestMethod.GET)
     public String getPayments(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("PAYMENTS_LIST", paymentFacade.findBySo1_Customer1_UserId(userid.toString()));
@@ -148,7 +150,7 @@ public class CabinetController {
     @RequestMapping(value = {"/password"}, method = RequestMethod.GET)
     public String getPassword(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         return "cabinet/password";
@@ -158,7 +160,7 @@ public class CabinetController {
     public String updatePassword(Principal principal, @RequestParam("name1") String name1,
                                  @RequestParam("name2") String name2, @RequestParam("name3") String name3) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         if (name2.length() < 8 || name2.length() > 32
                 || name3.length() < 8 || name3.length() > 32) {
@@ -184,7 +186,7 @@ public class CabinetController {
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
     public String apply(@PathVariable("sq") Long qw, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if ( soRepository.findOne(qw) == null
@@ -203,8 +205,8 @@ public class CabinetController {
             List<ProductItems> productItemsList = new ArrayList<>();
             for (ProductItems pi : productItems){
                 if (pi.getOrdItem().getStatus().equals("Wait")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
-                    CMP += pi.getOrdItem().getDefMP();
-                    OTP += pi.getOrdItem().getDefOTP();
+                    CMP += pi.getMPWithTaxandDiscont();
+                    OTP += pi.getOTPWithTaxandDiscont();
                 }
             }
 
@@ -242,29 +244,39 @@ public class CabinetController {
             so.setPurchaseOrderNumber(payment.getPaymentId().toString());
             soRepository.save(so);
         } else if (so.getAttentionFlag().contains("Waiting for payment") && so.getStatus().equals("Ordered")){
-            Paymentbill paymentbill = new Paymentbill();
-            List<ProductItems> productItems = productItemsRepository.findAll();
-            List<ProductItems> productItemsList = new ArrayList<>();
-            for (ProductItems pi : productItems){
-                if (pi.getOrdItem().getStatus().equals("Ordered")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
-                    CMP += pi.getOrdItem().getDefMP();
+            try {
+                Paymentbill paymentbill = new Paymentbill();
+                List<ProductItems> productItems = productItemsRepository.findAll();
+                List<ProductItems> productItemsList = new ArrayList<>();
+                for (ProductItems pi : productItems){
+                    if (pi.getOrdItem().getStatus().equals("Ordered")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
+                        CMP += pi.getMPWithTaxandDiscont();
+                    }
                 }
+                paymentbill.setCmp(CMP);
+                so.setStatus("Ordered");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date lastdate = formatter.parse(so.getOrderDate());
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(lastdate);
+                cal.add(Calendar.MONTH, 1);
+                lastdate = cal.getTime();
+                so.setOrderDate(dateFormat.format(lastdate));
+                so.setAttentionFlag("");
+                soRepository.save(so);
+                paymentBillRepository.save(paymentbill);
+                Payment payment = new Payment();
+                payment.setPaymentDate(date);
+                payment.setPaymentInfo("Payment was succesfull");
+                payment.setSo1(so);
+                payment.setPaymentbill1(paymentbill);
+                payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
+                paymentFacade.save(payment);
+                so.setPurchaseOrderNumber(payment.getPaymentId().toString());
+                soRepository.save(so);
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-            paymentbill.setCmp(CMP);
-            so.setStatus("Ordered");
-            so.setOrderDate(dateFormat.format(date));
-            so.setAttentionFlag("");
-            soRepository.save(so);
-            paymentBillRepository.save(paymentbill);
-            Payment payment = new Payment();
-            payment.setPaymentDate(date);
-            payment.setPaymentInfo("Payment was succesfull");
-            payment.setSo1(so);
-            payment.setPaymentbill1(paymentbill);
-            payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
-            paymentFacade.save(payment);
-            so.setPurchaseOrderNumber(payment.getPaymentId().toString());
-            soRepository.save(so);
         }
         return "redirect:/application/orderinfo";
     }
@@ -272,7 +284,7 @@ public class CabinetController {
     @RequestMapping(value = {"/customer/remove/{id}"}, method = RequestMethod.GET)
     public String deleteCustomer(Model model, Principal principal, @PathVariable("id") Integer id) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long userid =  userRepository.findByUsername(principal.getName()).getId();
         if (soRepository.findByCustomer1_CustomerId(Long.valueOf(id)) != null){
@@ -286,7 +298,7 @@ public class CabinetController {
     @RequestMapping(value = {"/customerinfo"}, method = RequestMethod.GET)
     public String getCustomer(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         Long id =  userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(id.toString()));
@@ -297,7 +309,7 @@ public class CabinetController {
     @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.GET)
     public String emptyCustomer(Model model, Principal principal) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
         return "cabinet/create";
@@ -316,7 +328,7 @@ public class CabinetController {
                                  @RequestParam("country") String country,
                                  @RequestParam("postalCode") String postalCode) {
         if (principal==null){
-            return "main";
+            return "redirect:/";
         }
         customer.setLastName(lastName);
         customer.setFirstName(firstName);
