@@ -89,6 +89,13 @@
                                             <div class="col-lg-8">${CUSTOMER.address1.postalCode}</div>
                                         </div>
                                     </a>
+
+                                    <a href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-lg-4"><span>User :</span></div>
+                                            <div class="col-lg-8">${USER.username}</div>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a href="${contextPath}/admin/customer/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>

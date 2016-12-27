@@ -52,24 +52,32 @@
                                     </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">
-                                        <label for="addressId">Customer Id</label>
-                                        <input class="form-control" type="number" name="addressId" readonly value="${ADDRESS.addressId}" />
+                                        <label for="addressId">Address Id</label>
+                                        <input class="form-control" type="number" name="addressId" readonly value="${CUSTOMER.address1.addressId}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" name="addressLine" path="addressLine"  />
+                                        <input class="form-control" type="text" name="addressLine" value="${CUSTOMER.address1.addressLine}"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input class="form-control" type="text" name="city" path="city"  />
+                                        <input class="form-control" type="text" name="city" value="${CUSTOMER.address1.city}"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input class="form-control" type="text" name="country" path="country"  />
+                                        <input class="form-control" type="text" name="country" value="${CUSTOMER.address1.country}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="postalCode">Postal Code</label>
-                                        <input class="form-control" type="text" name="postalCode" path="postalCode"  />
+                                        <input class="form-control" type="text" name="postalCode" value="${CUSTOMER.address1.postalCode}"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>User</label>
+                                        <select path="user1" name="user1" onchange=" ">
+                                            <c:forEach items="${USER_LIST}" var="USER">
+                                                <option value="${USER.id}">${USER.username}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

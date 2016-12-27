@@ -3,7 +3,7 @@ create schema test;
 use test;
 
 CREATE TABLE address (AddressId INTEGER NOT NULL AUTO_INCREMENT, AddressLine VARCHAR(255), City VARCHAR(255), Country VARCHAR(255), ModifiedDate VARCHAR(255), PostalCode VARCHAR(255), PRIMARY KEY (AddressId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), Location VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
+CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
 CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, Discountvalue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
 CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), quantity INTEGER, PRIMARY KEY (ItemId));
@@ -61,8 +61,8 @@ insert into role values ('1', 'ROLE_USER');
 insert into role values ('2', 'ROLE_ADMIN');
 insert into role values ('3', 'ROLE_MODER');
 insert into user values ('1', '12345678', '$2a$11$0ZKRrpHj6UE2oKkj8L4P4ezdpFAFJlziymTqyqlhlxdXJni7wt6/y');
-insert into user values ('4', 'fragment', '$2a$11$zki2uF3twILG1noJJ8f9oubcrZ0KIadR4hvnexLHJ9QdPZ2zxpo2m');
-insert into user values ('5', 'qwertyui', '$2a$11$qgZhVSDAsnl1vdlEGOQqbO0gP2nl4xdU2KDyXbr1jVOMQxMXzTWB6');
+insert into user values ('2', 'fragment', '$2a$11$zki2uF3twILG1noJJ8f9oubcrZ0KIadR4hvnexLHJ9QdPZ2zxpo2m');
+insert into user values ('3', 'qwertyui', '$2a$11$qgZhVSDAsnl1vdlEGOQqbO0gP2nl4xdU2KDyXbr1jVOMQxMXzTWB6');
 insert into address values('1', 'Parkovaya 9-15', 'Pinsk', 'Belarus', '06.11.2016', '234099');
 insert into address values('2', 'Lesnaya 23-68', 'Moskow', 'Russia', '06.11.2016', '752834');
 insert into address values('3', 'Sadovaya 2-16', 'St.Petersburg', 'Russia', '06.11.2016', '448645');
@@ -79,10 +79,10 @@ insert into item values ('8', '20000', '7000', 'This is stick', '05.01.2016', 'S
 insert into item values ('9', '70000', '8000', 'This is bed', '05.03.2016', 'Bed', 'House', '12');
 insert into item values ('10', '60000', '9000', 'This is chair', '05.11.2016', 'Chair', 'House', '575');
 
-insert into discountrule values ('1', null, '10', 'disc', '');
-insert into discountrule values ('2', '20', '5', 'disc', '');
-insert into discountrule values ('3', '30', null, 'disc', '');
-insert into discountrule values ('4', '15', '10', 'disc', '');
+insert into discountrule values ('1', null, '10', 'discount', '');
+insert into discountrule values ('2', '20', '5', 'discount', '');
+insert into discountrule values ('3', '30', null, 'discount', '');
+insert into discountrule values ('4', '15', '10', 'discount', '');
 insert into discountrule values ('5', '70', '30', 'tax', '');
 insert into discountrule values ('6', '40', '90', 'tax', '');
 insert into itemdiscount values ('1', '1', '1');
@@ -133,12 +133,13 @@ insert into paymenttype values ('4', 'ASSIST');
 insert into paymenttype values ('5', 'WebMoney');
 insert into user_role values ('1', '1');
 insert into user_role values ('1', '2');
-insert into user_role values ('4', '1');
-insert into user_role values ('5', '1');
-insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', 'Belarus', '1', '1');
-insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', 'Belarus', '2', '7');
-insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', 'Belarus', '3', '1');
-insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', 'Belarus', '4', '7');
+insert into user_role values ('1', '3');
+insert into user_role values ('2', '1');
+insert into user_role values ('3', '1');
+insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', '1', '1');
+insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', '2', '1');
+insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', '3', '2');
+insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', '4', '3');
 insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
 insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
 insert into locations values ('1', 'Belarus');
@@ -166,6 +167,31 @@ insert into characteristics values ('7', 'Size', '40');
 insert into characteristics values ('8', 'Size', '41');
 insert into characteristics values ('9', 'Size', '42');
 insert into characteristics values ('10', 'Size', '43');
+
+/*insert into so values ('1', '05.11.2016', '04.11.2016', '08.11.2016', '011111', '1001', 'Ordered', '5', '5', '5', '5', 'Belarus', '1', '1');
+insert into so values ('2', '05.11.2016', '08.11.2016', '', '022222', '1002', 'Wait', '5', '5', '5', '5', 'Belarus', '1', '1');
+insert into so values ('3', '05.11.2016', '03.11.2016', '09.11.2016', '033333', '1003', 'Ordered', '5', '5', '5', '5', 'Belarus', '1', '1');
+
+insert into soproduct values ('1', '1');
+insert into soproduct values ('2', '2');
+insert into soproduct values ('3', '3');
+
+insert into PRODUCTITEMS values ('1', '1', '1', '1000', '1000');
+insert into PRODUCTITEMS values ('2', '4', '1', '1000', '1000');
+insert into PRODUCTITEMS values ('3', '5', '2', '1000', '1000');
+insert into PRODUCTITEMS values ('4', '2', '2', '1000', '1000');
+insert into PRODUCTITEMS values ('5', '8', '3', '1000', '1000');
+insert into PRODUCTITEMS values ('6', '7', '3', '1000', '1000');*/
+
+
+
+
+
+
+
+
+
+
 
 /*insert into so values ('1', '05.11.2016', '04.11.2016', '08.11.2016', '011111', '1001', 'Ordered', '5', '5', '5', '5', 'Belarus', '1', '1');
 insert into so values ('2', '05.11.2016', '08.11.2016', '', '022222', '1002', 'Wait', '5', '5', '5', '5', 'Belarus', '1', '1');

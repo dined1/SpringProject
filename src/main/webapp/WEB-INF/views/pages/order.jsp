@@ -14,6 +14,15 @@
                         <h5><i class="fa fa-plus-square fa-fw"></i> <b> Payment list</b></h5>
                     </div>
                     <div class="panel-body">
+                        <div class="container">
+                            <ul class="nav nav-pills">
+                                <li><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
+                                <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
+                                <li class="active"><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
+                            </ul>
+                            <br />
+                        </div>
+                        <br />
 
                         <!--div class="container">
                             <ul class="nav nav-pills">

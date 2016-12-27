@@ -23,6 +23,9 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,7 +52,7 @@ public class CustomerController {
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptyCustomer(Model model) {
-        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("USER_LIST", userRepository.findAll());
         return "customer/create";
     }
 
@@ -65,8 +68,10 @@ public class CustomerController {
                                  @RequestParam("addressLine") String addressLine,
                                  @RequestParam("city") String city,
                                  @RequestParam("country") String country,
+                                 @RequestParam("user1") String user1,
                                  @RequestParam("postalCode") String postalCode) {
         customer.setFirstName(firstName);
+        customer.setLastName(firstName);
         customer.setContact(contact);
         customer.setEmail(email);
         customer.setPhone(phone);
@@ -79,8 +84,13 @@ public class CustomerController {
         address.setCity(city);
         address.setCountry(country);
         address.setPostalCode(postalCode);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        address.setModifiedDate(dateFormat.format(date));
         addressRepository.save(address);
+        customer.setCustomerId(address.getAddressId());
         customer.setAddress1(address);
+        customer.setUserId(user1);
         customerRepository.save(customer);
         return "redirect:list";
     }
@@ -89,13 +99,14 @@ public class CustomerController {
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editCustomer(Model model, @PathVariable("id") Long id) {
         model.addAttribute("CUSTOMER", customerRepository.findOne(id));
-        List<Address> adr = addressRepository.findAll();
+        /*List<Address> adr = addressRepository.findAll();
         Address adrm = addressRepository.findOne(id);
         for (Address adr1: adr) if (adr1.getAddressId().equals(customerRepository.findOne(id).getAddress1().getAddressId())) {
             adrm = adr1;
             break;
         }
-        model.addAttribute("ADDRESS", adrm);
+        model.addAttribute("ADDRESS", adrm);*/
+        model.addAttribute("USER_LIST", userRepository.findAll());
         return "customer/update";
     }
 
@@ -113,10 +124,11 @@ public class CustomerController {
                                  @RequestParam("addressLine") String addressLine,
                                  @RequestParam("city") String city,
                                  @RequestParam("country") String country,
+                                 @RequestParam("user1") String user1,
                                  @RequestParam("postalCode") String postalCode) {
 
-        customer.setCustomerId(customerId);
         customer.setFirstName(firstName);
+        customer.setLastName(firstName);
         customer.setContact(contact);
         customer.setEmail(email);
         customer.setPhone(phone);
@@ -125,30 +137,32 @@ public class CustomerController {
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
-        address.setAddressId(addressId);
         address.setAddressLine(addressLine);
         address.setCity(city);
         address.setCountry(country);
         address.setPostalCode(postalCode);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        address.setModifiedDate(dateFormat.format(date));
         addressRepository.save(address);
+        customer.setCustomerId(address.getAddressId());
         customer.setAddress1(address);
+        customer.setUserId(user1);
         customerRepository.save(customer);
         return "redirect:/admin/customer/list";
     }
 
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
-    public String removeCustomer(@PathVariable("id") Integer id, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "welcome";
-        }
-        customerRepository.delete(customerRepository.findOne(Long.valueOf(id)));
-        return "redirect:customer/list";
+    public String removeCustomer(@PathVariable("id") Long id) {
+        customerRepository.delete(customerRepository.findOne(id));
+        return "redirect:/admin/customer/list";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String findCustomer(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("CUSTOMER", customerRepository.findOne(Long.valueOf(id)));
+    public String findCustomer(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("CUSTOMER", customerRepository.findOne(id));
+        model.addAttribute("USER", userRepository.findOne(Long.valueOf(customerRepository.findOne(id).getUserId())));
         return "customer/view";
     }
 

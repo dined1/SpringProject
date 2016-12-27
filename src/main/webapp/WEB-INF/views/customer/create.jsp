@@ -63,6 +63,14 @@
                                         <label for="postalCode">Postal Code</label>
                                         <input class="form-control" type="text" name="postalCode" path="postalCode"  />
                                     </div>
+                                    <div class="form-group">
+                                        <label>User</label>
+                                        <select path="user1" name="user1" onchange=" ">
+                                            <c:forEach items="${USER_LIST}" var="USER">
+                                                <option value="${USER.id}">${USER.username}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                     <a href="${contextPath}/admin/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>

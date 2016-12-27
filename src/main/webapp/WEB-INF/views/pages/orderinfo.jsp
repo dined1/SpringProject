@@ -30,6 +30,7 @@
                             <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
                                 <thead>
                                 <tr>
+                                    <th>Location</th>
                                     <th>SONumber</th>
                                     <th>Purchase Order Number</th>
                                     <th>Date Created</th>
@@ -49,21 +50,14 @@
                                         </c:if>
                                     </c:if>
                                     <tr>
-                                        <td>${(SO.SOId)}</td>
-
-
+                                        <td>${(SO.location)}</td>
+                                        <td>${(SO.SONumber)}</td>
                                         <td>${(SO.purchaseOrderNumber)}</td>
-
                                         <td>${(SO.dateCreated)}</td>
-
                                         <td>${(SO.orderDate)}</td>
-
                                         <td>${(SO.dateModified)}</td>
-
                                         <td>${(SO.customer1.lastName)}</td>
-
                                         <td>${(SO.status)}</td>
-
                                         <td>
                                             <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Details</a>
                                         </td>

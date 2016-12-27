@@ -28,6 +28,7 @@
                                     <th>DRId</th>
                                     <th>Discount Value</th>
                                     <th>Discount Procent</th>
+                                    <th>Type</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -39,6 +40,8 @@
                                         <td>${(DISCOUNTRULE.discountValue)}</td>
 
                                         <td>${(DISCOUNTRULE.discountProcent)}</td>
+
+                                        <td>${(DISCOUNTRULE.type)}</td>
 
                                         <td>
                                             <div class="pull-right">

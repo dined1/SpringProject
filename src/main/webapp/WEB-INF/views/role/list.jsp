@@ -26,7 +26,8 @@
                                 <tr>
                                     <th>User Id</th>
                                     <th>Login</th>
-                                    <th></th>
+                                    <th>Admin</th>
+                                    <th>Moder</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -36,8 +37,6 @@
 
                                         <td>${(USER.username)}</td>
 
-                                        <td>${(USER.roles)}</td>
-
                                         <td><a href="${contextPath}/admin/role/setadm/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make admin</a></td>
 
                                         <td><a href="${contextPath}/admin/role/setmod/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make moderator</a></td>
@@ -46,10 +45,48 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
+
+                            <h4>Moderators</h4>
+                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE">
+                                <thead>
+                                <tr>
+                                    <th>User Id</th>
+                                    <th>Login</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${USER_MODER}" var="USER">
+                                    <tr>
+                                        <td>${(USER.id)}</td>
+                                        <td>${(USER.username)}</td>
+                                        <td><a href="${contextPath}/admin/role/remove/${USER.id}/2">Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+
+                            <h4>Administrators</h4>
+                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE">
+                                <thead>
+                                <tr>
+                                    <th>User Id</th>
+                                    <th>Login</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${USER_ADMIN}" var="USER">
+                                    <tr>
+                                        <td>${(USER.id)}</td>
+                                        <td>${(USER.username)}</td>
+                                        <td><a href="${contextPath}/admin/role/remove/${USER.id}/1">Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
-                        <a href="${contextPath}/admin/role/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Назад</a>
-
-
+                        <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
 
                     </div>
                     <!-- /.panel-body -->

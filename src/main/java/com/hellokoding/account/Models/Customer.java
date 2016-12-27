@@ -62,10 +62,6 @@ public class Customer implements Serializable {
     @Basic
     private String countNumber;
 
-    @Column(name = "Location", table = "customer")
-    @Basic
-    private String location;
-
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
 
@@ -161,13 +157,5 @@ public class Customer implements Serializable {
 
     public void setSoes(List<So> soes) {
         this.soes = soes;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 }

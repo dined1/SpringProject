@@ -74,20 +74,21 @@ public class RoleController {
     }
 
 
-    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.POST)
-    public String updateRole(@Valid
-                                @BeanParam Role role, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "welcome";
+    @RequestMapping(value = {"/remove/{id1}/{id2}"}, method = RequestMethod.GET)
+    public String removeRole(User user, @PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
+        user = userRepository.findById(id1);
+        List<Role> new_r = new ArrayList<Role>();
+        Set<Role> cur_r = userRepository.findOne(id1).getRoles();
+        for (Role r: cur_r) {
+            if ((id2.equals(1l)) && (!r.getName().equals("ROLE_ADMIN")))
+                new_r.add(r);
+            else
+                if ((id2.equals(2l)) && ((!r.getName().equals("ROLE_MODER")) && (!r.getName().equals("ROLE_ADMIN"))))
+                    new_r.add(r);
         }
-        roleRepository.save(role);
-        return "redirect:role/list";
-    }
-
-    @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
-    public RedirectView removeRole(@PathVariable("id") Long id) {
-        roleRepository.delete(roleRepository.findOne(id));
-        return new RedirectView("/role/list");
+        user.setRoles(new HashSet<>(new_r));
+        userRepository.save(user);
+        return "redirect:/admin/role/list";
     }
 
     @RequestMapping(value = {"/setadm/{id}"}, method = RequestMethod.GET)
@@ -95,9 +96,8 @@ public class RoleController {
         user = userRepository.findById(id);
         List<Role> rl = roleRepository.findAll();
         List<Role> rq = new ArrayList<Role>();
-        for (Role r: rl) if (!r.getName().equals("ROLE_MODER")) rq.add(r);
+        for (Role r: rl) rq.add(r);
         user.setRoles(new HashSet<>(rq));
-        user.setId(id);
         userRepository.save(user);
         return "redirect:/admin/role/list";
     }
@@ -109,43 +109,28 @@ public class RoleController {
         List<Role> rq = new ArrayList<Role>();
         for (Role r: rl) if (!r.getName().equals("ROLE_ADMIN")) rq.add(r);
         user.setRoles(new HashSet<>(rq));
-        user.setId(id);
         userRepository.save(user);
         return "redirect:/admin/role/list";
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
-    public String findRole(User user, Principal principal, Model model, @PathVariable("id") Long id) {
-        user = userRepository.findById(id);
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
-        List<Role> rl = roleRepository.findAll();
-        user.getRoles();
-        Set<Role> i = user.getRoles();
-        Boolean adm = false;
-        Boolean mod = false;
-        //if (i.contains())
-        model.addAttribute("ID", id);
-
-        //model.addAttribute()
-        return "role/view";
-    }
-
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
-    public String findAllRole(Model model) {
+    public String findAllRole(Model model, Principal principal) {
         List<User> all = userRepository.findAll();
+        List<User> users = new ArrayList<User>();
+        for (User u: all) if (!u.getId().equals(userRepository.findByUsername(principal.getName()).getId())) users.add(u);
         List<User> adms = new ArrayList<User>();
         List<User> mods = new ArrayList<User>();
 
-        Role ra = roleRepository.findOne(2l);
-        Role rm = roleRepository.findOne(3l);
+        Role ra = roleRepository.findOne(2L);
+        Role rm = roleRepository.findOne(3L);
         for (User u: all) {
-            if (u.getRoles().contains(ra)) adms.add(u);
-            if (u.getRoles().contains(rm)) mods.add(u);
+            if ((u.getRoles().contains(ra)) && (!u.getId().equals(userRepository.findByUsername(principal.getName()).getId()))) adms.add(u);
+            if ((u.getRoles().contains(rm)) && (!u.getId().equals(userRepository.findByUsername(principal.getName()).getId()))) mods.add(u);
         }
 
-        model.addAttribute("USER_LIST", userRepository.findAll());
-        model.addAttribute("USER_LIST", userRepository.findAll());
-        model.addAttribute("USER_LIST", userRepository.findAll());
+        model.addAttribute("USER_LIST", users);
+        model.addAttribute("USER_ADMIN", adms);
+        model.addAttribute("USER_MODER", mods);
         return "role/list";
     }
     
