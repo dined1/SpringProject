@@ -10,4 +10,5 @@ import java.util.List;
  * Created by Admin on 17.12.2016.
  */
 public interface OrdItemCharacteristicsRepository extends JpaRepository<OrdItemCharacteristic, Long> {
+    List<OrdItemCharacteristic> findByOrdItem_orditemId(Long id);
 }
