@@ -96,7 +96,7 @@ public class UserController {
         Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Boolean adm = false;
         for (SimpleGrantedAuthority i: authorities) {
-            if (String.valueOf(i).equals("ROLE_ADMIN")) {
+            if (String.valueOf(i).equals("ROLE_MODER")) {
                 adm = true;
                 break;
             }

@@ -13,7 +13,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/role/update" method="POST">
+                                <form role="form" action="${contextPath}/superadmin/role/update" method="POST">
                                     <div class="form-group">
                                         <label for="roleId">Role Id</label>
                                         <input class="form-control" type="number" name="roleId" readonly value="${ROLE.roleId}" />
@@ -23,7 +23,7 @@
                                         <input class="form-control" type="text" name="name"  value="${ROLE.name}" />
                                     </div>     
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/admin/role/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/superadmin/role/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

@@ -32,7 +32,7 @@ import java.util.*;
  * @author dzni0816
  */
 @Transactional
-@RequestMapping(value = {"/admin/role"})
+@RequestMapping(value = {"/superadmin/role"})
 @Controller
 public class RoleController {
 
@@ -88,7 +88,7 @@ public class RoleController {
         }
         user.setRoles(new HashSet<>(new_r));
         userRepository.save(user);
-        return "redirect:/admin/role/list";
+        return "redirect:/superadmin/role/list";
     }
 
     @RequestMapping(value = {"/setadm/{id}"}, method = RequestMethod.GET)
@@ -99,7 +99,7 @@ public class RoleController {
         for (Role r: rl) rq.add(r);
         user.setRoles(new HashSet<>(rq));
         userRepository.save(user);
-        return "redirect:/admin/role/list";
+        return "redirect:/superadmin/role/list";
     }
 
     @RequestMapping(value = {"/setmod/{id}"}, method = RequestMethod.GET)
@@ -110,7 +110,7 @@ public class RoleController {
         for (Role r: rl) if (!r.getName().equals("ROLE_ADMIN")) rq.add(r);
         user.setRoles(new HashSet<>(rq));
         userRepository.save(user);
-        return "redirect:/admin/role/list";
+        return "redirect:/superadmin/role/list";
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)

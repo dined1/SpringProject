@@ -37,7 +37,7 @@
                                         <td>${P.ordItem.defMP}</td>
                                         <td>${P.ordItem.defOTP}</td>
                                         <td>${P.ordItem.modifiedDate}</td>
-                                        <td><a href="${contextPath}/admin/so/item/${P.ordItem.orditemId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
+                                        <td><a href="${contextPath}/admin/so/item/${P.ordItem.orditemId}/${P.soproduct1.so1.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
 
                                     </tr>
                                 </c:forEach>

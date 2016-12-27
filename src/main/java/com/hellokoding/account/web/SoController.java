@@ -105,8 +105,9 @@ public class SoController {
         return "so/view";
     }
 
-    @RequestMapping(value = {"/item/{id}"}, method = RequestMethod.GET)
-    public String findItem(Model model, @PathVariable("id") Long id) {
+    @RequestMapping(value = {"/item/{id}/{s}"}, method = RequestMethod.GET)
+    public String findItem(Model model, @PathVariable("id") Long id, @PathVariable("s") Long s) {
+        model.addAttribute("SO", s);
         model.addAttribute("ITEM", ordItemRepository.findOne(id));
         model.addAttribute("DISC", ordItemdiscountRepository.findByOrdItem_orditemId(id));
         model.addAttribute("CHAR", ordItemCharacteristicsRepository.findByOrdItem_orditemId(id));

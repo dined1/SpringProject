@@ -152,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="${contextPath}/admin/role/list">
+                    <a href="${contextPath}/superadmin/role/list">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

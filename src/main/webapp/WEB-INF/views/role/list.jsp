@@ -37,9 +37,9 @@
 
                                         <td>${(USER.username)}</td>
 
-                                        <td><a href="${contextPath}/admin/role/setadm/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make admin</a></td>
+                                        <td><a href="${contextPath}/superadmin/role/setadm/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make admin</a></td>
 
-                                        <td><a href="${contextPath}/admin/role/setmod/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make moderator</a></td>
+                                        <td><a href="${contextPath}/superadmin/role/setmod/${USER.id}"><i class="fa fa-level-up fa-fw"></i>  Make moderator</a></td>
 
                                     </tr>
                                 </c:forEach>
@@ -60,7 +60,7 @@
                                     <tr>
                                         <td>${(USER.id)}</td>
                                         <td>${(USER.username)}</td>
-                                        <td><a href="${contextPath}/admin/role/remove/${USER.id}/2">Delete</a></td>
+                                        <td><a href="${contextPath}/superadmin/role/remove/${USER.id}/2">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -80,7 +80,7 @@
                                     <tr>
                                         <td>${(USER.id)}</td>
                                         <td>${(USER.username)}</td>
-                                        <td><a href="${contextPath}/admin/role/remove/${USER.id}/1">Delete</a></td>
+                                        <td><a href="${contextPath}/superadmin/role/remove/${USER.id}/1">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
