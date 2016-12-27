@@ -243,7 +243,7 @@ public class CabinetController {
             paymentFacade.save(payment);
             so.setPurchaseOrderNumber(payment.getPaymentId().toString());
             soRepository.save(so);
-        } else if (so.getAttentionFlag().contains("Waiting for payment") && so.getStatus().equals("Ordered")){
+        } else if (so.getAttentionFlag() != null && so.getAttentionFlag().contains("Waiting for payment") && so.getStatus().equals("Ordered")){
             try {
                 Paymentbill paymentbill = new Paymentbill();
                 List<ProductItems> productItems = productItemsRepository.findAll();
@@ -255,7 +255,7 @@ public class CabinetController {
                 }
                 paymentbill.setCmp(CMP);
                 so.setStatus("Ordered");
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
                 Date lastdate = formatter.parse(so.getOrderDate());
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(lastdate);

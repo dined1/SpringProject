@@ -527,10 +527,6 @@ public class AppController {
         for (int i = 0; i < 4-so.getSOId().toString().length(); i++)
             s += '0';
         so.setSONumber(s + so.getSOId().toString());
-        s = "";
-        for (int i = 0; i < 8-so.getSOId().toString().length(); i++)
-            s += '0';
-        so.setPurchaseOrderNumber(s + so.getSOId().toString());
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());
         soproduct.setSo1(so);
