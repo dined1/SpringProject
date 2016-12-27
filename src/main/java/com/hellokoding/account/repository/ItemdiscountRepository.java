@@ -10,5 +10,4 @@ import java.util.List;
  */
 public interface ItemdiscountRepository extends JpaRepository<Itemdiscount, Long> {
     List<Itemdiscount> findByItem1_ItemId(Long itemid);
-    List<Itemdiscount> findByDiscountrule1_DRId(Long dRId);
 }

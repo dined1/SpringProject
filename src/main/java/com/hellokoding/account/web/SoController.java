@@ -31,7 +31,15 @@ import javax.ws.rs.*;
 public class SoController {
 
     @Autowired
+    OrdItemRepository ordItemRepository;
+    @Autowired
+    OrdItemdiscountRepository ordItemdiscountRepository;
+    @Autowired
+    OrdItemCharacteristicsRepository ordItemCharacteristicsRepository;
+    @Autowired
     SORepository soRepository;
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     ProductItemsRepository productItemsRepository;
     @Autowired
@@ -93,12 +101,30 @@ public class SoController {
     public String findSo(Model model, @PathVariable("id") Long id) {
         model.addAttribute("SO", soRepository.findOne(id));
         model.addAttribute("PROD", productItemsRepository.findBySoproduct1_SOPId(id));
+        model.addAttribute("USER", userRepository.findOne(Long.valueOf(soRepository.findOne(id).getCustomer1().getUserId())));
         return "so/view";
+    }
+
+    @RequestMapping(value = {"/item/{id}"}, method = RequestMethod.GET)
+    public String findItem(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("ITEM", ordItemRepository.findOne(id));
+        model.addAttribute("DISC", ordItemdiscountRepository.findByOrdItem_orditemId(id));
+        model.addAttribute("CHAR", ordItemCharacteristicsRepository.findByOrdItem_orditemId(id));
+        return "so/item";
+    }
+
+    @RequestMapping(value = {"/pay/{id}"}, method = RequestMethod.GET)
+    public String fakePay(Model model, @PathVariable("id") Long id) {
+        So so = soRepository.findOne(id);
+        so.setStatus("Ordered");
+        soRepository.save(so);
+        return "redirect:/admin/so/list";
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllSo(Model model) {
-        model.addAttribute("SO_LIST", soRepository.findAll());
+        model.addAttribute("SO_WAIT", soRepository.findByStatus("Wait"));
+        model.addAttribute("SO_ORDERED", soRepository.findByStatus("Ordered"));
         return "so/list";
     }
 

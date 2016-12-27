@@ -27,34 +27,60 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
+
+                            <h4>Wait</h4>
                             <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
                                 <thead>
-                                    <tr>
-                                        <th>SOId</th>
-                                        <th>Date Created</th>
-                                        <th>Order Date</th>
-                                        <th>Status</th>
-                                        <th>SONumber</th>
-                                        <th>Purchase Order Number</th>
-                                        <th>Date Modified</th>
-                                        <th>Customer</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th>SOId</th>
+                                    <th>SONumber</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Customer</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${SO_LIST}" var="SO">
-                                        <tr>
-                                            <td>${(SO.SOId)}</td>
-                                            <td>${(SO.dateCreated)}</td>
-                                            <td>${(SO.orderDate)}</td>
-                                            <td>${(SO.status)}</td>
-                                            <td>${(SO.SONumber)}</td>
-                                            <td>${(SO.purchaseOrderNumber)}</td>
-                                            <td>${(SO.dateModified)}</td>
-                                            <td>${(SO.customer1.lastName)}</td>
-                                            <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach items="${SO_WAIT}" var="SO">
+                                    <tr>
+                                        <td>${(SO.SOId)}</td>
+                                        <td>${(SO.SONumber)}</td>
+                                        <td>${(SO.purchaseOrderNumber)}</td>
+                                        <td>${(SO.customer1.lastName)}</td>
+                                        <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+
+                            <h4>Ordered</h4>
+                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
+                                <thead>
+                                <tr>
+                                    <th>SOId</th>
+                                    <th>Date Created</th>
+                                    <th>Order Date</th>
+                                    <th>Status</th>
+                                    <th>SONumber</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Date Modified</th>
+                                    <th>Customer</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${SO_ORDERED}" var="SO">
+                                    <tr>
+                                        <td>${(SO.SOId)}</td>
+                                        <td>${(SO.dateCreated)}</td>
+                                        <td>${(SO.orderDate)}</td>
+                                        <td>${(SO.status)}</td>
+                                        <td>${(SO.SONumber)}</td>
+                                        <td>${(SO.purchaseOrderNumber)}</td>
+                                        <td>${(SO.dateModified)}</td>
+                                        <td>${(SO.customer1.lastName)}</td>
+                                        <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
