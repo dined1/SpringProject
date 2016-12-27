@@ -255,6 +255,7 @@ public class CabinetController {
                 }
                 paymentbill.setCmp(CMP);
                 so.setStatus("Ordered");
+
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
                 Date lastdate = formatter.parse(so.getOrderDate());
                 Calendar cal = Calendar.getInstance();
