@@ -11,28 +11,28 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-edit fa-fw"></i> <b> Update User</b></h5> 
+                        <h5><i class="fa fa-edit fa-fw"></i> <b> Change password</b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/user/update" method="POST">
-
+                                <form role="form" action="${contextPath}/resetpassword" method="POST">
                                     <div class="form-group">
-                                        <label for="userId">User Id</label>
-                                        <input class="form-control" type="number" name="userId" readonly value="${USER.userId}" />
-                                    </div>     
-                                    <div class="form-group">
-                                        <label for="login">Login</label>
-                                        <input class="form-control" type="text" name="login"  value="${USER.login}" />
-                                    </div>     
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9]+" name="password"  value="${USER.password}" />
+                                        <label for="username">Login</label>
+                                        <input class="form-control" type="text" value="${userForm.username}" name="username" />
                                     </div>
-
+                                    <c:if test="${user == true}">
+                                        <div class="form-group">
+                                            <label for="question">Secret question: ${userForm.question}</label>
+                                            <input class="form-control" type="hidden" value="${userForm.question}" name="question" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="answer">Answer</label>
+                                            <input class="form-control" type="text" value="" name="answer" />
+                                        </div>
+                                    </c:if>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/admin/user/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

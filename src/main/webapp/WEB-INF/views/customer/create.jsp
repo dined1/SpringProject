@@ -20,48 +20,57 @@
                                     <h4>Customer information</h4>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" name="firstName" path="firstName"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Только буквы"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" name="lastName" path="lastName"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Только буквы"   />
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
-                                        <input class="form-control" type="text" name="contact" path="contact"  />
+                                        <input class="form-control" type="number" name="contact" path="contact"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" type="text" name="email" path="email"  />
+                                        <input class="form-control" type="email" name="email" path="email"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="text" name="phone" path="phone"  />
+                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="passNumber">Pass Number</label>
-                                        <input class="form-control" type="text" name="passNumber" path="PassNumber"  />
+                                        <input class="form-control" type="number" name="passNumber" path="PassNumber"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="countNumber">Count Number</label>
-                                        <input class="form-control" type="text" name="countNumber" path="CountNumber"  />
+                                        <input class="form-control" type="number" name="countNumber" path="CountNumber"  />
                                     </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" name="addressLine" path="addressLine"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9-]+" name="addressLine" path="addressLine" title="Введите адрес без пробелов" />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input class="form-control" type="text" name="city" path="city"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" path="city" title="Только буквы"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input class="form-control" type="text" name="country" path="country"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country" path="country" title="Только буквы" list="country_list" required />
+                                        <datalist id="country_list">
+                                            <option>Belarus</option>
+                                            <option>Russia</option>
+                                            <option>Ukraine</option>
+                                            <option>Poland</option>
+                                            <option>Czech</option>
+                                            <option>Slovakia</option>
+                                            <option>Serbia</option>
+                                        </datalist>
                                     </div>
                                     <div class="form-group">
                                         <label for="postalCode">Postal Code</label>
-                                        <input class="form-control" type="text" name="postalCode" path="postalCode"  />
+                                        <input class="form-control" type="number" name="postalCode" path="postalCode"  />
                                     </div>
                                     <div class="form-group">
                                         <label>User</label>

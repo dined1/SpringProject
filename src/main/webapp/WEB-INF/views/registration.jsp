@@ -55,6 +55,16 @@
             </div>
         </spring:bind>
 
+        <div class="form-group">
+            <label for="question">Secret question</label>
+            <input class="form-control" type="text" name="question" />
+        </div>
+
+        <div class="form-group">
+            <label for="answer">Answer</label>
+            <input class="form-control" type="text" name="answer" />
+        </div>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
 

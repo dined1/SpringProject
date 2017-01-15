@@ -5,28 +5,26 @@
  */
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.*;
+import com.hellokoding.account.Models.Address;
+import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.controller.util.ErrorBean;
-import com.hellokoding.account.repository.*;
+import com.hellokoding.account.repository.AddressRepository;
+import com.hellokoding.account.repository.CustomerRepository;
+import com.hellokoding.account.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.ws.rs.*;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -84,7 +82,7 @@ public class CustomerController {
         address.setCity(city);
         address.setCountry(country);
         address.setPostalCode(postalCode);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         address.setModifiedDate(dateFormat.format(date));
         addressRepository.save(address);
@@ -141,7 +139,7 @@ public class CustomerController {
         address.setCity(city);
         address.setCountry(country);
         address.setPostalCode(postalCode);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         address.setModifiedDate(dateFormat.format(date));
         addressRepository.save(address);

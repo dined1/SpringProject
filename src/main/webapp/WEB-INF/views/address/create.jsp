@@ -19,19 +19,28 @@
                                 <form role="form" action="${contextPath}/admin/address/new" method="POST">
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" name="addressLine" path="addressLine"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9-]+" name="addressLine" path="addressLine" title="Введите адрес без пробелов"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input class="form-control" type="text" name="city" path="city"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" path="city" title="Только буквы" />
                                     </div>
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input class="form-control" type="text" name="country" path="country"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country" path="country" title="Только буквы" list="country_list" required />
+                                        <datalist id="country_list">
+                                            <option>Belarus</option>
+                                            <option>Russia</option>
+                                            <option>Ukraine</option>
+                                            <option>Poland</option>
+                                            <option>Czech</option>
+                                            <option>Slovakia</option>
+                                            <option>Serbia</option>
+                                        </datalist>
                                     </div>
                                     <div class="form-group">
                                         <label for="postalCode">Postal Code</label>
-                                        <input class="form-control" type="text" name="postalCode" path="postalCode"  />
+                                        <input class="form-control" type="number" name="postalCode" path="postalCode"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="modifiedDate">Modified Date</label>

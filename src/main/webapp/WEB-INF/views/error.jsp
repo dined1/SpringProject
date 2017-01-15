@@ -12,6 +12,7 @@
                     <h3 class="panel-title">Error :</h3>
                 </div>
 
+                <label>${message}</label>
                 <div class="panel-footer">
                     <a onclick="history.back()" class="btn btn-lg btn-defult btn-block">Retry</a>
                 </div>

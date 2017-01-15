@@ -390,13 +390,13 @@ public class AppController {
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);
         for (Itemdiscount discount : itemdiscounts) {
             if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountProcent() != null){
-                otp = otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+                otp += otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
             }
             if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountValue() != null){
                 otp += discount.getDiscountrule1().getDiscountValue();
             }
         }
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date date = new Date();
         so.setDateModified(dateFormat.format(date));
         soRepository.save(so);
@@ -510,7 +510,7 @@ public class AppController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createItemdiscount(Model model, So so, Soproduct soproduct,
                                      @RequestParam("socustomer") String customer1) {
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date date = new Date();
         Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setStatus("Wait");

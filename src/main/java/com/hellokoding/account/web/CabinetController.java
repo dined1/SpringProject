@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -100,6 +101,7 @@ public class CabinetController {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if ( customerRepository.findOne(id) == null
                 || !customerRepository.findOne(id).getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot update others customer information");
             return "error";
         }
         model.addAttribute("CUSTOMER", customerRepository.findOne(id));
@@ -157,19 +159,23 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/password"}, method = RequestMethod.POST)
-    public String updatePassword(Principal principal, @RequestParam("name1") String name1,
+    public String updatePassword(Model model, Principal principal, @RequestParam("name1") String name1,
                                  @RequestParam("name2") String name2, @RequestParam("name3") String name3) {
         if (principal==null){
             return "redirect:/";
         }
         if (name2.length() < 8 || name2.length() > 32
                 || name3.length() < 8 || name3.length() > 32) {
-            return "error";        }
+            model.addAttribute("message", "You entered uncorrect password length");
+            return "error";
+        }
         if (!name2.equals(name3) || userRepository.findByUsername(principal.getName()) == null
                 || !bCryptPasswordEncoder.matches(name1, userRepository.findByUsername(principal.getName()).getPassword())){
+            model.addAttribute("message", "Passwords didn't matches");
             return "error";
         }
         if (bCryptPasswordEncoder.matches(name2, userRepository.findByUsername(principal.getName()).getPassword())){
+            model.addAttribute("message", "You entered wrong password");
             return "error";
         }
         User u = userRepository.findByUsername(principal.getName());
@@ -177,6 +183,8 @@ public class CabinetController {
         user.setId(u.getId());
         user.setPassword(bCryptPasswordEncoder.encode(name2));
         user.setPasswordConfirm(bCryptPasswordEncoder.encode(name2));
+        user.setQuestion(u.getQuestion());
+        user.setAnswer(u.getAnswer());
         user.setRoles(u.getRoles());
         user.setUsername(u.getUsername());
         userRepository.save(user);
@@ -184,17 +192,18 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
-    public String apply(@PathVariable("sq") Long qw, Principal principal) {
+    public String apply(Model model, @PathVariable("sq") Long qw, Principal principal) {
         if (principal==null){
             return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if ( soRepository.findOne(qw) == null
                 || !soRepository.findOne(qw).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
             return "error";
         }
 
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date date = new Date();
         Float CMP = 0f;
         Float OTP = 0f;
@@ -231,6 +240,7 @@ public class CabinetController {
                 }
             }
             so.setStatus("Ordered");
+            so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
             so.setOrderDate(dateFormat.format(date));
             soRepository.save(so);
             paymentBillRepository.save(paymentbill);
@@ -256,7 +266,7 @@ public class CabinetController {
                 paymentbill.setCmp(CMP);
                 so.setStatus("Ordered");
 
-                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 Date lastdate = formatter.parse(so.getOrderDate());
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(lastdate);
@@ -289,6 +299,7 @@ public class CabinetController {
         }
         Long userid =  userRepository.findByUsername(principal.getName()).getId();
         if (soRepository.findByCustomer1_CustomerId(Long.valueOf(id)) != null){
+            model.addAttribute("message", "You have more then 0 orders on this customer");
             return "error";
         }
         customerRepository.delete(customerRepository.findOne(Long.valueOf(id)));

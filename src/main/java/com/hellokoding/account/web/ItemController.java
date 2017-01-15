@@ -9,18 +9,15 @@ import com.hellokoding.account.Models.*;
 import com.hellokoding.account.controller.util.ErrorBean;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.Location;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +61,7 @@ public class ItemController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createItem(@Valid
             @BeanParam Item item) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         item.setModifiedDate(dateFormat.format(date));
         itemRepository.save(item);
@@ -80,7 +77,7 @@ public class ItemController {
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateItem(@Valid
                                 @BeanParam Item item) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         item.setModifiedDate(dateFormat.format(date));
         itemRepository.save(item);

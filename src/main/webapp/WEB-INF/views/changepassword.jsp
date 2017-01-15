@@ -11,28 +11,22 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-plus-square fa-fw"></i> <b> Create a new User </b></h5>
+                        <h5><i class="fa fa-edit fa-fw"></i> <b> Change password</b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/user/new" method="POST">
-
+                                <form role="form" action="${contextPath}/changepassword" method="POST">
                                     <div class="form-group">
-                                        <label for="userId">User Id</label>
-                                        <input class="form-control" type="number" name="userId" path="userId"  required="required" autofocus="autofocus"  />
+                                        <label for="userPassword2">New password</label>
+                                        <input class="form-control" type="password" name="name2" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="login">Login</label>
-                                        <input class="form-control" type="text" name="login" path="login"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9]+" name="password" path="password"  />
+                                        <label for="userPassword3">Repeat new password</label>
+                                        <input class="form-control" type="password" name="name3" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <a href="${contextPath}/admin/user/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
                                 </form>
                             </div>
                         </div>
@@ -42,6 +36,5 @@
         </div>
     </div>
 </div>
-
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>

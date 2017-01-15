@@ -464,3 +464,16 @@ insert into PRODUCTITEMS values ('30', '10', '12', '1000', '1000')*/
 -- insert into PRODUCTITEMS values ('29', '9', '11', '1000', '1000');
 -- insert into PRODUCTITEMS values ('30', '10', '12', '1000', '1000')
 -- 
+
+
+
+
+
+
+
+
+
+CREATE TABLE payusers (payuserid INTEGER NOT NULL AUTO_INCREMENT, login VARCHAR(255), password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), registered date, enabled boolean, role varchar(255), PRIMARY KEY (payuserid)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE accounts (accid INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(255), account_number VARCHAR(255), currency VARCHAR(255), balance float, enabled boolean, user_id INTEGER, PRIMARY KEY (accid));
+ALTER TABLE accounts ADD CONSTRAINT FK_accounts FOREIGN KEY (user_id) REFERENCES payusers (payuserid);
+

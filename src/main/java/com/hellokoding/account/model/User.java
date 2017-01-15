@@ -15,6 +15,9 @@ public class User {
     private String passwordConfirm;
     private Set<Role> roles;
 
+    private String question;
+
+    private String answer;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,7 +54,7 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public Set<Role> getRoles() {
         return roles;
@@ -62,4 +65,19 @@ public class User {
     }
 
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

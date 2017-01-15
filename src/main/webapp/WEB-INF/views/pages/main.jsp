@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-3 phone_number">
                 <h3><a href="+375298715105">(29) 4-8-15-16-23-42</a></h3>
-                <p>Режим работы с 8<sup>30</sup> до 18<sup>00</sup></p>
+                <p>Library hours: from 8<sup>30</sup> to 18<sup>30</sup></p>
             </div>
         </div>
     </div>
@@ -46,32 +46,32 @@
     <div class="container">
         <div class="row">
             <ul class="list-inline">
-                <a href="#">
-                    <li>Главная</li>
+                <a href="#main">
+                    <li>Home</li>
                 </a>
-                <a href="#">
-                    <li>Оборудование</li>
+                <a href="#who">
+                    <li>About us</li>
                 </a>
-                <a href="#">
-                    <li>Отзывы</li>
+                <a href="#portfolio">
+                    <li>Portfolio</li>
                 </a>
-                <a href="#">
-                    <li>Контакты</li>
+                <a href="#contacts">
+                    <li>Contact Information</li>
                 </a>
                 <c:if test="${us != null}">
                     <a href="${contextPath}/cabinet/cabinet">
-                        <li>Кабинет</li>
+                        <li>ACCOUNT</li>
                     </a>
                     <a href="${contextPath}/logout">
-                        <li>Выйти</li>
+                        <li>SING OUT</li>
                     </a>
                 </c:if>
                 <c:if test="${us == null}">
                     <a href="${contextPath}/login">
-                        <li>Вход</li>
+                        <li>SING IN</li>
                     </a>
                     <a href="${contextPath}/registration">
-                        <li>Регистрация</li>
+                        <li>REGISTRATION</li>
                     </a>
                 </c:if>
                 <c:if test="${ADM == true}">
@@ -85,14 +85,12 @@
 <section id="main">
     <div class="container">
         <div class="row main_header">
-            <h1><span>Вы совершили большую ошибку обратившись к нам! <br>Я серьезно, бегите пока можете.</span></h1>
+            <h1><span>We are engaged in wholesale distribution of goods around the world.For more than 20 years.</span></h1>
         </div>
         <div class="row">
-            <h3>Вы сами на это пошли.<span> Зря-зря!</span></h3>
+            <h3>In 10 countries. On 4 continents.<span> <br>Reliability, professionalism, fanatical care about our customers.</span></h3>
         </div>
         <div class="row main_buttons">
-            <button data-toggle= "modal" id="get_mes" href="#get_mes_modal">Я идиот.</button>
-            <a href="#types"><button id="get_types">Меня заставили!</button></a>
         </div>
     </div>
 </section>
@@ -188,7 +186,7 @@
     <div class="container">
         <div class="row">
             <div class="section_header text-center">
-                <h2>Посмотрите как мы вас ненавидим</h2>
+                <h2>Look at our portfolio</h2>
             </div>
         </div>
         <div class="col-md-10 col-md-offset-1">
@@ -228,6 +226,7 @@
                         <input name="phone" id="phone_1" type="text" required placeholder="Телефон" class="form-comtrol form_input">
                     </div>
                     <div class="col-md-4">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <button type="submit">Send</button>
                         </form>
                     </div>
@@ -241,7 +240,7 @@
     <div class="container">
         <div class="row">
             <div class="section_header text-center">
-                <h2>Отзывы</h2>
+                <h2>Feedback</h2>
             </div>
         </div>
         <div class="row">
@@ -285,7 +284,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <p>Ребята сразу дадут тебе понять: что никогда тебя не покинут, никогда не унизят, никогда не убегут от тебя и никогда не бросят. Никогда не заставят плакать, никогда не скажут "Прощай", никогда не соврут и не сделают тебе больно.</p>
+                                        <p>Never gonna give you up, never gonna let you down. Never gonna run around and desert you. Never gonna make you cry, never gonna say goodbye. Never gonna tell a lie and hurt you.</p>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +315,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <p>Ребята сразу дадут тебе понять: что никогда тебя не покинут, никогда не унизят, никогда не убегут от тебя и никогда не бросят. Никогда не заставят плакать, никогда не скажут "Прощай", никогда не соврут и не сделают тебе больно.</p>
+                                        <p>Never gonna give you up, never gonna let you down. Never gonna run around and desert you. Never gonna make you cry, never gonna say goodbye. Never gonna tell a lie and hurt you.</p>
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +346,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <p>Ребята сразу дадут тебе понять: что никогда тебя не покинут, никогда не унизят, никогда не убегут от тебя и никогда не бросят. Никогда не заставят плакать, никогда не скажут "Прощай", никогда не соврут и не сделают тебе больно.</p>
+                                        <p>Never gonna give you up, never gonna let you down. Never gonna run around and desert you. Never gonna make you cry, never gonna say goodbye. Never gonna tell a lie and hurt you.</p>
                                     </div>
                                 </div>
                             </div>
@@ -370,21 +369,21 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h2>Контактные данные</h2>
+                <h2>Contact Information</h2>
                 <div class="row">
                     <address>
                         <p id="address">
-                            Адрес:
+                            Address:
                         </p>
                         <p id="minck">
-                            Минск, ул. Притыцкого 28, офис 1
+                            Minsk, st. Pritytskogo 28, office 1
                         </p>
                     </address>
                 </div>
                 <div class="row">
                     <div class="phone_footer">
                         <p id="phone_footer">
-                            Телефон:
+                            Phone:
                         </p>
                         <p id="numder">
                             (29) 4-8-15-16-23-42
@@ -392,26 +391,25 @@
                     </div>
                 </div>
                 <div class="row social">
-                    <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/vk.png" alt="Вконтакте"></a>
-                    <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/insta.png" alt="Инстаграм"></a>
-                    <button id="get_answer" data-toggle="modal" href="#">Задать вопрос</button>
+                    <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/vk.png" alt="Vkontakte"></a>
+                    <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/insta.png" alt="Instagram"></a>
+ 
                 </div>
             </div>
         </div>
         <div class="row details_row">
             <div class="col-md-4 details">
-                <h5>ООО "Серьёзная компания" </h5>
+                <h5>INC "Serious company" </h5>
             </div>
             <div class="col-md-4 policy">
-                <h5>Плитика конфиденциальности</h5>
+                <h5>Privacy policy</h5>
                 <p>
-                    © Минск 2016—2016
+                    © Minsk 2016—2016
                 </p>
             </div>
             <div class="col-md-4 lk">
-                <h4>Сайт разработан:</h4>
-                <a href="https://vk.com/id83881482">Владислав</a>
-                <a href="https://vk.com/maxvancom"> & Максим</a>
+                <h4>Website developed by:</h4>
+                <a href="https://vk.com/id83881482">Vladislav</a>
             </div>
         </div>
     </div>
@@ -445,13 +443,6 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-            </div>
-            <div class="modal-body text-center">
-                <div class="row">
-                    <div class="header_modal_info">
-                        <h4>не знаю, что тут будет</h4>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

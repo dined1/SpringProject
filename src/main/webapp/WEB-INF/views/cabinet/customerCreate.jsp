@@ -20,31 +20,31 @@
                                     <h2>Customer creation</h2>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" name="firstName" path="firstName"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Только буквы" />
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" name="lastName" path="lastName"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Только буквы" />
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
-                                        <input class="form-control" type="text" name="contact" path="contact"  />
+                                        <input class="form-control" type="number" name="contact" path="contact"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" type="text" name="email" path="email"  />
+                                        <input class="form-control" type="email" name="email" path="email"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="text" name="phone" path="phone"  />
+                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="passNumber">Pass Number</label>
-                                        <input class="form-control" type="text" name="passNumber" path="passNumber"  />
+                                        <input class="form-control" type="number" name="passNumber" path="passNumber"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="countNumber">Count Number</label>
-                                        <input class="form-control" type="text" name="countNumber" path="countNumber"  />
+                                        <input class="form-control" type="number" name="countNumber" path="countNumber"  />
                                     </div>
                                     <h2>Customer address</h2>
                                     <div class="form-group">

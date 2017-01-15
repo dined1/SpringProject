@@ -33,17 +33,19 @@
                                         <label for="purchaseOrderNumber">Purchase Order Number</label>
                                         <input class="form-control" type="text" name="purchaseOrderNumber" path="purchaseOrderNumber"  />
                                     </div-->
-                                    <div class="form-group">
-                                        <label>Customer</label>
-                                        <select path="socustomer" name="socustomer" onchange=" ">
-                                            <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
-                                                <option value="${CUSTOMER.customerId}">${CUSTOMER.lastName}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                    <!--a href="${contextPath}/so/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a-->
+                                    <c:if test="${!empty CUSTOMER_LIST}">
+                                        <div class="form-group">
+                                            <label>Customer</label>
+                                            <select path="socustomer" name="socustomer" onchange=" ">
+                                                <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
+                                                    <option value="${CUSTOMER.customerId}">${CUSTOMER.lastName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
+                                    </c:if>
+                                    <!--a href="${contextPath}/admin/so/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a-->
                                 </form>
                             </div>
                         </div>
