@@ -30,14 +30,15 @@
                             <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
                                 <thead>
                                 <tr>
-                                    <th>Location</th>
                                     <th>SONumber</th>
+                                    <th>Customer</th>
+                                    <th>Customer e-mail</th>
+                                    <th>Status</th>
+                                    <th>Location</th>
                                     <th>Purchase Order Number</th>
                                     <th>Date Created</th>
-                                    <th>Order Date</th>
                                     <th>Date Modified</th>
-                                    <th>Customer</th>
-                                    <th>Status</th>
+                                    <th>Order Date</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -50,14 +51,15 @@
                                         </c:if>
                                     </c:if>
                                     <tr>
-                                        <td>${(SO.location)}</td>
                                         <td>${(SO.SONumber)}</td>
+                                        <td>${(SO.customer1.firstName)}, ${SO.customer1.lastName}</td>
+                                        <td>${(SO.customer1.email)}</td>
+                                        <td>${(SO.status)}</td>
+                                        <td>${(SO.location)}</td>
                                         <td>${(SO.purchaseOrderNumber)}</td>
                                         <td>${(SO.dateCreated)}</td>
-                                        <td>${(SO.orderDate)}</td>
                                         <td>${(SO.dateModified)}</td>
-                                        <td>${(SO.customer1.lastName)}</td>
-                                        <td>${(SO.status)}</td>
+                                        <td>${(SO.orderDate)}</td>
                                         <td>
                                             <a href="basket/${SO.customer1.customerId}/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Details</a>
                                         </td>

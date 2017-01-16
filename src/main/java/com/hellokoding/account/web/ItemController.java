@@ -115,7 +115,9 @@ public class ItemController {
 
         for (Group1 i: tempgroup1s) {
             Boolean b = false;
-            for (Itemgroup idisc: itemgroups) if (i.getGroupId().equals(idisc.getGroups1().getGroupId())) b = true;
+            for (Itemgroup idisc: itemgroups)
+                if (i.getGroupId().equals(idisc.getGroups1().getGroupId()))
+                    b = true;
             if (b) group1s.add(i);
             else ngroup1s.add(i);
         }

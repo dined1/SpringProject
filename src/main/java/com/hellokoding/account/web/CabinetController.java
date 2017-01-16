@@ -328,13 +328,12 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.POST)
-    public String createCustomer(Principal principal, Address address, Customer customer, @RequestParam("firstName") String firstName,
+    public String createCustomer(Model model, Principal principal, Address address, Customer customer,
+                                 @RequestParam("firstName") String firstName,
                                  @RequestParam("lastName") String lastName,
                                  @RequestParam("contact") String contact,
                                  @RequestParam("email") String email,
                                  @RequestParam("phone") String phone,
-                                 @RequestParam("passNumber") String passNumber,
-                                 @RequestParam("countNumber") String countNumber,
                                  @RequestParam("addressLine") String addressLine,
                                  @RequestParam("city") String city,
                                  @RequestParam("country") String country,
@@ -342,13 +341,15 @@ public class CabinetController {
         if (principal==null){
             return "redirect:/";
         }
+        if (customerRepository.findByEmail(email) == null){
+            model.addAttribute("message", "Customer with this e-mail already situated. Please, use another e-mail!");
+            return "error";
+        }
         customer.setLastName(lastName);
         customer.setFirstName(firstName);
         customer.setContact(contact);
         customer.setEmail(email);
         customer.setPhone(phone);
-        customer.setPassNumber(passNumber);
-        customer.setCountNumber(countNumber);
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));

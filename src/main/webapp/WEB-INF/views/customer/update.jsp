@@ -42,14 +42,6 @@
                                         <label for="phone">Phone</label>
                                         <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#"  name="phone" value="${CUSTOMER.phone}" />
                                     </div>
-                                    <div class="form-group">
-                                        <label for="passNumber">Pass Number</label>
-                                        <input class="form-control" type="number" name="passNumber" value="${CUSTOMER.passNumber}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="countNumber">Count Number</label>
-                                        <input class="form-control" type="number" name="countNumber" value="${CUSTOMER.countNumber}" />
-                                    </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">
                                         <label for="addressId">Address Id</label>

@@ -61,20 +61,16 @@ public class CustomerController {
                                  @RequestParam("contact") String contact,
                                  @RequestParam("email") String email,
                                  @RequestParam("phone") String phone,
-                                 @RequestParam("passNumber") String passNumber,
-                                 @RequestParam("countNumber") String countNumber,
                                  @RequestParam("addressLine") String addressLine,
                                  @RequestParam("city") String city,
                                  @RequestParam("country") String country,
                                  @RequestParam("user1") String user1,
                                  @RequestParam("postalCode") String postalCode) {
         customer.setFirstName(firstName);
-        customer.setLastName(firstName);
+        customer.setLastName(lastName);
         customer.setContact(contact);
         customer.setEmail(email);
         customer.setPhone(phone);
-        customer.setPassNumber(passNumber);
-        customer.setCountNumber(countNumber);
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
@@ -116,8 +112,6 @@ public class CustomerController {
                                  @RequestParam("contact") String contact,
                                  @RequestParam("email") String email,
                                  @RequestParam("phone") String phone,
-                                 @RequestParam("passNumber") String passNumber,
-                                 @RequestParam("countNumber") String countNumber,
                                  @RequestParam("addressId") Long addressId,
                                  @RequestParam("addressLine") String addressLine,
                                  @RequestParam("city") String city,
@@ -126,12 +120,10 @@ public class CustomerController {
                                  @RequestParam("postalCode") String postalCode) {
 
         customer.setFirstName(firstName);
-        customer.setLastName(firstName);
+        customer.setLastName(lastName);
         customer.setContact(contact);
         customer.setEmail(email);
         customer.setPhone(phone);
-        customer.setPassNumber(passNumber);
-        customer.setCountNumber(countNumber);
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
@@ -169,9 +161,6 @@ public class CustomerController {
         model.addAttribute("CUSTOMER_LIST", customerRepository.findAll());
         return "customer/list";
     }
-
-
-
 
     @RequestMapping(value = {"/cabinet"}, method = RequestMethod.GET)
     public String editCabinet(Model model) {

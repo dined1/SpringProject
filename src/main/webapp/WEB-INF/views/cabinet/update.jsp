@@ -38,14 +38,6 @@
                                         <input class="form-control" type="text" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" value="${CUSTOMER.phone}"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="passNumber">Pass Number</label>
-                                        <input class="form-control" type="number" name="passNumber" path="passNumber"  value="${CUSTOMER.passNumber}"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="countNumber">Count Number</label>
-                                        <input class="form-control" type="number" name="countNumber" path="countNumber" value="${CUSTOMER.countNumber}" />
-                                    </div>
-                                    <div class="form-group">
                                         <input type="hidden" class="form-control" type="text" name="location" path="location" value="${CUSTOMER.location}" />
                                     </div>
                                     <div class="form-group">
@@ -81,6 +73,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
+                                    <a href="${contextPath}/cabinet/customerinfo" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

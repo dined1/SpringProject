@@ -38,7 +38,7 @@
                                             <label>Customer</label>
                                             <select path="socustomer" name="socustomer" onchange=" ">
                                                 <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
-                                                    <option value="${CUSTOMER.customerId}">${CUSTOMER.lastName}</option>
+                                                    <option value="${CUSTOMER.customerId}">${CUSTOMER.firstName}, ${CUSTOMER.lastName}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>

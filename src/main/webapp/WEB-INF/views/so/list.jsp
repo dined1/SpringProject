@@ -46,7 +46,11 @@
                                         <td>${(SO.SONumber)}</td>
                                         <td>${(SO.purchaseOrderNumber)}</td>
                                         <td>${(SO.customer1.lastName)}</td>
-                                        <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
+                                        <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
+                                        <c:if test="${empty SO.orderDate}">
+                                            <a href="${contextPath}/admin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
+                                        </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -95,6 +99,7 @@
 
 
                     </div>
+                    <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Back</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

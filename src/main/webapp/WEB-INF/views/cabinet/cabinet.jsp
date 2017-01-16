@@ -36,8 +36,6 @@
                                     <th>Contact</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Pass Number</th>
-                                    <th>Count Number</th>
                                     <th>Address</th>
                                     <th></th>
                                 </tr>
@@ -56,10 +54,6 @@
                                         <td>${(CUSTOMER.email)}</td>
 
                                         <td>${(CUSTOMER.phone)}</td>
-
-                                        <td>${(CUSTOMER.passNumber)}</td>
-
-                                        <td>${(CUSTOMER.countNumber)}</td>
 
                                         <td>${(CUSTOMER.address1.addressLine)}</td>
 

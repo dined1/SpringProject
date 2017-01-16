@@ -7,11 +7,14 @@ import com.hellokoding.account.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -24,9 +27,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        List<Role> rq = new ArrayList<Role>();
-        rq.add(roleRepository.findOne(1l));
-        user.setRoles(new HashSet<>(rq));
+        Set<Role> rq = new HashSet<>();
+        Role role = roleRepository.findOne(1L);
+        role.getUsers().add(user);
+        rq.add(role);
+        user.setRoles(rq);
+        roleRepository.save(role);
         userRepository.save(user);
     }
 

@@ -38,14 +38,6 @@
                                         <label for="phone">Phone</label>
                                         <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone"  />
                                     </div>
-                                    <div class="form-group">
-                                        <label for="passNumber">Pass Number</label>
-                                        <input class="form-control" type="number" name="passNumber" path="PassNumber"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="countNumber">Count Number</label>
-                                        <input class="form-control" type="number" name="countNumber" path="CountNumber"  />
-                                    </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>

@@ -79,7 +79,7 @@ public class So implements Serializable {
     @OneToMany(targetEntity = Payment.class, mappedBy = "so1")
     private List<Payment> payments1;
 
-    @OneToMany(targetEntity = Soproduct.class, mappedBy = "so1")
+    @OneToMany(targetEntity = Soproduct.class, mappedBy = "so1", cascade = CascadeType.REMOVE)
     private List<Soproduct> soproducts1;
 
     public String getDateCreated() {

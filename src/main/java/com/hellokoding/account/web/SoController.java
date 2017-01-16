@@ -88,13 +88,13 @@ public class SoController {
             return "welcome";
         }
         soRepository.save(so);
-        return "redirect:so/list";
+        return "redirect:/so/list";
     }
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public RedirectView removeSo(@PathVariable("id") Long id) {
-        soRepository.delete(soRepository.findOne(id));
-        return new RedirectView("/so/list");
+        soRepository.delete(id);
+        return new RedirectView("redirect:so/list");
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
