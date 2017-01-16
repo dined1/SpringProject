@@ -3,7 +3,7 @@ create schema test;
 use test;
 
 CREATE TABLE address (AddressId INTEGER NOT NULL AUTO_INCREMENT, AddressLine VARCHAR(255), City VARCHAR(255), Country VARCHAR(255), ModifiedDate VARCHAR(255), PostalCode VARCHAR(255), PRIMARY KEY (AddressId)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), Location VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, PRIMARY KEY (CustomerId));
+CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, location VARCHAR(255), PRIMARY KEY (CustomerId));
 CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, Discountvalue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
 CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), quantity INTEGER, PRIMARY KEY (ItemId));
@@ -29,7 +29,7 @@ CREATE TABLE itemlocations (iLid INTEGER NOT NULL AUTO_INCREMENT, location_locat
 
 
 DROP TABLE IF EXISTS user;
-CREATE TABLE user (id int(11) NOT NULL AUTO_INCREMENT,username varchar(255) DEFAULT NULL,password varchar(255) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE user (id int(11) NOT NULL AUTO_INCREMENT,username varchar(255) DEFAULT NULL,password varchar(255) DEFAULT NULL, question varchar(255), answer varchar(255), PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 ALTER TABLE statisticscollector ADD CONSTRAINT FK_statisticscollector_CUSTOMER1_CustomerId FOREIGN KEY (CUSTOMER1_CustomerId) REFERENCES customer (CustomerId);
 ALTER TABLE PRODUCTITEMS ADD CONSTRAINT FK_PRODUCTITEMS_ORDITEM_OrdItemId FOREIGN KEY (ORDITEM_OrdItemId) REFERENCES orditem (OrdItemId);
@@ -60,9 +60,9 @@ ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_location_locationId FO
 insert into role values ('1', 'ROLE_USER');
 insert into role values ('2', 'ROLE_ADMIN');
 insert into role values ('3', 'ROLE_MODER');
-insert into user values ('1', '12345678', '$2a$11$0ZKRrpHj6UE2oKkj8L4P4ezdpFAFJlziymTqyqlhlxdXJni7wt6/y');
-insert into user values ('2', 'fragment', '$2a$11$zki2uF3twILG1noJJ8f9oubcrZ0KIadR4hvnexLHJ9QdPZ2zxpo2m');
-insert into user values ('3', 'qwertyui', '$2a$11$qgZhVSDAsnl1vdlEGOQqbO0gP2nl4xdU2KDyXbr1jVOMQxMXzTWB6');
+insert into user values ('1', '12345678', '$2a$11$0ZKRrpHj6UE2oKkj8L4P4ezdpFAFJlziymTqyqlhlxdXJni7wt6/y', '?', '!');
+insert into user values ('2', 'fragment', '$2a$11$zki2uF3twILG1noJJ8f9oubcrZ0KIadR4hvnexLHJ9QdPZ2zxpo2m', '?', '!');
+insert into user values ('3', 'qwertyui', '$2a$11$qgZhVSDAsnl1vdlEGOQqbO0gP2nl4xdU2KDyXbr1jVOMQxMXzTWB6', '?', '!');
 insert into address values('1', 'Parkovaya 9-15', 'Pinsk', 'Belarus', '06.11.2016', '234099');
 insert into address values('2', 'Lesnaya 23-68', 'Moskow', 'Russia', '06.11.2016', '752834');
 insert into address values('3', 'Sadovaya 2-16', 'St.Petersburg', 'Russia', '06.11.2016', '448645');
@@ -136,10 +136,10 @@ insert into user_role values ('1', '2');
 insert into user_role values ('1', '3');
 insert into user_role values ('2', '1');
 insert into user_role values ('3', '1');
-insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', 'Belarus', '1', '1');
-insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', 'Belarus', '2', '1');
-insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', 'Belarus', '3', '2');
-insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', 'Belarus', '4', '3');
+insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234325234', '2344234235', '1', '1', 'Belarus');
+insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', '2', '1', 'Belarus');
+insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', '3', '2', 'Belarus');
+insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', '4', '3', 'Belarus');
 insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
 insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
 insert into locations values ('1', 'Belarus');
@@ -468,12 +468,7 @@ insert into PRODUCTITEMS values ('30', '10', '12', '1000', '1000')*/
 
 
 
-
-
-
-
-
-CREATE TABLE payusers (payuserid INTEGER NOT NULL AUTO_INCREMENT, login VARCHAR(255), password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), registered date, enabled boolean, role varchar(255), PRIMARY KEY (payuserid)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-CREATE TABLE accounts (accid INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(255), account_number VARCHAR(255), currency VARCHAR(255), balance float, enabled boolean, user_id INTEGER, PRIMARY KEY (accid));
+CREATE TABLE payusers (payuserid INTEGER NOT NULL AUTO_INCREMENT, login VARCHAR(255), password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), registered date, enabled boolean, role varchar(255), KEY (payuserid)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE accounts (accid INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(255), account_number VARCHAR(255), currency VARCHAR(255), balance float, user_id integer, enabled boolean, PRIMARY KEY (accid));
 ALTER TABLE accounts ADD CONSTRAINT FK_accounts FOREIGN KEY (user_id) REFERENCES payusers (payuserid);
-
+INSERT INTO `test`.`payusers` (`payuserid`, `login`, `password`, `first_name`, `last_name`, `email`, `registered`, `enabled`, `role`) VALUES ('1', '12345678', '12345678', '12213', 'asdasd', 'di@m.com', '2017-01-03', '1', 'ROLE_USER');
