@@ -74,6 +74,7 @@ public class CustomerController {
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
+        customer.setUsername(principal.getName());
         address.setAddressLine(addressLine);
         address.setCity(city);
         address.setCountry(country);
@@ -82,7 +83,6 @@ public class CustomerController {
         Date date = new Date();
         address.setModifiedDate(dateFormat.format(date));
         addressRepository.save(address);
-        customer.setCustomerId(address.getAddressId());
         customer.setAddress1(address);
         customer.setUserId(user1);
         customerRepository.save(customer);
@@ -127,6 +127,7 @@ public class CustomerController {
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
+        customer.setUsername(principal.getName());
         address.setAddressLine(addressLine);
         address.setCity(city);
         address.setCountry(country);
@@ -135,7 +136,6 @@ public class CustomerController {
         Date date = new Date();
         address.setModifiedDate(dateFormat.format(date));
         addressRepository.save(address);
-        customer.setCustomerId(address.getAddressId());
         customer.setAddress1(address);
         customer.setUserId(user1);
         customerRepository.save(customer);

@@ -38,7 +38,7 @@
                                         <input class="form-control" type="number" name="defOTP" path="defOTP"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="quantity">Quantity</label>
+                                        <label for="quantity">Amount</label>
                                         <input class="form-control" type="number" name="quantity" path="quantity"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

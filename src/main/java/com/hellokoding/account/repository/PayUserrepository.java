@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PayUserrepository extends JpaRepository<PayUser, Long> {
     PayUser findByLogin(String login);
+
+    PayUser findByLoginAndPassword(String login, String password);
 }

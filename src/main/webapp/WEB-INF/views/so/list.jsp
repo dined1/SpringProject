@@ -29,13 +29,19 @@
                         <div class="dataTable_wrapper">
 
                             <h4>Wait</h4>
-                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
+                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE_WAIT">
                                 <thead>
                                 <tr>
                                     <th>SOId</th>
                                     <th>SONumber</th>
                                     <th>Purchase Order Number</th>
                                     <th>Customer</th>
+                                    <th>Order date</th>
+                                    <th>Order date created</th>
+                                    <th>Order date modified</th>
+                                    <th>MP</th>
+                                    <th>OTP</th>
+                                    <th>Location</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -46,6 +52,12 @@
                                         <td>${(SO.SONumber)}</td>
                                         <td>${(SO.purchaseOrderNumber)}</td>
                                         <td>${(SO.customer1.lastName)}</td>
+                                        <td>${(SO.orderDate)}</td>
+                                        <td>${(SO.dateCreated)}</td>
+                                        <td>${(SO.dateModified)}</td>
+                                        <td>${(SO.finalMPwithTaxAndDiscount)}</td>
+                                        <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
+                                        <td>${(SO.location)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
                                         <c:if test="${empty SO.orderDate}">
                                             <a href="${contextPath}/admin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
@@ -57,17 +69,19 @@
                             </table>
 
                             <h4>Ordered</h4>
-                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
+                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE_ORD">
                                 <thead>
                                 <tr>
                                     <th>SOId</th>
-                                    <th>Date Created</th>
-                                    <th>Order Date</th>
-                                    <th>Status</th>
                                     <th>SONumber</th>
                                     <th>Purchase Order Number</th>
-                                    <th>Date Modified</th>
                                     <th>Customer</th>
+                                    <th>Order date</th>
+                                    <th>Order date created</th>
+                                    <th>Order date modified</th>
+                                    <th>MP</th>
+                                    <th>OTP</th>
+                                    <th>Location</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -75,14 +89,58 @@
                                 <c:forEach items="${SO_ORDERED}" var="SO">
                                     <tr>
                                         <td>${(SO.SOId)}</td>
-                                        <td>${(SO.dateCreated)}</td>
-                                        <td>${(SO.orderDate)}</td>
-                                        <td>${(SO.status)}</td>
                                         <td>${(SO.SONumber)}</td>
                                         <td>${(SO.purchaseOrderNumber)}</td>
-                                        <td>${(SO.dateModified)}</td>
                                         <td>${(SO.customer1.lastName)}</td>
+                                        <td>${(SO.orderDate)}</td>
+                                        <td>${(SO.dateCreated)}</td>
+                                        <td>${(SO.dateModified)}</td>
+                                        <td>${(SO.finalMPwithTaxAndDiscount)}</td>
+                                        <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
+                                        <td>${(SO.location)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+
+                            <h4>All Statuses</h4>
+                            <table class="table table-striped table-bordered table-hover" id="SO_TABLE">
+                                <thead>
+                                <tr>
+                                    <th>SOId</th>
+                                    <th>SONumber</th>
+                                    <th>Status</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Customer</th>
+                                    <th>Order date</th>
+                                    <th>Order date created</th>
+                                    <th>Order date modified</th>
+                                    <th>MP</th>
+                                    <th>OTP</th>
+                                    <th>Location</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${SOES}" var="SO">
+                                    <tr>
+                                        <td>${(SO.SOId)}</td>
+                                        <td>${(SO.SONumber)}</td>
+                                        <td>${(SO.status)}</td>
+                                        <td>${(SO.purchaseOrderNumber)}</td>
+                                        <td>${(SO.customer1.lastName)}</td>
+                                        <td>${(SO.orderDate)}</td>
+                                        <td>${(SO.dateCreated)}</td>
+                                        <td>${(SO.dateModified)}</td>
+                                        <td>${(SO.finalMPwithTaxAndDiscount)}</td>
+                                        <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
+                                        <td>${(SO.location)}</td>
+                                        <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
+                                            <c:if test="${empty SO.orderDate}">
+                                                <a href="${contextPath}/admin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
+                                            </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -90,7 +148,7 @@
                         </div>
 
 
-                        <c:if test="${empty requestScope.SO_LIST}">
+                        <c:if test="${empty requestScope.SOES}">
                             <div class="alert alert-info">
                                 <div align="center">No So found</div>
                             </div>
@@ -110,10 +168,10 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $('SO_TABLE').DataTable({
-            responsive: true
-        });
+    $(document).ready(function(){
+        $('#SO_TABLE').dataTable();
+        $('#SO_TABLE_ORD').dataTable();
+        $('#SO_TABLE_WAIT').dataTable();
     });
 </script>
 

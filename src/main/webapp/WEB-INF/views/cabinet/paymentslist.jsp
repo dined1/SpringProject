@@ -78,7 +78,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('PAYMENT_TABLE').DataTable({
+        $('#PAYMENT_TABLE').DataTable({
             responsive: true
         });
     });

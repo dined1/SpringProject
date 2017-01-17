@@ -32,7 +32,7 @@
                                         <th>Def MP</th>
                                         <th>Def OTP</th>
                                         <th>Modified Date</th>
-                                        <th>Quantity</th>
+                                        <th>Amount</th>
                                         <th></th>
                                     </tr>
                                 </thead>

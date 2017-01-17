@@ -92,7 +92,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('SO_TABLE').DataTable({
+        $('#SO_TABLE').DataTable({
             responsive: true
         });
     });

@@ -124,4 +124,12 @@ public class PayUser {
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
+
+    public Long getPayuserid() {
+        return payuserid;
+    }
+
+    public void setPayuserid(Long payuserid) {
+        this.payuserid = payuserid;
+    }
 }

@@ -45,7 +45,7 @@
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                     </c:if>
-                                    <!--a href="${contextPath}/admin/so/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a-->
+                                    <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

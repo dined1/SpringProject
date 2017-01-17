@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import java.math.BigDecimal;
 
 /**
  *
@@ -44,6 +45,8 @@ public class SoController {
     ProductItemsRepository productItemsRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    SOProductRepository soProductRepository;
     @Inject
     private ErrorBean error;
 
@@ -56,11 +59,21 @@ public class SoController {
 
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String createSo(@Valid
-                               @BeanParam So so, @RequestParam(value = "customer1", required = false) String cust) {
+    public String createSo(Model model, So so, Soproduct soproduct, @RequestParam("socustomer") String cust) {
         Customer customer = customerRepository.findOne(Long.valueOf(cust));
+        if (so.getOrderDate().equals("")){
+            so.setOrderDate(null);
+        }
+        so.setFinalMP(BigDecimal.ZERO);
+        so.setFinalOTP(BigDecimal.ZERO);
+        so.setLocation(customer.getAddress1().getCountry());
+        so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
+        so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setCustomer1(customer);
         soRepository.save(so);
+        soproduct.setSOPId(so.getSOId());
+        soproduct.setSo1(so);
+        soProductRepository.save(soproduct);
         return "redirect:list";
     }
 
@@ -88,13 +101,13 @@ public class SoController {
             return "welcome";
         }
         soRepository.save(so);
-        return "redirect:/so/list";
+        return "redirect:list";
     }
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
-    public RedirectView removeSo(@PathVariable("id") Long id) {
+    public String removeSo(@PathVariable("id") Long id) {
         soRepository.delete(id);
-        return new RedirectView("redirect:so/list");
+        return "redirect:/admin/so/list";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
@@ -126,6 +139,7 @@ public class SoController {
     public String findAllSo(Model model) {
         model.addAttribute("SO_WAIT", soRepository.findByStatus("Wait"));
         model.addAttribute("SO_ORDERED", soRepository.findByStatus("Ordered"));
+        model.addAttribute("SOES", soRepository.findAll());
         return "so/list";
     }
 

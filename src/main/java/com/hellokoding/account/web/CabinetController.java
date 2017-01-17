@@ -341,7 +341,7 @@ public class CabinetController {
         if (principal==null){
             return "redirect:/";
         }
-        if (customerRepository.findByEmail(email) == null){
+        if (customerRepository.findByEmail(email) != null){
             model.addAttribute("message", "Customer with this e-mail already situated. Please, use another e-mail!");
             return "error";
         }
@@ -353,6 +353,7 @@ public class CabinetController {
         Long i = userRepository.findByUsername(principal.getName()).getId();
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
+        customer.setUsername(principal.getName());
         address.setAddressLine(addressLine);
         address.setCity(city);
         address.setCountry(country);

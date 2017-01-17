@@ -87,4 +87,12 @@ public class Account {
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
+
+    public Long getAccid() {
+        return accid;
+    }
+
+    public void setAccid(Long accid) {
+        this.accid = accid;
+    }
 }

@@ -1,6 +1,5 @@
 package com.hellokoding.account.Models;
 
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 
 /**

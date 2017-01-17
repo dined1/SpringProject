@@ -35,7 +35,7 @@
                                 <th>Default One-time price, BYN</th>
                                 <th>Default Mounth price, BYN</th>
                                 <th>Modified Date</th>
-                                <th>Available quantity</th>
+                                <th>Available amount</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -87,6 +87,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function(){
+        $('#ITEM_TABLE').dataTable();
+    });
+</script>
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>

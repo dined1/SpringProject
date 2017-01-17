@@ -23,33 +23,25 @@
                                     </div-->
                                     <div class="form-group">
                                         <label for="dateCreated">Date Created</label>
-                                        <input class="form-control" type="text" name="dateCreated" path="dateCreated"  />
+                                        <input class="form-control" type="date" name="dateCreated" path="dateCreated"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="orderDate">Order Date</label>
-                                        <input class="form-control" type="text" name="orderDate" path="orderDate"  />
+                                        <input class="form-control" type="date" name="orderDate" path="orderDate"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input class="form-control" type="text" name="status" path="status"  />
+                                        <label for="status">Status<span style="color:red">*</span></label>
+                                        <input class="form-control" type="text" name="status" path="status" required />
                                     </div>
                                     <div class="form-group">
-                                        <label for="SONumber">SONumber</label>
-                                        <input class="form-control" type="text" name="SONumber" path="SONumber"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="purchaseOrderNumber">Purchase Order Number</label>
-                                        <input class="form-control" type="text" name="purchaseOrderNumber" path="purchaseOrderNumber"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="dateModified">Date Modified</label>
-                                        <input class="form-control" type="text" name="dateModified" path="dateModified"  />
+                                        <label for="SONumber">SONumber<span style="color:red">*</span></label>
+                                        <input class="form-control" type="text" name="SONumber" path="SONumber" required />
                                     </div>
                                     <div class="form-group">
                                         <label>Costumer</label>
-                                        <select path="customer1" name="customer1" onchange=" ">
+                                        <select path="socustomer" name="socustomer" onchange=" ">
                                             <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
-                                                <option value="${CUSTOMER.customerId}">${CUSTOMER.lastName}</option>
+                                                <option value="${CUSTOMER.customerId}">${CUSTOMER.firstName}, ${CUSTOMER.lastName}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

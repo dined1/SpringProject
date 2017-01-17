@@ -54,6 +54,10 @@ public class Customer implements Serializable {
     @Basic
     private String userId;
 
+    @Column(name = "Username", table = "customer")
+    @Basic
+    private String username;
+
     @Column(name = "PassNumber", table = "customer")
     @Basic
     private String passNumber;
@@ -169,5 +173,13 @@ public class Customer implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
