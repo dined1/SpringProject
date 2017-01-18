@@ -112,7 +112,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('CUSTOMER_TABLE').DataTable({
+        $('#CUSTOMER_TABLE').DataTable({
             responsive: true
         });
     });

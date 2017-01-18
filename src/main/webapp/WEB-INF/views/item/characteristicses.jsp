@@ -40,7 +40,7 @@
                         </table>
 
                         <h4>To remove the feature</h4>
-                        <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE">
+                        <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE_1">
                             <thead>
                             <tr>
                                 <th>Characteristics Id</th>
@@ -69,6 +69,15 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#CHARACTERISTICS_TABLE').DataTable({
+            responsive: true
+        });
+        $('#CHARACTERISTICS_TABLE_1').DataTable({
+            responsive: true
+        });
+    });
+</script>
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>

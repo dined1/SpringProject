@@ -114,7 +114,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('STATISTICSCOLLECTOR_TABLE').DataTable({
+        $('#STATISTICSCOLLECTOR_TABLE').DataTable({
             responsive: true
         });
     });

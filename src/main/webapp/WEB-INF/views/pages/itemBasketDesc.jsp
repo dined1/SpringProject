@@ -54,29 +54,37 @@
                                                 <div class="col-lg-8">${(ITEM.modifiedDate)}</div>
                                             </div>
                                         </a>
-                                        <div class="row">
-                                            <label>Charactiristics </label><br>
-                                            <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">
-                                                <tr>
-                                                    <c:if test="${Characteristic.ordItem.orditemId==ITEM.orditemId}">
-                                                        <td><label>${Characteristic.itemCharacteristic.characteristic}:
-                                                          ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
-                                                    </c:if>
-                                                </tr>
-                                            </c:forEach>
-                                        </div>
-                                        <div class="row">
-                                            <label>Discounts </label><br>
-                                            <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
-                                                <tr>
-
-                                                    <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='disc'}">
-                                                        <td><label>${DISCOUNT.discountrule1.description}:
-                                                        ${DISCOUNT.discountrule1.discountValue}</label></td>
-                                                    </c:if>
-                                                </tr>
-                                            </c:forEach>
-                                        </div>
+                                        <c:if test="${not empty ITEMCHARACTERISTICS}">
+                                            <div class="row">
+                                                <label>Charactiristics: </label><br>
+                                                <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">
+                                                    <tr>
+                                                        <c:if test="${Characteristic.ordItem.orditemId==ITEM.orditemId}">
+                                                            <td><label>${Characteristic.itemCharacteristic.characteristic}:
+                                                              ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
+                                                        </c:if>
+                                                    </tr>
+                                                </c:forEach>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${not empty ITEMDISCOUNTS}">
+                                            <div class="row">
+                                                <label>Active discounts and taxes: </label><br>
+                                                <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
+                                                    <tr>
+                                                        <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='disc'}">
+                                                            <td><label>${DISCOUNT.discountrule1.description} :
+                                                                    value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
+                                                        </c:if>
+                                                        <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='tax'}">
+                                                            <span style="color:darkred">Tax</span>
+                                                            <td><label>${DISCOUNT.discountrule1.description} :
+                                                                    value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
+                                                        </c:if>
+                                                    </tr>
+                                                </c:forEach>
+                                            </div>
+                                        </c:if>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                                     </form>

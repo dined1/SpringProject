@@ -101,7 +101,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('DISCOUNTRULE_TABLE').DataTable({
+        $('#DISCOUNTRULE_TABLE').DataTable({
             responsive: true
         });
     });

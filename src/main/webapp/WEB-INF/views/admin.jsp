@@ -422,7 +422,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('ITEMDISCOUNT_TABLE').DataTable({
+        $('#ITEMDISCOUNT_TABLE').DataTable({
             responsive: true
         });
     });

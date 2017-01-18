@@ -6,6 +6,7 @@ package com.hellokoding.account.Models;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +47,7 @@ public class ProductItems implements Serializable {
     @ManyToOne(targetEntity = Soproduct.class)
     private Soproduct soproduct1;
 
-    @ManyToOne(targetEntity = OrdItem.class)
+    @ManyToOne(targetEntity = OrdItem.class, cascade = CascadeType.REMOVE)
     private OrdItem ordItem;
 
     public Long getId() {

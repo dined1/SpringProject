@@ -47,7 +47,7 @@
                             </table>
 
                             <h4>Moderators</h4>
-                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE">
+                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE_1">
                                 <thead>
                                 <tr>
                                     <th>User Id</th>
@@ -67,7 +67,7 @@
                             </table>
 
                             <h4>Administrators</h4>
-                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE">
+                            <table class="table table-striped table-bordered table-hover" id="USER_TABLE_2">
                                 <thead>
                                 <tr>
                                     <th>User Id</th>
@@ -100,7 +100,13 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('USER_TABLE').DataTable({
+        $('#USER_TABLE').DataTable({
+            responsive: true
+        });
+        $('#USER_TABLE_1').DataTable({
+            responsive: true
+        });
+        $('#USER_TABLE_2').DataTable({
             responsive: true
         });
     });

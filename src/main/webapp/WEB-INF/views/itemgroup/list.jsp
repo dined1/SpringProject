@@ -111,7 +111,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('ITEMGROUP_TABLE').DataTable({
+        $('#ITEMGROUP_TABLE').DataTable({
             responsive: true
         });
     });

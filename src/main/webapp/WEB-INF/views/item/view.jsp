@@ -35,7 +35,7 @@
                         </table>
 
                         <h4>Add the item to the group</h4>
-                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
+                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE_1">
                             <thead>
                             <tr>
                                 <th>Group Id</th>
@@ -70,6 +70,15 @@
     </div>
     <!-- /#page-wrapper -->
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#ITEM_TABLE').DataTable({
+            responsive: true
+        });
+        $('#ITEM_TABLE_1').DataTable({
+            responsive: true
+        });
+    });
+</script>
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>

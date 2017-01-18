@@ -84,8 +84,6 @@ public class SoController {
         return "so/update";
     }
 
-
-
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateSo(@Valid
                                 @BeanParam So so) {

@@ -111,7 +111,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('USER_ROLE_TABLE').DataTable({
+        $('#USER_ROLE_TABLE').DataTable({
             responsive: true
         });
     });

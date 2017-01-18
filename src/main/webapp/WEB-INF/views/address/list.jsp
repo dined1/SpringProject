@@ -122,7 +122,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('ADDRESS_TABLE').DataTable({
+        $('#ADDRESS_TABLE').DataTable({
             responsive: true
         });
     });

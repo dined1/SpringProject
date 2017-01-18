@@ -25,7 +25,7 @@ public class Soproduct implements Serializable {
     @ManyToOne(targetEntity = So.class)
     private So so1;
 
-    @OneToMany(targetEntity = ProductItems.class, mappedBy = "soproduct1")
+    @OneToMany(targetEntity = ProductItems.class, mappedBy = "soproduct1", cascade = CascadeType.REMOVE)
     private List<ProductItems> productItemses1;
 
     public Long getSOPId() {

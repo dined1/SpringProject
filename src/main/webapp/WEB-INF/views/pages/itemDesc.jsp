@@ -54,40 +54,42 @@
                                                 <div class="col-lg-8">${(ITEM.modifiedDate)}</div>
                                             </div>
                                         </a>
-                                        <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">
+                                        <label>Charactiristics: </label><br>
                                         <div class="list-group">
-                                            <label>Charactiristics: </label><br>
+                                            <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">
                                             <tr>
                                                 <c:if test="${Characteristic.item.itemId==ITEM.itemId}">
                                                     <td><label><input type="checkbox" name="characteristics" value="${Characteristic.itemCharacteristic.characteristicId}">${Characteristic.itemCharacteristic.characteristic}:  ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
                                                 </c:if>
                                             </tr>
+                                            </c:forEach>
                                         </div>
-                                        </c:forEach>
-                                        <% if (request.isUserInRole("ROLE_ADMIN")) {%>
-                                        <div class="list-group">
+                                        <c:if test="${not empty ITEMDISCOUNTS}">
+                                            <% if (request.isUserInRole("ROLE_ADMIN")) {%>
                                             <label>Discounts: </label><br>
+                                            <div class="list-group">
+                                                <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
+                                                    <tr>
+                                                        <c:if test="${(DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='disc') or DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='discount'}">
+                                                            <td><label><input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}:
+                                                                    ${DISCOUNT.discountrule1.discountValue}</label></td>
+                                                        </c:if>
+                                                    </tr>
+                                                </c:forEach>
+                                            </div>
+                                            <%}%>
+                                            <label>Taxes: </label><br>
+                                            <div class="list-group">
                                             <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                 <tr>
-                                                    <c:if test="${(DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='disc') or DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='discount'}">
-                                                        <td><label><input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}:
-                                                                ${DISCOUNT.discountrule1.discountValue}</label></td>
+                                                    <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='tax'}">
+                                                        <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountProcent}</label> - Percentage</td>
+                                                        <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountValue}</label> - Value</td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
-                                        </div>
-                                        <%}%>
-                                        <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
-                                        <div class="list-group">
-                                            <label>Taxes: </label><br>
-                                            <tr>
-                                                <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='tax'}">
-                                                    <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountProcent}</label> - Percentage</td>
-                                                    <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountValue}</label> - Value</td>
-                                                </c:if>
-                                            </tr>
-                                        </div>
-                                        </c:forEach>
+                                            </div>
+                                        </c:if>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
                                         <a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>

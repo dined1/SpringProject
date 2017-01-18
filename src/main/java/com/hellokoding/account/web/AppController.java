@@ -247,9 +247,13 @@ public class AppController {
     @RequestMapping(value = {"/itembasket/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String itemBasketDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
-                                  Principal principal) {
+                                  Principal principal) throws Exception {
         if (principal==null){
             return "redirect:/";
+        }
+        if (soRepository.findOne(soid) == null || soRepository.findByCustomer1_CustomerId(customerid) == null
+                || !soRepository.findByCustomer1_CustomerId(customerid).getCustomer1().getUsername().equals(principal.getName())){
+            throw new NotFoundException(soid);
         }
         OrdItem item = ordItemRepository.findOne(itemid);
         model.addAttribute("ITEM", item);
@@ -457,7 +461,10 @@ public class AppController {
             return "error";
         }
         Long parent = ordItemRepository.findOne(itemid).getParentId();
-        itemRepository.findOne(parent).setQuantity(itemRepository.findOne(parent).getQuantity().add(BigInteger.ONE));
+        Item root = itemRepository.findOne(parent);
+        if (root != null){
+            itemRepository.findOne(parent).setQuantity(root.getQuantity().add(BigInteger.ONE));
+        }
         ordItemRepository.delete(itemid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
@@ -520,7 +527,7 @@ public class AppController {
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
-        so.setDateModified(dateFormat.format(date));
+//        so.setDateModified(dateFormat.format(date));
         so.setCustomer1(customer);
         soRepository.save(so);
         String s = "";

@@ -73,7 +73,7 @@
 
                         <c:if test="${empty requestScope.SO_LIST}">
                             <div class="alert alert-info">
-                                <div align="center">No So found</div>
+                                <div align="center">No orders found</div>
                             </div>
                         </c:if>
 

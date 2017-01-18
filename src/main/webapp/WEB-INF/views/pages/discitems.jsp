@@ -62,7 +62,7 @@
 
                         <c:if test="${empty requestScope.ITEM_LIST}">
                             <div class="alert alert-info">
-                                <div align="center">No Item found</div>
+                                <div align="center">No Items found</div>
                             </div>
                         </c:if>
 
@@ -80,7 +80,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('ITEM_TABLE').DataTable({
+        $('#ITEM_TABLE').DataTable({
             responsive: true
         });
     });

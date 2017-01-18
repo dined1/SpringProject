@@ -141,7 +141,7 @@
 
                         <c:if test="${empty requestScope.GROUP_LIST}">
                             <div class="alert alert-info">
-                                <div align="center">No Group 1 found</div>
+                                <div align="center">No Groups found</div>
                             </div>
                         </c:if>
 
@@ -160,7 +160,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('GROUP_TABLE').DataTable({
+        $('#GROUP_TABLE').DataTable({
             responsive: true
         });
     });

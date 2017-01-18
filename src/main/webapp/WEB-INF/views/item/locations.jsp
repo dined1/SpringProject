@@ -38,7 +38,7 @@
                         </table>
 
                         <h4>To remove the location of the sale</h4>
-                        <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
+                        <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE_1">
                             <thead>
                             <tr>
                                 <th>Location Id</th>
@@ -65,6 +65,15 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#DISCOUNTRULE_TABLE').DataTable({
+            responsive: true
+        });
+        $('#DISCOUNTRULE_TABLE_1').DataTable({
+            responsive: true
+        });
+    });
+</script>
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>

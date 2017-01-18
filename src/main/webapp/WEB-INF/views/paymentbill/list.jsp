@@ -117,7 +117,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('PAYMENTBILL_TABLE').DataTable({
+        $('#PAYMENTBILL_TABLE').DataTable({
             responsive: true
         });
     });

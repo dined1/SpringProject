@@ -171,21 +171,6 @@ public class ItemController {
         return "redirect:/admin/item/discountrule/" + id1;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @RequestMapping(value = {"/locations/{id}"}, method = RequestMethod.GET)
     public String findLocation(Model model, @PathVariable("id") Long id) {
         List<ItemLocations> itemLocationses = itemLocationRepository.findByItem_ItemId(id);
@@ -223,25 +208,6 @@ public class ItemController {
         itemLocationRepository.save(itemLocations);
         return "redirect:/admin/item/locations/" + id1;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @RequestMapping(value = {"/characteristicses/{id}"}, method = RequestMethod.GET)
     public String findCharacteristics(Model model, @PathVariable("id") Long id) {
