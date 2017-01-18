@@ -16,13 +16,13 @@
                     <div class="panel-body">
 
                         <div class="container">
-                                <ul class="nav nav-pills">
-                                    <c:if test="${STATUS != 'Canceled'}">
-                                        <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
-                                        <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
-                                        <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
-                                    </c:if>
-                                </ul>
+                            <ul class="nav nav-pills">
+                                <c:if test="${STATUS != 'Canceled'}">
+                                    <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
+                                    <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
+                                    <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
+                                </c:if>
+                            </ul>
                         </div>
                         <br />
                         <div class="table-responsive">
@@ -47,9 +47,9 @@
                                         <td>${(PRODUCTITEMS.mp)}</td>
 
                                         <c:if test="${STATUS == 'Wait'}">
-                                        <c:if test="${PRODUCTITEMS.ordItem.status == 'Wait'}">
-                                            <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
-                                        </c:if>
+                                            <c:if test="${PRODUCTITEMS.ordItem.status == 'Wait'}">
+                                                <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
+                                            </c:if>
                                         </c:if>
                                     </tr>
                                 </c:forEach>
@@ -65,12 +65,12 @@
                             </div>
                         </c:if>
                         <%--<c:if test="${STATUS == 'Canceled'}">--%>
-                            <%--<div>Result:--%>
-                                <%--<label>One-time price: <span id="total-cart-summa">${(Pr.toString())}</span> BYN</label><br>--%>
-                                <%--<label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>--%>
-                                <%--<label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>--%>
-                                <%--<label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>--%>
-                            <%--</div>--%>
+                        <%--<div>Result:--%>
+                        <%--<label>One-time price: <span id="total-cart-summa">${(Pr.toString())}</span> BYN</label><br>--%>
+                        <%--<label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>--%>
+                        <%--<label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>--%>
+                        <%--<label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>--%>
+                        <%--</div>--%>
                         <%--</c:if>--%>
                         <br />
                         <c:if test="${STATUS == 'Wait' and STATUS != 'Canceled'}">
@@ -80,6 +80,12 @@
                             <a class="btn btn-info" href="${contextPath}/application/cancel/${CUSTOMERID}/${SOID}/">Cancel order</a>
                         </c:if>
                         <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                        <!--a href="${contextPath}/application/print" class="btn btn-default btn-sm" onclick="javascript:window.print()">
+                            <i class="fa fa-print fa-fw"></i> Print
+                        </a-->
+                        <a href="${contextPath}/application/print/${CUSTOMERID}/${SOID}" class="btn btn-default btn-sm">
+                            <i class="fa fa-print fa-fw"></i> Print
+                        </a>
                     </div>
                 </div>
             </div>

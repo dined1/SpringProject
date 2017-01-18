@@ -148,16 +148,9 @@
                         </div>
 
 
-                        <c:if test="${empty requestScope.SOES}">
-                            <div class="alert alert-info">
-                                <div align="center">No So found</div>
-                            </div>
-                        </c:if>
-
-
 
                     </div>
-                    <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Back</a>
+                    <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

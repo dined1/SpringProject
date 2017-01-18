@@ -23,11 +23,11 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="dateCreated">Date Created</label>
-                                        <input class="form-control" type="text" name="dateCreated"  value="${SO.dateCreated}" />
+                                        <input class="form-control" type="date" name="dateCreated"  value="${SO.dateCreated}" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="orderDate">Order Date</label>
-                                        <input class="form-control" type="text" name="orderDate"  value="${SO.orderDate}" />
+                                        <input class="form-control" type="date" name="orderDate"  value="${SO.orderDate}" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="status">Status</label>

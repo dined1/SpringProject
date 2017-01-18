@@ -19,27 +19,27 @@
                                 <form role="form" action="${contextPath}/admin/item/new" method="POST">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name" path="name"  />
+                                        <input class="form-control" type="text" name="name" path="name" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="type">Type</label>
-                                        <input class="form-control" type="text" name="type" path="type"  />
+                                        <input class="form-control" type="text" name="type" path="type" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <input class="form-control" type="text" name="description" path="description"  />
+                                        <input class="form-control" type="text" name="description" path="description" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="defMP">Discount Value</label>
-                                        <input class="form-control" type="number" name="defMP" path="defMP"  />
+                                        <input class="form-control" type="number" min="0" step="1" name="defMP" path="defMP" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="defOTP">Discount Procent</label>
-                                        <input class="form-control" type="number" name="defOTP" path="defOTP"  />
+                                        <input class="form-control" type="number" min="0" max="100" step="0.01" name="defOTP" path="defOTP" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="quantity">Amount</label>
-                                        <input class="form-control" type="number" name="quantity" path="quantity"  />
+                                        <input class="form-control" type="number" min="0" step="1" name="quantity" path="quantity" required = "required"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

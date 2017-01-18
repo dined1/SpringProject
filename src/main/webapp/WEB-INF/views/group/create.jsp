@@ -19,7 +19,7 @@
                                 <form role="form" action="${contextPath}/admin/group/new" method="POST">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name" path="name"  />
+                                        <input class="form-control" type="text" name="name" path="name" required = "required"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

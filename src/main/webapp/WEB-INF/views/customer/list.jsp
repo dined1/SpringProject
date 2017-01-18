@@ -24,16 +24,17 @@
                         <div class="dataTable_wrapper">
                             <table class="table table-striped table-bordered table-hover" id="CUSTOMER_TABLE">
                                 <thead>
-                                    <tr>
-                                        <th>Customer Id</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Contact</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th>Customer Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>User</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
@@ -51,6 +52,8 @@
                                         <td>${(CUSTOMER.phone)}</td>
 
                                         <td>${(CUSTOMER.address1.addressLine)}</td>
+
+                                        <td>${(CUSTOMER.username)}</td>
 
                                         <td>
                                             <div class="pull-right">

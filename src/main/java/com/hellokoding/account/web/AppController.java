@@ -541,4 +541,62 @@ public class AppController {
         model.addAttribute("SO_LIST", soRepository.findAll());
         return "/pages/orderinfo";
     }
+
+    @RequestMapping(value = {"/print/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String print(Model model,
+                        @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                        Principal principal) throws Exception {
+        if (principal==null){
+            return "redirect:/";
+        }
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            throw new NotFoundException(soid);
+        }
+
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        List<ProductItems> finalproducts = new ArrayList<>();
+        Float CMP = 0f;
+        Float OTP = 0f;
+        Float FCMP = 0f;
+        Float FOTP = 0f;
+        for (ProductItems productItem : productItems){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+                    && productItem.getOrdItem().getStatus().equals("Wait")){
+                CMP+=productItem.getMp();
+                OTP+=productItem.getOtp();
+                FCMP+=productItem.getMPWithTaxandDiscont();
+                FOTP+=productItem.getOTPWithTaxandDiscont();
+                finalproducts.add(productItem);
+            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                CMP+=productItem.getMp();
+                FCMP+=productItem.getMPWithTaxandDiscont();
+                finalproducts.add(productItem);
+            }
+        }
+        int i=0;
+        for (ProductItems p : finalproducts){
+            if (p.getOrdItem().getStatus().equals("Ordered")){
+                i++;
+            }
+        }
+        if (i == finalproducts.size() && i != 0){
+            soRepository.findOne(soid).setStatus("Ordered");
+        }
+        model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
+        model.addAttribute("CUSTOMERID", customerid);
+        model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
+        model.addAttribute("SOID", soid);
+        model.addAttribute("USERID", userid);
+        model.addAttribute("FCMP", FCMP);
+        model.addAttribute("FOTP", FOTP);
+        model.addAttribute("CMP", CMP);
+        model.addAttribute("OTP", OTP);
+        return "/pages/print";
+    }
 }

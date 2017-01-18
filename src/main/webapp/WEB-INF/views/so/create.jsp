@@ -22,6 +22,7 @@
                                         <input class="form-control" type="number" name="SOId" path="SOId"  required="required" autofocus="autofocus"  />
                                     </div-->
                                     <div class="form-group">
+                                        <p>Выберите дату: <input type="date" name="calenhdfr">
                                         <label for="dateCreated">Date Created</label>
                                         <input class="form-control" type="date" name="dateCreated" path="dateCreated"  />
                                     </div>

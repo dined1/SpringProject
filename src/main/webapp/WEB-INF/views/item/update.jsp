@@ -23,27 +23,27 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name"  value="${ITEM.name}" />
+                                        <input class="form-control" type="text" name="name"  value="${ITEM.name}" required = "required" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="type">Type</label>
-                                        <input class="form-control" type="text" name="type"  value="${ITEM.type}" />
+                                        <input class="form-control" type="text" name="type"  value="${ITEM.type}" required = "required" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <input class="form-control" type="text" name="description"  value="${ITEM.description}" />
+                                        <input class="form-control" type="text" name="description"  value="${ITEM.description}" required = "required" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="defMP">Def MP</label>
-                                        <input class="form-control" type="number" name="defMP"  value="${ITEM.defMP}" />
+                                        <input class="form-control" type="number" min="0" step="1" name="defMP"  value="${ITEM.defMP}" required = "required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="defOTP">Def OTP</label>
-                                        <input class="form-control" type="number" name="defOTP"  value="${ITEM.defOTP}" />
+                                        <input class="form-control" type="number" min="0" max="100" step="0.01" name="defOTP"  value="${ITEM.defOTP}" required = "required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="quantity">Amount</label>
-                                        <input class="form-control" type="number" name="quantity"  value="${ITEM.quantity}" />
+                                        <input class="form-control" type="number" min="0" step="1" name="quantity"  value="${ITEM.quantity}" required = "required" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
