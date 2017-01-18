@@ -13,7 +13,7 @@ public interface SORepository extends JpaRepository<So, Long> {
 
     List<So> findByStatus(String s);
 
-    So findByCustomer1_CustomerId(Long customerid);
+    List<So> findByCustomer1_CustomerId(Long customerid);
 
     List<So> findByCustomer1_UserId(String customerid);
 

@@ -298,7 +298,7 @@ public class CabinetController {
             return "redirect:/";
         }
         Long userid =  userRepository.findByUsername(principal.getName()).getId();
-        if (soRepository.findByCustomer1_CustomerId(Long.valueOf(id)) != null){
+        if (!soRepository.findByCustomer1_CustomerId(Long.valueOf(id)).isEmpty()){
             model.addAttribute("message", "You have more then 0 orders on this customer");
             return "error";
         }

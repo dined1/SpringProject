@@ -251,8 +251,8 @@ public class AppController {
         if (principal==null){
             return "redirect:/";
         }
-        if (soRepository.findOne(soid) == null || soRepository.findByCustomer1_CustomerId(customerid) == null
-                || !soRepository.findByCustomer1_CustomerId(customerid).getCustomer1().getUsername().equals(principal.getName())){
+        if (soRepository.findOne(soid) == null || soRepository.findByCustomer1_CustomerId(customerid).isEmpty()
+                || soRepository.findByCustomer1_UserId(userRepository.findByUsername(principal.getName()).getId().toString()).isEmpty()){
             throw new NotFoundException(soid);
         }
         OrdItem item = ordItemRepository.findOne(itemid);
@@ -369,6 +369,14 @@ public class AppController {
             for (String disc : discounts) {
                 ordDisc.setOrdItem(ordItem);
                 ordDisc.setDiscountrule1(discountruleRepository.findOne(Long.valueOf(disc)));
+                ordItemdiscountRepository.save(ordDisc);
+            }
+        }
+        OrdItemDiscount ordDisc = new OrdItemDiscount();
+        for (Itemdiscount itemdisc : itemdiscountRepository.findByItem1_ItemId(ordItem.getParentId())) {
+            if (itemdisc.getDiscountrule1().getType().equals("tax")) {
+                ordDisc.setOrdItem(ordItem);
+                ordDisc.setDiscountrule1(itemdisc.getDiscountrule1());
                 ordItemdiscountRepository.save(ordDisc);
             }
         }
@@ -512,6 +520,11 @@ public class AppController {
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         return "/pages/so";
+    }
+
+    @RequestMapping(value = {"/faq"}, method = RequestMethod.GET)
+    public String createItemdiscount(Model model) {
+        return "/services";
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)

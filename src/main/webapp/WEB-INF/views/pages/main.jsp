@@ -173,7 +173,7 @@
                 <br>
                 <p>Are you having difficulties with the registration? <br> You saw an unknown status of the goods?.</p>
                 <br>
-                <button id="free_consult" data-toggle="modal"><a href="${contextPath}/WEB-INF/views/services.jsp">Read F.A.Q.</a></button>
+                <button id="free_consult" data-toggle="modal"><a href="${contextPath}/application/faq">Read F.A.Q.</a></button>
             </div>
             <div class="col-md-2">
                 <img src="${contextPath}/webresources/static/need/img/help_img.jpg" alt="Бесплатная консультация" class="img-responsive help_img center-block">
