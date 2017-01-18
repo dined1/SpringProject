@@ -62,12 +62,6 @@
                         </div>
 
 
-                        <c:if test="${empty PAYMENTS_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No Payment found</div>
-                            </div>
-                        </c:if>
-
 
                         <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>

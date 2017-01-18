@@ -71,13 +71,6 @@
                         </div>
 
 
-                        <c:if test="${empty requestScope.SO_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No orders found</div>
-                            </div>
-                        </c:if>
-
-
 
                     </div>
                     <a href="${contextPath}/cabinet/cabinet" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>

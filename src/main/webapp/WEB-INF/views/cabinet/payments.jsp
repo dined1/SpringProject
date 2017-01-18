@@ -92,12 +92,6 @@
                         </div>
 
 
-                        <c:if test="${empty requestScope.PAYMENT_LIST}">
-                            <div class="alert alert-info">
-                                <div align="center">No Payment found</div>
-                            </div>
-                        </c:if>
-
 
 
                     </div>

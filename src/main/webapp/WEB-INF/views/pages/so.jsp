@@ -33,6 +33,9 @@
                                         <label for="purchaseOrderNumber">Purchase Order Number</label>
                                         <input class="form-control" type="text" name="purchaseOrderNumber" path="purchaseOrderNumber"  />
                                     </div-->
+                                    <c:if test="${empty CUSTOMER_LIST}">
+                                        <h4>Please, create customer</h4><Br/>
+                                    </c:if>
                                     <c:if test="${!empty CUSTOMER_LIST}">
                                         <div class="form-group">
                                             <label>Customer</label>
