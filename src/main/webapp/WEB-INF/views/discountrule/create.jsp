@@ -26,10 +26,14 @@
                                         <input class="form-control" type="number" min="0" max="100" step="0.01" name="discountProcent" path="discountProcent"  />
                                     </div>
                                     <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input class="form-control" type="text" name="description"  path="description" />
+                                    </div>
+                                    <div class="form-group">
                                         <label>Tax/Discount</label>
                                         <select path="type" name="type" onchange=" ">
                                             <option value="tax">Tax</option>
-                                            <option value="discount">Discount</option>
+                                            <option value="disc">Discount</option>
                                         </select>
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

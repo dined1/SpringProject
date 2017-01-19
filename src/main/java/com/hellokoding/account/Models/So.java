@@ -49,19 +49,19 @@ public class So implements Serializable {
     @Basic
     private String dateModified;
 
-    @Column(name = "FinalMP", table = "so")
+    @Column(name = "FinalMP", table = "so", precision = 2)
     @Basic
     private BigDecimal finalMP;
 
-    @Column(name = "FinalOTP", table = "so")
+    @Column(name = "FinalOTP", table = "so", precision = 2)
     @Basic
     private BigDecimal finalOTP;
 
-    @Column(name = "FinalMPwithTaxAndDiscount", table = "so")
+    @Column(name = "FinalMPwithTaxAndDiscount", table = "so", precision = 2)
     @Basic
     private BigDecimal finalMPwithTaxAndDiscount;
 
-    @Column(name = "FinalOTPwithTaxAndDiscount", table = "so")
+    @Column(name = "FinalOTPwithTaxAndDiscount", table = "so", precision = 2)
     @Basic
     private BigDecimal finalOTPwithTaxAndDiscount;
 

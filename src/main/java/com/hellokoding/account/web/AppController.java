@@ -356,8 +356,8 @@ public class AppController {
         ordItemRepository.save(ordItem);
         String[] characs = request.getParameterValues("characteristics");
         if (characs!=null) {
-            OrdItemCharacteristic ordItemChar = new OrdItemCharacteristic();
             for (String charac : characs) {
+                OrdItemCharacteristic ordItemChar = new OrdItemCharacteristic();
                 ordItemChar.setOrdItem(ordItem);
                 ordItemChar.setItemCharacteristic(characteristicsRepository.findOne(Long.valueOf(charac)));
                 ordItemCharacteristicsRepository.save(ordItemChar);
@@ -395,8 +395,8 @@ public class AppController {
                 mp -= discount.getDiscountrule1().getDiscountValue();
             }
             if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountProcent() != null){
-                otp = otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
-                mp = mp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+                otp -= otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+                mp -= mp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
             }
         }
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);
@@ -414,10 +414,10 @@ public class AppController {
         soRepository.save(so);
         itemRepository.findOne(itemid).setQuantity(item.getQuantity().subtract(BigInteger.ONE));
         productItems.setOrdItem(ordItem);
-        productItems.setOTPWithTaxandDiscont(otp);
-        productItems.setMPWithTaxandDiscont(mp);
-        productItems.setOtp(item.getDefOTP());
-        productItems.setMp(item.getDefMP());
+        productItems.setOTPWithTaxandDiscont(Float.valueOf(String.valueOf(BigDecimal.valueOf(otp).setScale(2, BigDecimal.ROUND_HALF_UP))));
+        productItems.setMPWithTaxandDiscont(Float.valueOf(String.valueOf(BigDecimal.valueOf(mp).setScale(2, BigDecimal.ROUND_HALF_UP))));
+        productItems.setOtp(Float.valueOf(String.valueOf(BigDecimal.valueOf(item.getDefOTP()).setScale(2, BigDecimal.ROUND_HALF_UP))));
+        productItems.setMp(Float.valueOf(String.valueOf(BigDecimal.valueOf(item.getDefMP()).setScale(2, BigDecimal.ROUND_HALF_UP))));
         productItemsRepository.save(productItems);
         priceRecountSO(customerid, soid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
@@ -436,10 +436,10 @@ public class AppController {
                 OTPTD+=productItem.getOTPWithTaxandDiscont();
             }
         }
-        soRepository.findOne(soid).setFinalMP(BigDecimal.valueOf(CMP));
-        soRepository.findOne(soid).setFinalOTP(BigDecimal.valueOf(OTP));
-        soRepository.findOne(soid).setFinalMPwithTaxAndDiscount(BigDecimal.valueOf(CMPTD));
-        soRepository.findOne(soid).setFinalOTPwithTaxAndDiscount(BigDecimal.valueOf(OTPTD));
+        soRepository.findOne(soid).setFinalMP(BigDecimal.valueOf(CMP).setScale(2, BigDecimal.ROUND_HALF_UP));
+        soRepository.findOne(soid).setFinalOTP(BigDecimal.valueOf(OTP).setScale(2, BigDecimal.ROUND_HALF_UP));
+        soRepository.findOne(soid).setFinalMPwithTaxAndDiscount(BigDecimal.valueOf(CMPTD).setScale(2, BigDecimal.ROUND_HALF_UP));
+        soRepository.findOne(soid).setFinalOTPwithTaxAndDiscount(BigDecimal.valueOf(OTPTD).setScale(2, BigDecimal.ROUND_HALF_UP));
     }
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
@@ -474,6 +474,7 @@ public class AppController {
             itemRepository.findOne(parent).setQuantity(root.getQuantity().add(BigInteger.ONE));
         }
         ordItemRepository.delete(itemid);
+        priceRecountSO(customerid, soid);
         return "redirect:/application/basket/" + customerid + "/" + soid;
     }
 

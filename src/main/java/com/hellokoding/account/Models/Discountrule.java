@@ -6,7 +6,6 @@ package com.hellokoding.account.Models;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,9 +34,9 @@ public class Discountrule implements Serializable {
     @Basic
     private String type;
 
-    @Column(name = "Description", table = "discountrule", precision = 12)
+    @Column(name = "Description", table = "discountrule")
     @Basic
-    private Float description;
+    private String description;
 
     @OneToMany(targetEntity = Itemdiscount.class, mappedBy = "discountrule1", cascade = CascadeType.REMOVE)
     private List<Itemdiscount> itemdiscounts1;
@@ -77,11 +76,11 @@ public class Discountrule implements Serializable {
         this.itemdiscounts1 = itemdiscounts1;
     }
 
-    public Float getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Float description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

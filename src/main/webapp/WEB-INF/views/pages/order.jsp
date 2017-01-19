@@ -106,7 +106,12 @@
 
 
 
-
+                        <c:if test="${SO_FINAL.status != 'Canceled'}">
+                            <div>Result:
+                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(SO_FINAL.finalOTPwithTaxAndDiscount.toString())}</span> BYN</label><br>
+                                <label>Final Recurrent price with taxes and discounts: <span>${(SO_FINAL.finalMPwithTaxAndDiscount.toString())}</span>  BYN</label>
+                            </div>
+                        </c:if>
                         <br/>
                         <br />
                         <form action="${contextPath}/application/stripe/${SOID}" method="POST">
