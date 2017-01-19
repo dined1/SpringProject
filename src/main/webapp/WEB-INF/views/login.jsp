@@ -21,6 +21,7 @@
     <link href="${contextPath}/webresources/common/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/webresources/common/css/common.css" rel="stylesheet">
 
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,7 +45,6 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
             <h4 class="text-center"><a href="${contextPath}/resetpassword">Forgot password?</a></h4>
         </div>
 

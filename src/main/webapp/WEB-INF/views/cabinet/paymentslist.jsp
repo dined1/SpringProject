@@ -35,7 +35,7 @@
                                     <th>One-time price</th>
                                     <th>Mounth price</th>
                                     <th>Payment type</th>
-                                    <th></th>
+                                    <th>Print</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,6 +54,11 @@
                                         <td>${PAYMENT.paymentbill1.cmp}</td>
 
                                         <td>${PAYMENT.paymenttype1.typeName}</td>
+
+                                        <td><a href="${contextPath}/cabinet/print/${PAYMENT.paymentId}">
+                                            <i class="fa fa-print fa-fw"></i> Print
+                                        </a></td>
+
 
                                     </tr>
                                 </c:forEach>

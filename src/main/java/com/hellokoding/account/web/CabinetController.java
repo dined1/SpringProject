@@ -34,6 +34,7 @@ import java.util.List;
 @Controller
 public class CabinetController {
 
+
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
@@ -362,5 +363,16 @@ public class CabinetController {
         customer.setAddress1(address);
         customerRepository.save(customer);
         return "redirect:customerinfo";
+    }
+
+    @RequestMapping(value = {"/print/{payid}"}, method = RequestMethod.GET)
+    public String print(Model model, Principal principal, @PathVariable("payid") Long payid) {
+        if (principal==null){
+            return "redirect:/";
+        }
+        Long id =  userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("PAY", paymentFacade.findOne(payid));
+
+        return "cabinet/print";
     }
 }
