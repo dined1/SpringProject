@@ -363,4 +363,15 @@ public class CabinetController {
         customerRepository.save(customer);
         return "redirect:customerinfo";
     }
+
+    @RequestMapping(value = {"/print/{payid}"}, method = RequestMethod.GET)
+    public String print(Model model, Principal principal, @PathVariable("payid") Long payid) {
+        if (principal==null){
+            return "redirect:/";
+        }
+        Long id =  userRepository.findByUsername(principal.getName()).getId();
+        model.addAttribute("PAY", paymentFacade.findOne(payid));
+
+        return "cabinet/print";
+    }
 }
