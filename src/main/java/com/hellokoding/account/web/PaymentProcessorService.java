@@ -53,7 +53,7 @@ public class PaymentProcessorService {
                     && BigDecimal.ZERO.equals(payment.getSo1().getFinalMPwithTaxAndDiscount())) {
                 try {
                 Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date paymentDate = formatter.parse(payment.getSo1().getOrderDate());
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(paymentDate);

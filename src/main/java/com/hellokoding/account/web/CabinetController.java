@@ -204,7 +204,7 @@ public class CabinetController {
             return "error";
         }
 
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         Float CMP = 0f;
         Float OTP = 0f;
@@ -267,7 +267,7 @@ public class CabinetController {
                 paymentbill.setCmp(CMP);
                 so.setStatus("Ordered");
 
-                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date lastdate = formatter.parse(so.getOrderDate());
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(lastdate);

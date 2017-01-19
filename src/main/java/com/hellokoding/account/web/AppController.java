@@ -287,7 +287,20 @@ public class AppController {
         if (principal==null){
             return "redirect:/";
         }
-        model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
+        List<ProductItems> productItems = productItemsRepository.findAll();
+        List<ProductItems> finalproducts = new ArrayList<>();
+
+        for (ProductItems productItem : productItems){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+                    && productItem.getOrdItem().getStatus().equals("Wait")){
+                finalproducts.add(productItem);
+            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                finalproducts.add(productItem);
+            }
+        }
+        model.addAttribute("ITEM_LIST", finalproducts);
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
@@ -408,7 +421,7 @@ public class AppController {
                 otp += discount.getDiscountrule1().getDiscountValue();
             }
         }
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         so.setDateModified(dateFormat.format(date));
         soRepository.save(so);
@@ -531,7 +544,7 @@ public class AppController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createItemdiscount(Model model, So so, Soproduct soproduct,
                                      @RequestParam("socustomer") String customer1) {
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setStatus("Wait");
