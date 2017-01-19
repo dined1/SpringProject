@@ -29,6 +29,7 @@
 
                                         <td>${(PRODUCTITEMS.otp)}</td>
 
+
                                         <td>${(PRODUCTITEMS.mp)}</td>
                                     </tr>
                                 </c:forEach>

@@ -59,6 +59,7 @@
                                             <i class="fa fa-print fa-fw"></i> Print
                                         </a></td>
 
+
                                     </tr>
                                 </c:forEach>
                                 </tbody>

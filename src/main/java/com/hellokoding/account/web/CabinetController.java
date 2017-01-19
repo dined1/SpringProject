@@ -34,6 +34,7 @@ import java.util.List;
 @Controller
 public class CabinetController {
 
+
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired

@@ -89,6 +89,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function(){
         $('#PRODUCTITEMS_TABLE').dataTable();
