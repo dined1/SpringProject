@@ -56,7 +56,13 @@
 
                                         <td>${(CUSTOMER.phone)}</td>
 
-                                        <td>${(CUSTOMER.address1.addressLine)}</td>
+                                        <td><div data-html="true" data-toggle="tooltip"
+                                                 title="
+                                            Country: ${CUSTOMER.address1.country} <br>
+                                            City: ${CUSTOMER.address1.city} <br>
+                                            Postal code: ${CUSTOMER.address1.postalCode} <br>
+                                            Address: ${CUSTOMER.address1.addressLine}">${(CUSTOMER.address1.addressLine)}</div>
+                                        </td>
 
                                         <td>${(CUSTOMER.username)}</td>
 
@@ -123,6 +129,10 @@
         });
     });
 </script>
-
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>
