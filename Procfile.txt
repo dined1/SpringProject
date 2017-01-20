@@ -1,1 +1,1 @@
-web: sh target/
+web: java -jar target/account-1.0-SNAPSHOT.war
