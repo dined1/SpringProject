@@ -47,6 +47,11 @@ public class Payments {
     public String payLogin(@Context HttpServletResponse httpServletResponse,
                            @Context HttpServletRequest httpServletRequest,
                            Model model) {
+        for (Cookie cookie : httpServletRequest.getCookies()){
+            cookie.setValue(null);
+            cookie.setMaxAge(0);
+            httpServletResponse.addCookie(cookie);
+        }
         Cookie cookie = new Cookie("value", "12");
         httpServletResponse.addCookie(cookie);
         return "/paylogin";
@@ -59,6 +64,12 @@ public class Payments {
                                PayUser payUser, Model model) {
         if (payUserrepository.findByLoginAndPassword(payUser.getLogin(), payUser.getPassword()) != null){
             Cookie cookie = new Cookie("Login", payUser.getLogin());
+            for (Cookie cookies : httpServletRequest.getCookies()){
+                if (cookies.getName().equals("Login")){
+                    cookies.setValue("");
+                }
+                httpServletResponse.addCookie(cookie);
+            }
             httpServletResponse.addCookie(cookie);
             return "redirect:/payments/transfer";
         } else {

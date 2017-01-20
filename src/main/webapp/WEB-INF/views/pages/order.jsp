@@ -108,9 +108,11 @@
 
                         <c:if test="${SO_FINAL.status != 'Canceled'}">
                             <div>Result:
-                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(SO_FINAL.finalOTPwithTaxAndDiscount.toString())}</span> BYN</label><br>
-                                <label>Final Recurrent price with taxes and discounts: <span>${(SO_FINAL.finalMPwithTaxAndDiscount.toString())}</span>  BYN</label>
+                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
+                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
                             </div>
+                            <c:if test="${FOTP.toString() != '0.0'}">Summary pay: ${FOTP}</c:if>
+                            <c:if test="${FOTP.toString() == '0.0' and FCMP.toString() != '0.0'}">Summary pay: ${FCMP.toString()}</c:if>
                         </c:if>
                         <br/>
                         <br />

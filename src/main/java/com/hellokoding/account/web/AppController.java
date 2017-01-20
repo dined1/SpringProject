@@ -290,6 +290,23 @@ public class AppController {
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
 
+
+        Float FCMP = 0f;
+        Float FOTP = 0f;
+        for (ProductItems productItem : productItems){
+            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+                    && productItem.getOrdItem().getStatus().equals("Wait")){
+                FCMP+=productItem.getMPWithTaxandDiscont();
+                FOTP+=productItem.getOTPWithTaxandDiscont();
+                finalproducts.add(productItem);
+            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                FCMP+=productItem.getMPWithTaxandDiscont();
+                finalproducts.add(productItem);
+            }
+        }
+
         for (ProductItems productItem : productItems){
             if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)
@@ -302,6 +319,8 @@ public class AppController {
         }
         model.addAttribute("ITEM_LIST", finalproducts);
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
+        model.addAttribute("FCMP", FCMP);
+        model.addAttribute("FOTP", FOTP);
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("SOID", soid);
         return "/pages/order";
@@ -346,7 +365,7 @@ public class AppController {
         }
 
         So so = soRepository.findOne(soid);
-        if (so.getStatus().equals("Ordered")){
+        if (so.getStatus().equals("Ordered") || so.getStatus().equals("Open")){
             so.setStatus("Wait");
         }
         Soproduct soproduct = so.getSoproducts1().get(0);
@@ -547,7 +566,7 @@ public class AppController {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         Customer customer = customerRepository.findOne(Long.valueOf(customer1));
-        so.setStatus("Wait");
+        so.setStatus("Open");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
         so.setLocation(customer.getAddress1().getCountry());
@@ -566,7 +585,7 @@ public class AppController {
         soproduct.setSo1(so);
         soProductRepository.save(soproduct);
         model.addAttribute("SO_LIST", soRepository.findAll());
-        return "/pages/orderinfo";
+        return "redirect:/application/orderinfo";
     }
 
     @RequestMapping(value = {"/print/{customerid}/{soid}"}, method = RequestMethod.GET)
