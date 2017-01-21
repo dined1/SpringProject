@@ -23,15 +23,15 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name"  value="${ITEM.name}" required = "required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="name"  value="${ITEM.name}" required = "required" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="type">Type</label>
-                                        <input class="form-control" type="text" name="type"  value="${ITEM.type}" required = "required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="type"  value="${ITEM.type}" required = "required" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <input class="form-control" type="text" name="description"  value="${ITEM.description}" required = "required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="description"  value="${ITEM.description}" required = "required" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="defMP">Def MP</label>

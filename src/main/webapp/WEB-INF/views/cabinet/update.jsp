@@ -19,11 +19,11 @@
                                 <form role="form" action="${contextPath}/cabinet/customer/update" method="POST">
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName"  value="${CUSTOMER.firstName}" title="Только буквы" required/>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Only english letters"  value="${CUSTOMER.firstName}" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName"  value="${CUSTOMER.lastName}" title="Только буквы" required/>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName"  value="${CUSTOMER.lastName}" title="Only english letters" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
@@ -47,15 +47,15 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label for="addressLine">Address Line</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z0-9-]+" name="addressLine" path="addressLine" value="${ADDRESS.addressLine}" title="Введите адрес без пробелов!" required/>
+                                            <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" path="addressLine" value="${ADDRESS.addressLine}" title="Only numbers and english letters" required/>
                                         </div>
                                         <div class="form-group">
                                             <label for="city">City</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" path="city" value="${ADDRESS.city}" required />
+                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" path="city" value="${ADDRESS.city}" title="Only english letters" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="country">Country</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country"  value="${ADDRESS.country}" title="Только буквы" list="country_list" required />
+                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country"  value="${ADDRESS.country}" title="Only english letters" list="country_list" required />
                                             <datalist id="country_list">
                                                 <option>Belarus</option>
                                                 <option>Russia</option>

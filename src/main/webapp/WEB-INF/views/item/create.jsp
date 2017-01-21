@@ -19,15 +19,15 @@
                                 <form role="form" action="${contextPath}/admin/item/new" method="POST">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name" path="name" required = "required"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="name" path="name" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="type">Type</label>
-                                        <input class="form-control" type="text" name="type" path="type" required = "required"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="type" path="type" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <input class="form-control" type="text" name="description" path="description" required = "required"  />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="description" path="description" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="defMP">Discount Value</label>

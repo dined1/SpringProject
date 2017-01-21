@@ -19,11 +19,11 @@
                                 <form role="form" action="${contextPath}/admin/characteristics/new" method="POST">
                                     <div class="form-group">
                                         <label for="Characteristic">Characteristic</label>
-                                        <input class="form-control" type="text" name="Characteristic" path="Characteristic" required="required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="Characteristic" path="Characteristic" title="Only english letters" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="CharacteristicValue">Characteristic Value</label>
-                                        <input class="form-control" type="text" name="CharacteristicValue" path="CharacteristicValue" required="required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="CharacteristicValue" path="CharacteristicValue" title="Only english letters" required="required" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

@@ -19,7 +19,7 @@
                                 <form role="form" action="${contextPath}/cabinet/login" method="POST">
                                     <div class="form-group">
                                         <label for="userName">First Name</label>
-                                        <input class="form-control" type="text" name="name"  value="${n}" />
+                                        <input class="form-control" pattern="[a-zA-Z]+" type="text" name="name" title="Only english letters"  value="${n}" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

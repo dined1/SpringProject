@@ -24,11 +24,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" value="${CUSTOMER.firstName}" title="Только буквы"/ required="required">
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" value="${CUSTOMER.firstName}" title="Only english letters" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" value="${CUSTOMER.lastName}" title="Только буквы"/ required="required">
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" value="${CUSTOMER.lastName}" title="Only english letters" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
@@ -49,11 +49,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Введите адрес без пробелов" required="required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Only numbers and english letters" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" value="${CUSTOMER.address1.city}" title="Только буквы" required="required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" value="${CUSTOMER.address1.city}" title="Only english letters" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="country">Country</label>

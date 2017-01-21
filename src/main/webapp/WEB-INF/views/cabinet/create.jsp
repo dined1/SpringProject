@@ -20,11 +20,11 @@
                                     <h2>Customer information</h2>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Only letters" required/>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Only english letters" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only letters" required/>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only english letters" required/>
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label for="addressLine">Address Line</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z0-9-]+"  name="addressLine" path="addressLine"   title="Введите адрес без пробелов" required/>
+                                            <input class="form-control" type="text" pattern="[a-zA-Z0-9-]+"  name="addressLine" path="addressLine" title="Only numbers and english letters" required/>
                                         </div>
                                         <div class="form-group">
                                             <label for="city">City</label>

@@ -23,7 +23,7 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="locationname">Location</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="locationname"  value="${LOCATIONS.locationname}" required = "required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" title="Only english letters" name="locationname"  value="${LOCATIONS.locationname}" required = "required" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
