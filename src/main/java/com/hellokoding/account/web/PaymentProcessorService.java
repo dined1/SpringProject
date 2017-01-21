@@ -48,28 +48,29 @@ public class PaymentProcessorService {
     public void paymentTimer(){
         List<Payment> payments = paymentRepository.findAll();
         for (Payment payment : payments){
-            if (payment.getSo1().getFinalMP() != null && BigDecimal.ZERO.equals(payment.getSo1().getFinalMP())
+            if (payment.getSo1().getFinalMP() != null
                     && payment.getSo1().getFinalMPwithTaxAndDiscount() != null
-                    && BigDecimal.ZERO.equals(payment.getSo1().getFinalMPwithTaxAndDiscount())) {
+                    && !BigDecimal.ZERO.equals(payment.getSo1().getFinalMPwithTaxAndDiscount())
+                    && payment.getSo1().getStatus().equals("Ordered")) {
                 try {
-                Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                Date paymentDate = formatter.parse(payment.getSo1().getOrderDate());
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(paymentDate);
-                cal.add(Calendar.DATE, 27);
-                paymentDate = cal.getTime();
-                long left = Math.abs(date.getTime() - paymentDate.getTime());
-                long days = left / (24 * 60 * 60 * 1000);
-                if (paymentDate.before(date) && days >= 0) {
-                    So so = payment.getSo1();
-                    so.setAttentionFlag("Waiting for payment. Days left: " + days);
-                    soRepository.save(so);
-                } else if (days < 0){
-                    So so = payment.getSo1();
-                    so.setAttentionFlag("Services stopped");
-                    soRepository.save(so);
-                }
+                    Date date = new Date();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Date paymentDate = formatter.parse(payment.getSo1().getOrderDate());
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(paymentDate);
+                    cal.add(Calendar.DATE, 27);
+                    paymentDate = cal.getTime();
+                    long left = Math.abs(date.getTime() - paymentDate.getTime());
+                    long days = left / (24 * 60 * 60 * 1000);
+                    if (paymentDate.before(date) && days >= 0) {
+                        So so = payment.getSo1();
+                        so.setAttentionFlag("Waiting for payment. Days left: " + days);
+                        soRepository.save(so);
+                    } else if (days < 0){
+                        So so = payment.getSo1();
+                        so.setAttentionFlag("Services stopped");
+                        soRepository.save(so);
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

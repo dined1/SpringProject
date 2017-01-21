@@ -57,12 +57,12 @@
 
         <div class="form-group">
             <label for="question">Secret question</label>
-            <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="text" name="question" />
+            <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="text" name="question" required/>
         </div>
 
         <div class="form-group">
             <label for="answer">Answer</label>
-            <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="text" name="answer" />
+            <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="text" name="answer" required/>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
