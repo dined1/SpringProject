@@ -19,16 +19,16 @@
                                 <form role="form" action="${contextPath}/resetpassword" method="POST">
                                     <div class="form-group">
                                         <label for="username">Login</label>
-                                        <input class="form-control" type="text" value="${userForm.username}" name="username" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" title="Only latin letters" value="${userForm.username}" name="username" />
                                     </div>
                                     <c:if test="${user == true}">
                                         <div class="form-group">
                                             <label for="question">Secret question: ${userForm.question}</label>
-                                            <input class="form-control" type="hidden" value="${userForm.question}" name="question" />
+                                            <input class="form-control" type="hidden" pattern="[a-zA-Z]+" title="Only latin letters" value="${userForm.question}" name="question" />
                                         </div>
                                         <div class="form-group">
                                             <label for="answer">Answer</label>
-                                            <input class="form-control" type="text" value="" name="answer" />
+                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" title="Only latin letters" value="" name="answer" />
                                         </div>
                                     </c:if>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
