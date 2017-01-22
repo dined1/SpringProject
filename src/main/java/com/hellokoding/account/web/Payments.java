@@ -7,6 +7,7 @@ import com.hellokoding.account.repository.PayUserrepository;
 import com.hellokoding.account.service.CurrencyConverter;
 import com.hellokoding.account.service.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -39,7 +40,8 @@ public class Payments {
     private AccountRepository accountRepository;
     @Autowired
     private AccountHistoryRepository accountHistoryRepository;
-
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = {"/paylogin"}, method = RequestMethod.GET)
     public String payLogin(@Context HttpServletResponse httpServletResponse,
@@ -135,9 +137,19 @@ public class Payments {
 
         for (Account acc : accounts){
             if (acc.getAccountNumber().equals(account)){
-                if ((acc.getBalance().subtract(BigDecimal.valueOf(summ)).compareTo(BigDecimal.ZERO) !=-1 )){
-                    object = getTransactionInformation(Integer.valueOf(String.valueOf(payUserrepository.findByLogin(login).getPayuserid())), Integer.valueOf(String.valueOf(acc.getAccid())), "Comment", root.getAccountNumber(), BigDecimal.valueOf(summ));
+                if (acc.getBalance().compareTo(BigDecimal.valueOf(summ)) < 0) {
+                    model.addAttribute("message", "Not enough money in the account");
+                    return "error";
                 }
+                if (!acc.isEnable()) {
+                    model.addAttribute("message", "Not available account");
+                    return "error";
+                }
+                if (BigDecimal.valueOf(summ).compareTo(BigDecimal.ZERO.setScale(2, BigDecimal.ROUND_HALF_UP)) <= 0) {
+                    model.addAttribute("message", "Incorrect amount");
+                    return "error";
+                }
+                object = getTransactionInformation(Integer.valueOf(String.valueOf(payUserrepository.findByLogin(login).getPayuserid())), Integer.valueOf(String.valueOf(acc.getAccid())), "Comment", root.getAccountNumber(), BigDecimal.valueOf(summ));
             }
         }
         sendMoney(Integer.valueOf(String.valueOf(payUserrepository.findByLogin(login).getPayuserid())), Integer.valueOf(String.valueOf(object.getSenderAccount().getAccid())), 1,
