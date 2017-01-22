@@ -140,8 +140,8 @@ insert into user_role values ('3', '1');
 -- insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', '2', '1', 'Belarus');
 -- insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', '3', '2', 'Belarus');
 -- insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', '4', '3', 'Belarus');
--- insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
--- insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
+insert into statisticscollector values ('1', 'Type1', 'Info1', '1');
+insert into statisticscollector values ('2', 'Type2', 'Info2', '2');
 insert into locations values ('1', 'Belarus');
 insert into locations values ('2', 'Russia');
 insert into locations values ('3', 'Czech');
@@ -470,6 +470,24 @@ insert into PRODUCTITEMS values ('30', '10', '12', '1000', '1000')*/
 
 CREATE TABLE payusers (payuserid INTEGER NOT NULL AUTO_INCREMENT, login VARCHAR(255), password VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), email VARCHAR(255), registered date, enabled boolean, role varchar(255), KEY (payuserid)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 CREATE TABLE accounts (accid INTEGER NOT NULL AUTO_INCREMENT, name VARCHAR(255), account_number VARCHAR(255), currency VARCHAR(255), balance float, user_id integer, enabled boolean, PRIMARY KEY (accid));
+CREATE TABLE account_histories (
+  id INTEGER auto_increment PRIMARY KEY,
+  from_user_id INTEGER NOT NULL,
+  to_user_id INTEGER NOT NULL,
+  from_account_id INTEGER NOT NULL,
+  to_account_id INTEGER NOT NULL,
+  operation_time TIMESTAMP,
+  sender_currency VARCHAR(3) NOT NULL,
+  recipient_currency VARCHAR(3) NOT NULL,
+  from_account_number VARCHAR(255) NOT NULL,
+  to_account_number VARCHAR(255) NOT NULL,
+  comment VARCHAR(255) NOT NULL ,
+  sender_amount DECIMAL(20,2) NOT NULL,
+  recipient_amount DECIMAL(20,2) NOT NULL,
+  commission DECIMAL(20,2) NOT NULL,
+  amount_after_operation_on_sender DECIMAL(20,2) NOT NULL,
+  amount_after_operation_in_recipient DECIMAL(20,2) NOT NULL
+);
 ALTER TABLE accounts ADD CONSTRAINT FK_accounts FOREIGN KEY (user_id) REFERENCES payusers (payuserid);
 INSERT INTO `test`.`payusers` (`payuserid`, `login`, `password`, `first_name`, `last_name`, `email`, `registered`, `enabled`, `role`) VALUES ('1', '12345678', '12345678', '12213', 'asdasd', 'di@m.com', '2017-01-03', '1', 'ROLE_USER');
 INSERT INTO `test`.`accounts` (`accid`, `name`, `account_number`, `currency`, `balance`, `user_id`, `enabled`) VALUES ('1', 'Account1', '000001', 'USD', '1000', '1', '1');
