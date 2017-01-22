@@ -106,30 +106,44 @@
 
 
 
-                        <c:if test="${SO_FINAL.status != 'Canceled'}">
-                            <div>Result:
-                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
-                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
-                            </div>
-                            <c:if test="${FOTP.toString() != '0.0'}">Summary pay: ${FOTP}</c:if>
-                            <c:if test="${FOTP.toString() == '0.0' and FCMP.toString() != '0.0'}">Summary pay: ${FCMP.toString()}</c:if>
-                        </c:if>
-                        <br/>
-                        <br />
-                        <form action="${contextPath}/application/stripe/${SOID}" method="POST">
-                            <script th:inline="javascript"
-                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-                                    data-currency="BYN"
-                                    data-amount="${SO_FINAL.finalOTPwithTaxAndDiscount}"
-                                    data-name="Stripe Checkout Demo"
-                                    data-description="Demo"
-                                    data-locale="auto"
-                                    data-bitcoin="true"
-                                    data-alipay="true">
 
-                            </script>
+                        <br/>
+                        <form action="${contextPath}/payments/paylogin" method="GET">
+                            <c:if test="${SO_FINAL.status != 'Canceled'}">
+                                <div>Result:
+                                    <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
+                                    <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
+                                </div>
+                                <input type="hidden" name="SOID" value="${SO_FINAL.SOId}">
+                                <c:if test="${FOTP.toString() != '0.0'}">
+                                    <input type="hidden" name="paymentsum" value="${FOTP}">
+                                    <label>Summary pay: ${FOTP.toString()}</label>
+                                    <br>
+                                    <input type="submit" value="Pay it!">
+                                </c:if>
+                                <c:if test="${FOTP.toString() == '0.0' and FCMP.toString() != '0.0' and SO_FINAL.attentionFlag != '' and SO_FINAL.attentionFlag != null}">
+                                    <input type="hidden" name="paymentsum" value="${FCMP}">
+                                    <label>Summary pay: ${FCMP.toString()}</label>
+                                    <br>
+                                    <input type="submit" value="Pay it!">
+                                </c:if>
+                            </c:if>
                         </form>
+                        <br />
+                        <%--<form action="${contextPath}/application/stripe/${SOID}" method="POST">--%>
+                            <%--<script th:inline="javascript"--%>
+                                    <%--src="https://checkout.stripe.com/checkout.js" class="stripe-button"--%>
+                                    <%--data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"--%>
+                                    <%--data-currency="BYN"--%>
+                                    <%--data-amount="${SO_FINAL.finalOTPwithTaxAndDiscount}"--%>
+                                    <%--data-name="Stripe Checkout Demo"--%>
+                                    <%--data-description="Demo"--%>
+                                    <%--data-locale="auto"--%>
+                                    <%--data-bitcoin="true"--%>
+                                    <%--data-alipay="true">--%>
+
+                            <%--</script>--%>
+                        <%--</form>--%>
                         <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
                 </div>

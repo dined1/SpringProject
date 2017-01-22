@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
+import javax.ws.rs.core.Context;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.DateFormat;
@@ -193,7 +196,9 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/apply/{sq}"}, method = RequestMethod.GET)
-    public String apply(Model model, @PathVariable("sq") Long qw, Principal principal) {
+    public String apply(Model model, @PathVariable("sq") Long qw, Principal principal,
+                        @Context HttpServletResponse httpServletResponse,
+                        @Context HttpServletRequest httpServletRequest) {
         if (principal==null){
             return "redirect:/";
         }

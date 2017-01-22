@@ -147,25 +147,27 @@ public class AppController {
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
-        Float FCMP = 0f;
-        Float FOTP = 0f;
+        Float FFCMP = 0f;
+        Float FFOTP = 0f;
         for (ProductItems productItem : productItems){
             if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)
                     && productItem.getOrdItem().getStatus().equals("Wait")){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
-                FCMP+=productItem.getMPWithTaxandDiscont();
-                FOTP+=productItem.getOTPWithTaxandDiscont();
+                FFCMP+=productItem.getMPWithTaxandDiscont();
+                FFOTP+=productItem.getOTPWithTaxandDiscont();
                 finalproducts.add(productItem);
             } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
                 CMP+=productItem.getMp();
-                FCMP+=productItem.getMPWithTaxandDiscont();
+                FFCMP+=productItem.getMPWithTaxandDiscont();
                 finalproducts.add(productItem);
             }
         }
         int i=0;
+        BigDecimal FCMP = new BigDecimal(Float.toString(FFCMP)).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal FOTP = new BigDecimal(Float.toString(FFOTP)).setScale(2, BigDecimal.ROUND_HALF_UP);
         for (ProductItems p : finalproducts){
             if (p.getOrdItem().getStatus().equals("Ordered")){
                 i++;
@@ -291,18 +293,18 @@ public class AppController {
         List<ProductItems> finalproducts = new ArrayList<>();
 
 
-        Float FCMP = 0f;
-        Float FOTP = 0f;
+        Float FFCMP = 0f;
+        Float FFOTP = 0f;
         for (ProductItems productItem : productItems){
             if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)
                     && productItem.getOrdItem().getStatus().equals("Wait")){
-                FCMP+=productItem.getMPWithTaxandDiscont();
-                FOTP+=productItem.getOTPWithTaxandDiscont();
+                FFCMP+=productItem.getMPWithTaxandDiscont();
+                FFOTP+=productItem.getOTPWithTaxandDiscont();
                 finalproducts.add(productItem);
             } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
                     productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
-                FCMP+=productItem.getMPWithTaxandDiscont();
+                FFCMP+=productItem.getMPWithTaxandDiscont();
                 finalproducts.add(productItem);
             }
         }
@@ -317,6 +319,8 @@ public class AppController {
                 finalproducts.add(productItem);
             }
         }
+        BigDecimal FCMP = new BigDecimal(Float.toString(FFCMP)).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal FOTP = new BigDecimal(Float.toString(FFOTP)).setScale(2, BigDecimal.ROUND_HALF_UP);
         model.addAttribute("ITEM_LIST", finalproducts);
         model.addAttribute("SO_FINAL", soRepository.findOne(soid));
         model.addAttribute("FCMP", FCMP);

@@ -17,14 +17,18 @@
     <title>Title</title>
 </head>
 <body>
-    <c:forEach items="${Accounts}" var="account">
-    <form role="form" action="${contextPath}/payments/payit" method="GET">
-        <label>${account.name} : ${account.accountNumber}</label>
-        <input class="form-control" type="hidden" name="accountnumber" value="Pay it!"/>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>${account.accountNumber}</button>
-        <h3>Balance value: ${account.balance}</h3>
-    </form>
-    </c:forEach>
+    <h3>Payment summary - ${value}$</h3>
+    <br>
+    <div class="list-group-item">
+        <c:forEach items="${Accounts}" var="account">
+        <form role="form" action="${contextPath}/payments/payit" method="GET">
+            <label>${account.name} : ${account.accountNumber}</label>
+            <input class="form-control" type="hidden" name="accountnumber" value="${account.accountNumber}"/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Pay it!</button>
+            <h3>Balance value: ${account.balance}</h3>
+        </form>
+        </c:forEach>
+    </div>
 </body>
 </html>
