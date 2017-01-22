@@ -115,13 +115,13 @@
                                     <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
                                 </div>
                                 <input type="hidden" name="SOID" value="${SO_FINAL.SOId}">
-                                <c:if test="${FOTP.toString() != '0.0'}">
+                                <c:if test="${FOTP.toString() != '0.00'}">
                                     <input type="hidden" name="paymentsum" value="${FOTP}">
                                     <label>Summary pay: ${FOTP.toString()}</label>
                                     <br>
                                     <input type="submit" value="Pay it!">
                                 </c:if>
-                                <c:if test="${FOTP.toString() == '0.0' and FCMP.toString() != '0.0' and SO_FINAL.attentionFlag != '' and SO_FINAL.attentionFlag != null}">
+                                <c:if test="${FOTP.toString() == '0.00' and FCMP.toString() != '0.00' and SO_FINAL.attentionFlag != '' and SO_FINAL.attentionFlag != null}">
                                     <input type="hidden" name="paymentsum" value="${FCMP}">
                                     <label>Summary pay: ${FCMP.toString()}</label>
                                     <br>

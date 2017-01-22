@@ -44,13 +44,20 @@ public class Payments {
     @RequestMapping(value = {"/paylogin"}, method = RequestMethod.GET)
     public String payLogin(@Context HttpServletResponse httpServletResponse,
                            @Context HttpServletRequest httpServletRequest,
+                           @RequestParam("SOID") String soid,
+                           @RequestParam("paymentsum") String paymentsum,
                            Model model) {
+        String payed = "";
         for (Cookie cookie : httpServletRequest.getCookies()){
+            if (cookie.getName().equals("PAYED")){
+                payed = cookie.getValue();
+            }
             cookie.setMaxAge(0);
             httpServletResponse.addCookie(cookie);
         }
-        String soid = httpServletRequest.getParameter("SOID");
-        String paymentsum = httpServletRequest.getParameter("paymentsum");
+        if (payed.equals("YES")){
+            return "redirect:/";
+        }
         Cookie cookie = new Cookie("value", paymentsum);
         httpServletResponse.addCookie(new Cookie("soid", soid));
         httpServletResponse.addCookie(cookie);
@@ -137,11 +144,19 @@ public class Payments {
                 Integer.valueOf(String.valueOf(object.getRecipientAccount().getAccid())), object.getSenderCurrency(), object.getComment(),
                 object.getAmount(), object.getCommission(), object.getAmountInRecipientCurrency());
         model.addAttribute("Accounts", accounts);
+        boolean b = false;
         for (Cookie cookie : httpServletRequest.getCookies()){
-            cookie.setMaxAge(0);
-            httpServletResponse.addCookie(cookie);
+            if (cookie.getName().equals("PAYED")){
+                cookie.setValue("YES");
+                b=true;
+            }else {
+                cookie.setMaxAge(0);
+                httpServletResponse.addCookie(cookie);
+            }
         }
-        eraseCookie(httpServletRequest, httpServletResponse);
+        if (!b) {
+            httpServletResponse.addCookie(new Cookie("PAYED", "YES"));
+        }
         return "redirect:/cabinet/apply/" + soid;
     }
 

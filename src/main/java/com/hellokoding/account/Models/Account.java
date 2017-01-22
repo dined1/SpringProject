@@ -28,7 +28,7 @@ public class Account {
     @NotNull
     private Currency currency;
 
-    @Column(name = "balance", nullable = false)
+    @Column(name = "balance", nullable = false, scale = 2)
     @NotNull
     private BigDecimal balance;
 

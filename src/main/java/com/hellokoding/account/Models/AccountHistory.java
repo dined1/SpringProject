@@ -21,9 +21,13 @@ public class AccountHistory{
     public final static String GET_CREDIT_BETWEEN_BY_ACCOUNT_ID = "AccountHistory.getCreditBetweenByAccountId";
     public final static String GET_COMMISSION_HISTORY = "AccountHistory.getCommissionHistory";
 
-    @Column(name = "from_user_id")
+    @Column(name = "achisId")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer achisId;
+
+    @Column(name = "from_user_id")
+    @NotNull
     private Integer fromUserId;
 
     @Column(name = "to_user_id", nullable = false)
@@ -223,5 +227,13 @@ public class AccountHistory{
 
     public void setOperationTime(Timestamp operationTime) {
         this.operationTime = operationTime;
+    }
+
+    public Integer getAchisId() {
+        return achisId;
+    }
+
+    public void setAchisId(Integer achisId) {
+        this.achisId = achisId;
     }
 }
