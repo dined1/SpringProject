@@ -153,7 +153,9 @@
 
                                 </div>
                                 <a href="${contextPath}/admin/so/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
-                                <a href="${contextPath}/admin/so/pay/${SO.SOId}" class="btn btn-default">Fake pay <i class="fa fa-arrow-circle-right fa-fw"></i></a>
+                                <c:if test="${SO.status != 'Canceled' and SO.status != 'Open'}">
+                                    <a href="${contextPath}/admin/so/pay/${SO.SOId}" class="btn btn-default">Fake pay <i class="fa fa-arrow-circle-right fa-fw"></i></a>
+                                </c:if>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

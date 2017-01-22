@@ -16,12 +16,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.*;
+import javax.ws.rs.BeanParam;
 import java.math.BigDecimal;
+import java.security.Principal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -47,6 +54,12 @@ public class SoController {
     CustomerRepository customerRepository;
     @Autowired
     SOProductRepository soProductRepository;
+    @Autowired
+    private PaymentRepository paymentFacade;
+    @Autowired
+    private PaymentBillRepository paymentBillRepository;
+    @Autowired
+    private PaymentTypeRepository paymentTypeRepository;
     @Inject
     private ErrorBean error;
 
@@ -126,10 +139,103 @@ public class SoController {
     }
 
     @RequestMapping(value = {"/pay/{id}"}, method = RequestMethod.GET)
-    public String fakePay(Model model, @PathVariable("id") Long id) {
-        So so = soRepository.findOne(id);
-        so.setStatus("Ordered");
-        soRepository.save(so);
+    public String fakePay(Model model, @PathVariable("id") Long qw, Principal principal) {
+        if (principal==null){
+            return "redirect:/";
+        }
+//        Long userid = userRepository.findByUsername(principal.getName()).getId();
+//        if ( soRepository.findOne(qw) == null
+//                || !soRepository.findOne(qw).getCustomer1().getUserId().equals(userid.toString())){
+//            model.addAttribute("message", "You cannot process this order");
+//            return "error";
+//        }
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        Float CMP = 0f;
+        Float OTP = 0f;
+        So so = soRepository.findOne(qw);
+        if (!so.getStatus().equals("Ordered")) {
+            Paymentbill paymentbill = new Paymentbill();
+            List<ProductItems> productItems = productItemsRepository.findAll();
+            List<ProductItems> productItemsList = new ArrayList<>();
+            for (ProductItems pi : productItems){
+                if (pi.getOrdItem().getStatus().equals("Wait")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
+                    CMP += pi.getMPWithTaxandDiscont();
+                    OTP += pi.getOTPWithTaxandDiscont();
+                }
+            }
+
+            Integer signal = 0;
+            for (ProductItems product : productItems) {
+                if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
+                    if (product.getOrdItem().getDefOTP() != 0 || product.getOrdItem().getDefOTP() != null){
+                        signal+=1;
+                    }
+                }
+            }
+            if (signal != 0){
+                paymentbill.setCotp(OTP);
+            } else {
+                paymentbill.setCmp(CMP);
+            }
+            for (ProductItems product : productItems) {
+                if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
+                    OrdItem item = product.getOrdItem();
+                    item.setStatus("Ordered");
+                    ordItemRepository.save(item);
+                }
+            }
+            so.setStatus("Ordered");
+            so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
+            so.setOrderDate(dateFormat.format(date));
+            soRepository.save(so);
+            paymentBillRepository.save(paymentbill);
+            Payment payment = new Payment();
+            payment.setPaymentDate(date);
+            payment.setPaymentInfo("Payment was succesfull");
+            payment.setSo1(so);
+            payment.setPaymentbill1(paymentbill);
+            payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
+            paymentFacade.save(payment);
+            so.setPurchaseOrderNumber(payment.getPaymentId().toString());
+            soRepository.save(so);
+        } else if (so.getAttentionFlag() != null && so.getAttentionFlag().contains("Waiting for payment") && so.getStatus().equals("Ordered")){
+            try {
+                Paymentbill paymentbill = new Paymentbill();
+                List<ProductItems> productItems = productItemsRepository.findAll();
+                List<ProductItems> productItemsList = new ArrayList<>();
+                for (ProductItems pi : productItems){
+                    if (pi.getOrdItem().getStatus().equals("Ordered")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
+                        CMP += pi.getMPWithTaxandDiscont();
+                    }
+                }
+                paymentbill.setCmp(CMP);
+                so.setStatus("Ordered");
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date lastdate = formatter.parse(so.getOrderDate());
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(lastdate);
+                cal.add(Calendar.MONTH, 1);
+                lastdate = cal.getTime();
+                so.setOrderDate(dateFormat.format(lastdate));
+                so.setAttentionFlag("");
+                soRepository.save(so);
+                paymentBillRepository.save(paymentbill);
+                Payment payment = new Payment();
+                payment.setPaymentDate(date);
+                payment.setPaymentInfo("Payment was succesfull");
+                payment.setSo1(so);
+                payment.setPaymentbill1(paymentbill);
+                payment.setPaymenttype1(paymentTypeRepository.findOne(2L));
+                paymentFacade.save(payment);
+                so.setPurchaseOrderNumber(payment.getPaymentId().toString());
+                soRepository.save(so);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         return "redirect:/admin/so/list";
     }
 
