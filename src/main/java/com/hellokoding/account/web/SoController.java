@@ -129,6 +129,15 @@ public class SoController {
         return "so/view";
     }
 
+    @RequestMapping(value = {"/pays/{id}"}, method = RequestMethod.GET)
+    public String pay(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("SO", soRepository.findOne(id));
+        model.addAttribute("PAY", paymentFacade.findAll());
+        model.addAttribute("PROD", productItemsRepository.findBySoproduct1_SOPId(id));
+        model.addAttribute("USER", userRepository.findOne(Long.valueOf(soRepository.findOne(id).getCustomer1().getUserId())));
+        return "so/pay";
+    }
+
     @RequestMapping(value = {"/item/{id}/{s}"}, method = RequestMethod.GET)
     public String findItem(Model model, @PathVariable("id") Long id, @PathVariable("s") Long s) {
         model.addAttribute("SO", s);
