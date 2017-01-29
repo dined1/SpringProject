@@ -38,10 +38,10 @@
                         </div>
                         <c:if test="${STATUS != 'Canceled'}">
                             <div>Result:
-                                <label>One-time price: <span id="total-cart-summa">${(OTP.toString())}</span> BYN</label><br>
-                                <label>Recurrent price: <span>${(CMP.toString())}</span>  BYN</label><br>
-                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> BYN</label><br>
-                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  BYN</label>
+                                <label>One-time price: <span id="total-cart-summa">${(OTP.toString())}</span> USD</label><br>
+                                <label>Recurrent price: <span>${(CMP.toString())}</span>  USD</label><br>
+                                <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> USD</label><br>
+                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  USD</label>
                             </div>
                         </c:if>
                         <button class="btn btn-default btn-sm noprint" onclick="javascript:window.print()">

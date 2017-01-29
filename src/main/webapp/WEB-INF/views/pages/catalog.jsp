@@ -30,8 +30,8 @@
                                 <th>Name</th>
                                 <th>Product type</th>
                                 <th>Description</th>
-                                <th>Default One-time price, BYN</th>
-                                <th>Default Mounth price, BYN</th>
+                                <th>Default One-time price, USD</th>
+                                <th>Default Mounth price, USD</th>
                                 <th>Modified Date</th>
                                 <th>Available amount</th>
                                 <th></th>
