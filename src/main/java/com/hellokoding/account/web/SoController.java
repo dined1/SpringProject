@@ -191,6 +191,7 @@ public class SoController {
             for (ProductItems product : productItems) {
                 if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
                     OrdItem item = product.getOrdItem();
+                    item.setModifiedDate(dateFormat.format(date));
                     item.setStatus("Ordered");
                     ordItemRepository.save(item);
                 }
@@ -215,8 +216,26 @@ public class SoController {
                 List<ProductItems> productItems = productItemsRepository.findAll();
                 List<ProductItems> productItemsList = new ArrayList<>();
                 for (ProductItems pi : productItems){
-                    if (pi.getOrdItem().getStatus().equals("Ordered")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Date itemDate = formatter.parse(pi.getOrdItem().getModifiedDate());
+                    Calendar calI = Calendar.getInstance();
+                    calI.setTime(itemDate);
+                    calI.add(Calendar.DATE, 27);
+                    itemDate = calI.getTime();
+                    long leftI = Math.abs(date.getTime() - itemDate.getTime());
+                    long daysI = leftI / (24 * 60 * 60 * 1000);
+                    if (pi.getOrdItem().getStatus().equals("Ordered")
+                            && qw.equals(pi.getSoproduct1().getSo1().getSOId())
+                            && itemDate.before(date) && daysI >= 0){
                         CMP += pi.getMPWithTaxandDiscont();
+                        itemDate = formatter.parse(pi.getOrdItem().getModifiedDate());
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(itemDate);
+                        cal.add(Calendar.MONTH, 1);
+                        itemDate = cal.getTime();
+                        pi.getOrdItem().setModifiedDate(dateFormat.format(itemDate));
+                        productItemsRepository.save(pi);
+                        ordItemRepository.save(pi.getOrdItem());
                     }
                 }
                 paymentbill.setCmp(CMP);

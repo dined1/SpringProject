@@ -2,8 +2,10 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.Payment;
 import com.hellokoding.account.Models.Paymentbill;
+import com.hellokoding.account.Models.ProductItems;
 import com.hellokoding.account.Models.So;
 import com.hellokoding.account.repository.PaymentRepository;
+import com.hellokoding.account.repository.ProductItemsRepository;
 import com.hellokoding.account.repository.SORepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -28,6 +30,8 @@ public class PaymentProcessorService {
     PaymentRepository paymentRepository;
     @Autowired
     SORepository soRepository;
+    @Autowired
+    ProductItemsRepository productItemsRepository;
 
 
     public Float paymentCount(Payment payment){
@@ -62,15 +66,34 @@ public class PaymentProcessorService {
                     paymentDate = cal.getTime();
                     long left = Math.abs(date.getTime() - paymentDate.getTime());
                     long days = left / (24 * 60 * 60 * 1000);
-                    if (paymentDate.before(date) && days >= 0) {
-                        So so = payment.getSo1();
-                        so.setAttentionFlag("Waiting for payment. Days left: " + days);
-                        soRepository.save(so);
-                    } else if (days < 0){
-                        So so = payment.getSo1();
-                        so.setAttentionFlag("Services stopped");
-                        soRepository.save(so);
+                    List<ProductItems> productItems = productItemsRepository.findBySoproduct1_SOPId(payment.getSo1().getSOId());
+                    for (ProductItems productItem : productItems){
+                        Date itemDate = formatter.parse(productItem.getOrdItem().getModifiedDate());
+                        Calendar calI = Calendar.getInstance();
+                        calI.setTime(itemDate);
+                        calI.add(Calendar.DATE, 27);
+                        itemDate = calI.getTime();
+                        long leftI = Math.abs(date.getTime() - itemDate.getTime());
+                        long daysI = leftI / (24 * 60 * 60 * 1000);
+                        if (itemDate.before(date) && daysI >= 0) {
+                            So so = payment.getSo1();
+                            so.setAttentionFlag("Waiting for payment. Days left: " + daysI);
+                            soRepository.save(so);
+                        } else if (daysI < 0){
+                            So so = payment.getSo1();
+                            so.setAttentionFlag("Services stopped");
+                            soRepository.save(so);
+                        }
                     }
+//                    if (paymentDate.before(date) && days >= 0) {
+//                        So so = payment.getSo1();
+//                        so.setAttentionFlag("Waiting for payment. Days left: " + days);
+//                        soRepository.save(so);
+//                    } else if (days < 0){
+//                        So so = payment.getSo1();
+//                        so.setAttentionFlag("Services stopped");
+//                        soRepository.save(so);
+//                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
