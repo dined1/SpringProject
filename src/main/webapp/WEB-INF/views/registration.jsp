@@ -66,6 +66,7 @@
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <h4><a class="btn btn-lg btn-primary btn-block text-center" style="text-decoration: none;" href="${contextPath}/"><font color="white">Back</font></a></h4>
     </form:form>
 
 </div>

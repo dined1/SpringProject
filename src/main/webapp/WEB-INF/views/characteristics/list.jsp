@@ -5,7 +5,7 @@
 
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -84,12 +84,8 @@
                                 </tbody>
                             </table>
                         </div>
-
-
-
-
+                        <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
-                    <a href="${contextPath}/adm" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->

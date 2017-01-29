@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Context;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.Principal;
@@ -352,31 +351,7 @@ public class AppController {
         model.addAttribute("USER_ID", userid);
         return "/pages/orderinfo";
     }
-    @RequestMapping(value = {"/PayPage"}, method = RequestMethod.GET)
-    public String AddPay(Model model, @Context HttpServletRequest request, Card card , Principal principal) {
 
-        Long userid = userRepository.findByUsername(principal.getName()).getId();
-
-        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
-        model.addAttribute("USER_ID", userid);
-        String soid = request.getParameter("SOID");
-        String paymentsum = request.getParameter("paymentsum");
-        model.addAttribute("SOID", soid);
-        model.addAttribute("PAYMENTSUM", paymentsum);
-        return "/processing/PayPage";
-    }
-    @RequestMapping(value = {"/PayNumb"}, method = RequestMethod.GET)
-    public String AddPayNumb(Model model, @Context HttpServletRequest request, Card card , Principal principal) {
-        Long userid = userRepository.findByUsername(principal.getName()).getId();
-
-        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
-        model.addAttribute("USER_ID", userid);
-        String soid = request.getParameter("SOID");
-        String paymentsum = request.getParameter("paymentsum");
-        model.addAttribute("SOID", soid);
-        model.addAttribute("PAYMENTSUM", paymentsum);
-        return "/processing/PayNumb";
-    }
     @RequestMapping(value = {"/add/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String addBasket(Model model, HttpServletRequest request, ItemCharacteristic itemCharacteristic, Itemdiscount itemdiscount,
                             ProductItems productItems, @PathVariable("itemid") Long itemid,
