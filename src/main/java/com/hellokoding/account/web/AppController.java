@@ -17,11 +17,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.Principal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Admin on 27.11.2016.
@@ -297,29 +295,34 @@ public class AppController {
         Float FFCMP = 0f;
         Float FFOTP = 0f;
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
-                    && productItem.getOrdItem().getStatus().equals("Wait")){
-                FFCMP+=productItem.getMPWithTaxandDiscont();
-                FFOTP+=productItem.getOTPWithTaxandDiscont();
-                finalproducts.add(productItem);
-            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
-                FFCMP+=productItem.getMPWithTaxandDiscont();
-                finalproducts.add(productItem);
+            try {
+                if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                        productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+                        && productItem.getOrdItem().getStatus().equals("Wait")){
+                    FFCMP+=productItem.getMPWithTaxandDiscont();
+                    FFOTP+=productItem.getOTPWithTaxandDiscont();
+                    finalproducts.add(productItem);
+                } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+                        productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+                    Date date = new Date();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Date itemDate = formatter.parse(productItem.getOrdItem().getModifiedDate());
+                    Calendar calI = Calendar.getInstance();
+                    calI.setTime(itemDate);
+                    calI.add(Calendar.DATE, 27);
+                    itemDate = calI.getTime();
+                    long leftI = Math.abs(date.getTime() - itemDate.getTime());
+                    long daysI = leftI / (24 * 60 * 60 * 1000);
+                    if (itemDate.before(date) && daysI >= 0) {
+                        FFCMP += productItem.getMPWithTaxandDiscont();
+                        finalproducts.add(productItem);
+                    }
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
 
-        for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
-                    && productItem.getOrdItem().getStatus().equals("Wait")){
-                finalproducts.add(productItem);
-            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
-                finalproducts.add(productItem);
-            }
-        }
         BigDecimal FCMP = new BigDecimal(Float.toString(FFCMP)).setScale(2, BigDecimal.ROUND_HALF_UP);
         BigDecimal FOTP = new BigDecimal(Float.toString(FFOTP)).setScale(2, BigDecimal.ROUND_HALF_UP);
         model.addAttribute("ITEM_LIST", finalproducts);
@@ -407,7 +410,7 @@ public class AppController {
         ordItem.setDefMP(item.getDefMP());
         ordItem.setDefOTP(item.getDefOTP());
         ordItem.setDescription(item.getDescription());
-        ordItem.setModifiedDate(item.getModifiedDate());
+//        ordItem.setModifiedDate(item.getModifiedDate());
         ordItem.setName(item.getName());
         ordItem.setType(item.getType());
         ordItem.setItemCharacteristic(ordItemCharacteristic);
@@ -453,11 +456,11 @@ public class AppController {
         for (OrdItemDiscount discount : basketItemdisc) {
             if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountValue() != null){
                 otp -= discount.getDiscountrule1().getDiscountValue();
-                mp -= discount.getDiscountrule1().getDiscountValue();
+//                mp -= discount.getDiscountrule1().getDiscountValue();
             }
             if (discount.getDiscountrule1().getType().equals("disc") && discount.getDiscountrule1().getDiscountProcent() != null){
                 otp -= otp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
-                mp -= mp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
+//                mp -= mp*discount.getDiscountrule1().getDiscountProcent()/100.0f;
             }
         }
         List<Itemdiscount> itemdiscounts = itemdiscountRepository.findByItem1_ItemId(itemid);

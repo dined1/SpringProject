@@ -241,6 +241,7 @@ public class CabinetController {
             for (ProductItems product : productItems) {
                 if (product.getOrdItem().getStatus().equals("Wait") && qw.equals(product.getSoproduct1().getSo1().getSOId())) {
                     OrdItem item = product.getOrdItem();
+                    item.setModifiedDate(dateFormat.format(date));
                     item.setStatus("Ordered");
                     ordItemRepository.save(item);
                 }
@@ -267,6 +268,7 @@ public class CabinetController {
                 for (ProductItems pi : productItems){
                     if (pi.getOrdItem().getStatus().equals("Ordered")  && qw.equals(pi.getSoproduct1().getSo1().getSOId())){
                         CMP += pi.getMPWithTaxandDiscont();
+                        pi.getOrdItem().setModifiedDate(dateFormat.format(date));
                     }
                 }
                 paymentbill.setCmp(CMP);
