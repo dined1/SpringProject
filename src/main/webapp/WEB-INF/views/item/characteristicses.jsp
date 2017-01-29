@@ -6,13 +6,13 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div>
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> ${ITEM.name}  Characteristics</b></h5>
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Characteristics</b></h5>
                     </div>
                     <div class="panel-body">
 
@@ -39,7 +39,7 @@
                             </tbody>
                         </table>
 
-                        <h4>Remove the feature</h4>
+                        <h4>To remove the feature</h4>
                         <table class="table table-striped table-bordered table-hover" id="CHARACTERISTICS_TABLE_1">
                             <thead>
                             <tr>

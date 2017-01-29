@@ -30,6 +30,7 @@
 </head>
 
 <body>
+
 <div class="container">
 
     <form method="POST" action="${contextPath}/login" class="form-signin">
@@ -44,15 +45,13 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4><a class="btn btn-lg btn-primary btn-block text-center" style="text-decoration: none;" href="${contextPath}/resetpassword"><font color="white">Forgot password?</font></a></h4>
-            <h4><a class="btn btn-lg btn-primary btn-block text-center" style="text-decoration: none;" href="${contextPath}/"><font color="white">Back</font></a></h4>
+            <h4 class="text-center"><a href="${contextPath}/resetpassword">Forgot password?</a></h4>
         </div>
 
     </form>
 
 </div>
 <!-- /container -->
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/webresources/common/js/bootstrap.min.js"></script>
 </body>

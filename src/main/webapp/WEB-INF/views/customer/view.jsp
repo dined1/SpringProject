@@ -6,12 +6,12 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div>
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Customer Info</b></h5>
+                        <h5><i class="fa fa-info-circle fa-fw"></i> <b> Customer info</b></h5>
                     </div>
                     <div class="panel-body">
                         <div class="row">

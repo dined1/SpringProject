@@ -3,7 +3,7 @@
 
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div>
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
