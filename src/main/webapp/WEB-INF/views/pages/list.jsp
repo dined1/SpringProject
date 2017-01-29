@@ -52,7 +52,6 @@
 
                                             <td>${(ITEM.item1.defOTP)}</td>
 
-
                                         </tr>
                                     </c:forEach>
                                 </tbody>
