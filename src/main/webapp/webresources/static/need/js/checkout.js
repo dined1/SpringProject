@@ -38,7 +38,7 @@ $( document ).ready(function() {
 		$form.find('.subscribe').html('Processing <i class="fa fa-spinner fa-pulse"></i>');
 		$form.submit();
 	}
-	
+
 	$('input[name=cardNumber]').payment('formatCardNumber');
 	$('input[name=cardCVC]').payment('formatCardCVC');
 	$('input[name=cardExpiry').payment('formatCardExpiry');

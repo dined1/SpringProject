@@ -1,15 +1,14 @@
 package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
+import com.hellokoding.account.model.User;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
@@ -380,6 +379,7 @@ public class AppController {
         model.addAttribute("PAYMENTSUM", paymentsum);
         return "/processing/PayPage";
     }
+
     @RequestMapping(value = {"/PayNumb"}, method = RequestMethod.GET)
     public String AddPayNumb(Model model, @Context HttpServletRequest request, Card card , Principal principal) {
         Long userid = userRepository.findByUsername(principal.getName()).getId();

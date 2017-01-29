@@ -20,6 +20,7 @@
     <script type="text/javascript" src="${contextPath}/webresources/static/need/js/checkout.js"></script>
 </head>
 <body>
+<form:form method="POST" modelAttribute="CardForm"  >
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-5 center-block">
@@ -42,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="cardNumber">Subscription Value</label>
                                     <input type="hidden" name="OrderReference" value="123" />
-                                    <p class="subscription-value" > ${PAYMENTSUM} <span class="subscription-recurrency"></span></p>
+                                    <p class="subscription-value" > ${PAYMENTSUM} USD. <span class="subscription-recurrency"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -51,8 +52,9 @@
                                 <div class="form-group">
                                     <label for="cardNumber">Card Holder</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-name" required="required" autofocus="autofocus" />
+                                        <form:input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-name" required="required" autofocus="autofocus" />
                                         <span class="input-group-addon">&nbsp;<i class="fa fa-user"></i></span>
+                                        <form:errors path="cardholder"></form:errors>
                                     </div>
                                 </div>
                             </div>
