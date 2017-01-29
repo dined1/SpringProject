@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Only numbers and english letters" required="required" />
+                                        <input class="form-control" type="text" pattern="[^а-яА-Я]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Only numbers and english letters" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input class="form-control" type="text" name="country"  value="${CUSTOMER.address1.country}" title="Only english letters" list="country_list"  required="required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country"  value="${CUSTOMER.address1.country}" title="Only english letters" list="country_list"  required="required" />
                                         <datalist id="country_list">
                                             <option>Belarus</option>
                                             <option>Russia</option>

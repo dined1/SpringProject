@@ -60,7 +60,7 @@
                                         <td>${(SO.location)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
                                         <c:if test="${empty SO.orderDate}">
-                                            <a href="${contextPath}/admin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
+                                            <a href="${contextPath}/superadmin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
                                         </c:if>
                                         </td>
                                     </tr>
@@ -99,7 +99,7 @@
                                         <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
                                         <td>${(SO.location)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a>
-                                            <a href="${contextPath}/admin/so/pays/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> Pays  </a></td>
+                                            <a href="${contextPath}/superadmin/so/pays/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> Pays  </a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -138,9 +138,9 @@
                                         <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
                                         <td>${(SO.location)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
-                                        <a href="${contextPath}/admin/so/pays/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> Pays  </a>
+                                        <a href="${contextPath}/superadmin/so/pays/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> Pays  </a>
                                             <c:if test="${empty SO.orderDate}">
-                                                <a href="${contextPath}/admin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
+                                                <a href="${contextPath}/superadmin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
                                             </c:if>
                                         </td>
                                     </tr>

@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Only numbers and english letters" required="required" />
+                                        <input class="form-control" type="text" pattern="[^а-яА-Я]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Only numbers and english letters" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
@@ -82,7 +82,7 @@
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
-                                    <a href="${contextPath}/admin/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+                                    <a href="${contextPath}/superadmin/customer/list" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>

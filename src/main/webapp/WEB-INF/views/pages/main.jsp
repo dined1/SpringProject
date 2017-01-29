@@ -35,7 +35,7 @@
                 <h5>ASCOM</h5>
             </div>
             <div class="col-sm-3 phone_number">
-                <h3><a href="+375298715105">(29) 4-8-15-16-23-42</a></h3>
+                <h3>(29) 4-8-15-16-23-42</h3>
                 <p>Library hours: from 8<sup>30</sup> to 18<sup>30</sup></p>
             </div>
         </div>
@@ -173,7 +173,7 @@
                 <br>
                 <p>Are you having difficulties with the registration? <br> You saw an unknown status of the goods?.</p>
                 <br>
-                <button id="free_consult" data-toggle="modal"><a href="${contextPath}/application/faq">Read F.A.Q.</a></button>
+                <a href="${contextPath}/application/faq"><button id="free_consult" data-toggle="modal">Read F.A.Q.</button></a>
             </div>
             <div class="col-md-2">
                 <img src="${contextPath}/webresources/static/need/img/help_img.jpg" alt="Бесплатная консультация" class="img-responsive help_img center-block">
@@ -216,20 +216,20 @@
                 <h3>Our logistics experts will contact you. And answer all your questions.</h3>
                 <p>It's free!</p>
                 <div class="row">
-                    <div class="col-md-4">
-                        <form action="${contextPath}/webresources/static/need/send.php" method="post">
+                    <form action="/" method="post">
+                        <!--div class="col-md-4">
                             <input type="hidden" name="what" value="Участвовать в акции">
                             <input name="name" type="text" required placeholder="Имя" class="form-comtrol form_input">
 
-                    </div>
-                    <div class="col-md-4">
-                        <input name="phone" id="phone_1" type="text" required placeholder="Телефон" class="form-comtrol form_input">
-                    </div>
-                    <div class="col-md-4">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <button type="submit">Send</button>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="col-md-4">
+                            <input name="phone" id="phone_1" type="number" required placeholder="Телефон" class="form-comtrol form_input">
+                        </div-->
+                        <div class="col-md-4">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <h3><a href="https://vk.com/id0">Send</a></h3>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -393,7 +393,7 @@
                 <div class="row social">
                     <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/vk.png" alt="Vkontakte"></a>
                     <a class="social_icon" href=""><img src="${contextPath}/webresources/static/need/img/insta.png" alt="Instagram"></a>
- 
+
                 </div>
             </div>
         </div>

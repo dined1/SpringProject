@@ -41,7 +41,7 @@
                                     <h4>Customer address</h4>
                                     <div class="form-group">
                                         <label for="addressLine">Address Line</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" path="addressLine"  title="Only numbers and english letters" required="required" />
+                                        <input class="form-control" type="text" pattern="[^а-яА-Я]+" name="addressLine" path="addressLine"  title="Only numbers and english letters" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>

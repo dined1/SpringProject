@@ -39,6 +39,7 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                        <a href="${contextPath}/superadmin/so/list" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
 
 
                         <!-- /.row (nested) -->

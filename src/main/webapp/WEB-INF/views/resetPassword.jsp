@@ -33,6 +33,7 @@
                                     </c:if>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>
+                                    <a href="${contextPath}/" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                                 </form>
                             </div>
                         </div>

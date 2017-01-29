@@ -31,12 +31,12 @@
             <img src="${contextPath}/webresources/static/need/img/logo.png" alt="Логотип Компании" class="img-responsive">
           </div>
           <div class="col-sm-7 text-center descript">
-            <h4>Автоматизированная система по управлению заказом пользователя</h4>
-            <h5>АСУЗП</h5>
-          </div> 
+            <h4>automated system for customer order management</h4>
+            <h5>ASCOM</h5>
+          </div>
           <div class="col-sm-3 phone_number">
-            <h3><a href="+375298715105">(29) 4-8-15-16-23-42</a></h3>
-            <p>Режим работы с 8<sup>30</sup> до 18<sup>00</sup></p>
+            <h3>(29) 4-8-15-16-23-42</h3>
+            <p>Library hours: from 8<sup>30</sup> to 18<sup>30</sup></p>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
         <div class="row">
           <ul class="list-inline">
             <a href="${contextPath}/">
-              <li>Главная</li>
+              <li>Main</li>
             </a>
           </ul>
         </div>

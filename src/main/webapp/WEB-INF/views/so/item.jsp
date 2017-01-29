@@ -107,7 +107,7 @@
                                     </a>
 
                                 </div>
-                                <a href="${contextPath}/admin/so/${SO}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/superadmin/so/${SO}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>
