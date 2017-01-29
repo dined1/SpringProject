@@ -139,7 +139,8 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
-            throw new NotFoundException(soid);
+            model.addAttribute("message", "You cannot process this order");
+            return "error";
         }
 
         List<ProductItems> productItems = productItemsRepository.findAll();
@@ -206,6 +207,7 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
             return "error";
         }
         if ("Canceled".equals(so.getStatus())){
@@ -231,6 +233,7 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
             return "error";
         }
         Item item = itemRepository.findOne(itemid);
@@ -254,7 +257,8 @@ public class AppController {
         }
         if (soRepository.findOne(soid) == null || soRepository.findByCustomer1_CustomerId(customerid).isEmpty()
                 || soRepository.findByCustomer1_UserId(userRepository.findByUsername(principal.getName()).getId().toString()).isEmpty()){
-            throw new NotFoundException(soid);
+            model.addAttribute("message", "You cannot process this order");
+            return "error";
         }
         OrdItem item = ordItemRepository.findOne(itemid);
         model.addAttribute("ITEM", item);
@@ -290,7 +294,15 @@ public class AppController {
         }
         List<ProductItems> productItems = productItemsRepository.findAll();
         List<ProductItems> finalproducts = new ArrayList<>();
-
+        So so = soRepository.findOne(soid);
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
+            return "error";
+        }
 
         Float FFCMP = 0f;
         Float FFOTP = 0f;
@@ -393,6 +405,7 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
             return "error";
         }
 
@@ -530,6 +543,7 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
             return "error";
         }
         Long parent = ordItemRepository.findOne(itemid).getParentId();
@@ -554,6 +568,7 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
             return "error";
         }
         List<ProductItems> productItems = productItemsRepository.findAll();
@@ -632,7 +647,8 @@ public class AppController {
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
                 || soRepository.findOne(soid) == null
                 || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
-            throw new NotFoundException(soid);
+            model.addAttribute("message", "You cannot process this order");
+            return "error";
         }
 
         List<ProductItems> productItems = productItemsRepository.findAll();
