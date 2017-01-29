@@ -20,7 +20,7 @@
     <script type="text/javascript" src="${contextPath}/webresources/static/need/js/checkout.js"></script>
 </head>
 <body>
-<form:form method="POST" modelAttribute="CardForm"  >
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-5 center-block">
@@ -34,6 +34,10 @@
                         <div class="display-td" >
                             <img class="img-responsive" src="${contextPath}/webresources/static/need/img/mastercard-curved-32px.png">
                         </div>
+                        <div class="display-td" >
+                            <img class="img-responsive" src="${contextPath}/webresources/static/need/img/american-express-curved-32px.png">
+                        </div>
+
                     </div>
                 </div>
                 <div class="panel-body">
@@ -52,9 +56,10 @@
                                 <div class="form-group">
                                     <label for="cardNumber">Card Holder</label>
                                     <div class="input-group">
-                                        <form:input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-name" required="required" autofocus="autofocus" />
+                                        <input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-holder" pattern="[a-zA-Z]\s{1,26}$+" title="invalid card holder" required="required" autofocus="autofocus"
+                                                />
                                         <span class="input-group-addon">&nbsp;<i class="fa fa-user"></i></span>
-                                        <form:errors path="cardholder"></form:errors>
+
                                     </div>
                                 </div>
                             </div>
@@ -120,6 +125,12 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <a href="${contextPath}/cabinet/apply/${SOID}" class="subscribe btn btn-success btn-lg btn-block" type="button">Pay</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="${contextPath}/application/orderinfo" class=" btn btn-success btn-lg btn-block" type="button">Cancel</a>
                             </div>
                         </div>
                     </form>

@@ -41,7 +41,7 @@ $( document ).ready(function() {
 
 	$('input[name=cardNumber]').payment('formatCardNumber');
 	$('input[name=cardCVC]').payment('formatCardCVC');
-	$('input[name=cardExpiry').payment('formatCardExpiry');
+	$('input[name=cardExpiry]').payment('formatCardExpiry');
 	
 	$.validator.addMethod("cardNumber", function(value, element) {
 	    return this.optional(element) || validateCardNumber(value);
