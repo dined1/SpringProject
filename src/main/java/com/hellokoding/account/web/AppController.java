@@ -1,14 +1,15 @@
 package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
-import com.hellokoding.account.model.User;
 import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
@@ -484,6 +485,12 @@ public class AppController {
             if (discount.getDiscountrule1().getType().equals("tax") && discount.getDiscountrule1().getDiscountValue() != null){
                 otp += discount.getDiscountrule1().getDiscountValue();
             }
+        }
+        if (otp < 0){
+            otp = 0.01f;
+        }
+        if (mp < 0){
+            mp = 0.01f;
         }
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();

@@ -79,10 +79,10 @@ insert into item values ('8', '20000', '7000', 'This is stick', '05.01.2016', 'S
 insert into item values ('9', '70000', '8000', 'This is bed', '05.03.2016', 'Bed', 'House', '12');
 insert into item values ('10', '60000', '9000', 'This is chair', '05.11.2016', 'Chair', 'House', '575');
 
-insert into discountrule values ('1', '0', '10', 'discount', 'Discount #1');
-insert into discountrule values ('2', '20', '5', 'discount', 'Discount #2');
-insert into discountrule values ('3', '30', '0', 'discount', 'Discount #3');
-insert into discountrule values ('4', '15', '10', 'discount', 'Discount #4');
+insert into discountrule values ('1', '0', '10', 'disc', 'Discount #1');
+insert into discountrule values ('2', '20', '5', 'disc', 'Discount #2');
+insert into discountrule values ('3', '30', '0', 'disc', 'Discount #3');
+insert into discountrule values ('4', '15', '10', 'disc', 'Discount #4');
 insert into discountrule values ('5', '70', '30', 'tax', 'Tax #1');
 insert into discountrule values ('6', '40', '90', 'tax', 'Tax #2');
 insert into itemdiscount values ('1', '1', '1');
