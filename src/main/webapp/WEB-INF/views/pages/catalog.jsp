@@ -6,11 +6,9 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div>
         <div class="row">
             <div class="col-lg-12">
-
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h5><i class="fa fa-plus-square fa-fw"></i> <b> Item catalog </b></h5>
@@ -72,17 +70,13 @@
                         <script src="${contextPath}/webresources/common/js/modules/catalog.js" type="text/javascript"></script>
                         <script src="${contextPath}/webresources/common/js/modules/cart.js" type="text/javascript"></script>
                         <script src="${contextPath}/webresources/common/js/modules/main.js" type="text/javascript"></script>
+                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
 
-                    <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
-                    <Br/>
-                    <Br/>
-                    <Br/>
-                    <div id='gcw_mainFtR4jmg7i' class='gcw_mainFtR4jmg7i'></div>
-                    <script>function reloadFtR4jmg7i(){ var sc = document.getElementById('scFtR4jmg7i');if (sc) sc.parentNode.removeChild(sc);sc = document.createElement('script');sc.type = 'text/javascript';sc.charset = 'UTF-8';sc.async = true;sc.id='scFtR4jmg7i';sc.src = 'http://freecurrencyrates.com/ru/widget-horizontal-editable?iso=BYNRUBUSDEURCNY&df=1&p=FtR4jmg7i&v=fi&source=fcr&width=900&width_title=184&firstrowvalue=1&thm=A6C9E2,FCFDFD,4297D7,5C9CCC,FFFFFF,C5DBEC,FCFDFD,2E6E9E,000000&title=%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B5%D1%80%20%D0%B2%D0%B0%D0%BB%D1%8E%D1%82&tzo=-180';var div = document.getElementById('gcw_mainFtR4jmg7i');div.parentNode.insertBefore(sc, div);} reloadFtR4jmg7i(); </script>
-                    <Br/>
-                    <Br/>
                 </div>
+                <div id='gcw_mainFDKzQnAYv' class='gcw_mainFDKzQnAYv'></div>
+                <a id='gcw_siteFDKzQnAYv' href='http://freecurrencyrates.com/ru/'>FreeCurrencyRates.com</a>
+                <script>function reloadFDKzQnAYv(){ var sc = document.getElementById('scFDKzQnAYv');if (sc) sc.parentNode.removeChild(sc);sc = document.createElement('script');sc.type = 'text/javascript';sc.charset = 'UTF-8';sc.async = true;sc.id='scFDKzQnAYv';sc.src = 'http://freecurrencyrates.com/ru/widget-horizontal-editable?iso=USDEURBYNRUBCNY&df=1&p=FDKzQnAYv&v=fi&source=fcr&width=900&width_title=184&firstrowvalue=1&thm=A6C9E2,FCFDFD,4297D7,5C9CCC,FFFFFF,C5DBEC,FCFDFD,2E6E9E,000000&title=%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B5%D1%80%20%D0%B2%D0%B0%D0%BB%D1%8E%D1%82&tzo=-180';var div = document.getElementById('gcw_mainFDKzQnAYv');div.parentNode.insertBefore(sc, div);} reloadFDKzQnAYv(); </script>
             </div>
         </div>
     </div>

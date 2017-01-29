@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="CharacteristicValue">Characteristic Value</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="CharacteristicValue"  value="${CHARACTERISTICS.characteristicValue}" title="Only english letters" required="required" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="CharacteristicValue"  value="${CHARACTERISTICS.characteristicValue}" title="Only numbers and english letters" required="required" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

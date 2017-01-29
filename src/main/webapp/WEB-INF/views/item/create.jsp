@@ -30,16 +30,16 @@
                                         <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="description" path="description" required = "required"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="defMP">Discount Value</label>
-                                        <input class="form-control" type="number" min="0" step="1" name="defMP" path="defMP" required = "required"  />
+                                        <label for="defMP">Def MP</label>
+                                        <input class="form-control" type="number" min="0" max="1000000" step="0.01" name="defMP" path="defMP" required = "required"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="defOTP">Discount Procent</label>
-                                        <input class="form-control" type="number" min="0" max="100" step="0.01" name="defOTP" path="defOTP" required = "required"  />
+                                        <label for="defOTP">Def OTP</label>
+                                        <input class="form-control" type="number" min="0" max="1000000" step="0.01" name="defOTP" path="defOTP" required = "required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="quantity">Amount</label>
-                                        <input class="form-control" type="number" min="0" step="1" name="quantity" path="quantity" required = "required"  />
+                                        <input class="form-control" type="number" min="0" max="10000" step="1" name="quantity" path="quantity" required = "required"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

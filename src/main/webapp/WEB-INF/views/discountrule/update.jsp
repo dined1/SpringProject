@@ -23,7 +23,7 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="discountValue">Discount Value</label>
-                                        <input class="form-control" type="number" name="discountValue"  value="${DISCOUNTRULE.discountValue}" />
+                                        <input class="form-control" type="number" min="0" max="1000000" step="0.01" name="discountValue"  value="${DISCOUNTRULE.discountValue}" />
                                     </div>     
                                     <div class="form-group">
                                         <label for="discountProcent">Discount Procent</label>
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <input class="form-control" type="text" name="description"  value="${DISCOUNTRULE.description}" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" title="Only numbers and english letters" name="description"  value="${DISCOUNTRULE.description}" />
                                     </div>
                                     <div class="form-group">
                                         <label>Tax/Discount</label>

@@ -18,58 +18,58 @@
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/cabinet/customer/update" method="POST">
                                     <div class="form-group">
+                                        <label for="customerId">Customer Id</label>
+                                        <input class="form-control" type="number" name="customerId" readonly value="${CUSTOMER.customerId}" />
+                                    </div>
+                                    <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Only english letters"  value="${CUSTOMER.firstName}" required/>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" value="${CUSTOMER.firstName}" title="Only english letters" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName"  value="${CUSTOMER.lastName}" title="Only english letters" required/>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" value="${CUSTOMER.lastName}" title="Only english letters" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" path="contact" value="${CUSTOMER.contact}" required />
+                                        <input class="form-control" type="number" name="contact" value="${CUSTOMER.contact}" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" type="email" name="email" path="email" value="${CUSTOMER.email}" required/>
+                                        <input class="form-control" type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" name="email" value="${CUSTOMER.email}" title="2 - 6 letters afret dot" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="text" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" value="${CUSTOMER.phone}" required/>
+                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#"  name="phone" value="${CUSTOMER.phone}" required="required" />
+                                    </div>
+                                    <h4>Customer address</h4>
+                                    <div class="form-group">
+                                        <label for="addressId">Address Id</label>
+                                        <input class="form-control" type="number" name="addressId" readonly value="${CUSTOMER.address1.addressId}" required="required" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" type="text" name="location" path="location" value="${CUSTOMER.location}" required />
+                                        <label for="addressLine">Address Line</label>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" value="${CUSTOMER.address1.addressLine}" title="Only numbers and english letters" required="required" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" type="text" name="customerId" path="customerId" value="${CUSTOMER.customerId}" required />
+                                        <label for="city">City</label>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" value="${CUSTOMER.address1.city}" title="Only english letters" required="required" />
                                     </div>
-                                    <h2>Customer address</h2>
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="addressLine">Address Line</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" path="addressLine" value="${ADDRESS.addressLine}" title="Only numbers and english letters" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="city">City</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" path="city" value="${ADDRESS.city}" title="Only english letters" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="country">Country</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country"  value="${ADDRESS.country}" title="Only english letters" list="country_list" required />
-                                            <datalist id="country_list">
-                                                <option>Belarus</option>
-                                                <option>Russia</option>
-                                                <option>Ukraine</option>
-                                                <option>Poland</option>
-                                                <option>Czech</option>
-                                                <option>Slovakia</option>
-                                                <option>Serbia</option>
-                                            </datalist>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="postalCode">Postal Code</label>
-                                            <input class="form-control" type="number" name="postalCode" path="postalCode" value="${ADDRESS.postalCode}" required />
-                                        </div>
+                                        <label for="country">Country</label>
+                                        <input class="form-control" type="text" name="country"  value="${CUSTOMER.address1.country}" title="Only english letters" list="country_list"  required="required" />
+                                        <datalist id="country_list">
+                                            <option>Belarus</option>
+                                            <option>Russia</option>
+                                            <option>Ukraine</option>
+                                            <option>Poland</option>
+                                            <option>Czech</option>
+                                            <option>Slovakia</option>
+                                            <option>Serbia</option>
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="postalCode">Postal Code</label>
+                                        <input class="form-control" type="number" name="postalCode" value="${CUSTOMER.address1.postalCode}"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

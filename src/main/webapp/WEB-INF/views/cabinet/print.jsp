@@ -38,7 +38,7 @@
                                             <td><div class="col-lg-8">${PAY.paymentbill1.cotp}</div></td>
                                         </tr>
                                         <tr>
-                                            <td><div class="col-lg-4"><span>Mouth price :</span></div></td>
+                                            <td><div class="col-lg-4"><span>Month price :</span></div></td>
                                             <td><div class="col-lg-8">${PAY.paymentbill1.cmp}</div></td>
                                         </tr>
                                         <tr>

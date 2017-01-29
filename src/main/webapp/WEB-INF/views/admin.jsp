@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="${contextPath}/admin/customer/list">
+                            <a href="${contextPath}/superadmin/customer/list">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="${contextPath}/admin/so/list">
+                            <a href="${contextPath}/superadmin/so/list">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -19,15 +19,15 @@
                                 <form role="form" action="${contextPath}/cabinet/password" method="POST">
                                     <div class="form-group">
                                         <label for="userPassword1">Old password</label>
-                                        <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="password" name="name1" />
+                                        <input class="form-control" pattern="[a-zA-Z0-9]+" title="Only numbers and english letters" type="password" name="name1" />
                                     </div>
                                     <div class="form-group">
                                         <label for="userPassword2">New password</label>
-                                        <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="password" name="name2" />
+                                        <input class="form-control" pattern="[a-zA-Z0-9]+" title="Only numbers and english letters" type="password" name="name2" />
                                     </div>
                                     <div class="form-group">
                                         <label for="userPassword3">Repeat new password</label>
-                                        <input class="form-control" pattern="[a-zA-Z]+" title="Only latin letters" type="password" name="name3" />
+                                        <input class="form-control" pattern="[a-zA-Z0-9]+" title="Only numbers and english letters" type="password" name="name3" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

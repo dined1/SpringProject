@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" type="email" name="email" value="${CUSTOMER.email}" required="required" />
+                                        <input class="form-control" type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" name="email" value="${CUSTOMER.email}" title="2 - 6 letters afret dot" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="country">Country</label>
-                                        <input class="form-control" type="text" name="country"  value="${CUSTOMER.address1.country}" title="Только буквы" list="country_list"  required="required" />
+                                        <input class="form-control" type="text" name="country"  value="${CUSTOMER.address1.country}" title="Only english letters" list="country_list"  required="required" />
                                         <datalist id="country_list">
                                             <option>Belarus</option>
                                             <option>Russia</option>

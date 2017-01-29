@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" type="email" name="email" path="email" required="required"  />
+                                        <input class="form-control" type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" name="email" title="2 - 6 letters afret dot" path="email" required="required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>

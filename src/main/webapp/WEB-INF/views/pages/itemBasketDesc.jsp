@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -61,34 +61,35 @@
                                                     <tr>
                                                         <c:if test="${Characteristic.ordItem.orditemId==ITEM.orditemId}">
                                                             <td><label>${Characteristic.itemCharacteristic.characteristic}:
-                                                              ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
+                                                                    ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
                                                         </c:if>
                                                     </tr>
                                                 </c:forEach>
                                             </div>
                                         </c:if>
                                         <c:if test="${not empty ITEMDISCOUNTS}">
-                                            <div class="row">
+                                            <Br/>
+                                            <div>
                                                 <label>Active discounts and taxes: </label><br>
                                                 <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                     <tr>
                                                         <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='disc'}">
                                                             <td><label>${DISCOUNT.discountrule1.description} :
-                                                                    value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
+                                                                value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
                                                         </c:if>
                                                         <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='tax'}">
                                                             <span style="color:darkred">Tax</span>
                                                             <td><label>${DISCOUNT.discountrule1.description} :
-                                                                    value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
+                                                                value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
                                                         </c:if>
                                                     </tr>
                                                 </c:forEach>
                                             </div>
                                         </c:if>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                                     </form>
                                 </div>
+                                <a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>

@@ -35,15 +35,15 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="defMP">Def MP</label>
-                                        <input class="form-control" type="number" min="0" step="1" name="defMP"  value="${ITEM.defMP}" required = "required" />
+                                        <input class="form-control" type="number" min="0" max="1000000" step="0.01" name="defMP"  value="${ITEM.defMP}" required = "required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="defOTP">Def OTP</label>
-                                        <input class="form-control" type="number" min="0" max="100" step="0.01" name="defOTP"  value="${ITEM.defOTP}" required = "required" />
+                                        <input class="form-control" type="number" min="0" max="1000000" step="0.01" name="defOTP"  value="${ITEM.defOTP}" required = "required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="quantity">Amount</label>
-                                        <input class="form-control" type="number" min="0" step="1" name="quantity"  value="${ITEM.quantity}" required = "required" />
+                                        <input class="form-control" type="number" min="0" max="10000" step="1" name="quantity"  value="${ITEM.quantity}" required = "required" />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Update</button>

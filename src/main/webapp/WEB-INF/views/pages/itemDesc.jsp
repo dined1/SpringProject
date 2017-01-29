@@ -59,7 +59,7 @@
                                             <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">
                                             <tr>
                                                 <c:if test="${Characteristic.item.itemId==ITEM.itemId}">
-                                                    <td><label><input type="checkbox" name="characteristics" value="${Characteristic.itemCharacteristic.characteristicId}">${Characteristic.itemCharacteristic.characteristic}:  ${Characteristic.itemCharacteristic.characteristicValue}</label></td>
+                                                    <td><label>${Characteristic.itemCharacteristic.characteristic}:  ${Characteristic.itemCharacteristic.characteristicValue}  <input type="checkbox" name="characteristics" value="${Characteristic.itemCharacteristic.characteristicId}"></label></td>
                                                 </c:if>
                                             </tr>
                                             </c:forEach>

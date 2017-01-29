@@ -30,7 +30,7 @@ import java.util.Date;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"/admin/customer"})
+@RequestMapping(value = {"/superadmin/customer"})
 @Controller
 public class CustomerController {
 

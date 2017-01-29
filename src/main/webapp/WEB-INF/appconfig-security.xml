@@ -14,7 +14,8 @@
         <intercept-url pattern="/application/**" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/welcome" access="hasRole('ROLE_USER')"/>
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
-        <logout logout-success-url="/login?logout" />
+        <logout logout-success-url="/" />
+        <!--login?logout-->
     </http>
 
     <authentication-manager alias="authenticationManager">

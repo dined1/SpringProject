@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -126,10 +126,9 @@
                                     <label>Summary pay: ${FCMP.toString()}</label>
                                     <br>
                                     <input type="submit" class="btn btn-default" value="Pay Card">
-
-
                                 </c:if>
                             </c:if>
+                            <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             <!--  </form>
 
                                     <br />
@@ -172,7 +171,6 @@
 
                         <%--</script>--%>
                         <%--</form>--%>
-                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
                 </div>
             </div>

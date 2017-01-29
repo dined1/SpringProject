@@ -20,40 +20,49 @@
                                     <h2>Customer creation</h2>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Only english letters" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="firstName" path="firstName" title="Only english letters" required="required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
-                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only english letters" />
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only english letters" required="required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" path="contact"  />
+                                        <input class="form-control" type="number" name="contact" path="contact" required="required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" type="email" name="email" path="email"  />
+                                        <input class="form-control" type="text" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" name="email" title="2 - 6 letters afret dot" path="email" required="required"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone"  />
+                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" required="required"  />
+                                    </div>
+                                    <h4>Customer address</h4>
+                                    <div class="form-group">
+                                        <label for="addressLine">Address Line</label>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z0-9- ]+" name="addressLine" path="addressLine"  title="Only numbers and english letters" required="required" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="passNumber">Pass Number</label>
-                                        <input class="form-control" type="number" name="passNumber" path="passNumber"  />
+                                        <label for="city">City</label>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="city" path="city" title="Only english letters" required="required"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="countNumber">Count Number</label>
-                                        <input class="form-control" type="number" name="countNumber" path="countNumber"  />
+                                        <label for="country">Country</label>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country" path="country" title="Only english letters" list="country_list" required required="required" />
+                                        <datalist id="country_list">
+                                            <option>Belarus</option>
+                                            <option>Russia</option>
+                                            <option>Ukraine</option>
+                                            <option>Poland</option>
+                                            <option>Czech</option>
+                                            <option>Slovakia</option>
+                                            <option>Serbia</option>
+                                        </datalist>
                                     </div>
-                                    <h2>Customer address</h2>
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <select path="Address" name="Address" onchange=" ">
-                                            <c:forEach items="${ADDRESS_LIST}" var="ADDRESS">
-                                                <option value="${ADDRESS.addressId}">${ADDRESS.addressLine}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <label for="postalCode">Postal Code</label>
+                                        <input class="form-control" type="number" name="postalCode" path="postalCode"  />
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>

@@ -34,7 +34,7 @@ import java.util.List;
  *
  * @author dzni0816
  */
-@RequestMapping(value = {"admin/so"})
+@RequestMapping(value = {"superadmin/so"})
 @Controller
 public class SoController {
 
