@@ -75,12 +75,12 @@
                                                     <tr>
                                                         <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='disc'}">
                                                             <td><label>${DISCOUNT.discountrule1.description} :
-                                                                value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
+                                                                value - ${DISCOUNT.discountrule1.discountValue}$, percentage - ${DISCOUNT.discountrule1.discountProcent}%</label></td>
                                                         </c:if>
                                                         <c:if test="${DISCOUNT.ordItem.orditemId==ITEM.orditemId && DISCOUNT.discountrule1.type=='tax'}">
                                                             <span style="color:darkred">Tax</span>
                                                             <td><label>${DISCOUNT.discountrule1.description} :
-                                                                value - ${DISCOUNT.discountrule1.discountValue}, percentage - ${DISCOUNT.discountrule1.discountProcent}</label></td>
+                                                                value - ${DISCOUNT.discountrule1.discountValue}$, percentage - ${DISCOUNT.discountrule1.discountProcent}%</label></td>
                                                         </c:if>
                                                     </tr>
                                                 </c:forEach>

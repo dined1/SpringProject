@@ -71,8 +71,8 @@
                                                 <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                     <tr>
                                                         <c:if test="${(DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='disc') or DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='discount'}">
-                                                            <td><label><input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}">${DISCOUNT.discountrule1.description}:
-                                                                    ${DISCOUNT.discountrule1.discountValue}</label></td>
+                                                            <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountProcent}</label>%,</td>
+                                                            <td><label>${DISCOUNT.discountrule1.discountValue}</label>$  <input type="checkbox" name="discounts" value="${DISCOUNT.discountrule1.dRId}"></td>
                                                         </c:if>
                                                     </tr>
                                                 </c:forEach>
@@ -83,8 +83,8 @@
                                             <c:forEach items="${ITEMDISCOUNTS}" var="DISCOUNT">
                                                 <tr>
                                                     <c:if test="${DISCOUNT.item1.itemId==ITEM.itemId && DISCOUNT.discountrule1.type=='tax'}">
-                                                        <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountProcent}</label> - Percentage</td>
-                                                        <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountValue}</label> - Value</td>
+                                                        <td><label>${DISCOUNT.discountrule1.description} : ${DISCOUNT.discountrule1.discountProcent}</label>%,</td>
+                                                        <td><label>${DISCOUNT.discountrule1.discountValue}</label>$</td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
