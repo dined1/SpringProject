@@ -145,7 +145,14 @@ public class SoController {
     @RequestMapping(value = {"/pays/{id}"}, method = RequestMethod.GET)
     public String pay(Model model, @PathVariable("id") Long id) {
         model.addAttribute("SO", soRepository.findOne(id));
-        model.addAttribute("PAY", paymentFacade.findAll());
+        List<Payment> payments = paymentFacade.findAll();
+        List<Payment> fpay = new ArrayList<>();
+        for (Payment payment : payments){
+            if (payment.getSo1().getSOId().equals(id)){
+                fpay.add(payment);
+            }
+        }
+        model.addAttribute("PAY", fpay);
         model.addAttribute("PROD", productItemsRepository.findBySoproduct1_SOPId(id));
         model.addAttribute("USER", userRepository.findOne(Long.valueOf(soRepository.findOne(id).getCustomer1().getUserId())));
         return "so/pay";

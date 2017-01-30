@@ -61,7 +61,9 @@
                                 <label>One-time price: <span id="total-cart-summa">${(OTP.toString())}</span> USD</label><br>
                                 <label>Recurrent price: <span>${(CMP.toString())}</span>  USD</label><br>
                                 <label>Final One-time price with taxes and discounts: <span id="total-cart-summa">${(FOTP.toString())}</span> USD</label><br>
-                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  USD</label>
+                                <label>Final Recurrent price with taxes and discounts: <span>${(FCMP.toString())}</span>  USD</label><br>
+
+                                <label>Final One-time price for all order: <span id="total-cart-summa">${(SO.finalOTPwithTaxAndDiscount)}</span> USD</label><br>
                             </div>
                         </c:if>
                         <%--<c:if test="${STATUS == 'Canceled'}">--%>

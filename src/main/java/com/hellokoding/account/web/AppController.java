@@ -180,6 +180,7 @@ public class AppController {
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
         model.addAttribute("SOID", soid);
+        model.addAttribute("SO", soRepository.findOne(soid));
         model.addAttribute("USERID", userid);
         model.addAttribute("FCMP", FCMP);
         model.addAttribute("FOTP", FOTP);
