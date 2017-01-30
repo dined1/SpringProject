@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -60,6 +61,8 @@ public class SoController {
     private PaymentBillRepository paymentBillRepository;
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
+    @Autowired
+    private ItemRepository itemRepository;
     @Inject
     private ErrorBean error;
 
@@ -117,6 +120,16 @@ public class SoController {
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String removeSo(@PathVariable("id") Long id) {
+        So so = soRepository.findOne(id);
+        List<ProductItems> productItems = productItemsRepository.findBySoproduct1_SOPId(id);
+        for (ProductItems pr : productItems){
+            Long parent = pr.getOrdItem().getParentId();
+            Item root = itemRepository.findOne(parent);
+            if (root != null){
+                root.setQuantity(root.getQuantity().add(BigInteger.ONE));
+                itemRepository.save(root);
+            }
+        }
         soRepository.delete(id);
         return "redirect:/superadmin/so/list";
     }
