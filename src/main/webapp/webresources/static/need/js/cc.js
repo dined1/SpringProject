@@ -10,6 +10,10 @@ $(document).ready(function () {
 
     // form validation functions.
     form_validate = {
+      holder: function(holder){
+        return this.required(holder) && (/^[a-zA-Z]+\s{2,30}$/.test(email.trim()));
+
+      },
       email: function (email) {
         return this.required(email) && (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email.trim()));
       },

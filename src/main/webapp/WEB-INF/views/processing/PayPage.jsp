@@ -57,7 +57,7 @@
                                     <label for="cardNumber">Card Holder</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-holder" pattern="[a-zA-Z]{2,30}"
-                                               title="invalid card holder" required="required" autofocus="autofocus" />
+                                               title="invalid card holder" maxlength="25" required="required" autofocus="autofocus" />
                                         <span class="input-group-addon">&nbsp;<i class="fa fa-user"></i></span>
 
                                     </div>

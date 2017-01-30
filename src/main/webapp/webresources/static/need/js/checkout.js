@@ -42,7 +42,9 @@ $( document ).ready(function() {
 	$('input[name=cardNumber]').payment('formatCardNumber');
 	$('input[name=cardCVC]').payment('formatCardCVC');
 	$('input[name=cardExpiry]').payment('formatCardExpiry');
-	
+	$.validator.addMethod("cardHolder",function (value,element) {
+		return this.optional(element || validateCardHolder(value));
+	},"Card Holder is invalid.");
 	$.validator.addMethod("cardNumber", function(value, element) {
 	    return this.optional(element) || validateCardNumber(value);
 	}, "Please specify a valid credit card number.");
@@ -100,7 +102,9 @@ $( document ).ready(function() {
 	});
 	
 	paymentFormReady = function() {
-		if ($form.find('[name=cardNumber]').hasClass("success") &&
+		if ($form.find('[name=cardHolder]').val().length>1 &&
+
+			$form.find('[name=cardNumber]').hasClass("success") &&
 			$form.find('[name=cardExpiry]').hasClass("success") &&
 			$form.find('[name=cardCVC]').val().length > 2) {
 			return true;
@@ -117,7 +121,12 @@ $( document ).ready(function() {
 			$form.find('.subscribe').prop('disabled', true);
 		}
 	}, 250);
-	
+	function validateCardHolder(value){
+		if (value.length<2 ) {
+			return false;
+		}
+		return true;
+	}
 	function validateCardNumber(value) {
 	    if (/[^0-9-\s]+/.test(value)) return false;
 	    var nCheck = 0, nDigit = 0, bEven = false;
