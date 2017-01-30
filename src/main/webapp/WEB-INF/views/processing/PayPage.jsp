@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form role="form" id="payment-form" method="POST" action="${contextPath}/cabinet/apply/${SOID}"  >
+                    <form role="form" id="payment-form"  action="${contextPath}/cabinet/apply/${SOID}"  >
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
@@ -56,8 +56,8 @@
                                 <div class="form-group">
                                     <label for="cardNumber">Card Holder</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-holder" pattern="[a-zA-Z]\s{1,26}$+" title="invalid card holder" required="required" autofocus="autofocus"
-                                                />
+                                        <input type="text" class="form-control" path="cardholder" name="cardHolder" id="cardHolder" placeholder="exactly as on the card" autocomplete="cc-holder" pattern="[a-zA-Z]{2,30}"
+                                               title="invalid card holder" required="required" autofocus="autofocus" />
                                         <span class="input-group-addon">&nbsp;<i class="fa fa-user"></i></span>
 
                                     </div>
@@ -124,7 +124,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <a href="${contextPath}/cabinet/apply/${SOID}" class="subscribe btn btn-success btn-lg btn-block" type="button">Pay</a>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button href="${contextPath}/cabinet/apply/${SOID}" class="subscribe btn btn-success btn-lg btn-block" type="button">Pay</button>
                             </div>
                         </div>
                         <br>

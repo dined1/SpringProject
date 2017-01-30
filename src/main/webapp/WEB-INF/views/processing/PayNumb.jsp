@@ -21,62 +21,48 @@
 
 </head>
 <body>
-<form action="#" id="cc-form" novalidate>
-    <div class="error hidden"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-md-5 center-block">
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-heading display-table" >
-                    <div class="row display-tr" >
-                        <h3 class="panel-title display-td" >Payment Details</h3>
+<div id="wrapper">
 
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5><i class="fa fa-default fa-fw"></i> <b> Payment Details</b></h5>
                     </div>
-                </div>
-                <div class="panel-body">
-                    <form role="form" id="payment-form" method="POST" action="${contextPath}/cabinet/apply/${SOID}"  >
+                    <div class="panel-body">
                         <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cardNumber">Subscription Value</label>
-                                    <input type="hidden" name="OrderReference" value="123" />
-                                    <p class="subscription-value" > ${PAYMENTSUM} <span class="subscription-recurrency"></span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cardNumber">Bill Number</label>
-                                    <div class="input-group">
-                                        <input  type="tel"  pattern="[0-9]*"  name="cardNumber" id="cardNumber" placeholder="Valid Bill Number" class="form-control" required autofocus  />
-
+                            <div class="col-lg-12">
+                                <form role="form" action="${contextPath}/cabinet/apply/${SOID}" >
+                                    <h4>Subscription Value</h4>
+                                    <div class="form-group">
+                                        <p class="subscription-value" > ${PAYMENTSUM} USD. <span class="subscription-recurrency"></span></p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                        <div class="col-xs-7 col-md-7">
-                                <div class="form-group">
-                                    <label for="cvv2">Bank Code</label>
-                                    <input placeholder="Bank Code" pattern="[0-9]*" type="tel" name="cvv2" id="cvv2" maxlength="3" class="form-control" required>
-                                </div>
-                            </div>
-                            </div>
 
 
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <a href="${contextPath}/cabinet/apply/${SOID}" class="subscribe btn btn-success btn-lg btn-block" type="button">Pay</a>
+                                    <div class="form-group">
+                                        <label for="billNumber">Bill Number</label>
+                                        <input class="form-control" type="billNumber" pattern = "[0-9]{16}" placeholder="Valid Bill Number" title="incorrect bill number: length 16 digit" name="billNumber"  required="required" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="bankCode">Bank Code</label>
+                                        <input class="form-control" type="text"  pattern = "[0-9]{3}" placeholder="Valid Bank Code" title="incorrect bank code: length 3 digit" name="bankCode"  required="required" />
+                                    </div>
+
+
+
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <button href="${contextPath}/cabinet/apply/${SOID}" type="submit" class="btn btn-success btn-lg btn-block">Pay</button>
+                                    <a href="${contextPath}/application/orderinfo" class="btn btn-success btn-lg btn-block"></i>Cancel</a>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    </form>
 </body>
 </html>
