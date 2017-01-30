@@ -118,7 +118,7 @@ public class SoController {
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String removeSo(@PathVariable("id") Long id) {
         soRepository.delete(id);
-        return "redirect:/admin/so/list";
+        return "redirect:/superadmin/so/list";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
@@ -264,7 +264,7 @@ public class SoController {
                 e.printStackTrace();
             }
         }
-        return "redirect:/admin/so/list";
+        return "redirect:/superadmin/so/list";
     }
 
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)

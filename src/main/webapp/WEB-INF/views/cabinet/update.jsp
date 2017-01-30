@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -30,8 +30,8 @@
                                         <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" value="${CUSTOMER.lastName}" title="Only english letters" required="required">
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" value="${CUSTOMER.contact}" required="required" />
+                                        <label for="contact">Fax</label>
+                                        <input class="form-control" type="number" name="contact" value="${CUSTOMER.contact}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#"  name="phone" value="${CUSTOMER.phone}" required="required" />
+                                        <input class="form-control" type="number"min="0" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#"  name="phone" value="${CUSTOMER.phone}" required="required" />
                                     </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">

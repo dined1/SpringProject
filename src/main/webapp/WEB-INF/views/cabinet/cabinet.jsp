@@ -5,7 +5,7 @@
 
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -16,9 +16,6 @@
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="newcustomer"><i class="fa fa-plus"></i> Add</a>
                                     <c:if test="${not empty requestScope.CUSTOMER_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Customer list
-                                        </button>
                                     </c:if>
                                 </div>
                             </div>

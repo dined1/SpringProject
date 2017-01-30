@@ -27,8 +27,8 @@
                                         <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only english letters" required="required"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" path="contact" required="required"  />
+                                        <label for="contact">Fax</label>
+                                        <input class="form-control" type="number" name="contact" path="contact"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>

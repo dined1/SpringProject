@@ -16,9 +16,6 @@
                                 <div align="right">
                                     <!--a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a-->
                                     <c:if test="${not empty requestScope.SO_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print So list
-                                        </button>
                                     </c:if>
                                 </div>
                             </div>

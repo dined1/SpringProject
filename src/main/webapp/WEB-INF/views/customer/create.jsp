@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/customer/new" method="POST">
+                                <form role="form" action="${contextPath}/superadmin/customer/new" method="POST">
                                     <h4>Customer information</h4>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
@@ -27,8 +27,8 @@
                                         <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only english letters" required="required"  />
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" path="contact" required="required"  />
+                                        <label for="contact">Fax</label>
+                                        <input class="form-control" type="number" min="0" name="contact" path="contact"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" required="required"  />
+                                        <input class="form-control" type="number" min="0" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" required="required"  />
                                     </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">

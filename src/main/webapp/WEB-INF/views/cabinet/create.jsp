@@ -27,8 +27,8 @@
                                         <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" path="lastName" title="Only english letters" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" path="contact" required  />
+                                        <label for="contact">Fax</label>
+                                        <input class="form-control" type="number" min="0" name="contact" path="contact"  />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" required  />
+                                        <input class="form-control" type="number" min="0" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#" name="phone" path="phone" required  />
                                     </div>
                                     <h2>Customer address</h2>
                                     <div class="form-group">
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="postalCode">Postal Code</label>
-                                            <input class="form-control" type="number" name="postalCode" path="postalCode" required />
+                                            <input class="form-control" type="number" min="0" name="postalCode" path="postalCode" required />
                                         </div>
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

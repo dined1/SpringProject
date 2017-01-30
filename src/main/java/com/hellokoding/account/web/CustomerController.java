@@ -139,14 +139,14 @@ public class CustomerController {
         customer.setAddress1(address);
         customer.setUserId(user1);
         customerRepository.save(customer);
-        return "redirect:/admin/customer/list";
+        return "redirect:/superadmin/customer/list";
     }
 
 
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String removeCustomer(@PathVariable("id") Long id) {
         customerRepository.delete(customerRepository.findOne(id));
-        return "redirect:/admin/customer/list";
+        return "redirect:/superadmin/customer/list";
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)

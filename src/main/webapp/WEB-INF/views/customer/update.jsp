@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form role="form" action="${contextPath}/admin/customer/update" method="POST">
+                                <form role="form" action="${contextPath}/superadmin/customer/update" method="POST">
                                     <h4>Customer information</h4>
                                     <div class="form-group">
                                         <label for="customerId">Customer Id</label>
@@ -31,8 +31,8 @@
                                         <input class="form-control" type="text" pattern="[a-zA-Z]+" name="lastName" value="${CUSTOMER.lastName}" title="Only english letters" required="required">
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact">Contact</label>
-                                        <input class="form-control" type="number" name="contact" value="${CUSTOMER.contact}" required="required" />
+                                        <label for="contact">Fax</label>
+                                        <input class="form-control" type="number" min="0" name="contact" value="${CUSTOMER.contact}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="number" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#"  name="phone" value="${CUSTOMER.phone}" required="required" />
+                                        <input class="form-control" type="number" min="0" pattern = "#^\+[0-9]{1,2}\s?\([0-9]{3}\)\s?[0-9]+\-[0-9]+\-[0-9]+$#"  name="phone" value="${CUSTOMER.phone}" required="required" />
                                     </div>
                                     <h4>Customer address</h4>
                                     <div class="form-group">

@@ -15,9 +15,6 @@
                             <div class="col-lg-6">
                                 <div align="right">
                                     <c:if test="${not empty requestScope.PAYMENT_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Payment list
-                                        </button>
                                     </c:if>
                                 </div>
                             </div>

@@ -16,19 +16,11 @@
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="newcustomer"><i class="fa fa-plus"></i> New customer</a>
                                     <c:if test="${not empty requestScope.CUSTOMER_LIST}">
-                                        <button class="btn btn-default btn-sm" onclick="javascript:window.print()">
-                                            <i class="fa fa-print fa-fw"></i> Print Customer list
-                                        </button>
                                     </c:if>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
