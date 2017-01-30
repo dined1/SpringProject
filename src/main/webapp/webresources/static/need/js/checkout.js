@@ -1,34 +1,35 @@
 $( document ).ready(function() {
 	var $form = $('#payment-form');
 	$form.find('.subscribe').on('click', sendForm);
-	
+
 	$('#cardHolder').on('keyup change', function(){
 		var card_holder = '';
 		card_holder += $(this).val();
 		$('#cc-holder').html(card_holder);
+
 	});
-	
+
 	$('#cardNumber').on('keyup change', function(){
-	    var card_number = '';
-	    card_number += $(this).val();
-	    $('#cc-number').html(card_number);
+		var card_number = '';
+		card_number += $(this).val();
+		$('#cc-number').html(card_number);
 	});
-	
+
 	$('#cardExpiry').on('keyup change', function(){
-	    var card_number = '';
-	    card_number += $(this).val();
-	    $('#cc-expires').html(card_number);
+		var card_number = '';
+		card_number += $(this).val();
+		$('#cc-expires').html(card_number);
 	});
-	
+
 	$('#cardCVC').on('keyup change', function(){
-	    var card_number = '';
-	    card_number += $(this).val();
-	    $('#cc-ccv').html(card_number);
+		var card_number = '';
+		card_number += $(this).val();
+		$('#cc-ccv').html(card_number);
 	});
-	
+
 	function sendForm() {
 		if (!validator.form()) {
-		    return false;
+			return false;
 		}
 		$form.find('.subscribe').html('Validating <i class="fa fa-spinner fa-pulse"></i>').prop('disabled', true);
 		$('#cardHolder').attr('readonly','readonly');
@@ -43,29 +44,29 @@ $( document ).ready(function() {
 	$('input[name=cardCVC]').payment('formatCardCVC');
 	$('input[name=cardExpiry]').payment('formatCardExpiry');
 	$.validator.addMethod("cardHolder",function (value,element) {
-		return this.optional(element || validateCardHolder(value));
+		return this.optional(element) || validateCardHolder(value);
 	},"Card Holder is invalid.");
 	$.validator.addMethod("cardNumber", function(value, element) {
-	    return this.optional(element) || validateCardNumber(value);
+		return this.optional(element) || validateCardNumber(value);
 	}, "Please specify a valid credit card number.");
-	
-	$.validator.addMethod("cardExpiry", function(value, element) {    
-	    value = $.payment.cardExpiryVal(value);
-	    return this.optional(element) || validateExpiry(value.month, value.year);
+
+	$.validator.addMethod("cardExpiry", function(value, element) {
+		value = $.payment.cardExpiryVal(value);
+		return this.optional(element) || validateExpiry(value.month, value.year);
 	}, "Invalid expiration date.");
-	
+
 	$.validator.addMethod("cardCVC", function(value, element) {
-	    return this.optional(element) || validateCVC(value);
+		return this.optional(element) || validateCVC(value);
 	}, "Invalid CVC.");
-	
+
 	validator = $form.validate({
 		rules: {
 			cardHolder: {
-	            required: true,
-	        },
+				required: true,
+			},
 			cardNumber: {
 				required: true,
-				cardNumber: true            
+				cardNumber: true
 			},
 			cardExpiry: {
 				required: true,
@@ -77,19 +78,19 @@ $( document ).ready(function() {
 			}
 		},
 		messages: {
-	        cardHolder: {
-	            required: "Required",
-	        },
-	        cardNumber: {
-	            required: "Required",
-	        },
-	        cardExpiry: {
-	            required: "Required",
-	        },
-	        cardCVC: {
-	            required: "Required",
-	        },
-	    },
+			cardHolder: {
+				required: "Required",
+			},
+			cardNumber: {
+				required: "Required",
+			},
+			cardExpiry: {
+				required: "Required",
+			},
+			cardCVC: {
+				required: "Required",
+			},
+		},
 		highlight: function(element) {
 			$(element).closest('.form-control').removeClass('success').addClass('error');
 		},
@@ -100,10 +101,12 @@ $( document ).ready(function() {
 			$(element).closest('.form-group').append(error);
 		}
 	});
-	
-	paymentFormReady = function() {
-		if ($form.find('[name=cardHolder]').val().length>1 &&
 
+	paymentFormReady = function() {
+		var regexp = /^[a-z\s]+$/i;
+		if ($form.find('[name=cardHolder]').val().length>1  &&
+			regexp.test($form.find('[name=cardHolder]').val()) &&
+			$form.find('[name=cardHolder]').hasClass("success") &&
 			$form.find('[name=cardNumber]').hasClass("success") &&
 			$form.find('[name=cardExpiry]').hasClass("success") &&
 			$form.find('[name=cardCVC]').val().length > 2) {
@@ -112,7 +115,7 @@ $( document ).ready(function() {
 			return false;
 		}
 	}
-	
+
 	$form.find('.subscribe').prop('disabled', true);
 	var readyInterval = setInterval(function() {
 		if (paymentFormReady()) {
@@ -122,27 +125,30 @@ $( document ).ready(function() {
 		}
 	}, 250);
 	function validateCardHolder(value){
-		if (value.length<2 ) {
+		var regexp = /^[a-z\s]+$/i;
+		if(!regexp.test(this.val())) {
+			e.preventDefault();
+			alert("enter only English characters or spaces");
 			return false;
 		}
 		return true;
 	}
 	function validateCardNumber(value) {
-	    if (/[^0-9-\s]+/.test(value)) return false;
-	    var nCheck = 0, nDigit = 0, bEven = false;
-	    value = value.replace(/\D/g, "");
-	    for (var n = value.length - 1; n >= 0; n--) {
-	        var cDigit = value.charAt(n),
-	              nDigit = parseInt(cDigit, 10);
-	        if (bEven) {
-	            if ((nDigit *= 2) > 9) nDigit -= 9;
-	        }
-	        nCheck += nDigit;
-	        bEven = !bEven;
-	    }
-	    return (nCheck % 10) == 0;
+		if (/[^0-9-\s]+/.test(value)) return false;
+		var nCheck = 0, nDigit = 0, bEven = false;
+		value = value.replace(/\D/g, "");
+		for (var n = value.length - 1; n >= 0; n--) {
+			var cDigit = value.charAt(n),
+				nDigit = parseInt(cDigit, 10);
+			if (bEven) {
+				if ((nDigit *= 2) > 9) nDigit -= 9;
+			}
+			nCheck += nDigit;
+			bEven = !bEven;
+		}
+		return (nCheck % 10) == 0;
 	}
-	
+
 	function validateExpiry(month, year) {
 		var today = new Date();
 		var someday = new Date();
@@ -150,18 +156,18 @@ $( document ).ready(function() {
 		var lastYear = thisYear + 20;
 		someday.setFullYear(year, month, 1);
 		if (someday < today) {
-		   return false;
+			return false;
 		}
 		if (year > lastYear) {
-	       return false;
-	    }
-	    return true;
+			return false;
+		}
+		return true;
 	}
-	
+
 	function validateCVC(value) {
 		if (value.length<3) {
-	        return false;
-	    }
-	    return true;
+			return false;
+		}
+		return true;
 	}
 });
