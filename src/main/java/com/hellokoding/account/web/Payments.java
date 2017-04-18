@@ -24,8 +24,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hibernate.jpa.internal.QueryImpl.LOG;
-
 /**
  * Created by Admin on 02.01.2017.
  */
@@ -177,8 +175,6 @@ public class Payments {
                           int recipientId, int recipientAccountId,
                           Currency currency, String comment,
                           BigDecimal transferAmount, BigDecimal commission, BigDecimal amountForReceive) {
-        LOG.info("send money from user id=" + senderId + " to id=" + recipientId + ". " +
-                "From account id=" + senderAccountId + " to id=" + recipientAccountId);
         sendMoneyto(
                 senderId, senderAccountId,
                 recipientId, recipientAccountId,

@@ -3,12 +3,13 @@
  */
 package com.hellokoding.account.Models;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import javax.ws.rs.FormParam;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "item")
+@Proxy(lazy = false)
 @Transactional
 public class Item implements Serializable {
 
@@ -52,6 +54,12 @@ public class Item implements Serializable {
     @Column(name = "Quantity", table = "item")
     @Basic
     private BigInteger quantity;
+
+    @ManyToOne(targetEntity = Item.class)
+    private Item parent;
+
+    @OneToMany(targetEntity = Item.class, mappedBy = "parent", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private List<Item> items = new ArrayList<>();
 
     @OneToMany(targetEntity = ItemLocations.class, mappedBy = "item", cascade = CascadeType.REMOVE)
     private List<ItemLocations> itemlocations;
@@ -162,5 +170,21 @@ public class Item implements Serializable {
 
     public void setQuantity(BigInteger quantity) {
         this.quantity = quantity;
+    }
+
+    public Item getParent() {
+        return parent;
+    }
+
+    public void setParent(Item parent) {
+        this.parent = parent;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> parentId) {
+        this.items = parentId;
     }
 }

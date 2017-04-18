@@ -24,46 +24,69 @@
                             <br />
                         </div>
 
-                        <table class="table table-striped table-bordered table-hover" id="ITEM_TABLE">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Product type</th>
-                                <th>Description</th>
-                                <th>Default One-time price, USD</th>
-                                <th>Default Mounth price, USD</th>
-                                <th>Modified Date</th>
-                                <th>Available amount</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${ITEM_LIST}" var="ITEM">
-                                <c:if test="${ITEM.item.quantity > 0}">
-                                    <tr>
-                                        <td class="bg-info"><a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">${(ITEM.item.name)}</a></td>
+                        <div class="rTable">
+                            <div class="rTableHeading">
+                                <div class="rTableRow">
+                                    <div class="rTableHead">
+                                        Name
+                                    </div>
+                                    <div class="rTableHead">
+                                        Product type
+                                    </div>
+                                    <div class="rTableHead">
+                                        Description
+                                    </div>
+                                    <div class="rTableHead">
+                                        Default One-time price, USD
+                                    </div>
+                                    <div class="rTableHead">
+                                        Default Mounth price, USD
+                                    </div>
+                                    <div class="rTableHead">
+                                        Modified Date
+                                    </div>
+                                    <div class="rTableHead">
+                                        Available amount
+                                    </div>
+                                    <div class="rTableHead">
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rTableBody">
+                                <div class="rTableRow">
+                                    <div class="rTableCell">
+                                        <a href="${contextPath}/application/itemdescription/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">
+                                            ${(ITEM.item.name)}
+                                        </a>
+                                    </div>
+                                    <div class="rTableCell">
+                                        ${(ITEM.item.type)}
+                                    </div>
+                                    <div class="rTableCell">
+                                        ${(ITEM.item.description)}
+                                    </div>
+                                    <div class="rTableCell">
+                                        ${(ITEM.item.defOTP)}
+                                    </div>
+                                    <div class="rTableCell">
+                                        ${(ITEM.item.defMP)}
+                                    </div>
+                                    <div class="rTableCell">
+                                        ${(ITEM.item.modifiedDate)}
+                                    </div>
+                                    <div class="rTableCell">
+                                        ${(ITEM.item.quantity)}
+                                    </div>
+                                    <div class="rTableCell">
+                                        <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}">
+                                            Add
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                        <td>${(ITEM.item.type)}</td>
-
-                                        <td>${(ITEM.item.description)}</td>
-
-                                        <td>${(ITEM.item.defOTP)}</td>
-
-                                        <td>${(ITEM.item.defMP)}</td>
-
-                                        <td>${(ITEM.item.modifiedDate)}</td>
-
-                                        <td>${(ITEM.item.quantity)}</td>
-
-                                        <td>
-                                            <a href="${contextPath}/application/add/${ITEM.item.itemId}/${CUSTOMERID}/${SOID}"><i class="fa fa-level-up fa-fw"></i>Add</a>
-                                        </td>
-
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                            </tbody>
-                        </table>
 
                         <script src="${contextPath}/webresources/common/js/vendor/jquery.min.js" type="text/javascript"></script>
                         <script src="${contextPath}/webresources/common/js/vendor/underscore.min.js" type="text/javascript"></script>

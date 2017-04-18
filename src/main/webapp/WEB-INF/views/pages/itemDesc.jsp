@@ -54,6 +54,13 @@
                                                 <div class="col-lg-8">${(ITEM.modifiedDate)}</div>
                                             </div>
                                         </a>
+                                        <a href="#" class="list-group-item">
+                                            <div class="row">
+                                                <c:forEach items="${ITEM.items}" var="child">
+                                                    <div class="row"> ${ITEM.name} </div>
+                                                </c:forEach>
+                                            </div>
+                                        </a>
                                         <label>Charactiristics: </label><br>
                                         <div class="list-group">
                                             <c:forEach items="${ITEMCHARACTERISTICS}" var="Characteristic">

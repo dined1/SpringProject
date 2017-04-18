@@ -2,6 +2,7 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
 import com.hellokoding.account.repository.*;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

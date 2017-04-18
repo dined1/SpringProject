@@ -1,9 +1,11 @@
 package com.hellokoding.account.Models;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "orditem")
+@Proxy(lazy = false)
 @Transactional
 public class OrdItem implements Serializable {
 
@@ -54,6 +57,12 @@ public class OrdItem implements Serializable {
     @Column(name = "status", table = "orditem")
     @Basic
     private String status;
+
+    @ManyToOne(targetEntity = OrdItem.class)
+    private OrdItem parent;
+
+    @OneToMany(targetEntity = OrdItem.class, mappedBy = "parent", cascade = CascadeType.REMOVE)
+    private List<OrdItem> ordItems = new ArrayList<>();
 
     @OneToMany(targetEntity = ProductItems.class, mappedBy = "ordItem", cascade = CascadeType.REMOVE)
     private List<ProductItems> productItemses1;
@@ -166,5 +175,21 @@ public class OrdItem implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<OrdItem> getOrdItems() {
+        return ordItems;
+    }
+
+    public void setOrdItems(List<OrdItem> ordItems) {
+        this.ordItems = ordItems;
+    }
+
+    public OrdItem getParent() {
+        return parent;
+    }
+
+    public void setParent(OrdItem parent) {
+        this.parent = parent;
     }
 }
