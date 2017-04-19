@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">

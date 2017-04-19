@@ -1,6 +1,8 @@
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.model.User;
+import com.hellokoding.account.repository.CustomerRepository;
 import com.hellokoding.account.repository.GroupRepository;
 import com.hellokoding.account.repository.ItemGroupRepository;
 import com.hellokoding.account.repository.UserRepository;
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +54,9 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(Model model) {
@@ -196,8 +202,24 @@ public class UserController {
         return "pages/main";
     }
 
-    @RequestMapping(value = {"/adm"}, method = RequestMethod.GET)
-    public String admin(Model model, Principal principal) {
+//    @RequestMapping(value = {"/adm"}, method = RequestMethod.GET)
+//    public String admin(Model model, Principal principal) {
+//        return "admin";
+//    }
+
+    @RequestMapping(value = {"/adm/{customerId}"}, method = RequestMethod.GET)
+    public String admin(Model model, Principal principal,
+                        @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/orderentry/{customerId}"}, method = RequestMethod.GET)
+    public String orderEntry(Model model, Principal principal,
+                             @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("CUSTOMER", customer);
         return "admin";
     }
 

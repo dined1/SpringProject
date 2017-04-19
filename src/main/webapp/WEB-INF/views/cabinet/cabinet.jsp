@@ -5,7 +5,7 @@
 
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div>
+    <div id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -27,9 +27,7 @@
                             <table class="table table-striped table-bordered table-hover" id="CUSTOMER_TABLE">
                                 <thead>
                                 <tr>
-                                    <th>Customer Id</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Contact</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -41,11 +39,7 @@
                                 <tbody>
                                 <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
                                     <tr>
-                                        <td>${(CUSTOMER.customerId)}</td>
-
-                                        <td>${(CUSTOMER.firstName)}</td>
-
-                                        <td>${(CUSTOMER.lastName)}</td>
+                                        <td><a href="${contextPath}/adm/${(CUSTOMER.customerId)}"> ${(CUSTOMER.firstName)} ${(CUSTOMER.lastName)}</a></td>
 
                                         <td>${(CUSTOMER.contact)}</td>
 
