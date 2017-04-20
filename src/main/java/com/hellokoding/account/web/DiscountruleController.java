@@ -12,7 +12,6 @@ import com.hellokoding.account.controller.util.ErrorBean;
 import com.hellokoding.account.repository.DiscountruleRepository;
 import com.hellokoding.account.repository.ItemdiscountRepository;
 import com.hellokoding.account.repository.ItemRepository;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,7 +134,7 @@ public class DiscountruleController {
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String findAllDiscountrule(Model model) {
         model.addAttribute("DISCOUNTRULE_LIST", discountruleRepository.findAll());
-        return "discountrule/list";
+        return "/webresources/common/discountlist.jsp";
     }
     
 }

@@ -4,7 +4,7 @@
 <%@ include file="/webresources/common/header.jspf"%>
 
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <%--<%@ include file="/webresources/common/navigationbar.jspf"%>--%>
     <div>
         <div class="row">
             <div class="col-lg-12">

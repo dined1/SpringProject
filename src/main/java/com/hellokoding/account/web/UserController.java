@@ -2,9 +2,15 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.model.User;
+import com.hellokoding.account.repository.CharacteristicsRepository;
 import com.hellokoding.account.repository.CustomerRepository;
+import com.hellokoding.account.repository.DiscountruleRepository;
 import com.hellokoding.account.repository.GroupRepository;
 import com.hellokoding.account.repository.ItemGroupRepository;
+import com.hellokoding.account.repository.ItemRepository;
+import com.hellokoding.account.repository.ItemdiscountRepository;
+import com.hellokoding.account.repository.LocationRepository;
+import com.hellokoding.account.repository.SORepository;
 import com.hellokoding.account.repository.UserRepository;
 import com.hellokoding.account.service.SecurityService;
 import com.hellokoding.account.service.UserService;
@@ -57,6 +63,24 @@ public class UserController {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private CharacteristicsRepository characteristicsRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private DiscountruleRepository discountruleRepository;
+
+    @Autowired
+    private ItemdiscountRepository itemdiscountRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @Autowired
+    private SORepository soRepository;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(Model model) {
@@ -218,7 +242,69 @@ public class UserController {
     @RequestMapping(value = {"/adm/orderentry/{customerId}"}, method = RequestMethod.GET)
     public String orderEntry(Model model, Principal principal,
                              @PathVariable("customerId") Long customerId) {
+        if (principal==null){
+            return "redirect:/";
+        }
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+
+        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
+        model.addAttribute("USER_ID", userid);
         Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/catalog/{customerId}"}, method = RequestMethod.GET)
+    public String items(Model model, Principal principal,
+                             @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("ITEM_LIST", itemRepository.findAll());
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/discounts/{customerId}"}, method = RequestMethod.GET)
+    public String discounts(Model model, Principal principal,
+                             @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("DISCOUNTRULE_LIST", discountruleRepository.findAll());
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/groups/{customerId}"}, method = RequestMethod.GET)
+    public String groups(Model model, Principal principal,
+                             @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("GROUP_1_LIST", groupRepository.findAll());
+        model.addAttribute("ITEMGROUP_LIST", itemGroupRepository.findAll());
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/locations/{customerId}"}, method = RequestMethod.GET)
+    public String locations(Model model, Principal principal,
+                             @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("LOCATIONS_LIST", locationRepository.findAll());
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/characteristics/{customerId}"}, method = RequestMethod.GET)
+    public String characteristics(Model model, Principal principal,
+                            @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("CHARACTERISTICS_LIST", characteristicsRepository.findAll());
+        model.addAttribute("CUSTOMER", customer);
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/adm/customerinfo/{customerId}"}, method = RequestMethod.GET)
+    public String customerinfo(Model model, Principal principal,
+                            @PathVariable("customerId") Long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        model.addAttribute("CUSTOMER_LIST", customerRepository.findAll());
         model.addAttribute("CUSTOMER", customer);
         return "admin";
     }

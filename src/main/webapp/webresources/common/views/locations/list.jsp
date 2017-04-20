@@ -4,14 +4,14 @@
 <%@ include file="/webresources/common/header.jspf"%>
 
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <%--<%@ include file="/webresources/common/navigationbar.jspf"%>--%>
     <div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Characteristic List</b></h5></div>
+                            <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> Location List</b></h5></div>
                             <div class="col-lg-6">
                                 <div align="right">
                                     <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
@@ -25,20 +25,17 @@
                             <table class="table table-striped table-bordered table-hover" id="DISCOUNTRULE_TABLE">
                                 <thead>
                                 <tr>
-                                    <th>Characteristic Id</th>
-                                    <th>Characteristic</th>
-                                    <th>Characteristic Value</th>
+                                    <th>Location id</th>
+                                    <th>Location</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${CHARACTERISTICS_LIST}" var="CHARACTERISTICS">
+                                <c:forEach items="${LOCATIONS_LIST}" var="L">
                                     <tr>
-                                        <td>${(CHARACTERISTICS.characteristicId)}</td>
+                                        <td>${(L.locationId)}</td>
 
-                                        <td>${(CHARACTERISTICS.characteristic)}</td>
-
-                                        <td>${(CHARACTERISTICS.characteristicValue)}</td>
+                                        <td>${(L.locationname)}</td>
 
                                         <td>
                                             <div class="pull-right">
@@ -47,16 +44,16 @@
                                                         <i class="fa fa-gear"></i>  <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li><a href="${CHARACTERISTICS.characteristicId}"><i class="fa fa-level-up fa-fw"></i>  View</a></li>
-                                                        <li><a href="${contextPath}/admin/characteristics/update/${CHARACTERISTICS.characteristicId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
+                                                        <li><a href="${L.locationId}"><i class="fa fa-level-up fa-fw"></i>  Items</a></li>
+                                                        <li><a href="${contextPath}/admin/locations/update/${L.locationId}"><i class="fa fa-edit fa-fw"></i>  Edit</a></li>
                                                         <li class="divider"></li>
-                                                        <li><a data-toggle="modal" data-target="#confirm_delete_${CHARACTERISTICS.characteristicId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
+                                                        <li><a data-toggle="modal" data-target="#confirm_delete_${L.locationId}" href="#"  ><i class="fa fa-trash-o fa-fw"></i> Delete</a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="confirm_delete_${CHARACTERISTICS.characteristicId}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal fade" id="confirm_delete_${L.locationId}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -64,10 +61,10 @@
                                                             <h4 class="modal-title">Confirmation</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Are you sure to delete Characteristics?</p>
+                                                            <p>Are you sure to delete Location?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="${contextPath}/admin/characteristics/remove/${CHARACTERISTICS.characteristicId}" method="DELETE">
+                                                            <form action="${contextPath}/admin/locations/remove/${L.locationId}" method="DELETE">
                                                                 <a href="#" class="btn" data-dismiss="modal">Cancel</a> <button type="submit" class="btn btn-primary">Confirm</button>
                                                             </form>
                                                         </div>

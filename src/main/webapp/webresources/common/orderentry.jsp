@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+    function popup() {
+        window.open("new", 'window', 'width=200,height=100');
+    }
+</script>
 <div>
     <div class="row">
         <div class="col-lg-12">
@@ -15,7 +20,7 @@
                         <div class="col-lg-6"><h5><i class="fa fa-database fa-fw"></i> <b> So List</b></h5></div>
                         <div class="col-lg-6">
                             <div align="right">
-                                <a class="btn btn-primary btn-sm" href="new"><i class="fa fa-plus"></i> Add</a>
+                                <a class="btn btn-primary btn-sm" onclick="return popup()"><i class="fa fa-plus"></i> Add</a>
                                 <c:if test="${not empty requestScope.SO_LIST}">
                                     <!--a href="${contextPath}/cabinet/print/${USER_ID}" class="btn btn-default btn-sm">
                                     <i class="fa fa-print fa-fw"></i> Print
@@ -88,3 +93,10 @@
     </div>
     <!-- /.row -->
 </div>
+<script>
+    $(document).ready(function () {
+        $('#SO_TABLE').DataTable({
+            responsive: true
+        });
+    });
+</script>
