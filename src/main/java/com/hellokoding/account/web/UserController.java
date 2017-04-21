@@ -249,6 +249,7 @@ public class UserController {
 
         model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
         model.addAttribute("USER_ID", userid);
+        model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         Customer customer = customerRepository.findOne(customerId);
         model.addAttribute("CUSTOMER", customer);
         return "admin";

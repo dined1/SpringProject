@@ -5,7 +5,6 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
@@ -17,22 +16,6 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form role="form" action="${contextPath}/application/new" method="POST">
-                                    <!--div class="form-group">
-                                        <label for="SOId">SOId</label>
-                                        <input class="form-control" type="number" name="SOId" path="SOId"  required="required" autofocus="autofocus"  />
-                                    </div-->
-                                    <!--div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input class="form-control" type="text" name="status" path="status"  />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="SONumber">SONumber</label>
-                                        <input class="form-control" type="text" name="SONumber" path="SONumber"  />
-                                    </div>
-                                    <div-- class="form-group">
-                                        <label for="purchaseOrderNumber">Purchase Order Number</label>
-                                        <input class="form-control" type="text" name="purchaseOrderNumber" path="purchaseOrderNumber"  />
-                                    </div-->
                                     <c:if test="${empty CUSTOMER_LIST}">
                                         <h4>Please, create customer</h4><Br/>
                                     </c:if>

@@ -6,11 +6,30 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script>
-    function popup() {
-        window.open("new", 'window', 'width=200,height=100');
-    }
-</script>
+
+<div id="popupoe" class="modal">
+    <div class="modal-content">
+        <form id="dynForm" role="form" action="${contextPath}/adm/orderentry/new" method="POST">
+            <c:if test="${empty CUSTOMER_LIST}">
+                <h4>Please, create customer</h4><Br/>
+            </c:if>
+            <c:if test="${!empty CUSTOMER_LIST}">
+                <div class="form-group">
+                    <label>Customer</label>
+                    <select path="socustomer" name="socustomer" onchange=" ">
+                        <c:forEach items="${CUSTOMER_LIST}" var="CUSTOMER">
+                            <option value="${CUSTOMER.customerId}">${CUSTOMER.firstName}, ${CUSTOMER.lastName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
+            </c:if>
+            <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+        </form>
+    </div>
+</div>
+
 <div>
     <div class="row">
         <div class="col-lg-12">
@@ -93,6 +112,22 @@
     </div>
     <!-- /.row -->
 </div>
+<script>
+    var popupoe = document.getElementById('popupoe');
+
+    var subm = document.getElementById('subm');
+
+    subm.onclick = function() {
+        document.getElementById("dynForm").submit();
+        location.reload()
+        popupoe.style.display = "none";
+    };
+
+    function popup() {
+        popupoe.style.display = "block";
+    }
+
+</script>
 <script>
     $(document).ready(function () {
         $('#SO_TABLE').DataTable({
