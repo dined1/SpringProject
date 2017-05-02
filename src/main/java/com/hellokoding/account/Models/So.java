@@ -3,13 +3,11 @@
  */
 package com.hellokoding.account.Models;
 
-import com.hellokoding.account.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -67,7 +65,7 @@ public class So implements Serializable {
 
     @Column(name = "Location", table = "so")
     @Basic
-    private String location;
+    private String distributionChannel;
 
     @Column(name = "AttentionFlag", table = "so")
     @Basic
@@ -186,12 +184,12 @@ public class So implements Serializable {
         this.finalOTPwithTaxAndDiscount = finalOTPwithTaxAndDiscount;
     }
 
-    public String getLocation() {
-        return location;
+    public String getDistributionChannel() {
+        return distributionChannel;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDistributionChannel(String location) {
+        this.distributionChannel = location;
     }
 
     public Long getSOId() {

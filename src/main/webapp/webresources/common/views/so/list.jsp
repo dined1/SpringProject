@@ -54,7 +54,7 @@
                                         <td>${(SO.dateModified)}</td>
                                         <td>${(SO.finalMPwithTaxAndDiscount)}</td>
                                         <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
-                                        <td>${(SO.location)}</td>
+                                        <td>${(SO.distributionChannel)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
                                         <c:if test="${empty SO.orderDate}">
                                             <a href="${contextPath}/superadmin/so/remove/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  Delete</a>
@@ -94,7 +94,7 @@
                                         <td>${(SO.dateModified)}</td>
                                         <td>${(SO.finalMPwithTaxAndDiscount)}</td>
                                         <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
-                                        <td>${(SO.location)}</td>
+                                        <td>${(SO.distributionChannel)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i>  More</a>
                                             <a href="${contextPath}/superadmin/so/pays/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> Pays  </a></td>
                                     </tr>
@@ -133,7 +133,7 @@
                                         <td>${(SO.dateModified)}</td>
                                         <td>${(SO.finalMPwithTaxAndDiscount)}</td>
                                         <td>${(SO.finalOTPwithTaxAndDiscount)}</td>
-                                        <td>${(SO.location)}</td>
+                                        <td>${(SO.distributionChannel)}</td>
                                         <td><a href="${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> More  </a>
                                         <a href="${contextPath}/superadmin/so/pays/${SO.SOId}"><i class="fa fa-level-up fa-fw"></i> Pays  </a>
                                             <c:if test="${empty SO.orderDate}">

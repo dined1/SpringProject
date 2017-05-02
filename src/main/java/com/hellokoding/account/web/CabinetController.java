@@ -353,16 +353,13 @@ public class CabinetController {
     }
 
     @RequestMapping(value = {"/newcustomer"}, method = RequestMethod.POST)
-    public String createCustomer(Model model, Principal principal, Address address, Customer customer,
+    public String createCustomer(Model model, Principal principal, Customer customer,
                                  @RequestParam("firstName") String firstName,
                                  @RequestParam("lastName") String lastName,
                                  @RequestParam("contact") String contact,
                                  @RequestParam("email") String email,
                                  @RequestParam("phone") String phone,
-                                 @RequestParam("addressLine") String addressLine,
-                                 @RequestParam("city") String city,
-                                 @RequestParam("country") String country,
-                                 @RequestParam("postalCode") String postalCode) {
+                                 @RequestParam("address") String addressId) {
         if (principal==null){
             return "redirect:/";
         }
@@ -370,6 +367,7 @@ public class CabinetController {
             model.addAttribute("message", "Customer with this e-mail already situated. Please, use another e-mail!");
             return "error";
         }
+        Address address = addressRepository.findOne(Long.valueOf(addressId));
         customer.setLastName(lastName);
         customer.setFirstName(firstName);
         customer.setContact(contact);
@@ -379,11 +377,6 @@ public class CabinetController {
         String s = String.valueOf(i);
         customer.setUserId(String.valueOf(s));
         customer.setUsername(principal.getName());
-        address.setAddressLine(addressLine);
-        address.setCity(city);
-        address.setCountry(country);
-        address.setPostalCode(postalCode);
-        addressRepository.save(address);
         customer.setAddress1(address);
         customerRepository.save(customer);
         return "redirect:customerinfo";

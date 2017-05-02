@@ -21,9 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -96,15 +98,13 @@ public class OrderEntryController {
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String createItemdiscount(Model model, So so, Soproduct soproduct,
-                                     @RequestParam("socustomer") String customer1) {
+    public String createSalesOrder(Model model, So so, Soproduct soproduct, Customer customer) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        Customer customer = customerRepository.findOne(Long.valueOf(customer1));
         so.setStatus("Open");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
-        so.setLocation(customer.getAddress1().getCountry());
+        so.setDistributionChannel(customer.getAddress1().getCountry());
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));

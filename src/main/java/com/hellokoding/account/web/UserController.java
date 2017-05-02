@@ -2,6 +2,7 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.model.User;
+import com.hellokoding.account.repository.AddressRepository;
 import com.hellokoding.account.repository.CharacteristicsRepository;
 import com.hellokoding.account.repository.CustomerRepository;
 import com.hellokoding.account.repository.DiscountruleRepository;
@@ -42,6 +43,9 @@ import java.util.Collection;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -213,7 +217,7 @@ public class UserController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model, Principal principal) {
         model.addAttribute("us", principal);
-        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         Boolean adm = false;
         for (SimpleGrantedAuthority i: authorities) {
             if (String.valueOf(i).equals("ROLE_MODER")) {
@@ -247,8 +251,9 @@ public class UserController {
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
 
-        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
+        model.addAttribute("SO_LIST", soRepository.findByCustomer1_CustomerId(customerId));
         model.addAttribute("USER_ID", userid);
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         Customer customer = customerRepository.findOne(customerId);
         model.addAttribute("CUSTOMER", customer);

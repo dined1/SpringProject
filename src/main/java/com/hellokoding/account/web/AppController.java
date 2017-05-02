@@ -2,7 +2,6 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
 import com.hellokoding.account.repository.*;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -216,7 +215,7 @@ public class AppController {
             return "error";
         }
 
-        List<ItemLocations> items = itemLocationRepository.findByLocation_Locationname(so.getLocation());
+        List<ItemLocations> items = itemLocationRepository.findByLocation_Locationname(so.getDistributionChannel());
         model.addAttribute("CHARACTERISTICS", itemCharacteristicRepository.findAll());
         model.addAttribute("GROUP_LIST", groupRepository.findAll());
         model.addAttribute("ITEM_LIST", items);
@@ -625,7 +624,7 @@ public class AppController {
         so.setStatus("Open");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
-        so.setLocation(customer.getAddress1().getCountry());
+        so.setDistributionChannel(customer.getAddress1().getCountry());
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));

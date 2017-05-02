@@ -69,7 +69,7 @@
                                     <a href="#" class="list-group-item">
                                         <div class="row">
                                             <div class="col-lg-4"><span>Location :</span></div>
-                                            <div class="col-lg-8">${(SO.location)}</div>
+                                            <div class="col-lg-8">${(SO.distributionChannel)}</div>
                                         </div>
                                     </a>
                                     <a href="#" class="list-group-item">

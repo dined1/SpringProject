@@ -4,6 +4,14 @@
 <%@ include file="/webresources/common/header.jspf"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
+
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div id="page-wrapper" style="min-height: 476px;">
@@ -40,31 +48,24 @@
                                     </div>
                                     <h2>Customer address</h2>
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="addressLine">Address Line</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z0-9-]+"  name="addressLine" path="addressLine" title="Only numbers and english letters" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="city">City</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z]+"  name="city" path="city" title="Only letters" required  />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="country">Country</label>
-                                            <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country" path="country" title="Only letters" list="country_list" required />
-                                            <datalist id="country_list">
-                                                <option>Belarus</option>
-                                                <option>Russia</option>
-                                                <option>Ukraine</option>
-                                                <option>Poland</option>
-                                                <option>Czech</option>
-                                                <option>Slovakia</option>
-                                                <option>Serbia</option>
-                                            </datalist>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="postalCode">Postal Code</label>
-                                            <input class="form-control" type="number" min="0" name="postalCode" path="postalCode" required />
-                                        </div>
+                                        <select class="selectpicker" data-live-search="true" name="address">
+                                            <c:forEach items="${ADDRESS_LIST}" var="ADDRESS">
+                                                <option value="${ADDRESS.addressId}">${ADDRESS.country}, ${ADDRESS.city}, ${ADDRESS.addressLine}, ${ADDRESS.postalCode}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Distribution channel</label>
+                                        <input class="form-control" type="text" pattern="[a-zA-Z]+" name="country" path="country" title="Only letters" list="country_list" required />
+                                        <datalist id="country_list">
+                                            <option>Belarus</option>
+                                            <option>Russia</option>
+                                            <option>Ukraine</option>
+                                            <option>Poland</option>
+                                            <option>Czech</option>
+                                            <option>Slovakia</option>
+                                            <option>Serbia</option>
+                                        </datalist>
                                     </div>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-primary" onclick="disable()"><i class="fa fa-check fa-fw"></i>Submit</button>
@@ -78,6 +79,13 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 4
+        });
+    });
+</script>
 <%--end content--%>
 <%@ include file="/webresources/common/footer.jspf"%>

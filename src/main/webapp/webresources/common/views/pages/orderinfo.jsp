@@ -63,7 +63,7 @@
                                         <td>${(SO.customer1.firstName)}, ${SO.customer1.lastName}</td>
                                         <td>${(SO.customer1.email)}</td>
                                         <td>${(SO.status)}</td>
-                                        <td>${(SO.location)}</td>
+                                        <td>${(SO.distributionChannel)}</td>
                                         <td>${(SO.purchaseOrderNumber)}</td>
                                         <td>${(SO.dateCreated)}</td>
                                         <td>${(SO.dateModified)}</td>

@@ -82,7 +82,7 @@ public class SoController {
         }
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
-        so.setLocation(customer.getAddress1().getCountry());
+        so.setDistributionChannel(customer.getAddress1().getCountry());
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setCustomer1(customer);

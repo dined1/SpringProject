@@ -17,5 +17,5 @@ public interface SORepository extends JpaRepository<So, Long> {
 
     List<So> findByCustomer1_UserId(String customerid);
 
-    List<So> findByLocation(String location);
+    List<So> findByDistributionChannel(String location);
 }
