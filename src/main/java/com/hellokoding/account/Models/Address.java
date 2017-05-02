@@ -45,6 +45,9 @@ public class Address implements Serializable {
     @OneToMany(targetEntity = Customer.class, mappedBy = "address1")
     private List<Customer> customers1;
 
+    @OneToMany(targetEntity = So.class, mappedBy = "address")
+    private List<So> salesOrders;
+
     public Long getAddressId() {
         return this.addressId;
     }
@@ -101,4 +104,11 @@ public class Address implements Serializable {
         this.customers1 = customers1;
     }
 
+    public List<So> getSalesOrders() {
+        return salesOrders;
+    }
+
+    public void setSalesOrders(List<So> salesOrders) {
+        this.salesOrders = salesOrders;
+    }
 }

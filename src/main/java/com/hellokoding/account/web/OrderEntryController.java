@@ -1,19 +1,10 @@
 package com.hellokoding.account.web;
 
+import com.hellokoding.account.Models.Address;
 import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.Models.So;
 import com.hellokoding.account.Models.Soproduct;
-import com.hellokoding.account.repository.CharacteristicsRepository;
-import com.hellokoding.account.repository.CustomerRepository;
-import com.hellokoding.account.repository.DiscountruleRepository;
-import com.hellokoding.account.repository.GroupRepository;
-import com.hellokoding.account.repository.ItemGroupRepository;
-import com.hellokoding.account.repository.ItemRepository;
-import com.hellokoding.account.repository.ItemdiscountRepository;
-import com.hellokoding.account.repository.LocationRepository;
-import com.hellokoding.account.repository.SOProductRepository;
-import com.hellokoding.account.repository.SORepository;
-import com.hellokoding.account.repository.UserRepository;
+import com.hellokoding.account.repository.*;
 import com.hellokoding.account.service.SecurityService;
 import com.hellokoding.account.service.UserService;
 import com.hellokoding.account.validator.UserValidator;
@@ -21,11 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -40,6 +29,10 @@ import java.util.Date;
 @RequestMapping(value = {"/adm/orderentry"})
 @Controller
 public class OrderEntryController {
+
+    @Autowired
+    private AddressRepository addressRepository;
+
     @Autowired
     private UserService userService;
 
@@ -98,9 +91,16 @@ public class OrderEntryController {
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String createSalesOrder(Model model, So so, Soproduct soproduct, Customer customer) {
+    public String createSalesOrder(Model model, So so, Soproduct soproduct,
+                                   @RequestParam("customer") String custom,
+                                   @RequestParam("addresslist") String addressId) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
+        Customer customer = customerRepository.findOne(Long.valueOf(custom));
+        if (soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(customer.getCustomerId(), Long.valueOf(addressId)) != null){
+            return "redirect:/adm/orderentry/";
+        }
+        Address address = addressRepository.findOne(Long.valueOf(addressId));
         so.setStatus("Open");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
@@ -108,6 +108,7 @@ public class OrderEntryController {
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
+        so.setAddress(address);
 //        so.setDateModified(dateFormat.format(date));
         so.setCustomer1(customer);
         soRepository.save(so);

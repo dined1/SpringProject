@@ -80,6 +80,9 @@ public class So implements Serializable {
     @OneToMany(targetEntity = Soproduct.class, mappedBy = "so1", cascade = CascadeType.REMOVE)
     private List<Soproduct> soproducts1;
 
+    @ManyToOne(targetEntity = Address.class)
+    private Address address;
+
     public String getDateCreated() {
         return this.dateCreated;
     }
@@ -206,5 +209,13 @@ public class So implements Serializable {
 
     public void setAttentionFlag(String attentionFlag) {
         this.attentionFlag = attentionFlag;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

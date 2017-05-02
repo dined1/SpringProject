@@ -43,8 +43,8 @@
                             <option value="${ADDRESS.addressId}">${ADDRESS.country}, ${ADDRESS.city}, ${ADDRESS.addressLine}, ${ADDRESS.postalCode}</option>
                         </c:forEach>
                     </select>
+                    <input type="hidden" name="customer" value="${CUSTOMER.customerId}"/>
                 </div>
-                <input type="hidden" name="customer" value="${CUSTOMER}"/>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
             </c:if>
