@@ -58,7 +58,7 @@ public class Item implements Serializable {
     @ManyToOne(targetEntity = Item.class)
     private Item parent;
 
-    @OneToMany(targetEntity = Item.class, mappedBy = "parent", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Item.class, mappedBy = "parent", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<>();
 
     @OneToMany(targetEntity = ItemLocations.class, mappedBy = "item", cascade = CascadeType.REMOVE)
@@ -77,7 +77,7 @@ public class Item implements Serializable {
     private List<ItemCharacteristic> itemCharacteristic;
 
     public Long getItemId() {
-        return this.itemId;
+        return itemId;
     }
 
     public void setItemId(Long itemId) {
@@ -85,7 +85,7 @@ public class Item implements Serializable {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -93,7 +93,7 @@ public class Item implements Serializable {
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public void setType(String type) {
@@ -101,7 +101,7 @@ public class Item implements Serializable {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -109,7 +109,7 @@ public class Item implements Serializable {
     }
 
     public Float getDefMP() {
-        return this.defMP;
+        return defMP;
     }
 
     public void setDefMP(Float defMP) {
@@ -117,7 +117,7 @@ public class Item implements Serializable {
     }
 
     public Float getDefOTP() {
-        return this.defOTP;
+        return defOTP;
     }
 
     public void setDefOTP(Float defOTP) {
@@ -125,7 +125,7 @@ public class Item implements Serializable {
     }
 
     public String getModifiedDate() {
-        return this.modifiedDate;
+        return modifiedDate;
     }
 
     public void setModifiedDate(String modifiedDate) {
@@ -133,7 +133,7 @@ public class Item implements Serializable {
     }
 
     public List<Itemgroup> getItemgroups1() {
-        return this.itemgroups1;
+        return itemgroups1;
     }
 
     public void setItemgroups1(List<Itemgroup> itemgroups1) {
@@ -141,7 +141,7 @@ public class Item implements Serializable {
     }
 
     public List<Itemdiscount> getItemdiscounts1() {
-        return this.itemdiscounts1;
+        return itemdiscounts1;
     }
 
     public void setItemdiscounts1(List<Itemdiscount> itemdiscounts1) {

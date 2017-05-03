@@ -61,7 +61,7 @@ public class OrdItem implements Serializable {
     @ManyToOne(targetEntity = OrdItem.class)
     private OrdItem parent;
 
-    @OneToMany(targetEntity = OrdItem.class, mappedBy = "parent", cascade = CascadeType.REMOVE)
+    @OneToMany(targetEntity = OrdItem.class, mappedBy = "parent", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<OrdItem> ordItems = new ArrayList<>();
 
     @OneToMany(targetEntity = ProductItems.class, mappedBy = "ordItem", cascade = CascadeType.REMOVE)

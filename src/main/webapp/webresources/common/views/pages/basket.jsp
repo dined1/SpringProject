@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div>
+    <div  id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -18,9 +18,9 @@
                         <div class="container">
                             <ul class="nav nav-pills">
                                 <c:if test="${STATUS != 'Canceled'}">
-                                    <li class="active"><a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
-                                    <li><a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
-                                    <li><a href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
+                                    <li class="active"><a href="${contextPath}/adm/orderentry/basket/${CUSTOMERID}/${SOID}">Card<span id="total-cart-count" class="badge"></span></a></li>
+                                    <li><a href="${contextPath}/adm/orderentry/catalog/${CUSTOMERID}/${SOID}">Catalog</a></li>
+                                    <li><a href="${contextPath}/adm/orderentry/order/${CUSTOMERID}/${SOID}">Checkout</a></li>
                                 </c:if>
                             </ul>
                         </div>
@@ -40,7 +40,7 @@
                                 <tbody>
                                 <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
                                     <tr>
-                                        <td><a href="${contextPath}/application/itembasket/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">${(PRODUCTITEMS.ordItem.name)}</a></td>
+                                        <td><a href="${contextPath}/adm/orderentry/itembasket/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">${(PRODUCTITEMS.ordItem.name)}</a></td>
 
                                         <td>${(PRODUCTITEMS.otp)}</td>
 
@@ -48,7 +48,10 @@
 
                                         <c:if test="${STATUS == 'Wait'}">
                                             <c:if test="${PRODUCTITEMS.ordItem.status == 'Wait'}">
-                                                <td><a href="${contextPath}/application/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
+                                                <td><a href="${contextPath}/adm/orderentry/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
+                                            </c:if>
+                                            <c:if test="${PRODUCTITEMS.ordItem.status == 'Ordered'}">
+                                                <td><a href="${contextPath}/adm/orderentry/disconnect/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Disconnect</a></td>
                                             </c:if>
                                         </c:if>
                                     </tr>
@@ -76,16 +79,16 @@
                         <%--</c:if>--%>
                         <br />
                         <c:if test="${STATUS == 'Wait' and STATUS != 'Canceled'}">
-                            <a class="btn btn-info" href="${contextPath}/application/order/${CUSTOMERID}/${SOID}">Checkout</a>
+                            <a class="btn btn-info" href="${contextPath}/adm/orderentry/order/${CUSTOMERID}/${SOID}">Checkout</a>
                         </c:if>
                         <c:if test="${CMP != 0 and FCMP !=0 and STATUS == 'Ordered' and STATUS != 'Canceled'}">
-                            <a class="btn btn-info" href="${contextPath}/application/cancel/${CUSTOMERID}/${SOID}/">Cancel order</a>
+                            <a class="btn btn-info" href="${contextPath}/adm/orderentry/cancel/${CUSTOMERID}/${SOID}/">Cancel order</a>
                         </c:if>
-                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                        <a href="${contextPath}/adm/orderentry/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                         <!--a href="${contextPath}/application/print" class="btn btn-default btn-sm" onclick="javascript:window.print()">
                             <i class="fa fa-print fa-fw"></i> Print
                         </a-->
-                        <a href="${contextPath}/application/print/${CUSTOMERID}/${SOID}" class="btn btn-default btn-sm">
+                        <a href="${contextPath}/adm/orderentry/print/${CUSTOMERID}/${SOID}" class="btn btn-default btn-sm">
                             <i class="fa fa-print fa-fw"></i> Print
                         </a>
                     </div>

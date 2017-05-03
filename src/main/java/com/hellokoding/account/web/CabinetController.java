@@ -82,7 +82,7 @@ public class CabinetController {
         }
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(Long.toString(userRepository.findByUsername(principal.getName()).getId())));
         model.addAttribute("SO_LIST", soRepository.findAll());
-        return "/cabinet/list"; //Используется для просмотра главной страницы
+        return "/cabinet/list";
     }
 
     @RequestMapping(value = {"/payments"}, method = RequestMethod.GET)
