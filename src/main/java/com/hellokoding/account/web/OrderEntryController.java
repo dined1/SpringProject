@@ -113,16 +113,29 @@ public class OrderEntryController {
     }
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
-    public String createSalesOrder(Model model, So so, Soproduct soproduct,
+    public String createSalesOrder(Model model,
                                    @RequestParam("customer") String custom,
-                                   @RequestParam("addresslist") String addressId) {
+                                   @RequestParam("addresslist") String addressId,
+                                   @RequestParam("country") String countryId) {
+        Customer customer = customerRepository.findOne(Long.valueOf(custom));
+        So so = soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(customer.getCustomerId(), Long.valueOf(addressId));
+        if (so != null){
+            so.setDistributionChannel(countryId);
+            soRepository.save(so);
+            return "redirect:/adm/orderentry/basket/"+customer.getCustomerId()+"/"+so.getSOId();
+        }
+        createSalesOrder(Long.valueOf(addressId), customer);
+        model.addAttribute("SO_LIST", soRepository.findAll());
+        return "redirect:/adm/orderentry/"+customer.getCustomerId();
+    }
+
+
+    public So createSalesOrder(Long addressId, Customer customer){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        Customer customer = customerRepository.findOne(Long.valueOf(custom));
-        if (soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(customer.getCustomerId(), Long.valueOf(addressId)) != null){
-            return "redirect:/adm/orderentry/";
-        }
-        Address address = addressRepository.findOne(Long.valueOf(addressId));
+        So so = new So();
+        Soproduct soproduct = new Soproduct();
+        Address address = addressRepository.findOne(addressId);
         so.setStatus("Open");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
@@ -134,17 +147,17 @@ public class OrderEntryController {
 //        so.setDateModified(dateFormat.format(date));
         so.setCustomer1(customer);
         soRepository.save(so);
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int i = 0; i < 4-so.getSOId().toString().length(); i++)
-            s += '0';
+            s.append('0');
         so.setSONumber(s + so.getSOId().toString());
         soRepository.save(so);
         soproduct.setSOPId(so.getSOId());
         soproduct.setSo1(so);
         soProductRepository.save(soproduct);
-        model.addAttribute("SO_LIST", soRepository.findAll());
-        return "redirect:/adm/orderentry/"+customer.getCustomerId();
+        return so;
     }
+
 
     @RequestMapping(value = {"/basket/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyBasket(Model model,
@@ -195,6 +208,7 @@ public class OrderEntryController {
         if (i == finalproducts.size() && i != 0){
             soRepository.findOne(soid).setStatus("Ordered");
         }
+        model.addAttribute("ALLCUSTOMERLIST", customerRepository.findAll());
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
@@ -564,10 +578,10 @@ public class OrderEntryController {
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
     }
 
-    @RequestMapping(value = {"/changeownership/{itemid}/{customerid}/{soid}/{targetcustomerid}/{targetaddressid}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/changeownership/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String changeOwnershipOrdItem(Model model, @PathVariable("itemid") Long itemid, HttpServletRequest request,
                                  @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
-                                         @PathVariable("targetcustomerid") Long targetcustomerid, @PathVariable("targetaddressid") Long targetaddressid,
+                                 @RequestParam("targetcustomer") String targetCustomerId,
                                  Principal principal) {
         if (principal==null){
             return "redirect:/";
@@ -581,10 +595,16 @@ public class OrderEntryController {
             return "error";
         }
         ProductItems productItems = new ProductItems();
-        So so = soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(targetcustomerid, targetaddressid);
+        Customer customer = customerRepository.findOne(customerid);
+        So so = soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(Long.valueOf(targetCustomerId), customer.getAddress1().getAddressId());
+        if (so == null){
+            Customer targetCustomer = customerRepository.findOne(Long.valueOf(targetCustomerId));
+            so = createSalesOrder(customer.getAddress1().getAddressId(), targetCustomer);
+        }
         Long rootId = ordItemRepository.findOne(itemid).getParentId();
         deleteOnSource(itemid, customerid, soid);
         addOnTarget(productItems, rootId, so, request);
+        priceRecountSO(so.getCustomer1().getCustomerId(), so.getSOId());
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
     }
 }

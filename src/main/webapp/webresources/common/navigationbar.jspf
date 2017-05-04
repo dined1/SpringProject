@@ -66,25 +66,25 @@
                     <a href="index.html" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/adm/orderentry">Order entry</a>
+                    <a href="${contextPath}/adm/orderentry/${CUSTOMER.customerId}">Order entry</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/admin/item/list">Offering catalog</a>
+                    <a href="${contextPath}/adm/catalog/${CUSTOMER.customerId}">Offering catalog</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/admin/discountrule/list">Offering discounts catalog</a>
+                    <a href="${contextPath}/adm/discounts/${CUSTOMER.customerId}">Offering discounts catalog</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/admin/group/list">Offering groups</a>
+                    <a href="${contextPath}/adm/groups/${CUSTOMER.customerId}">Offering groups</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/admin/locations/list">Offering locations</a>
+                    <a href="${contextPath}/adm/locations/${CUSTOMER.customerId}">Offering locations</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/admin/characteristics/list">Offering characteristics</a>
+                    <a href="${contextPath}/adm/characteristics/${CUSTOMER.customerId}">Offering characteristics</a>
                 </li>
                 <li>
-                    <a href="${contextPath}/superadmin/customer/list">Customer information</a>
+                    <a href="${contextPath}/adm/customerinfo/${CUSTOMER.customerId}">Customer information</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>

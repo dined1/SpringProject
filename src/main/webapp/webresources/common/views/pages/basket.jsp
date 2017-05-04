@@ -4,6 +4,9 @@
 <%@ include file="/webresources/common/header.jspf"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
     <div  id="page-wrapper" style="min-height: 476px;">
@@ -33,29 +36,31 @@
                                     <th>One-time price</th>
                                     <th>Recurrent price</th>
                                     <c:if test="${STATUS == 'Wait'}">
-                                        <th>Удаление</th>
+                                        <th></th>
                                     </c:if>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
-                                    <tr>
-                                        <td><a href="${contextPath}/adm/orderentry/itembasket/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">${(PRODUCTITEMS.ordItem.name)}</a></td>
+                                    <c:forEach items="${PRODUCTITEMS_LIST}" var="PRODUCTITEMS">
+                                        <tr>
+                                            <td><a href="${contextPath}/adm/orderentry/itembasket/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">${(PRODUCTITEMS.ordItem.name)}</a></td>
 
-                                        <td>${(PRODUCTITEMS.otp)}</td>
+                                            <td>${(PRODUCTITEMS.otp)}</td>
 
-                                        <td>${(PRODUCTITEMS.mp)}</td>
+                                            <td>${(PRODUCTITEMS.mp)}</td>
 
-                                        <c:if test="${STATUS == 'Wait'}">
-                                            <c:if test="${PRODUCTITEMS.ordItem.status == 'Wait'}">
-                                                <td><a href="${contextPath}/adm/orderentry/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
+                                            <c:if test="${STATUS == 'Wait'}">
+                                                <c:if test="${PRODUCTITEMS.ordItem.status == 'Wait'}">
+                                                    <td><a href="${contextPath}/adm/orderentry/remove/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Delete</a></td>
+                                                </c:if>
                                             </c:if>
                                             <c:if test="${PRODUCTITEMS.ordItem.status == 'Ordered'}">
-                                                <td><a href="${contextPath}/adm/orderentry/disconnect/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Disconnect</a></td>
+                                                <td><a class="btn btn-default" href="${contextPath}/adm/orderentry/disconnect/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Disconnect</a></td>
+                                                <td><a class="btn btn-default" onclick="popup(<c:set var="item" value="${PRODUCTITEMS.ordItem.orditemId}"/> popup())">Change Ownership</a></td>
+                                                <td><a class="btn btn-default" onclick="relocatePopup(<c:set var="item" value="${PRODUCTITEMS.ordItem.orditemId}"/> popup())">Relocate</a></td>
                                             </c:if>
-                                        </c:if>
-                                    </tr>
-                                </c:forEach>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -97,9 +102,69 @@
         </div>
     </div>
 </div>
+
+
+<div id="changeOS" class="popover">
+    <div class="modal-content">
+        <form id="dynForm" role="form" action="${contextPath}/adm/orderentry/changeownership/${item}/${CUSTOMERID}/${SOID}" method="POST">
+            <c:if test="${empty ALLCUSTOMERLIST}">
+                <h4>Please, create customer</h4><Br/>
+            </c:if>
+            <c:if test="${!empty ALLCUSTOMERLIST}">
+                <div class="form-group">
+                    <label>Customer: </label>
+                    <select class="selectpicker" path="targetcustomer" data-live-search="true" name="targetcustomer" onchange=" ">
+                        <c:forEach items="${ALLCUSTOMERLIST}" var="CUSTOMER">
+                            <option value="${CUSTOMER.customerId}">${CUSTOMER.firstName}, ${CUSTOMER.lastName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
+            </c:if>
+            <a href="${contextPath}/adm/orderentry/${CUSTOMER.customerId}" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+        </form>
+    </div>
+</div>
+
+
 <script>
     $(document).ready(function(){
         $('#PRODUCTITEMS_TABLE').dataTable();
+    });
+</script>
+<script>
+    var subm = document.getElementById('subm');
+
+    subm.onclick = function() {
+        document.getElementById("dynForm").submit();
+        location.reload();
+        changeOS.style.display = "none";
+    };
+
+    var changeOS = document.getElementById('changeOS');
+
+    function popup() {
+        position = $(this).position;
+        changeOS.css('top', position.top+17);
+        changeOS.style.display = "block";
+    }
+
+    var relocate = document.getElementById('relocate');
+
+    function relocatePopup() {
+        position = $(this).position;
+        changeOS.css('top', position.top+17);
+        changeOS.style.display = "block";
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 4
+        });
     });
 </script>
 <%--end content--%>

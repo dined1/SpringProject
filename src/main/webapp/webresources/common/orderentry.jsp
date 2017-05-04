@@ -8,13 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
-<div id="popupoe" class="modal">
+<div id="popupoe" class="popover">
     <div class="modal-content">
         <form id="dynForm" role="form" action="${contextPath}/adm/orderentry/new" method="POST">
             <c:if test="${empty CUSTOMER_LIST}">

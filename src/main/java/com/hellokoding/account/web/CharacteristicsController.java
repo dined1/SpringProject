@@ -5,10 +5,13 @@
  */
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.*;
+import com.hellokoding.account.Models.Characteristics;
+import com.hellokoding.account.Models.Item;
+import com.hellokoding.account.Models.ItemCharacteristic;
 import com.hellokoding.account.controller.util.ErrorBean;
-import com.hellokoding.account.repository.*;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.hellokoding.account.repository.CharacteristicsRepository;
+import com.hellokoding.account.repository.ItemCharacteristicRepository;
+import com.hellokoding.account.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
