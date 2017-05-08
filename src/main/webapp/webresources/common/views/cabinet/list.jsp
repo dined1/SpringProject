@@ -5,7 +5,7 @@
 
 <div id="wrapper">
     <%@ include file="/webresources/common/navigationbar.jspf"%>
-    <div id="center-panel-grid">
+    <div id="page-wrapper" style="min-height: 476px;">
         <div class="center-block">
             <div class="center-block">
                 <div class="panel panel-default">

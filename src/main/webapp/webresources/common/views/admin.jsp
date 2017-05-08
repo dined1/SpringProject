@@ -85,6 +85,9 @@
                         <a href="${contextPath}/adm/locations/${CUSTOMER.customerId}">Offering locations</a>
                     </li>
                     <li>
+                        <a href="${contextPath}/adm/orderentry/customerlocations/${CUSTOMER.customerId}">Customer locations</a>
+                    </li>
+                    <li>
                         <a href="${contextPath}/adm/characteristics/${CUSTOMER.customerId}">Offering characteristics</a>
                     </li>
                     <li>
@@ -148,7 +151,7 @@
 
 
 
-        <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/orderentry')}">
+        <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/orderentry/')}">
             <%@ include file="/webresources/common/orderentry.jsp"%>
         </c:if>
         <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/catalog')}">
@@ -160,8 +163,11 @@
         <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/discounts')}">
             <%@ include file="/webresources/common/discountlist.jsp"%>
         </c:if>
-        <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/locations')}">
+        <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/locations/')}">
             <%@ include file="/webresources/common/views/locations/list.jsp"%>
+        </c:if>
+        <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/customerlocations')}">
+            <%@ include file="/webresources/common/views/pages/locationsEntry.jsp"%>
         </c:if>
         <c:if test="${fn:contains(requestScope['javax.servlet.forward.request_uri'], '/characteristics')}">
             <%@ include file="/webresources/common/views/characteristics/list.jsp"%>

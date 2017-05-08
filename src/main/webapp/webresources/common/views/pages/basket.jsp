@@ -56,8 +56,8 @@
                                             </c:if>
                                             <c:if test="${PRODUCTITEMS.ordItem.status == 'Ordered'}">
                                                 <td><a class="btn btn-default" href="${contextPath}/adm/orderentry/disconnect/${PRODUCTITEMS.ordItem.orditemId}/${CUSTOMERID}/${SOID}">Disconnect</a></td>
-                                                <td><a class="btn btn-default" onclick="popup(<c:set var="item" value="${PRODUCTITEMS.ordItem.orditemId}"/> popup())">Change Ownership</a></td>
-                                                <td><a class="btn btn-default" onclick="relocatePopup(<c:set var="item" value="${PRODUCTITEMS.ordItem.orditemId}"/> popup())">Relocate</a></td>
+                                                <td><a class="btn btn-default" onclick="<c:set var="item" value="${PRODUCTITEMS.ordItem.orditemId}"/> popup()">Change Ownership</a></td>
+                                                <td><a class="btn btn-default" onclick="<c:set var="item" value="${PRODUCTITEMS.ordItem.orditemId}"/> relocatePopup()">Relocate</a></td>
                                             </c:if>
                                         </tr>
                                     </c:forEach>
@@ -122,7 +122,34 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
             </c:if>
-            <a href="${contextPath}/adm/orderentry/${CUSTOMER.customerId}" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+            <a href="${contextPath}/adm/orderentry/${CUSTOMERID}" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
+        </form>
+    </div>
+</div>
+
+
+<div id="relocate" class="popover">
+    <div class="modal-content">
+        <form id="dyForm" role="form" action="${contextPath}/adm/orderentry/relocate/${item}/${CUSTOMERID}/${SOID}" method="GET">
+            <c:if test="${empty ALLLOCATIONS}">
+                <h4>Please, create customer</h4><Br/>
+            </c:if>
+            <c:if test="${!empty ALLLOCATIONS}">
+                <div class="form-group">
+                    <label>Customer: </label>
+                    <select class="selectpicker" path="targetlocation" data-live-search="true" name="targetlocation" onchange=" ">
+                        <c:forEach items="${ALLLOCATIONS}" var="LOCATION">
+                            <option value="${LOCATION.locationId}">${LOCATION.name}</option>
+                        </c:forEach>
+                        <c:forEach items="${ALLRELATEDLOCATIONS}" var="LOCATION">
+                            <option value="${LOCATION.locationId}">${LOCATION.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
+            </c:if>
+            <a href="${contextPath}/adm/orderentry/${CUSTOMERID}" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
         </form>
     </div>
 </div>
@@ -134,28 +161,17 @@
     });
 </script>
 <script>
-    var subm = document.getElementById('subm');
-
-    subm.onclick = function() {
-        document.getElementById("dynForm").submit();
-        location.reload();
-        changeOS.style.display = "none";
-    };
 
     var changeOS = document.getElementById('changeOS');
 
     function popup() {
-        position = $(this).position;
-        changeOS.css('top', position.top+17);
         changeOS.style.display = "block";
     }
 
     var relocate = document.getElementById('relocate');
 
     function relocatePopup() {
-        position = $(this).position;
-        changeOS.css('top', position.top+17);
-        changeOS.style.display = "block";
+        relocate.style.display = "block";
     }
 
 </script>

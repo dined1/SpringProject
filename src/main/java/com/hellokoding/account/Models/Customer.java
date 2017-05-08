@@ -73,6 +73,9 @@ public class Customer implements Serializable {
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
 
+    @OneToMany(targetEntity = Location.class, mappedBy = "customer", cascade = CascadeType.REMOVE)
+    private List<Location> locations;
+
     @OneToMany(targetEntity = Statisticscollector.class, mappedBy = "customer1", cascade = CascadeType.REMOVE)
     private List<Statisticscollector> statisticscollectors1;
 
@@ -181,5 +184,13 @@ public class Customer implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 }

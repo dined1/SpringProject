@@ -6,6 +6,8 @@ CREATE TABLE address (AddressId INTEGER NOT NULL AUTO_INCREMENT, AddressLine VAR
 CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCHAR(255), Email VARCHAR(255), FirstName VARCHAR(255), LastName VARCHAR(255), Phone VARCHAR(255), PassNumber VARCHAR(255), CountNumber VARCHAR(255), ADDRESS1_AddressId INTEGER, UserId INTEGER, Username VARCHAR(255), location VARCHAR(255), PRIMARY KEY (CustomerId));
 CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, Discountvalue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
+CREATE TABLE location (locationId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, customer_CustomerId INTEGER, address_addressId INTEGER, PRIMARY KEY (locationId));
+CREATE TABLE relatedlocation (locationId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, parentLocation_locationId INTEGER, PRIMARY KEY (locationId));
 CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), quantity INTEGER, parent_itemId INTEGER, PRIMARY KEY (ItemId));
 CREATE TABLE itemdiscount (IDid INTEGER NOT NULL AUTO_INCREMENT, DISCOUNTRULE1_DRId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IDid));
 CREATE TABLE itemgroup (IGId INTEGER NOT NULL AUTO_INCREMENT, GROUPS1_GroupId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IGId));
@@ -15,7 +17,7 @@ CREATE TABLE paymenttype (PTId INTEGER NOT NULL AUTO_INCREMENT, TypeName VARCHAR
 CREATE TABLE PRODUCTITEMS (ID BIGINT NOT NULL AUTO_INCREMENT, ORDITEM_OrdItemId INTEGER, SOPRODUCT1_SOPId INTEGER, MP FLOAT, OTP FLOAT, MPWithTaxandDiscont float, OTPWithTaxandDiscont float, PRIMARY KEY (ID));
 CREATE TABLE role (id int(11) NOT NULL AUTO_INCREMENT,  name varchar(45) DEFAULT NULL,  primary key (id)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 CREATE TABLE so (SOId BIGINT NOT NULL AUTO_INCREMENT, DateCreated VARCHAR(255), DateModified VARCHAR(255), OrderDate VARCHAR(255), PurchaseOrderNumber VARCHAR(255)
-, SONumber VARCHAR(255), Status VARCHAR(255), finalMP FLOAT, finalOTP FLOAT, finalMPwithTaxAndDiscount FLOAT, finalOTPwithTaxAndDiscount FLOAT, Location VARCHAR(255), attentionFlag varchar(255), CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, Address_AddressId INTEGER, PRIMARY KEY (SOId));
+, SONumber VARCHAR(255), Status VARCHAR(255), finalMP FLOAT, finalOTP FLOAT, finalMPwithTaxAndDiscount FLOAT, finalOTPwithTaxAndDiscount FLOAT, Location VARCHAR(255), attentionFlag varchar(255), CUSTOMER1_CustomerId INTEGER, USER1_UserId INTEGER, Location_locationId INTEGER, PRIMARY KEY (SOId));
 CREATE TABLE soproduct (SOPId INTEGER NOT NULL AUTO_INCREMENT, SO1_SOId BIGINT, PRIMARY KEY (SOPId));
 CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, StatisticType VARCHAR(255), StatisticsInfo VARCHAR(255), CUSTOMER1_CustomerId INTEGER, PRIMARY KEY (SCId));
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,7 +45,7 @@ ALTER TABLE itemgroup ADD CONSTRAINT FK_itemgroup_GROUPS1_GroupId FOREIGN KEY (G
 ALTER TABLE itemgroup ADD CONSTRAINT FK_itemgroup_ITEM1_ItemId FOREIGN KEY (ITEM1_ItemId) REFERENCES item (ItemId);
 ALTER TABLE so ADD CONSTRAINT FK_so_CUSTOMER1_CustomerId FOREIGN KEY (CUSTOMER1_CustomerId) REFERENCES customer (CustomerId);
 ALTER TABLE so ADD CONSTRAINT FK_so_USER1_UserId FOREIGN KEY (USER1_UserId) REFERENCES user (id);
-ALTER TABLE so ADD CONSTRAINT FK_so_Address_AddressId FOREIGN KEY (Address_AddressId) REFERENCES address (AddressId);
+ALTER TABLE so ADD CONSTRAINT FK_so_Location_location FOREIGN KEY (Location_locationId) REFERENCES location (locationId);
 ALTER TABLE soproduct ADD CONSTRAINT FK_soproduct_SO1_SOId FOREIGN KEY (SO1_SOId) REFERENCES so (SOId);
 ALTER TABLE customer ADD CONSTRAINT FK_customer_ADDRESS1_AddressId FOREIGN KEY (ADDRESS1_AddressId) REFERENCES address (AddressId);
 ALTER TABLE user_role ADD CONSTRAINT fk_user_role_roleid FOREIGN KEY (role_id) REFERENCES role (id);
@@ -58,6 +60,11 @@ ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_ITEM_ItemId FOREIGN KE
 ALTER TABLE itemlocations ADD CONSTRAINT FK_itemlocations_location_locationId FOREIGN KEY (location_locationId) REFERENCES locations (locationId);
 ALTER TABLE item ADD CONSTRAINT FK_parent_ITEM_ItemId FOREIGN KEY (parent_itemId) REFERENCES item (ItemId);
 ALTER TABLE orditem ADD CONSTRAINT FK_parent_ORDITEM_OrdItemId FOREIGN KEY (parent_ordItemId) REFERENCES orditem (ordItemId);
+ALTER TABLE location ADD CONSTRAINT FK_location_customer_CustomerId FOREIGN KEY (customer_CustomerId) REFERENCES customer (customerId);
+ALTER TABLE location ADD CONSTRAINT FK_location_address_addressId FOREIGN KEY (address_addressId) REFERENCES address (addressId);
+ALTER TABLE relatedlocation ADD CONSTRAINT FK_relatedlocation_parentLocation_locationId FOREIGN KEY (parentLocation_locationId) REFERENCES location (locationId);
+
+
 
 insert into role values ('1', 'ROLE_USER');
 insert into role values ('2', 'ROLE_ADMIN');

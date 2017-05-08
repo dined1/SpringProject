@@ -1,36 +1,7 @@
 package com.hellokoding.account.web;
 
-import com.hellokoding.account.Models.Address;
-import com.hellokoding.account.Models.Customer;
-import com.hellokoding.account.Models.Item;
-import com.hellokoding.account.Models.ItemCharacteristic;
-import com.hellokoding.account.Models.ItemLocations;
-import com.hellokoding.account.Models.Itemdiscount;
-import com.hellokoding.account.Models.OrdItem;
-import com.hellokoding.account.Models.OrdItemCharacteristic;
-import com.hellokoding.account.Models.OrdItemDiscount;
-import com.hellokoding.account.Models.ProductItems;
-import com.hellokoding.account.Models.So;
-import com.hellokoding.account.Models.Soproduct;
-import com.hellokoding.account.repository.AddressRepository;
-import com.hellokoding.account.repository.CharacteristicsRepository;
-import com.hellokoding.account.repository.CustomerRepository;
-import com.hellokoding.account.repository.DiscountruleRepository;
-import com.hellokoding.account.repository.GroupRepository;
-import com.hellokoding.account.repository.ItemCharacteristicRepository;
-import com.hellokoding.account.repository.ItemGroupRepository;
-import com.hellokoding.account.repository.ItemLocationRepository;
-import com.hellokoding.account.repository.ItemRepository;
-import com.hellokoding.account.repository.ItemdiscountRepository;
-import com.hellokoding.account.repository.OrdItemCharacteristicsRepository;
-import com.hellokoding.account.repository.OrdItemRepository;
-import com.hellokoding.account.repository.OrdItemdiscountRepository;
-import com.hellokoding.account.repository.PaymentRepository;
-import com.hellokoding.account.repository.PaymentTypeRepository;
-import com.hellokoding.account.repository.ProductItemsRepository;
-import com.hellokoding.account.repository.SOProductRepository;
-import com.hellokoding.account.repository.SORepository;
-import com.hellokoding.account.repository.UserRepository;
+import com.hellokoding.account.Models.*;
+import com.hellokoding.account.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -99,7 +70,10 @@ public class OrderEntryController {
     private ItemCharacteristicRepository itemCharacteristicRepository;
     @Autowired
     private ItemLocationRepository itemLocationRepository;
-
+    @Autowired
+    private CustomerLocationRepository customerLocationRepository;
+    @Autowired
+    private RelatedLocationRepository relatedLocationRepository;
 
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String orderEntry(Model model, Principal principal) {
@@ -115,27 +89,27 @@ public class OrderEntryController {
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createSalesOrder(Model model,
                                    @RequestParam("customer") String custom,
-                                   @RequestParam("addresslist") String addressId,
+                                   @RequestParam("addresslist") String locationId,
                                    @RequestParam("country") String countryId) {
         Customer customer = customerRepository.findOne(Long.valueOf(custom));
-        So so = soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(customer.getCustomerId(), Long.valueOf(addressId));
+        So so = soRepository.findByCustomer1_CustomerIdAndLocation_LocationId(customer.getCustomerId(), Long.valueOf(locationId));
         if (so != null){
             so.setDistributionChannel(countryId);
             soRepository.save(so);
             return "redirect:/adm/orderentry/basket/"+customer.getCustomerId()+"/"+so.getSOId();
         }
-        createSalesOrder(Long.valueOf(addressId), customer);
+        createSalesOrder(Long.valueOf(locationId), customer);
         model.addAttribute("SO_LIST", soRepository.findAll());
         return "redirect:/adm/orderentry/"+customer.getCustomerId();
     }
 
 
-    public So createSalesOrder(Long addressId, Customer customer){
+    public So createSalesOrder(Long locationId, Customer customer){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         So so = new So();
         Soproduct soproduct = new Soproduct();
-        Address address = addressRepository.findOne(addressId);
+        Location location = customerLocationRepository.findOne(locationId);
         so.setStatus("Open");
         so.setFinalMP(BigDecimal.ZERO);
         so.setFinalOTP(BigDecimal.ZERO);
@@ -143,7 +117,7 @@ public class OrderEntryController {
         so.setFinalMPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setFinalOTPwithTaxAndDiscount(BigDecimal.ZERO);
         so.setDateCreated(dateFormat.format(date));
-        so.setAddress(address);
+        so.setLocation(location);
 //        so.setDateModified(dateFormat.format(date));
         so.setCustomer1(customer);
         soRepository.save(so);
@@ -155,6 +129,9 @@ public class OrderEntryController {
         soproduct.setSOPId(so.getSOId());
         soproduct.setSo1(so);
         soProductRepository.save(soproduct);
+        List<Soproduct> soproductList = new ArrayList<>();
+        soproductList.add(soproduct);
+        so.setSoproducts1(soproductList);
         return so;
     }
 
@@ -209,6 +186,8 @@ public class OrderEntryController {
             soRepository.findOne(soid).setStatus("Ordered");
         }
         model.addAttribute("ALLCUSTOMERLIST", customerRepository.findAll());
+        model.addAttribute("ALLLOCATIONS", customerLocationRepository.findByCustomer_CustomerId(customerid));
+        model.addAttribute("ALLRELATEDLOCATIONS", relatedLocationRepository.findByParentLocation_Customer_CustomerId(customerid));
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
@@ -422,9 +401,6 @@ public class OrderEntryController {
         }
 
         So so = soRepository.findOne(soid);
-        if (so.getStatus().equals("Ordered") || so.getStatus().equals("Open")){
-            so.setStatus("Wait");
-        }
         addOnTarget(productItems, itemid, so, request);
         priceRecountSO(customerid, soid);
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
@@ -480,6 +456,9 @@ public class OrderEntryController {
 
     private void addOnTarget(ProductItems productItems, Long itemid,
                              So so, HttpServletRequest request){
+        if (so.getStatus().equals("Ordered") || so.getStatus().equals("Open")){
+            so.setStatus("Wait");
+        }
         Soproduct soproduct = so.getSoproducts1().get(0);
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(itemid);
@@ -578,6 +557,51 @@ public class OrderEntryController {
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
     }
 
+
+    @RequestMapping(value = {"/customerlocations/{customerid}"}, method = RequestMethod.GET)
+    public String customerLocations(Model model, @PathVariable("customerid") Long customerid,
+                                 Principal principal) {
+        if (principal==null){
+            return "redirect:/";
+        }
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        Customer customer = customerRepository.findOne(customerid);
+        if (customer == null
+                || !customer.getUserId().equals(userid.toString())) {
+            model.addAttribute("message", "You cannot process this order");
+            return "error";
+        }
+
+        model.addAttribute("CUSTOMER", customer);
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(customerid));
+        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(customerid));
+        return "admin";
+    }
+
+    @RequestMapping(value = {"/customerlocations"}, method = RequestMethod.POST)
+    public String locreate(Model model, @RequestParam("customer") String customerid,
+                           @RequestParam("addresslist") String locationId,
+                           @RequestParam("name") String name, Principal principal) {
+        if (principal==null){
+            return "redirect:/";
+        }
+
+        Location location = new Location();
+        Address address = addressRepository.findOne(Long.valueOf(locationId));
+        Customer customer = customerRepository.findOne(Long.valueOf(customerid));
+        location.setAddress(address);
+        location.setCustomer(customer);
+        location.setName(name);
+        customerLocationRepository.save(location);
+
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
+        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(Long.valueOf(customerid)));
+        return "redirect:/adm/orderentry/customerlocations/"+customerid;
+    }
+
+
     @RequestMapping(value = {"/changeownership/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String changeOwnershipOrdItem(Model model, @PathVariable("itemid") Long itemid, HttpServletRequest request,
                                  @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
@@ -596,10 +620,40 @@ public class OrderEntryController {
         }
         ProductItems productItems = new ProductItems();
         Customer customer = customerRepository.findOne(customerid);
-        So so = soRepository.findByCustomer1_CustomerIdAndAddress_AddressId(Long.valueOf(targetCustomerId), customer.getAddress1().getAddressId());
+        So so = soRepository.findByCustomer1_CustomerIdAndLocation_LocationId(Long.valueOf(targetCustomerId), customer.getAddress1().getAddressId());
         if (so == null){
             Customer targetCustomer = customerRepository.findOne(Long.valueOf(targetCustomerId));
             so = createSalesOrder(customer.getAddress1().getAddressId(), targetCustomer);
+        }
+        Long rootId = ordItemRepository.findOne(itemid).getParentId();
+        deleteOnSource(itemid, customerid, soid);
+        addOnTarget(productItems, rootId, so, request);
+        priceRecountSO(so.getCustomer1().getCustomerId(), so.getSOId());
+        return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
+    }
+
+    @RequestMapping(value = {"/relocate/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
+    public String relocateOrdItem(Model model, @PathVariable("itemid") Long itemid, HttpServletRequest request,
+                                         @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
+                                         @RequestParam("targetlocation") String targetLocationId,
+                                         Principal principal) {
+        if (principal==null){
+            return "redirect:/";
+        }
+        Long userid = userRepository.findByUsername(principal.getName()).getId();
+        if (customerRepository.findOne(customerid) == null
+                || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
+                || soRepository.findOne(soid) == null
+                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+            model.addAttribute("message", "You cannot process this order");
+            return "error";
+        }
+        ProductItems productItems = new ProductItems();
+        Customer customer = customerRepository.findOne(customerid);
+        So so = soRepository.findByCustomer1_CustomerIdAndLocation_LocationId(customerid, Long.valueOf(targetLocationId));
+        if (so == null){
+            createSalesOrder(Long.valueOf(targetLocationId), customer);
+            so = soRepository.findByCustomer1_CustomerIdAndLocation_LocationId(customerid, Long.valueOf(targetLocationId));
         }
         Long rootId = ordItemRepository.findOne(itemid).getParentId();
         deleteOnSource(itemid, customerid, soid);

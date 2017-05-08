@@ -2,17 +2,7 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.Customer;
 import com.hellokoding.account.model.User;
-import com.hellokoding.account.repository.AddressRepository;
-import com.hellokoding.account.repository.CharacteristicsRepository;
-import com.hellokoding.account.repository.CustomerRepository;
-import com.hellokoding.account.repository.DiscountruleRepository;
-import com.hellokoding.account.repository.GroupRepository;
-import com.hellokoding.account.repository.ItemGroupRepository;
-import com.hellokoding.account.repository.ItemRepository;
-import com.hellokoding.account.repository.ItemdiscountRepository;
-import com.hellokoding.account.repository.LocationRepository;
-import com.hellokoding.account.repository.SORepository;
-import com.hellokoding.account.repository.UserRepository;
+import com.hellokoding.account.repository.*;
 import com.hellokoding.account.service.SecurityService;
 import com.hellokoding.account.service.UserService;
 import com.hellokoding.account.validator.UserValidator;
@@ -85,6 +75,12 @@ public class UserController {
 
     @Autowired
     private SORepository soRepository;
+
+    @Autowired
+    private CustomerLocationRepository customerLocationRepository;
+
+    @Autowired
+    private RelatedLocationRepository relatedLocationRepository;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(Model model) {
@@ -253,7 +249,8 @@ public class UserController {
 
         model.addAttribute("SO_LIST", soRepository.findByCustomer1_CustomerId(customerId));
         model.addAttribute("USER_ID", userid);
-        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("ADDRESS_LIST", customerLocationRepository.findByCustomer_CustomerId(customerId));
+        model.addAttribute("RELATED_ADDRESS_LIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(customerId));
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         Customer customer = customerRepository.findOne(customerId);
         model.addAttribute("CUSTOMER", customer);

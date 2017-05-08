@@ -37,7 +37,10 @@
                     <label>Address: </label>
                     <select class="selectpicker" path="addresslist" data-live-search="true" name="addresslist" onchange=" ">
                         <c:forEach items="${ADDRESS_LIST}" var="ADDRESS">
-                            <option value="${ADDRESS.addressId}">${ADDRESS.country}, ${ADDRESS.city}, ${ADDRESS.addressLine}, ${ADDRESS.postalCode}</option>
+                            <option value="${ADDRESS.locationId}">${ADDRESS.name}</option>
+                        </c:forEach>
+                        <c:forEach items="${RELATED_ADDRESS_LIST}" var="ADDRESS">
+                            <option value="${ADDRESS.parentLocation.locationId}">${ADDRESS.name}</option>
                         </c:forEach>
                     </select>
                     <input type="hidden" name="customer" value="${CUSTOMER.customerId}"/>
