@@ -587,13 +587,25 @@ public class OrderEntryController {
             return "redirect:/";
         }
 
-        Location location = new Location();
-        Address address = addressRepository.findOne(Long.valueOf(locationId));
-        Customer customer = customerRepository.findOne(Long.valueOf(customerid));
-        location.setAddress(address);
-        location.setCustomer(customer);
-        location.setName(name);
-        customerLocationRepository.save(location);
+        List<Location> locations = customerLocationRepository.findByAddress_AddressId(Long.valueOf(locationId));
+        if (locations == null || locations.isEmpty()){
+            Location location = new Location();
+            Address address = addressRepository.findOne(Long.valueOf(locationId));
+            Customer customer = customerRepository.findOne(Long.valueOf(customerid));
+            location.setAddress(address);
+            location.setCustomer(customer);
+            location.setName(name);
+            customerLocationRepository.save(location);
+        } else {
+            model.addAttribute("CUSTOMER", customerid);
+            model.addAttribute("addresslist", locationId);
+            model.addAttribute("name", name);
+            model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+            model.addAttribute("LOCATIONSLIST", locations);
+            model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(Long.valueOf(customerid)));
+            return "pages/chancetorelated";
+        }
+
 
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
         model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
