@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface ProductItemsRepository extends JpaRepository<ProductItems, Long> {
     List<ProductItems> findBySoproduct1_SOPId(Long id);
+
+    List<ProductItems> findByOrdItem_Location(Long locationId);
 }

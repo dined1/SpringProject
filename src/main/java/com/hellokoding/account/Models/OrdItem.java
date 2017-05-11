@@ -61,6 +61,18 @@ public class OrdItem implements Serializable {
     @ManyToOne(targetEntity = OrdItem.class)
     private OrdItem parent;
 
+    @Column(name = "location", table = "orditem")
+    @Basic
+    private Long location;
+
+    @Column(name = "orderedBy", table = "orditem")
+    @Basic
+    private Long orderedBy;
+
+    @Column(name = "initialVersion", table = "orditem")
+    @Basic
+    private Long initialVersion;
+
     @OneToMany(targetEntity = OrdItem.class, mappedBy = "parent", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<OrdItem> ordItems = new ArrayList<>();
 
@@ -191,5 +203,29 @@ public class OrdItem implements Serializable {
 
     public void setParent(OrdItem parent) {
         this.parent = parent;
+    }
+
+    public Long getOrderedBy() {
+        return orderedBy;
+    }
+
+    public void setOrderedBy(Long orderedBy) {
+        this.orderedBy = orderedBy;
+    }
+
+    public Long getInitialVersion() {
+        return initialVersion;
+    }
+
+    public void setInitialVersion(Long initialVersion) {
+        this.initialVersion = initialVersion;
+    }
+
+    public Long getLocation() {
+        return location;
+    }
+
+    public void setLocation(Long location) {
+        this.location = location;
     }
 }

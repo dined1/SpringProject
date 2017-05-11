@@ -73,8 +73,11 @@ public class Customer implements Serializable {
     @ManyToOne(targetEntity = Address.class)
     private Address address1;
 
-    @OneToMany(targetEntity = Location.class, mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @OneToMany(targetEntity = Location.class, mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<Location> locations;
+
+    @OneToMany(targetEntity = RelatedLocation.class, mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<RelatedLocation> relatedLocations;
 
     @OneToMany(targetEntity = Statisticscollector.class, mappedBy = "customer1", cascade = CascadeType.REMOVE)
     private List<Statisticscollector> statisticscollectors1;
@@ -192,5 +195,13 @@ public class Customer implements Serializable {
 
     public void setLocations(List<Location> locations) {
         this.locations = locations;
+    }
+
+    public List<RelatedLocation> getRelatedLocations() {
+        return relatedLocations;
+    }
+
+    public void setRelatedLocations(List<RelatedLocation> relatedLocations) {
+        this.relatedLocations = relatedLocations;
     }
 }

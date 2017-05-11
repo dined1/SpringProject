@@ -22,8 +22,11 @@ public class RelatedLocation {
     @Basic
     private String name;
 
-    @ManyToOne(targetEntity = Location.class)
+    @ManyToOne(targetEntity = Location.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Location parentLocation;
+
+    @ManyToOne(targetEntity = Customer.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private Customer customer;
 
     public Long getLocationId() {
         return locationId;
@@ -47,5 +50,13 @@ public class RelatedLocation {
 
     public void setParentLocation(Location parentLocation) {
         this.parentLocation = parentLocation;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

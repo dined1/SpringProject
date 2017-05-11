@@ -5,21 +5,30 @@
 
 <div id="wrapper" class="">
     <div class="modal-content">
-        <form id="dynForm" role="form" action="${contextPath}/adm/orderentry/customerlocations" method="POST">
+        <form id="dynForm" role="form" action="${contextPath}/adm/orderentry/createnewlocation" method="POST">
+            <div class="form-group">
+                <input type="hidden" name="addresslist" value="${addresslist}"/>
+                <input type="hidden" name="customer" value="${CUSTOMER}"/>
+                <input type="hidden" name="name" value="${name}"/>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Create new anyway</button>
+        </form>
+        <form id="dynForm2" role="form" action="${contextPath}/adm/orderentry/createnewrelatedlocation" method="POST">
             <div class="form-group">
                 <label>: </label>
-                <select class="selectpicker" path="addresslist" data-live-search="true" name="addresslist" onchange=" ">
+                <select class="selectpicker" path="locationId" data-live-search="true" name="locationId" onchange=" ">
                     <c:forEach items="${LOCATIONSLIST}" var="LOCATION">
                         <option value="${LOCATION.locationId}">${LOCATION.name}</option>
                     </c:forEach>
                 </select>
                 <input type="hidden" name="customer" value="${CUSTOMER}"/>
+                <input type="hidden" name="name" value="${name}"/>
             </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <button href="" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Create related</button>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Create new anyway</button>
-            <a href="${contextPath}/adm/orderentry/customerlocations/${CUSTOMER}" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
         </form>
+        <a href="${contextPath}/adm/orderentry/customerlocations/${CUSTOMER}" class="btn btn-default"><i class="fa fa-close fa-fw"></i>Cancel</a>
     </div>
 </div>
 

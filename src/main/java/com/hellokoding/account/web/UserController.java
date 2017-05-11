@@ -250,7 +250,7 @@ public class UserController {
         model.addAttribute("SO_LIST", soRepository.findByCustomer1_CustomerId(customerId));
         model.addAttribute("USER_ID", userid);
         model.addAttribute("ADDRESS_LIST", customerLocationRepository.findByCustomer_CustomerId(customerId));
-        model.addAttribute("RELATED_ADDRESS_LIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(customerId));
+        model.addAttribute("RELATED_ADDRESS_LIST", relatedLocationRepository.findByCustomer_CustomerId(customerId));
         model.addAttribute("CUSTOMER_LIST", customerRepository.findByUserId(userid.toString()));
         Customer customer = customerRepository.findOne(customerId);
         model.addAttribute("CUSTOMER", customer);

@@ -28,7 +28,7 @@ public class Location {
     @ManyToOne(targetEntity = Address.class)
     private Address address;
 
-    @OneToMany(targetEntity = RelatedLocation.class, mappedBy = "parentLocation", cascade = CascadeType.REMOVE)
+    @OneToMany(targetEntity = RelatedLocation.class, mappedBy = "parentLocation", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<RelatedLocation> relatedLocations;
 
     @OneToMany(targetEntity = So.class, mappedBy = "location", cascade = CascadeType.REMOVE)

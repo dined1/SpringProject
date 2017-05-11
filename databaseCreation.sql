@@ -7,7 +7,7 @@ CREATE TABLE customer (CustomerId INTEGER NOT NULL AUTO_INCREMENT, Contact VARCH
 CREATE TABLE discountrule (DRId INTEGER NOT NULL AUTO_INCREMENT, DiscountProcent FLOAT, Discountvalue FLOAT, Type VARCHAR(255), Description VARCHAR(255), PRIMARY KEY (DRId));
 CREATE TABLE groups (GroupId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, PRIMARY KEY (GroupId));
 CREATE TABLE location (locationId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, customer_CustomerId INTEGER, address_addressId INTEGER, PRIMARY KEY (locationId));
-CREATE TABLE relatedlocation (locationId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, parentLocation_locationId INTEGER, PRIMARY KEY (locationId));
+CREATE TABLE relatedlocation (locationId INTEGER NOT NULL AUTO_INCREMENT, Name VARCHAR(255) NOT NULL, parentLocation_locationId INTEGER, customer_CustomerId INTEGER, PRIMARY KEY (locationId));
 CREATE TABLE item (ItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), quantity INTEGER, parent_itemId INTEGER, PRIMARY KEY (ItemId));
 CREATE TABLE itemdiscount (IDid INTEGER NOT NULL AUTO_INCREMENT, DISCOUNTRULE1_DRId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IDid));
 CREATE TABLE itemgroup (IGId INTEGER NOT NULL AUTO_INCREMENT, GROUPS1_GroupId INTEGER, ITEM1_ItemId INTEGER, PRIMARY KEY (IGId));
@@ -23,7 +23,7 @@ CREATE TABLE statisticscollector (SCId INTEGER NOT NULL AUTO_INCREMENT, Statisti
 CREATE TABLE user_role (user_id int(11) NOT NULL,  role_id int(11) NOT NULL,  PRIMARY KEY (user_id,role_id),  KEY fk_user_role_roleid_idx (role_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE characteristics (CharacteristicId INTEGER NOT NULL AUTO_INCREMENT, Characteristic VARCHAR(255), Characteristicvalue VARCHAR(255), PRIMARY KEY (CharacteristicId));
 CREATE TABLE itemcharacteristic (ItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, Item_itemId INTEGER, PRIMARY KEY (ItemCharacteristicId));
-CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), parentId INTEGER, status varchar(255), parent_ordItemId INTEGER, PRIMARY KEY (OrdItemId));
+CREATE TABLE orditem (OrdItemId INTEGER NOT NULL AUTO_INCREMENT, DefMP FLOAT, DefOTP FLOAT, Description VARCHAR(255), ModifiedDate VARCHAR(255), Name VARCHAR(255), Type VARCHAR(255), locationDistribute VARCHAR(255), parentId INTEGER, location INTEGER, orderedBy INTEGER, initialVersion INTEGER, status varchar(255), parent_ordItemId INTEGER, PRIMARY KEY (OrdItemId));
 CREATE TABLE orditemcharacteristic (OrdItemCharacteristicId INTEGER NOT NULL AUTO_INCREMENT, ItemCharacteristic_CharacteristicId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdItemCharacteristicId));
 CREATE TABLE orditemdiscount (OrdIDid INTEGER NOT NULL AUTO_INCREMENT, discountrule1_dRId INTEGER, OrdItem_orditemId INTEGER, PRIMARY KEY (OrdIDid));
 CREATE TABLE locations (locationId INTEGER NOT NULL AUTO_INCREMENT, locationname varchar(255), PRIMARY KEY (locationId));
@@ -63,6 +63,7 @@ ALTER TABLE orditem ADD CONSTRAINT FK_parent_ORDITEM_OrdItemId FOREIGN KEY (pare
 ALTER TABLE location ADD CONSTRAINT FK_location_customer_CustomerId FOREIGN KEY (customer_CustomerId) REFERENCES customer (customerId);
 ALTER TABLE location ADD CONSTRAINT FK_location_address_addressId FOREIGN KEY (address_addressId) REFERENCES address (addressId);
 ALTER TABLE relatedlocation ADD CONSTRAINT FK_relatedlocation_parentLocation_locationId FOREIGN KEY (parentLocation_locationId) REFERENCES location (locationId);
+ALTER TABLE relatedlocation ADD CONSTRAINT FK_relatedlocation_customer_CustomerId FOREIGN KEY (customer_CustomerId) REFERENCES customer (customerId);
 
 
 

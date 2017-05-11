@@ -144,15 +144,17 @@ public class OrderEntryController {
             return "redirect:/";
         }
         Long userid = userRepository.findByUsername(principal.getName()).getId();
+        So so = soRepository.findOne(soid);
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
-                || soRepository.findOne(soid) == null
-                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+                ||  so == null
+                || !so.getCustomer1().getUserId().equals(userid.toString())){
             model.addAttribute("message", "You cannot process this order");
             return "error";
         }
 
-        List<ProductItems> productItems = productItemsRepository.findAll();
+
+        List<ProductItems> productItems = productItemsRepository.findByOrdItem_Location(so.getLocation().getLocationId());
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
@@ -187,7 +189,7 @@ public class OrderEntryController {
         }
         model.addAttribute("ALLCUSTOMERLIST", customerRepository.findAll());
         model.addAttribute("ALLLOCATIONS", customerLocationRepository.findByCustomer_CustomerId(customerid));
-        model.addAttribute("ALLRELATEDLOCATIONS", relatedLocationRepository.findByParentLocation_Customer_CustomerId(customerid));
+        model.addAttribute("ALLRELATEDLOCATIONS", relatedLocationRepository.findByCustomer_CustomerId(customerid));
         model.addAttribute("PRODUCTITEMS_LIST", finalproducts);
         model.addAttribute("CUSTOMERID", customerid);
         model.addAttribute("STATUS", soRepository.findOne(soid).getStatus());
@@ -401,7 +403,7 @@ public class OrderEntryController {
         }
 
         So so = soRepository.findOne(soid);
-        addOnTarget(productItems, itemid, so, request);
+        addOnTarget(customerid, productItems, itemid, so, request);
         priceRecountSO(customerid, soid);
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
     }
@@ -454,7 +456,7 @@ public class OrderEntryController {
         priceRecountSO(customerid, soid);
     }
 
-    private void addOnTarget(ProductItems productItems, Long itemid,
+    private void addOnTarget(Long customerId, ProductItems productItems, Long itemid,
                              So so, HttpServletRequest request){
         if (so.getStatus().equals("Ordered") || so.getStatus().equals("Open")){
             so.setStatus("Wait");
@@ -464,6 +466,7 @@ public class OrderEntryController {
         Item item = itemRepository.findOne(itemid);
         OrdItem ordItem = new OrdItem();
         copyItemToOrderItem(item, ordItem);
+        ordItem.setLocation(so.getLocation().getLocationId());
         ordItemRepository.save(ordItem);
         String[] characs = request.getParameterValues("characteristics");
         if (characs!=null) {
@@ -575,7 +578,7 @@ public class OrderEntryController {
         model.addAttribute("CUSTOMER", customer);
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
         model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(customerid));
-        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(customerid));
+        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByCustomer_CustomerId(customerid));
         return "admin";
     }
 
@@ -602,14 +605,58 @@ public class OrderEntryController {
             model.addAttribute("name", name);
             model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
             model.addAttribute("LOCATIONSLIST", locations);
-            model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(Long.valueOf(customerid)));
+            model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
             return "pages/chancetorelated";
         }
 
 
         model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
         model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
-        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByParentLocation_Customer_CustomerId(Long.valueOf(customerid)));
+        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
+        return "redirect:/adm/orderentry/customerlocations/"+customerid;
+    }
+
+    @RequestMapping(value = {"/createnewlocation"}, method = RequestMethod.POST)
+    public String createNewLocation(Model model, @RequestParam("customer") String customerid,
+                           @RequestParam("addresslist") String locationId,
+                           @RequestParam("name") String name, Principal principal) {
+        if (principal==null){
+            return "redirect:/";
+        }
+
+        Location location = new Location();
+        Address address = addressRepository.findOne(Long.valueOf(locationId));
+        Customer customer = customerRepository.findOne(Long.valueOf(customerid));
+        location.setAddress(address);
+        location.setCustomer(customer);
+        location.setName(name);
+        customerLocationRepository.save(location);
+
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
+        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
+        return "redirect:/adm/orderentry/customerlocations/"+customerid;
+    }
+
+    @RequestMapping(value = {"/createnewrelatedlocation"}, method = RequestMethod.POST)
+    public String createNewRelatedLocation(Model model, @RequestParam("customer") String customerid,
+                                    @RequestParam("locationId") String locationId,
+                                    @RequestParam("name") String name, Principal principal) {
+        if (principal==null){
+            return "redirect:/";
+        }
+
+        RelatedLocation relatedLocation = new RelatedLocation();
+        Location location = customerLocationRepository.findOne(Long.valueOf(locationId));
+        Customer customer = customerRepository.findOne(Long.valueOf(customerid));
+        relatedLocation.setName(location.getName());
+        relatedLocation.setParentLocation(location);
+        relatedLocation.setCustomer(customer);
+        relatedLocationRepository.save(relatedLocation);
+
+        model.addAttribute("ADDRESS_LIST", addressRepository.findAll());
+        model.addAttribute("LOCATIONSLIST", customerLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
+        model.addAttribute("RELATEDLOCATIONSLIST", relatedLocationRepository.findByCustomer_CustomerId(Long.valueOf(customerid)));
         return "redirect:/adm/orderentry/customerlocations/"+customerid;
     }
 
@@ -639,7 +686,7 @@ public class OrderEntryController {
         }
         Long rootId = ordItemRepository.findOne(itemid).getParentId();
         deleteOnSource(itemid, customerid, soid);
-        addOnTarget(productItems, rootId, so, request);
+        addOnTarget(customerid, productItems, rootId, so, request);
         priceRecountSO(so.getCustomer1().getCustomerId(), so.getSOId());
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
     }
@@ -669,7 +716,7 @@ public class OrderEntryController {
         }
         Long rootId = ordItemRepository.findOne(itemid).getParentId();
         deleteOnSource(itemid, customerid, soid);
-        addOnTarget(productItems, rootId, so, request);
+        addOnTarget(customerid, productItems, rootId, so, request);
         priceRecountSO(so.getCustomer1().getCustomerId(), so.getSOId());
         return "redirect:/adm/orderentry/basket/" + customerid + "/" + soid;
     }
