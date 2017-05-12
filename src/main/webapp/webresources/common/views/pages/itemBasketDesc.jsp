@@ -5,7 +5,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <%--<%@ include file="/webresources/common/navigationbar.jspf"%>--%>
     <div id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
@@ -23,7 +23,7 @@
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     </form>
                                 </div>
-                                <a href="${contextPath}/application/basket/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                <a href="${contextPath}/adm/orderentry/basket/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                             </div>
                         </div>
                     </div>

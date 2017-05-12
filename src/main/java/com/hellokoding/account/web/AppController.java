@@ -34,27 +34,13 @@ public class AppController {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private DiscountruleRepository discountruleRepository;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
     private ItemGroupRepository itemGroupRepository;
-    @Autowired
-    private ItemdiscountRepository itemdiscountRepository;
     @Autowired
     private GroupRepository groupRepository;
     @Autowired
     private OrdItemRepository ordItemRepository;
     @Autowired
-    private OrdItemCharacteristicsRepository ordItemCharacteristicsRepository;
-    @Autowired
-    private OrdItemdiscountRepository ordItemdiscountRepository;
-    @Autowired
     private ProductItemsRepository productItemsRepository;
-    @Autowired
-    private PaymentRepository paymentFacade;
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
     @Autowired
@@ -63,12 +49,6 @@ public class AppController {
     private SORepository soRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private CharacteristicsRepository characteristicsRepository;
-    @Autowired
-    private ItemCharacteristicRepository itemCharacteristicRepository;
-    @Autowired
-    private ItemLocationRepository itemLocationRepository;
 
 
     @RequestMapping(value = {"/main"}, method = RequestMethod.GET)
@@ -78,63 +58,10 @@ public class AppController {
     }
 
 
-    @RequestMapping(value = {"/grousadsp/{id}"}, method = RequestMethod.GET)
-    public String groupItem(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("ID", id);
-        model.addAttribute("ITEM_LIST", itemRepository.findAll());
-        model.addAttribute("ITEMGROUP_LIST", itemGroupRepository.findAll());
-        model.addAttribute("ITEMDISCOUNT_LIST", itemdiscountRepository.findAll());
-        model.addAttribute("GROUP_LIST", groupRepository.findAll());
-        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        model.addAttribute("PAYMENT_LIST", paymentFacade.findAll());
-        return "/pages/group";
-    }
-
     @RequestMapping(value = {"/finalpay"}, method = RequestMethod.GET)
     public String emptyPay(Model model) {
         model.addAttribute("PAYTYPE_LIST", paymentTypeRepository.findAll());
         return "/pages/payment"; //Используется для просмотра главной страницы
-    }
-
-    @RequestMapping(value = {"/basket"}, method = RequestMethod.GET)
-    public String basket(Model model, Principal principal) {
-        if (principal==null){
-            return "redirect:/";
-        }
-        Long userid = userRepository.findByUsername(principal.getName()).getId();
-        List<ProductItems> productItems = productItemsRepository.findAll();
-        List<ProductItems> finalproducts = new ArrayList<>();
-        Float CMP = 0f;
-        Float OTP = 0f;
-        So so = soRepository.findByStatusAndCustomer1_UserId("Wait", userid.toString()).get(0);
-//        for (ProductItems productItem : productItems){
-//            if (productItem.getSoproduct1().getSo1().getCustomer1().getUserId().equals(userid.toString()) && productItem.getSoproduct1().getSo1().getStatus().equals("Wait")){
-//                CMP+=productItem.getMp();
-//                OTP+=productItem.getOtp();
-//                finalproducts.add(productItem);
-//            }
-//        }
-        List<ProductItems> pm = so.getSoproducts1().get(0).getProductItemses1();
-        for (ProductItems productItems1 : pm){
-            CMP+=productItems1.getMp();
-            OTP+=productItems1.getOtp();
-        }
-        model.addAttribute("PRODUCTITEMS_LIST", pm);
-        model.addAttribute("ID", userid);
-
-        model.addAttribute("CMP", CMP);
-        model.addAttribute("OTP", OTP);
-        return "/pages/basket";
-    }
-
-    @RequestMapping(value = {"/stripe"}, method = RequestMethod.GET)
-    public String stripe(@RequestParam Map<String, String> request, Model model,
-                         Principal principal) {
-        if (principal==null){
-            return "redirect:/";
-        }
-        model.addAttribute("ITEM_LIST", ordItemRepository.findAll());
-        return "/pages/order";
     }
 
     @RequestMapping(value = {"/orderinfo"}, method = RequestMethod.GET)
@@ -174,20 +101,6 @@ public class AppController {
         model.addAttribute("PAYMENTSUM", paymentsum);
         return "/processing/PayNumb";
     }
-
-    @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
-    public String addBasd(Model model, ProductItems productItems) {
-        /*Soproduct soproduct = soProductRepository.findOne(Long.valueOf(c));
-        productItems.setSoproduct1(soproduct);
-        Item item = itemRepository.findOne(Long.valueOf(id));
-        productItems.setItem1(item);
-        productItemsRepository.save(productItems);
-        model.addAttribute("PRODUCTITEMS_LIST", productItemsRepository.findAll());
-        model.addAttribute("ID", c);*/
-        return "/pages/basket";
-    }
-
-
 
     @RequestMapping(value = {"/cancel/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String cancel(Model model, @PathVariable("customerid") Long customerid,
@@ -283,23 +196,23 @@ public class AppController {
             return "error";
         }
 
-        List<ProductItems> productItems = productItemsRepository.findAll();
+        So so = soRepository.findOne(soid);
+        List<ProductItems> productItems = productItemsRepository.findByOrdItem_Location(so.getLocation().getLocationId());
         List<ProductItems> finalproducts = new ArrayList<>();
         Float CMP = 0f;
         Float OTP = 0f;
         Float FCMP = 0f;
         Float FOTP = 0f;
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+            if (customerid.equals(productItem.getOrdItem().getOrderedBy()) || productItem.getOrdItem().getOrderedBy() == null
                     && productItem.getOrdItem().getStatus().equals("Wait")){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
                 FCMP+=productItem.getMPWithTaxandDiscont();
                 FOTP+=productItem.getOTPWithTaxandDiscont();
                 finalproducts.add(productItem);
-            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+            } else if (customerid.equals(productItem.getOrdItem().getOrderedBy()) ||
+                    productItem.getOrdItem().getOrderedBy() == null){
                 CMP+=productItem.getMp();
                 FCMP+=productItem.getMPWithTaxandDiscont();
                 finalproducts.add(productItem);

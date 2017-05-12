@@ -161,18 +161,22 @@ public class OrderEntryController {
         Float FFCMP = 0f;
         Float FFOTP = 0f;
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
-                    && productItem.getOrdItem().getStatus().equals("Wait")){
-                CMP+=productItem.getMp();
-                OTP+=productItem.getOtp();
-                FFCMP+=productItem.getMPWithTaxandDiscont();
-                FFOTP+=productItem.getOTPWithTaxandDiscont();
-                finalproducts.add(productItem);
-            } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
-                CMP+=productItem.getMp();
-                FFCMP+=productItem.getMPWithTaxandDiscont();
+//            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
+//                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)
+//                    && productItem.getOrdItem().getStatus().equals("Wait")){
+            if (customerid.equals(productItem.getOrdItem().getOrderedBy()) || productItem.getOrdItem().getOrderedBy() == null){
+                if (productItem.getOrdItem().getStatus().equals("Wait")) {
+                    CMP += productItem.getMp();
+                    OTP += productItem.getOtp();
+                    FFCMP += productItem.getMPWithTaxandDiscont();
+                    FFOTP += productItem.getOTPWithTaxandDiscont();
+                    finalproducts.add(productItem);
+                } else {
+                    CMP+=productItem.getMp();
+                    FFCMP+=productItem.getMPWithTaxandDiscont();
+                    finalproducts.add(productItem);
+                }
+            } else if (!customerid.equals(productItem.getOrdItem().getOrderedBy())){
                 finalproducts.add(productItem);
             }
         }
@@ -305,43 +309,44 @@ public class OrderEntryController {
         if (principal==null){
             return "redirect:/";
         }
-        List<ProductItems> productItems = productItemsRepository.findAll();
-        List<ProductItems> finalproducts = new ArrayList<>();
+
         So so = soRepository.findOne(soid);
+        List<ProductItems> finalproducts = new ArrayList<>();
         Long userid = userRepository.findByUsername(principal.getName()).getId();
         if (customerRepository.findOne(customerid) == null
                 || !customerRepository.findOne(customerid).getUserId().equals(userid.toString())
-                || soRepository.findOne(soid) == null
-                || !soRepository.findOne(soid).getCustomer1().getUserId().equals(userid.toString())){
+                || so == null
+                || !so.getCustomer1().getUserId().equals(userid.toString())){
             model.addAttribute("message", "You cannot process this order");
             return "error";
         }
-
+        List<ProductItems> productItems = productItemsRepository.findByOrdItem_Location(so.getLocation().getLocationId());
         Float FFCMP = 0f;
         Float FFOTP = 0f;
         for (ProductItems productItem : productItems){
             try {
-                if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                        productItem.getSoproduct1().getSo1().getSOId().equals(soid)
-                        && productItem.getOrdItem().getStatus().equals("Wait")){
-                    FFCMP+=productItem.getMPWithTaxandDiscont();
-                    FFOTP+=productItem.getOTPWithTaxandDiscont();
-                    finalproducts.add(productItem);
-                } else if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                        productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
-                    Date date = new Date();
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    Date itemDate = formatter.parse(productItem.getOrdItem().getModifiedDate());
-                    Calendar calI = Calendar.getInstance();
-                    calI.setTime(itemDate);
-                    calI.add(Calendar.DATE, 27);
-                    itemDate = calI.getTime();
-                    long leftI = Math.abs(date.getTime() - itemDate.getTime());
-                    long daysI = leftI / (24 * 60 * 60 * 1000);
-                    if (itemDate.before(date) && daysI >= 0) {
+                if (customerid.equals(productItem.getOrdItem().getOrderedBy()) || productItem.getOrdItem().getOrderedBy() == null){
+                    if (productItem.getOrdItem().getStatus().equals("Wait")) {
                         FFCMP += productItem.getMPWithTaxandDiscont();
+                        FFOTP += productItem.getOTPWithTaxandDiscont();
                         finalproducts.add(productItem);
+                    } else {
+                        Date date = new Date();
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                        Date itemDate = formatter.parse(productItem.getOrdItem().getModifiedDate());
+                        Calendar calI = Calendar.getInstance();
+                        calI.setTime(itemDate);
+                        calI.add(Calendar.DATE, 27);
+                        itemDate = calI.getTime();
+                        long leftI = Math.abs(date.getTime() - itemDate.getTime());
+                        long daysI = leftI / (24 * 60 * 60 * 1000);
+                        if (itemDate.before(date) && daysI >= 0) {
+                            FFCMP += productItem.getMPWithTaxandDiscont();
+                            finalproducts.add(productItem);
+                        }
                     }
+                } else if (!customerid.equals(productItem.getOrdItem().getOrderedBy())){
+                    finalproducts.add(productItem);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -360,7 +365,7 @@ public class OrderEntryController {
     }
 
 
-    private void copyItemToOrderItem(Item item, OrdItem ordItem){
+    private void copyItemToOrderItem(Item item, OrdItem ordItem, So so){
         List<OrdItemCharacteristic> ordItemCharacteristic = new ArrayList<>();
         List<OrdItemDiscount> ordItemDiscount = new ArrayList<>();
         ordItem.setDefMP(item.getDefMP());
@@ -373,11 +378,13 @@ public class OrderEntryController {
         ordItem.setItemdiscounts1(ordItemDiscount);
         ordItem.setParentId(item.getItemId());
         ordItem.setStatus("Wait");
+        ordItem.setLocation(so.getLocation().getLocationId());
+        ordItem.setOrderedBy(so.getCustomer1().getCustomerId());
         while (item.getItems() != null && !item.getItems().isEmpty()){
             for (Item item1 : item.getItems()){
                 item = item1;
                 OrdItem ordItem1 = new OrdItem();
-                copyItemToOrderItem(item, ordItem1);
+                copyItemToOrderItem(item, ordItem1, so);
                 ordItem1.setParent(ordItem);
                 ordItem.getOrdItems().add(ordItem1);
             }
@@ -409,12 +416,12 @@ public class OrderEntryController {
     }
 
     private void priceRecountSO(Long customerid, Long soid){
-        List<ProductItems> productItems = productItemsRepository.findAll();
+        So so = soRepository.findOne(soid);
+        List<ProductItems> productItems = productItemsRepository.findByOrdItem_Location(so.getLocation().getLocationId());
         Float CMP = 0f, CMPTD = 0f;
         Float OTP = 0f, OTPTD = 0f;
         for (ProductItems productItem : productItems){
-            if (productItem.getSoproduct1().getSo1().getCustomer1().getCustomerId().equals(customerid) &&
-                    productItem.getSoproduct1().getSo1().getSOId().equals(soid)){
+            if (customerid.equals(productItem.getOrdItem().getOrderedBy()) || productItem.getOrdItem().getOrderedBy() == null){
                 CMP+=productItem.getMp();
                 OTP+=productItem.getOtp();
                 CMPTD+=productItem.getMPWithTaxandDiscont();
@@ -465,8 +472,7 @@ public class OrderEntryController {
         productItems.setSoproduct1(soproduct);
         Item item = itemRepository.findOne(itemid);
         OrdItem ordItem = new OrdItem();
-        copyItemToOrderItem(item, ordItem);
-        ordItem.setLocation(so.getLocation().getLocationId());
+        copyItemToOrderItem(item, ordItem, so);
         ordItemRepository.save(ordItem);
         String[] characs = request.getParameterValues("characteristics");
         if (characs!=null) {

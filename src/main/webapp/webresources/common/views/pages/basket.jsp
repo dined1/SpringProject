@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <%--<%@ include file="/webresources/common/navigationbar.jspf"%>--%>
     <div  id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
@@ -89,7 +89,7 @@
                         <c:if test="${CMP != 0 and FCMP !=0 and STATUS == 'Ordered' and STATUS != 'Canceled'}">
                             <a class="btn btn-info" href="${contextPath}/adm/orderentry/cancel/${CUSTOMERID}/${SOID}/">Cancel order</a>
                         </c:if>
-                        <a href="${contextPath}/adm/orderentry/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                        <a href="${contextPath}/adm/orderentry/${CUSTOMERID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                         <!--a href="${contextPath}/application/print" class="btn btn-default btn-sm" onclick="javascript:window.print()">
                             <i class="fa fa-print fa-fw"></i> Print
                         </a-->

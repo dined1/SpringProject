@@ -5,7 +5,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <%--<%@ include file="/webresources/common/navigationbar.jspf"%>--%>
     <div id="page-wrapper" style="min-height: 476px;">
         <div class="row">
             <div class="col-lg-12">
@@ -71,7 +71,7 @@
                         <script src="${contextPath}/webresources/common/js/modules/catalog.js" type="text/javascript"></script>
                         <script src="${contextPath}/webresources/common/js/modules/cart.js" type="text/javascript"></script>
                         <script src="${contextPath}/webresources/common/js/modules/main.js" type="text/javascript"></script>
-                        <a href="${contextPath}/application/orderinfo" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                        <a href="${contextPath}/adm/orderentry/${CUSTOMERID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                     </div>
 
                 </div>

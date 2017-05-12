@@ -5,7 +5,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="wrapper">
-    <%@ include file="/webresources/common/navigationbar.jspf"%>
+    <%--<%@ include file="/webresources/common/navigationbar.jspf"%>--%>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="list-group">
-                                    <form role="form" action="${contextPath}/application/add/${ITEMID}/${CUSTOMERID}/${SOID}" method="GET">
+                                    <form role="form" action="${contextPath}/adm/orderentry/add/${ITEMID}/${CUSTOMERID}/${SOID}" method="GET">
                                         <a href="#" class="list-group-item">
                                             <div class="row">
                                                 <div class="col-lg-4"><span class="small">Name :</span></div>
@@ -99,7 +99,7 @@
                                         </c:if>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw"></i>Submit</button>
-                                        <a href="${contextPath}/application/catalog/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
+                                        <a href="${contextPath}/adm/orderentry/catalog/${CUSTOMERID}/${SOID}" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i>Back</a>
                                     </form>
                                 </div>
                             </div>

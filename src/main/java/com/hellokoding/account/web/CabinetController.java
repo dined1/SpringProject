@@ -37,21 +37,10 @@ import java.util.List;
 @Controller
 public class CabinetController {
 
-
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private DiscountruleRepository discountruleRepository;
-    @Autowired
     private AddressRepository addressRepository;
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private ItemGroupRepository itemGroupRepository;
-    @Autowired
-    private ItemdiscountRepository itemdiscountRepository;
-    @Autowired
-    private GroupRepository groupRepository;
     @Autowired
     private ProductItemsRepository productItemsRepository;
     @Autowired
@@ -61,10 +50,7 @@ public class CabinetController {
     @Autowired
     private PaymentTypeRepository paymentTypeRepository;
     @Autowired
-    private SOProductRepository soProductRepository;
-    @Autowired
     private OrdItemRepository ordItemRepository;
-
     @Autowired
     private SORepository soRepository;
     @Autowired
@@ -130,16 +116,6 @@ public class CabinetController {
         addressRepository.save(customer1.getAddress1());
         customerRepository.save(customer1);
         return "redirect:/cabinet/customerinfo";
-    }
-
-    @RequestMapping(value = {"/myorders"}, method = RequestMethod.GET)
-    public String getOrders(Model model, Principal principal) {
-        if (principal==null){
-            return "redirect:/";
-        }
-        Long userid = userRepository.findByUsername(principal.getName()).getId();
-        model.addAttribute("SO_LIST", soRepository.findByCustomer1_UserId(userid.toString()));
-        return "cabinet/orders";
     }
 
     @RequestMapping(value = {"/mypayments"}, method = RequestMethod.GET)
