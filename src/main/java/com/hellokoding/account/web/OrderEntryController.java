@@ -2,6 +2,7 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
 import com.hellokoding.account.repository.*;
+import com.hellokoding.account.web.interfaces.OrderEntryControllerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,51 +31,10 @@ import java.util.List;
 @RequestMapping(value = {"/adm/orderentry"})
 @Controller
 @Transactional
-public class OrderEntryController {
+public class OrderEntryController extends AbstractController implements OrderEntryControllerInterface {
 
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private DiscountruleRepository discountruleRepository;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private ItemGroupRepository itemGroupRepository;
-    @Autowired
-    private ItemdiscountRepository itemdiscountRepository;
-    @Autowired
-    private GroupRepository groupRepository;
-    @Autowired
-    private OrdItemRepository ordItemRepository;
-    @Autowired
-    private OrdItemCharacteristicsRepository ordItemCharacteristicsRepository;
-    @Autowired
-    private OrdItemdiscountRepository ordItemdiscountRepository;
-    @Autowired
-    private ProductItemsRepository productItemsRepository;
-    @Autowired
-    private PaymentRepository paymentFacade;
-    @Autowired
-    private PaymentTypeRepository paymentTypeRepository;
-    @Autowired
-    private SOProductRepository soProductRepository;
-    @Autowired
-    private SORepository soRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CharacteristicsRepository characteristicsRepository;
-    @Autowired
-    private ItemCharacteristicRepository itemCharacteristicRepository;
-    @Autowired
-    private ItemLocationRepository itemLocationRepository;
-    @Autowired
-    private CustomerLocationRepository customerLocationRepository;
-    @Autowired
-    private RelatedLocationRepository relatedLocationRepository;
 
+    @Override
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String orderEntry(Model model, Principal principal) {
 
@@ -86,6 +46,7 @@ public class OrderEntryController {
         return "/pages/so";
     }
 
+    @Override
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createSalesOrder(Model model,
                                    @RequestParam("customer") String custom,
@@ -104,6 +65,7 @@ public class OrderEntryController {
     }
 
 
+    @Override
     public So createSalesOrder(Long locationId, Customer customer){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
@@ -136,6 +98,7 @@ public class OrderEntryController {
     }
 
 
+    @Override
     @RequestMapping(value = {"/basket/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyBasket(Model model,
                               @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
@@ -207,6 +170,7 @@ public class OrderEntryController {
         return "/pages/basket";
     }
 
+    @Override
     @Transactional
     @RequestMapping(value = {"/catalog/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyCatalog(Model model,
@@ -238,6 +202,7 @@ public class OrderEntryController {
         return "/pages/catalog";
     }
 
+    @Override
     @RequestMapping(value = {"/itemdescription/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String itemDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
                                   @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
@@ -265,6 +230,7 @@ public class OrderEntryController {
         return "/pages/itemDesc";
     }
 
+    @Override
     @RequestMapping(value = {"/itembasket/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String itemBasketDescription(Model model, ProductItems productItems, @PathVariable("itemid") Long itemid,
                                         @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,
@@ -302,6 +268,7 @@ public class OrderEntryController {
         return "/pages/itemBasketDesc";
     }
 
+    @Override
     @RequestMapping(value = {"/order/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String emptyOrder(Model model, @PathVariable("customerid") Long customerid,
                              @PathVariable("soid") Long soid,
@@ -392,6 +359,7 @@ public class OrderEntryController {
     }
 
 
+    @Override
     @RequestMapping(value = {"/add/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String addBasket(Model model, HttpServletRequest request,
                             ProductItems productItems, @PathVariable("itemid") Long itemid,
@@ -434,6 +402,7 @@ public class OrderEntryController {
         soRepository.findOne(soid).setFinalOTPwithTaxAndDiscount(BigDecimal.valueOf(OTPTD).setScale(2, BigDecimal.ROUND_HALF_UP));
     }
 
+    @Override
     @RequestMapping(value = {"/remove/{itemid}/{customerid}/{soid}"}, method = RequestMethod.GET)
     public String removeBasket(Model model, @PathVariable("itemid") Long itemid,
                                @PathVariable("customerid") Long customerid, @PathVariable("soid") Long soid,

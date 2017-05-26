@@ -7,7 +7,8 @@ package com.hellokoding.account.web;
 
 import com.hellokoding.account.Models.*;
 import com.hellokoding.account.controller.util.ErrorBean;
-import com.hellokoding.account.repository.*;
+import com.hellokoding.account.repository.PaymentBillRepository;
+import com.hellokoding.account.web.interfaces.SoControllerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,36 +38,16 @@ import java.util.List;
  */
 @RequestMapping(value = {"superadmin/so"})
 @Controller
-public class SoController {
+public class SoController extends AbstractController implements SoControllerInterface {
 
     @Autowired
-    OrdItemRepository ordItemRepository;
-    @Autowired
-    OrdItemdiscountRepository ordItemdiscountRepository;
-    @Autowired
-    OrdItemCharacteristicsRepository ordItemCharacteristicsRepository;
-    @Autowired
-    SORepository soRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    ProductItemsRepository productItemsRepository;
-    @Autowired
-    CustomerRepository customerRepository;
-    @Autowired
-    SOProductRepository soProductRepository;
-    @Autowired
-    private PaymentRepository paymentFacade;
-    @Autowired
     private PaymentBillRepository paymentBillRepository;
-    @Autowired
-    private PaymentTypeRepository paymentTypeRepository;
-    @Autowired
-    private ItemRepository itemRepository;
+
     @Inject
     private ErrorBean error;
 
 
+    @Override
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String emptySo(Model model) {
         model.addAttribute("CUSTOMER_LIST", customerRepository.findAll());
@@ -74,6 +55,7 @@ public class SoController {
     }
 
 
+    @Override
     @RequestMapping(value = {"/new"}, method = RequestMethod.POST)
     public String createSo(Model model, So so, Soproduct soproduct, @RequestParam("socustomer") String cust) {
         Customer customer = customerRepository.findOne(Long.valueOf(cust));
@@ -94,23 +76,26 @@ public class SoController {
     }
 
 
+    @Override
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String editSo(Model model, @PathVariable("id") Long id) {
         model.addAttribute("SO", soRepository.findOne(id));
         return "so/update";
     }
 
+    @Override
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public String updateSo(@Valid
-                                @BeanParam So so) {
+                           @BeanParam So so) {
         soRepository.save(so);
         return "redirect:list";
     }
 
 
+    @Override
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.POST)
     public String updateSo(@Valid
-                                @BeanParam So so, BindingResult bindingResult) {
+                           @BeanParam So so, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "welcome";
         }
@@ -118,6 +103,7 @@ public class SoController {
         return "redirect:list";
     }
 
+    @Override
     @RequestMapping(value = {"/remove/{id}"}, method = RequestMethod.GET)
     public String removeSo(@PathVariable("id") Long id) {
         So so = soRepository.findOne(id);
@@ -134,6 +120,7 @@ public class SoController {
         return "redirect:/superadmin/so/list";
     }
 
+    @Override
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
     public String findSo(Model model, @PathVariable("id") Long id) {
         model.addAttribute("SO", soRepository.findOne(id));
@@ -142,6 +129,7 @@ public class SoController {
         return "so/view";
     }
 
+    @Override
     @RequestMapping(value = {"/pays/{id}"}, method = RequestMethod.GET)
     public String pay(Model model, @PathVariable("id") Long id) {
         model.addAttribute("SO", soRepository.findOne(id));
