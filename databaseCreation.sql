@@ -77,17 +77,24 @@ insert into address values('1', 'Parkovaya 9-15', 'Pinsk', 'Belarus', '06.11.201
 insert into address values('2', 'Lesnaya 23-68', 'Moskow', 'Russia', '06.11.2016', '752834');
 insert into address values('3', 'Sadovaya 2-16', 'St.Petersburg', 'Russia', '06.11.2016', '448645');
 insert into address values('4', 'Stepnaya 34-61', 'Minsk', 'Belarus', '06.11.2016', '346734');
+insert into address values('5', 'Novaya 34-61', 'Minsk', 'Belarus', '06.11.2016', '346734');
+insert into address values('6', 'Vesennaya 34-61', 'Minsk', 'Belarus', '06.11.2016', '346734');
+insert into address values('7', 'Slepanka 3-61', 'Moscow', 'Russia', '06.11.2016', '346734');
 
-insert into item values ('1', '10000', '3000', 'This is computer', '08.11.2016', 'Computer', 'Tech', '10', null);
-insert into item values ('2', '1000', '500', 'This is phone', '04.11.2016', 'Phone', 'Tech','39', null);
-insert into item values ('3', '20000', '5000', 'This is car', '05.09.2016', 'Car', 'Auto', '28', null);
-insert into item values ('4', '30000', '3000', 'This is motorcycle', '03.11.2016', 'Motorcycle', 'Auto', '65', null);
-insert into item values ('5', '40000', '5000', 'This is hat', '12.12.2016', 'Hat', 'Clothes', '56', null);
-insert into item values ('6', '10000', '2000', 'This is tshort', '23.11.2016', 'Tshort', 'Clothes', '3134', null);
-insert into item values ('7', '30000', '1000', 'This is ball', '11.11.2016', 'Ball', 'Sport', '124', null);
-insert into item values ('8', '20000', '7000', 'This is stick', '05.01.2016', 'Stick', 'Sport', '234', null);
-insert into item values ('9', '70000', '8000', 'This is bed', '05.03.2016', 'Bed', 'House', '12', null);
-insert into item values ('10', '60000', '9000', 'This is chair', '05.11.2016', 'Chair', 'House', '575', null);
+
+
+insert into item values ('1', '10000', '3000', 'This is internet', '08.11.2016', 'High Speed', 'Tech', '10', null);
+insert into item values ('2', '1000', '500', 'This is internet', '04.11.2016', 'High Speed', 'Tech','39', null);
+insert into item values ('3', '20000', '5000', 'This is internet', '05.09.2016', 'BestPlan1', 'Auto', '28', null);
+insert into item values ('4', '30000', '3000', 'This is internet', '03.11.2016', 'BestPlan1', 'Auto', '65', null);
+insert into item values ('5', '40000', '5000', 'This is internet', '12.12.2016', 'BestPlan1', 'Clothes', '56', null);
+insert into item values ('6', '10000', '2000', 'This is internet', '23.11.2016', 'BestPlan1', 'Clothes', '3134', null);
+insert into item values ('7', '30000', '1000', 'This is internet', '11.11.2016', 'BestPlan1', 'Sport', '124', null);
+insert into item values ('8', '20000', '7000', 'This is internet', '05.01.2016', 'BestPlan1', 'Sport', '234', null);
+insert into item values ('9', '70000', '8000', 'This is internet', '05.03.2016', 'BestPlan1', 'House', '12', null);
+insert into item values ('10', '60000', '9000', 'This is internet', '05.11.2016', 'TV Pack', 'House', '575', null);
+insert into item values ('11', '60000', '9000', 'This is internet', '05.11.2016', 'TV Pack', 'House', '575', null);
+insert into item values ('12', '60000', '9000', 'This is internet', '05.11.2016', 'TV Pack', 'House', '575', null);
 
 insert into discountrule values ('1', '0', '10', 'disc', 'Discount #1');
 insert into discountrule values ('2', '20', '5', 'disc', 'Discount #2');
@@ -146,7 +153,15 @@ insert into user_role values ('1', '2');
 insert into user_role values ('1', '3');
 insert into user_role values ('2', '1');
 insert into user_role values ('3', '1');
--- insert into customer values ('1', '1111', 'Max@com', 'Maxim', 'Karpik', '9701065', '234item325234', '2344234235', '1', '1', 'Belarus');
+insert into customer values ('1', '1111', 'Max@mail.com', 'Maxim', 'Karpik', '9701065', '234item325234', '2344234235', '1', '1','user', 'Belarus');
+insert into customer values ('2', '1111', 'Max@com.ru', 'Maxim', 'User', '9701065', '234item325234', '2344234235', '1', '1','user', 'Belarus');
+insert into customer values ('3', '1111', 'Cust1@com.ru', 'Customer2', 'User', '9701065', '234item325234', '2344234235', '2', '1','user', 'Belarus');
+insert into customer values ('4', '1111', 'Cust2@com.ru', 'Customer3', 'User', '9701065', '234item325234', '2344234235', '3', '1','user',  'Belarus');
+insert into customer values ('5', '1111', 'Cust3@com.ru', 'Customer4', 'User', '9701065', '234item325234', '2344234235', '4', '1','user',  'Belarus');
+insert into customer values ('6', '1111', 'Cust4@com.ru', 'Customer5', 'User', '9701065', '234item325234', '2344234235', '5', '1','user',  'Belarus');
+insert into customer values ('7', '1111', 'Cust5@com.ru', 'Customer6', 'User', '9701065', '234item325234', '2344234235', '6', '1','user',  'Belarus');
+insert into customer values ('8', '1111', 'Cust6@com.ru', 'Customer7customer', 'User', '9701065', '234item325234', '2344234235', '3', '1','user',  'Belarus');
+
 -- insert into customer values ('2', '2222', 'Vlad@com', 'Vladislav', 'Lukashevich', '1234567', '234325234', '2344234235', '2', '1', 'Belarus');
 -- insert into customer values ('3', '3333', 'Lesha@com', 'Alexey', 'Pasevich', '8345281', '234325234', '2344234235', '3', '2', 'Belarus');
 -- insert into customer values ('4', '4444', 'Dima@com', 'Dmitry', 'Nedavny', '4368532', '234325234', '2344234235', '4', '3', 'Belarus');
