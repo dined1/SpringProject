@@ -4,11 +4,11 @@ import pg from "pg";
 
 // Connect to the database using the DATABASE_URL environment
 //   variable injected by Railway
-const pool = new pg.Pool();
+// const pool = new pg.Pool();
 
 const app = express();
 const path = require('path');
-const port = process.env.PORT || 3333;
+// const port = process.env.PORT || 3333;
 
 app.set('view engine', 'ejs');
 // app.set('views', 'C:/expressjs-postgres/src/views')
@@ -19,12 +19,11 @@ app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
 app.use(bodyParser.text({ type: "text/html" }));
 
 app.get("/", async (req, res) => {
-  const { rows } = await pool.query("SELECT tadoushi, jidoushi, translation FROM tajiverb");
+//   const { rows } = await pool.query("SELECT tadoushi, jidoushi, translation FROM tajiverb");
   res.render('ind', {
     subject: 'EJS template engine',
     name: 'Japanese',
-    link: 'https://google.com',
-    rows: rows
+    link: 'https://google.com'
   });
 });
 
